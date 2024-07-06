@@ -1,6 +1,6 @@
 //
 //  PersistanceKey.swift
-//  CashbackApp
+//  CashbackManager
 //
 //  Created by Alexander on 29.06.2024.
 //

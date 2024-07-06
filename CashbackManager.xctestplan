@@ -1,0 +1,41 @@
+{
+  "configurations" : [
+    {
+      "id" : "B1DC6F1F-8182-4E3F-9573-652536A71C89",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:CashbackManager.xcodeproj",
+      "identifier" : "27A5D7CC2C394EC400B93512",
+      "name" : "CashbackManager"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:CashbackManager.xcodeproj",
+        "identifier" : "27A5D7DC2C394EC500B93512",
+        "name" : "CashbackManagerTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "skippedTests" : [
+        "CashbackManagerUITests",
+        "CashbackManagerUITestsLaunchTests"
+      ],
+      "target" : {
+        "containerPath" : "container:CashbackManager.xcodeproj",
+        "identifier" : "27A5D7E62C394EC500B93512",
+        "name" : "CashbackManagerUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

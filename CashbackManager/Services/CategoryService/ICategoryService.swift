@@ -1,6 +1,6 @@
 //
 //  ICategoryService.swift
-//  CashbackApp
+//  CashbackManager
 //
 //  Created by Alexander on 17.06.2024.
 //

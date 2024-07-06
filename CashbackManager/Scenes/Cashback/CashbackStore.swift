@@ -1,6 +1,6 @@
 //
 //  CashbackStore.swift
-//  CashbackApp
+//  CashbackManager
 //
 //  Created by Alexander on 25.06.2024.
 //

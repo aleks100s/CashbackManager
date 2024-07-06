@@ -1,6 +1,6 @@
 //
 //  Category+Arbitrary.swift
-//  CashbackApp
+//  CashbackManager
 //
 //  Created by Alexander on 14.06.2024.
 //

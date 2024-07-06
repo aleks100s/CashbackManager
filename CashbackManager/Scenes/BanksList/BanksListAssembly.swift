@@ -1,6 +1,6 @@
 //
 //  BanksListAssembly.swift
-//  CashbackApp
+//  CashbackManager
 //
 //  Created by Alexander on 20.06.2024.
 //
