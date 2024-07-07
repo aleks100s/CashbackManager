@@ -41,7 +41,6 @@ extension SelectCardState: StoreState {
 	}
 	
 	static func reduce(state: inout SelectCardState, with message: Message<Input, Feedback>) -> Effect? {
-		print(message)
 		switch message {
 		case .input(.viewDidAppear):
 			return .reloadBank(state.bank)

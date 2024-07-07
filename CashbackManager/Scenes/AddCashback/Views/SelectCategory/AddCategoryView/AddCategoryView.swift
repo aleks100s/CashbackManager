@@ -1,28 +1,28 @@
 //
-//  AddCardView.swift
+//  AddCategoryView.swift
 //  CashbackManager
 //
-//  Created by Alexander on 29.06.2024.
+//  Created by Alexander on 07.07.2024.
 //
 
 import SwiftUI
 
-struct AddCardView: View {
-	@State var cardName = ""
+struct AddCategoryView: View {
 	let onSaveButtonTapped: (String) -> Void
 	
+	@State private var newCategoryName = ""
 	@FocusState private var isFocused
 	
 	var body: some View {
 		ScrollView {
-			VStack(alignment: .center, spacing: 16) {
-				CMTextField("Название карты", text: $cardName)
+			VStack {
+				CMTextField("Название категории", text: $newCategoryName)
 					.focused($isFocused)
-
+				
 				CMProminentButton("Сохранить") {
-					onSaveButtonTapped(cardName)
+					onSaveButtonTapped(newCategoryName)
 				}
-				.disabled(cardName.isEmpty)
+				.disabled(newCategoryName.isEmpty)
 			}
 			.padding()
 		}

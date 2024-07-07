@@ -32,7 +32,6 @@ extension CashbackState: StoreState {
 	}
 	
 	static func reduce(state: inout CashbackState, with message: Message<Input, Feedback>) -> Effect? {
-		print(message)
 		switch message {
 		case .input(.viewDidAppear):
 			return .fetchCard(id: state.card.id)

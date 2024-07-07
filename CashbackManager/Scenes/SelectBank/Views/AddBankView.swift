@@ -16,8 +16,7 @@ struct AddBankView: View {
 	var body: some View {
 		ScrollView {
 			VStack(alignment: .center, spacing: 16) {
-				TextField("Банк", text: $bankName)
-					.textFieldStyle(RoundedBorderTextFieldStyle())
+				CMTextField("Банк", text: $bankName)
 					.focused($isFocused)
 				
 				Button("Сохранить") {

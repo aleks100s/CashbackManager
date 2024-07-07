@@ -38,7 +38,6 @@ extension BanksListState: StoreState {
 	}
 	
 	static func reduce(state: inout BanksListState, with message: Message<Input, Feedback>) -> Effect? {
-		print(message)
 		switch message {
 		case .input(.onAppear):
 			return .fetchBanks

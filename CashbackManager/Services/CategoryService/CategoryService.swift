@@ -25,8 +25,8 @@ final class CategoryService: ICategoryService {
 		return predefinedCategories + userCategories
 	}
 	
-	func save(categories: [Category]) {
-		self.categories = categories
+	func save(category: Category) {
+		categories.append(category)
 	}
 	
 	private func persistCategories() {

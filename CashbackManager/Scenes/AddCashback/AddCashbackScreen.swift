@@ -10,6 +10,7 @@ import SwiftUI
 struct AddCashbackScreen: View {
 	@State var store: AddCashbackStore
 	@FocusState private var isFocused
+	@State private var percentString = "5"
 	
 	var body: some View {
 		ScrollView(.vertical) {
@@ -32,18 +33,19 @@ struct AddCashbackScreen: View {
 							}
 							.buttonStyle(PlainButtonStyle())
 						} else {
-							Button {
+							CMProminentButton("Выбрать категорию") {
 								store.send(.selectCategoryTapped)
-							} label: {
-								Text("Выбрать категорию")
 							}
-							.buttonStyle(BorderedProminentButtonStyle())
 						}
 					}
 					
 					if store.selectedCategory != nil {
 						ScrollView(.horizontal) {
 							LazyHStack {
+								CMProminentButton("Другой процент") {
+									store.send(.onInputPercentButtonTapped)
+								}
+								
 								ForEach(store.percentPresets, id: \.self) { percent in
 									Button {
 										store.send(.updatePercent(percent))
@@ -61,6 +63,9 @@ struct AddCashbackScreen: View {
 			}
 		}
 		.background(Color(UIColor.secondarySystemBackground))
+		.onTapGesture {
+			isFocused = false
+		}
 		.navigationTitle("Добавить кэшбек")
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
@@ -87,11 +92,34 @@ struct AddCashbackScreen: View {
 					store.send(.categorySelected(category))
 				} onSearchTextChange: { text in
 					store.send(.searchTextChanged(text))
+				} onSaveCategoryButtonTapped: { newCategoryName in
+					store.send(.saveNewCategory(newCategoryName))
 				}
 			}
 			.navigationTitle("Выбор категории")
 			.navigationBarTitleDisplayMode(.inline)
 			.presentationDetents([.large])
+		}
+		.sheet(
+			isPresented: Binding(
+				get: { store.isPercentInputSheetPresented },
+				set: { value, _ in
+					if value {
+						store.send(.onInputPercentButtonTapped)
+					} else {
+						store.send(.dismissInputPercentSheet)
+					}
+				}
+			)
+		) {
+			NavigationView {
+				InputPercentView(percentString: String(format: "%.0f", store.percent * 100)) { value in
+					store.send(.updatePercentString(value))
+				}
+			}
+			.navigationTitle("Процент кэщбека")
+			.navigationBarTitleDisplayMode(.inline)
+			.presentationDetents([.medium])
 		}
 		.onAppear {
 			store.send(.viewDidAppear)

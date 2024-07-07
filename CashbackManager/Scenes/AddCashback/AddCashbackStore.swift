@@ -16,6 +16,7 @@ struct AddCashbackState {
 	var filteredCategories = [Category]()
 	var isCategorySelectorPresented = false
 	var searchText: String = ""
+	var isPercentInputSheetPresented = false
 }
 
 extension AddCashbackState: StoreState {
@@ -27,19 +28,24 @@ extension AddCashbackState: StoreState {
 		case updatePercent(Double)
 		case saveCashbackTapped
 		case searchTextChanged(String)
+		case saveNewCategory(String)
+		case onInputPercentButtonTapped
+		case dismissInputPercentSheet
+		case updatePercentString(String)
 	}
 	
 	enum Effect {
 		case fetchCategories
 		case updateCard(Card)
+		case saveCategory(Category)
 	}
 	
 	enum Feedback {
 		case categoriesFetched([Category])
+		case categorySaved
 	}
 	
 	static func reduce(state: inout AddCashbackState, with message: Message<Input, Feedback>) -> Effect? {
-		print(message)
 		switch message {
 		case .input(.viewDidAppear):
 			return .fetchCategories
@@ -52,6 +58,11 @@ extension AddCashbackState: StoreState {
 			state.isCategorySelectorPresented = false
 		case .input(.updatePercent(let percent)):
 			state.percent = percent
+		case .input(.updatePercentString(let string)):
+			let text = string.replacingOccurrences(of: ",", with: ".")
+			let percent = (Double(text) ?? 0) / 100
+			state.percent = percent
+			state.isPercentInputSheetPresented = false
 		case .input(.saveCashbackTapped):
 			if let category = state.selectedCategory {
 				var card = state.card
@@ -66,9 +77,18 @@ extension AddCashbackState: StoreState {
 			} else {
 				state.filteredCategories = state.categories.filter { $0.name.lowercased().contains(text.lowercased()) }
 			}
+		case .input(.saveNewCategory(let categoryName)):
+			let category = Category(name: categoryName, emoji: "\(categoryName.uppercased().first ?? "?")")
+			return .saveCategory(category)
+		case .input(.onInputPercentButtonTapped):
+			state.isPercentInputSheetPresented = true
+		case .input(.dismissInputPercentSheet):
+			state.isPercentInputSheetPresented = false
 		case .feedback(.categoriesFetched(let categories)):
 			state.categories = categories
 			state.filteredCategories = categories
+		case .feedback(.categorySaved):
+			return .fetchCategories
 		}
 		return nil
 	}
@@ -99,6 +119,9 @@ final class AddCashbackEffectHandler: EffectHandler {
 		case .updateCard(let card):
 			cashbackService.update(card: card)
 			coordinator.navigateBack()
+		case .saveCategory(let category):
+			categoryService.save(category: category)
+			return .categorySaved
 		}
 		return nil
 	}

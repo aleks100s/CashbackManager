@@ -1,28 +1,29 @@
 //
-//  AddCardView.swift
+//  InputPercentView.swift
 //  CashbackManager
 //
-//  Created by Alexander on 29.06.2024.
+//  Created by Alexander on 07.07.2024.
 //
 
 import SwiftUI
 
-struct AddCardView: View {
-	@State var cardName = ""
+struct InputPercentView: View {
+	@State var percentString: String
 	let onSaveButtonTapped: (String) -> Void
 	
 	@FocusState private var isFocused
 	
 	var body: some View {
 		ScrollView {
-			VStack(alignment: .center, spacing: 16) {
-				CMTextField("Название карты", text: $cardName)
+			VStack {
+				CMTextField("Процент", text: $percentString)
+					.keyboardType(.decimalPad)
 					.focused($isFocused)
-
+				
 				CMProminentButton("Сохранить") {
-					onSaveButtonTapped(cardName)
+					onSaveButtonTapped(percentString)
 				}
-				.disabled(cardName.isEmpty)
+				.disabled(percentString.isEmpty)
 			}
 			.padding()
 		}

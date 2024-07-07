@@ -12,6 +12,9 @@ struct SelectCategoryView: View {
 	let searchText: String
 	let onSelect: (Category) -> Void
 	let onSearchTextChange: (String) -> Void
+	let onSaveCategoryButtonTapped: (String) -> Void
+	
+	@State private var isAddCategorySheetPresented = false
 	
 	var body: some View {
 		List {
@@ -29,9 +32,23 @@ struct SelectCategoryView: View {
 			text: Binding(get: { searchText }, set: { onSearchTextChange($0) }),
 			placement: .navigationBarDrawer(displayMode: .always)
 		)
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing) {
+				Button("Добавить") {
+					isAddCategorySheetPresented = true
+				}
+			}
+		}
+		.sheet(isPresented: $isAddCategorySheetPresented) {
+			NavigationView {
+				AddCategoryView { categoryName in
+					onSaveCategoryButtonTapped(categoryName)
+					isAddCategorySheetPresented = false
+				}
+			}
+			.navigationTitle("Создать категорию")
+			.navigationBarTitleDisplayMode(.inline)
+			.presentationDetents([.medium])
+		}
 	}
-}
-
-#Preview {
-	SelectCategoryView(categories: [.allPurchases, .entertainment, .fastfood], searchText: "") { _ in } onSearchTextChange: { _ in }
 }

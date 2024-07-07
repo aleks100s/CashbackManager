@@ -7,5 +7,5 @@
 
 protocol ICategoryService {
 	func getCategories() -> [Category]
-	func save(categories: [Category])
+	func save(category: Category)
 }

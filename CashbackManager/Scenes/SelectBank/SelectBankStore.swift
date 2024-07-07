@@ -43,7 +43,6 @@ extension SelectBankState: StoreState {
 	}
 	
 	static func reduce(state: inout SelectBankState, with message: Message<Input, Feedback>) -> Effect? {
-		print(message)
 		switch message {
 		case .input(.viewDidAppear):
 			return .fetchBanks
