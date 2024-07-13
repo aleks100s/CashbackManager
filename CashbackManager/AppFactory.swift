@@ -5,6 +5,9 @@
 //  Created by Alexander on 27.06.2024.
 //
 
+import CashbackService
+import CategoryService
+
 final class AppFactory {
 	private lazy var persistanceManager = PersistanceManager()
 	private lazy var cashbackService = CashbackService(persistanceManager: persistanceManager)

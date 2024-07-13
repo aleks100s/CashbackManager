@@ -38,9 +38,16 @@
     },
     {
       "target" : {
-        "containerPath" : "container:..\/Domain",
+        "containerPath" : "container:Packages\/Domain",
         "identifier" : "DomainTests",
         "name" : "DomainTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/Services",
+        "identifier" : "ServicesTests",
+        "name" : "ServicesTests"
       }
     }
   ],

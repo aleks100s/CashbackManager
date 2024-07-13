@@ -7,6 +7,7 @@
 
 import Domain
 import Foundation
+import Persistance
 
 struct PersistanceManager: IPersistanceManager {
 	private let encoder: JSONEncoder
