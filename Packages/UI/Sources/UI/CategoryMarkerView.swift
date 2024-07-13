@@ -8,10 +8,14 @@
 import Domain
 import SwiftUI
 
-struct CategoryMarkerView: View {
-	let category: Domain.Category
+public struct CategoryMarkerView: View {
+	private let category: Domain.Category
 	
-	var body: some View {
+	public init(category: Domain.Category) {
+		self.category = category
+	}
+	
+	public var body: some View {
 		coloredCircle(Color(UIColor.systemBackground), side: 44)
 			.overlay {
 				coloredCircle(.red, side: 40)

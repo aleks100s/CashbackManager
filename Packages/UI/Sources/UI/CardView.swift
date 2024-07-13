@@ -8,8 +8,8 @@
 import Domain
 import SwiftUI
 
-struct CardView: View {
-	let card: Card
+public struct CardView: View {
+	private let card: Card
 	
 	@Environment(\.colorScheme) private var colorScheme
 	private var shadowColor: Color {
@@ -23,7 +23,11 @@ struct CardView: View {
 		}
 	}
 	
-	var body: some View {
+	public init(card: Card) {
+		self.card = card
+	}
+	
+	public var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			Text(card.name)
 				.foregroundStyle(.secondary)

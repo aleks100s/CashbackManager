@@ -8,10 +8,14 @@
 import Domain
 import SwiftUI
 
-struct CashbackView: View {
-	let cashback: Cashback
+public struct CashbackView: View {
+	private let cashback: Cashback
 	
-	var body: some View {
+	public init(cashback: Cashback) {
+		self.cashback = cashback
+	}
+	
+	public var body: some View {
 		HStack(alignment: .center, spacing: .zero) {
 			CategoryMarkerView(category: cashback.category)
 				.padding(.trailing, 8)

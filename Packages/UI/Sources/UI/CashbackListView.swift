@@ -8,10 +8,14 @@
 import Domain
 import SwiftUI
 
-struct CashbackListView: View {
-	let cashback: [Cashback]
+public struct CashbackListView: View {
+	private let cashback: [Cashback]
 	
-	var body: some View {
+	public init(cashback: [Cashback]) {
+		self.cashback = cashback
+	}
+	
+	public var body: some View {
 		List {
 			ForEach(cashback) { cashback in
 				CashbackView(cashback: cashback)

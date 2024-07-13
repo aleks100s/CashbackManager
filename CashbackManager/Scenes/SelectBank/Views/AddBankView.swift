@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct AddBankView: View {
 	@State var bankName: String = ""

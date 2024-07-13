@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct CMTextField: View {
-	let titleKey: LocalizedStringKey
-	@Binding var text: String
+public struct CMTextField: View {
+	private let titleKey: LocalizedStringKey
+	@Binding private var text: String
 	
-	init(_ titleKey: LocalizedStringKey, text: Binding<String>) {
+	public init(_ titleKey: LocalizedStringKey, text: Binding<String>) {
 		self.titleKey = titleKey
 		_text = text
 	}
 	
-	var body: some View {
+	public var body: some View {
 		TextField(titleKey, text: $text)
 			.textFieldStyle(RoundedBorderTextFieldStyle())
 	}

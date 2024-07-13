@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UI
 
 struct InputPercentView: View {
 	@State var percentString: String

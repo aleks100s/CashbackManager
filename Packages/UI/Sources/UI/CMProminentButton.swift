@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct CMProminentButton: View {
-	let title: String
-	let action: () -> Void
+public struct CMProminentButton: View {
+	private let title: String
+	private let action: () -> Void
 	
-	init(_ title: String, action: @escaping () -> Void) {
+	public init(_ title: String, action: @escaping () -> Void) {
 		self.title = title
 		self.action = action
 	}
 	
-	var body: some View {
+	public var body: some View {
 		Button(title, action: action)
 			.buttonStyle(BorderedProminentButtonStyle())
 	}
