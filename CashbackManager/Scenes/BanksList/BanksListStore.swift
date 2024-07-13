@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Store
 
 typealias BanksListStore = Store<BanksListState, BanksListEffectHandler>
 

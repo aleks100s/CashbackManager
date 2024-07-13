@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Store
 
 typealias SelectCardStore = Store<SelectCardState, SelectCardEffectHandler>
 

@@ -7,6 +7,7 @@
 
 import Domain
 import Foundation
+import Store
 
 typealias SelectBankStore = Store<SelectBankState, SelectBankEffectHandler>
 

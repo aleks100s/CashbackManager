@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Store
 
 typealias AddCashbackStore = Store<AddCashbackState, AddCashbackEffectHandler>
 
