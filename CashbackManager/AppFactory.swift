@@ -7,6 +7,7 @@
 
 import CashbackService
 import CategoryService
+import PersistanceManager
 
 final class AppFactory {
 	private lazy var persistanceManager = PersistanceManager()

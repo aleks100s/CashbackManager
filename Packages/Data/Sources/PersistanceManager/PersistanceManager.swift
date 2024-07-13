@@ -9,12 +9,12 @@ import Domain
 import Foundation
 import Persistance
 
-struct PersistanceManager: IPersistanceManager {
+public struct PersistanceManager: IPersistanceManager {
 	private let encoder: JSONEncoder
 	private let decoder: JSONDecoder
 	private let defaults: UserDefaults
 	
-	init(
+	public init(
 		encoder: JSONEncoder = JSONEncoder(),
 		decoder: JSONDecoder = JSONDecoder(),
 		defaults: UserDefaults = .standard
@@ -24,7 +24,7 @@ struct PersistanceManager: IPersistanceManager {
 		self.defaults = defaults
 	}
 	
-	func save(models: [some Model], for key: PersistanceKey) {
+	public func save(models: [some Model], for key: PersistanceKey) {
 		do {
 			let data = try encoder.encode(models)
 			let string = String(data: data, encoding: .utf8)
@@ -34,7 +34,7 @@ struct PersistanceManager: IPersistanceManager {
 		}
 	}
 	
-	func readModels(for key: PersistanceKey) -> [any Model] {
+	public func readModels(for key: PersistanceKey) -> [any Model] {
 		guard let string = defaults.value(forKey: key.value) as? String else {
 			return []
 		}
