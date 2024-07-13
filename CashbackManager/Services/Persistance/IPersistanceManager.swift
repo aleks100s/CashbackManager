@@ -5,6 +5,7 @@
 //  Created by Alexander on 29.06.2024.
 //
 
+import Domain
 import Foundation
 
 protocol IPersistanceManager {

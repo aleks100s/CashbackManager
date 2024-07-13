@@ -35,6 +35,13 @@
         "identifier" : "27A5D7E62C394EC500B93512",
         "name" : "CashbackManagerUITests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Domain",
+        "identifier" : "DomainTests",
+        "name" : "DomainTests"
+      }
     }
   ],
   "version" : 1

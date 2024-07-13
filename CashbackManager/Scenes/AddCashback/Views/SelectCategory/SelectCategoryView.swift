@@ -5,12 +5,13 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import Domain
 import SwiftUI
 
 struct SelectCategoryView: View {
-	let categories: [Category]
+	let categories: [Domain.Category]
 	let searchText: String
-	let onSelect: (Category) -> Void
+	let onSelect: (Domain.Category) -> Void
 	let onSearchTextChange: (String) -> Void
 	let onSaveCategoryButtonTapped: (String) -> Void
 	
@@ -49,6 +50,7 @@ struct SelectCategoryView: View {
 			.navigationTitle("Создать категорию")
 			.navigationBarTitleDisplayMode(.inline)
 			.presentationDetents([.medium])
+			.presentationBackground(.regularMaterial)
 		}
 	}
 }

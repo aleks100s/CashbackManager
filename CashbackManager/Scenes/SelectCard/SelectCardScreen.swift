@@ -62,6 +62,7 @@ struct SelectCardScreen: View {
 				.navigationBarTitleDisplayMode(.inline)
 			}
 			.presentationDetents([.medium])
+			.presentationBackground(.regularMaterial)
 		}
 		.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissRenameCard)})) { card in
 			NavigationView {
@@ -72,6 +73,7 @@ struct SelectCardScreen: View {
 				.navigationBarTitleDisplayMode(.inline)
 			}
 			.presentationDetents([.medium])
+			.presentationBackground(.regularMaterial)
 		}
 	}
 }

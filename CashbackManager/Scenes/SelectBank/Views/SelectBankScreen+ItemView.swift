@@ -5,6 +5,7 @@
 //  Created by Alexander on 19.06.2024.
 //
 
+import Domain
 import SwiftUI
 
 extension SelectBankScreen {

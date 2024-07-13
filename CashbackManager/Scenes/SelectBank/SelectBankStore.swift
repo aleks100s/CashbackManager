@@ -5,6 +5,7 @@
 //  Created by Alexander on 27.06.2024.
 //
 
+import Domain
 import Foundation
 
 typealias SelectBankStore = Store<SelectBankState, SelectBankEffectHandler>

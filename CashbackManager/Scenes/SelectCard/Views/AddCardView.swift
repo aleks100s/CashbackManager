@@ -30,6 +30,5 @@ struct AddCardView: View {
 			isFocused = false
 		}
 		.scrollDismissesKeyboard(.interactively)
-		.background(Color(UIColor.secondarySystemBackground))
 	}
 }

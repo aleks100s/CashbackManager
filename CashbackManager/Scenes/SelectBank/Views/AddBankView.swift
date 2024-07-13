@@ -31,6 +31,5 @@ struct AddBankView: View {
 			isFocused = false
 		}
 		.scrollDismissesKeyboard(.interactively)
-		.background(Color(UIColor.secondarySystemBackground))
 	}
 }

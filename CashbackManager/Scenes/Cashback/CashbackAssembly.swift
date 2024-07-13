@@ -5,6 +5,7 @@
 //  Created by Alexander on 25.06.2024.
 //
 
+import Domain
 import SwiftUI
 
 enum CashbackAssembly {

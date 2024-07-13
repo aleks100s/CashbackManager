@@ -5,10 +5,11 @@
 //  Created by Alexander on 27.06.2024.
 //
 
+import Domain
 import SwiftUI
 
 struct CategoryView: View {
-	let category: Category
+	let category: Domain.Category
 	
 	var body: some View {
 		HStack(alignment: .center) {

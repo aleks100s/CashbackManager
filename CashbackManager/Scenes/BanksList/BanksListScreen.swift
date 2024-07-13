@@ -65,6 +65,7 @@ struct BanksListScreen: View {
 					.navigationBarTitleDisplayMode(.inline)
 				}
 				.presentationDetents([.medium])
+				.presentationBackground(.regularMaterial)
 			}
 		}
 	}

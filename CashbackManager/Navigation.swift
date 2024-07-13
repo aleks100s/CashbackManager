@@ -5,6 +5,8 @@
 //  Created by Alexander on 15.06.2024.
 //
 
+import Domain
+
 enum Navigation: Hashable {
 	case selectBank([Bank])
 	case selectCard(Bank)

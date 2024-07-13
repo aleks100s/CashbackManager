@@ -99,6 +99,7 @@ struct AddCashbackScreen: View {
 			.navigationTitle("Выбор категории")
 			.navigationBarTitleDisplayMode(.inline)
 			.presentationDetents([.large])
+			.presentationBackground(.regularMaterial)
 		}
 		.sheet(
 			isPresented: Binding(
@@ -120,6 +121,7 @@ struct AddCashbackScreen: View {
 			.navigationTitle("Процент кэщбека")
 			.navigationBarTitleDisplayMode(.inline)
 			.presentationDetents([.medium])
+			.presentationBackground(.regularMaterial)
 		}
 		.onAppear {
 			store.send(.viewDidAppear)

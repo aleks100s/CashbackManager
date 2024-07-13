@@ -5,6 +5,7 @@
 //  Created by Alexander on 30.06.2024.
 //
 
+import Domain
 import Foundation
 
 final class CashbackService: ICashbackService {

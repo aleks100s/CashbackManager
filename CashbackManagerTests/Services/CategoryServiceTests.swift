@@ -5,6 +5,7 @@
 //  Created by Alexander on 17.06.2024.
 //
 
+import Domain
 import XCTest
 @testable import CashbackManager
 
@@ -32,36 +33,36 @@ final class CategoryServiceTests: XCTestCase {
 		let result = service.getCategories()
 		
 		// Then
-		XCTAssertEqual(result, PredefinedCategory.allCases.map { Category(name: $0.name, emoji: $0.emoji) })
+		XCTAssertEqual(result, PredefinedCategory.allCases.map { Domain.Category(name: $0.name, emoji: $0.emoji) })
 	}
 	
 	func test_getCategories() {
 		// Given
-		let userCategory = Category.arbitrary()
+		let userCategory = Domain.Category.arbitrary()
 		setupPersistance(categories: [userCategory])
 		
 		// When
 		let result = service.getCategories()
 		
 		// Then
-		XCTAssertEqual(result, PredefinedCategory.allCases.map { Category(name: $0.name, emoji: $0.emoji) } + [userCategory])
+		XCTAssertEqual(result, PredefinedCategory.allCases.map { Domain.Category(name: $0.name, emoji: $0.emoji) } + [userCategory])
 	}
 	
 	func test_saveCategories() {
 		// Given
 		setupPersistance(categories: [])
-		let category = Category.arbitrary()
+		let category = Domain.Category.arbitrary()
 		
 		// When
-		service.save(categories: [category])
+		service.save(category: category)
 		
 		// Then
-		XCTAssertEqual(service.getCategories(), PredefinedCategory.allCases.map { Category(name: $0.name, emoji: $0.emoji) } + [category])
+		XCTAssertEqual(service.getCategories(), PredefinedCategory.allCases.map { Domain.Category(name: $0.name, emoji: $0.emoji) } + [category])
 	}
 }
 
 private extension CategoryServiceTests {
-	func setupPersistance(categories: [CashbackManager.Category]) {
+	func setupPersistance(categories: [Domain.Category]) {
 		persistanceManager = .init()
 		persistanceManager.readModelsReturnValue = categories
 		service = .init(persistanceManager: persistanceManager)

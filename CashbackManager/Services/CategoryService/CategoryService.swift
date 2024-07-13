@@ -5,10 +5,12 @@
 //  Created by Alexander on 30.06.2024.
 //
 
+import Domain
+
 final class CategoryService: ICategoryService {
 	private let persistanceManager: IPersistanceManager
 	
-	private var categories: [Category] = [] {
+	private var categories: [Domain.Category] = [] {
 		didSet {
 			persistCategories()
 		}
@@ -16,16 +18,16 @@ final class CategoryService: ICategoryService {
 	
 	init(persistanceManager: IPersistanceManager) {
 		self.persistanceManager = persistanceManager
-		self.categories = persistanceManager.readModels(for: .categories) as? [Category] ?? []
+		self.categories = persistanceManager.readModels(for: .categories) as? [Domain.Category] ?? []
 	}
 	
-	func getCategories() -> [Category] {
+	func getCategories() -> [Domain.Category] {
 		let predefinedCategories = PredefinedCategory.allCases.map(\.asCategory)
-		let userCategories: [Category] = categories
+		let userCategories: [Domain.Category] = categories
 		return predefinedCategories + userCategories
 	}
 	
-	func save(category: Category) {
+	func save(category: Domain.Category) {
 		categories.append(category)
 	}
 	

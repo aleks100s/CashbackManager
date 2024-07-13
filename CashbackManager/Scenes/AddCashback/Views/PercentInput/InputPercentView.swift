@@ -31,6 +31,5 @@ struct InputPercentView: View {
 			isFocused = false
 		}
 		.scrollDismissesKeyboard(.interactively)
-		.background(Color(UIColor.secondarySystemBackground))
 	}
 }

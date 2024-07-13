@@ -30,6 +30,5 @@ struct AddCategoryView: View {
 			isFocused = false
 		}
 		.scrollDismissesKeyboard(.interactively)
-		.background(Color(UIColor.secondarySystemBackground))
 	}
 }

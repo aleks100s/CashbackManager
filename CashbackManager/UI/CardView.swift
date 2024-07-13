@@ -5,6 +5,7 @@
 //  Created by Alexander on 15.06.2024.
 //
 
+import Domain
 import SwiftUI
 
 struct CardView: View {

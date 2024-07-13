@@ -5,10 +5,11 @@
 //  Created by Alexander on 15.06.2024.
 //
 
+import Domain
 import SwiftUI
 
 struct CategoryMarkerView: View {
-	let category: Category
+	let category: Domain.Category
 	
 	var body: some View {
 		coloredCircle(Color(UIColor.systemBackground), side: 44)

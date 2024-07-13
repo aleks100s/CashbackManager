@@ -5,7 +5,9 @@
 //  Created by Alexander on 17.06.2024.
 //
 
+import Domain
+
 protocol ICategoryService {
-	func getCategories() -> [Category]
-	func save(category: Category)
+	func getCategories() -> [Domain.Category]
+	func save(category: Domain.Category)
 }

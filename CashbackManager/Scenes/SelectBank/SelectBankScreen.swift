@@ -56,6 +56,7 @@ struct SelectBankScreen: View {
 				.navigationBarTitleDisplayMode(.inline)
 			}
 			.presentationDetents([.medium])
+			.presentationBackground(.regularMaterial)
 		}
 		.sheet(item: Binding(get: { store.bankToBeRenamed }, set: { _ in store.send(.dismissRenameBankSheet) })) { bank in
 			NavigationView {
@@ -66,6 +67,7 @@ struct SelectBankScreen: View {
 				.navigationBarTitleDisplayMode(.inline)
 			}
 			.presentationDetents([.medium])
+			.presentationBackground(.regularMaterial)
 		}
 	}
 }

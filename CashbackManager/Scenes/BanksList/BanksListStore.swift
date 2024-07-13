@@ -5,6 +5,8 @@
 //  Created by Alexander on 20.06.2024.
 //
 
+import Domain
+
 typealias BanksListStore = Store<BanksListState, BanksListEffectHandler>
 
 struct BanksListState {

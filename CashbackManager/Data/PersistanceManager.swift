@@ -5,6 +5,7 @@
 //  Created by Alexander on 29.06.2024.
 //
 
+import Domain
 import Foundation
 
 struct PersistanceManager: IPersistanceManager {
@@ -63,7 +64,7 @@ private extension PersistanceKey {
 		case .banks:
 			[Bank].self
 		case .categories:
-			[Category].self
+			[Domain.Category].self
 		}
 	}
 }

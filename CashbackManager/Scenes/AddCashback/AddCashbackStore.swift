@@ -5,15 +5,17 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import Domain
+
 typealias AddCashbackStore = Store<AddCashbackState, AddCashbackEffectHandler>
 
 struct AddCashbackState {
 	let card: Card
 	let percentPresets: [Double] = [0.01, 0.015, 0.02, 0.03, 0.05, 0.07, 0.1, 0.15, 0.2, 0.25]
-	var selectedCategory: Category?
+	var selectedCategory: Domain.Category?
 	var percent: Double = 0.05
-	var categories = [Category]()
-	var filteredCategories = [Category]()
+	var categories = [Domain.Category]()
+	var filteredCategories = [Domain.Category]()
 	var isCategorySelectorPresented = false
 	var searchText: String = ""
 	var isPercentInputSheetPresented = false
@@ -23,7 +25,7 @@ extension AddCashbackState: StoreState {
 	enum Input {
 		case viewDidAppear
 		case selectCategoryTapped
-		case categorySelected(Category)
+		case categorySelected(Domain.Category)
 		case dismissSelection
 		case updatePercent(Double)
 		case saveCashbackTapped
@@ -37,11 +39,11 @@ extension AddCashbackState: StoreState {
 	enum Effect {
 		case fetchCategories
 		case updateCard(Card)
-		case saveCategory(Category)
+		case saveCategory(Domain.Category)
 	}
 	
 	enum Feedback {
-		case categoriesFetched([Category])
+		case categoriesFetched([Domain.Category])
 		case categorySaved
 	}
 	
@@ -78,7 +80,7 @@ extension AddCashbackState: StoreState {
 				state.filteredCategories = state.categories.filter { $0.name.lowercased().contains(text.lowercased()) }
 			}
 		case .input(.saveNewCategory(let categoryName)):
-			let category = Category(name: categoryName, emoji: "\(categoryName.uppercased().first ?? "?")")
+			let category = Domain.Category(name: categoryName, emoji: "\(categoryName.uppercased().first ?? "?")")
 			return .saveCategory(category)
 		case .input(.onInputPercentButtonTapped):
 			state.isPercentInputSheetPresented = true
