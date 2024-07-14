@@ -31,7 +31,8 @@ struct SelectCategoryView: View {
 		}
 		.searchable(
 			text: Binding(get: { searchText }, set: { onSearchTextChange($0) }),
-			placement: .navigationBarDrawer(displayMode: .always)
+			placement: .navigationBarDrawer(displayMode: .always),
+			prompt: "Название категории"
 		)
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {

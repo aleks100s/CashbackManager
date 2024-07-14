@@ -11,8 +11,10 @@ import Store
 typealias BanksListStore = Store<BanksListState, BanksListEffectHandler>
 
 struct BanksListState {
-	var banks = [Bank]()
+	var allBanks = [Bank]()
+	var filteredBanks = [Bank]()
 	var cardToBeRenamed: Card?
+	var searchText = ""
 }
 
 extension BanksListState: StoreState {
@@ -24,6 +26,7 @@ extension BanksListState: StoreState {
 		case onCardRenameTapped(Card)
 		case dismissCardRename
 		case cardRenamed(String)
+		case searchTextChanged(String)
 	}
 	
 	enum Effect {
@@ -45,7 +48,7 @@ extension BanksListState: StoreState {
 		case .input(.onAppear):
 			return .fetchBanks
 		case .input(.onAddCashbackTap):
-			return .navigateToBankSelection(state.banks)
+			return .navigateToBankSelection(state.allBanks)
 		case .input(.onCardSelected(let card)):
 			return .navigateToCardDetail(card)
 		case .input(.onCardDeleted(let card)):
@@ -60,8 +63,25 @@ extension BanksListState: StoreState {
 				state.cardToBeRenamed = nil
 				return .updateCard(card)
 			}
+		case .input(.searchTextChanged(let text)):
+			state.searchText = text
+			let text = text.lowercased()
+			guard !text.isEmpty else { break }
+			
+			var filteredBanks = state.allBanks.filter { bank in
+				bank.cards.contains { card in
+					card.cashbackDescription.lowercased().contains(text)
+				}
+			}
+			filteredBanks.indices.forEach { index in
+				filteredBanks[index].cards = filteredBanks[index].cards.filter { card in
+					card.cashbackDescription.lowercased().contains(text)
+				}
+			}
+			state.filteredBanks = filteredBanks
 		case .feedback(.banksFetched(let banks)):
-			state.banks = banks
+			state.allBanks = banks
+			state.filteredBanks = banks
 		case .feedback(.cardDeleted):
 			return .fetchBanks
 		case .feedback(.cardRenamed):

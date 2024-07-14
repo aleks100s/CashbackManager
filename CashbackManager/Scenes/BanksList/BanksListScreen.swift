@@ -16,6 +16,11 @@ struct BanksListScreen: View {
 	
 	var body: some View {
 		contentView
+			.searchable(
+				text: Binding(get: { store.searchText }, set: { store.send(.searchTextChanged($0)) }),
+				placement: .navigationBarDrawer(displayMode: .always),
+				prompt: "Категория кэшбека"
+			)
 			.navigationTitle("Мои кэшбеки")
 			.toolbar {
 				ToolbarItem(placement: .topBarTrailing) {
@@ -31,7 +36,7 @@ struct BanksListScreen: View {
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if store.state.banks.isEmpty {
+		if store.state.filteredBanks.isEmpty {
 			VStack(alignment: .center, spacing: 16) {
 				Text("Пока здесь пусто")
 				Button("Добавить кэшбек") {
@@ -41,7 +46,7 @@ struct BanksListScreen: View {
 		} else {
 			ScrollView {
 				LazyVStack(spacing: .zero) {
-					ForEach(store.state.banks) { bank in
+					ForEach(store.state.filteredBanks) { bank in
 						BankView(bank: bank) { card, action in
 							switch action {
 							case .select:
