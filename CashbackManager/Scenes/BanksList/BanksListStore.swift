@@ -65,8 +65,11 @@ extension BanksListState: StoreState {
 			}
 		case .input(.searchTextChanged(let text)):
 			state.searchText = text
-			let text = text.lowercased()
-			guard !text.isEmpty else { break }
+			let text = text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+			guard !text.isEmpty else {
+				state.filteredBanks = state.allBanks
+				break
+			}
 			
 			var filteredBanks = state.allBanks.filter { bank in
 				bank.cards.contains { card in

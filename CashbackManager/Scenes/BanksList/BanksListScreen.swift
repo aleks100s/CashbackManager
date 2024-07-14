@@ -60,6 +60,7 @@ struct BanksListScreen: View {
 					}
 				}
 			}
+			.scrollDismissesKeyboard(.interactively)
 			.background(Color(UIColor.secondarySystemBackground))
 			.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissCardRename) })) { card in
 				NavigationView {
