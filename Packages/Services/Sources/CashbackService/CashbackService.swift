@@ -42,7 +42,7 @@ public final class CashbackService: ICashbackService {
 	
 	public func update(card: Card) {
 		for i in banks.indices {
-			if banks[i].cards.contains { $0.id == card.id } {
+			if banks[i].cards.contains(where: { $0.id == card.id }) {
 				for j in banks[i].cards.indices {
 					if banks[i].cards[j].id == card.id {
 						var cards = banks[i].cards

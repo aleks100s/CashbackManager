@@ -5,6 +5,7 @@
 //  Created by Alexander on 15.06.2024.
 //
 
+import CommonInput
 import SwiftUI
 
 struct BanksListScreen: View {
@@ -64,7 +65,7 @@ struct BanksListScreen: View {
 			.background(Color.cmScreenBackground)
 			.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissCardRename) })) { card in
 				NavigationView {
-					AddCardView(cardName: card.name) { cardName in
+					CommonInputView("Название карты", text: card.name) { cardName in
 						store.send(.cardRenamed(cardName))
 					}
 					.navigationTitle("Переименовать карту")

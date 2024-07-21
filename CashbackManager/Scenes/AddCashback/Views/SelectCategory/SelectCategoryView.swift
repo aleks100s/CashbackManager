@@ -5,6 +5,7 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import CommonInput
 import Domain
 import SwiftUI
 
@@ -43,7 +44,7 @@ struct SelectCategoryView: View {
 		}
 		.sheet(isPresented: $isAddCategorySheetPresented) {
 			NavigationView {
-				AddCategoryView { categoryName in
+				CommonInputView("Название категории") { categoryName in
 					onSaveCategoryButtonTapped(categoryName)
 					isAddCategorySheetPresented = false
 				}

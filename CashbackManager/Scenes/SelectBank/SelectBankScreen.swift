@@ -5,6 +5,7 @@
 //  Created by Alexander on 19.06.2024.
 //
 
+import CommonInput
 import SwiftUI
 
 struct SelectBankScreen: View {
@@ -49,7 +50,7 @@ struct SelectBankScreen: View {
 		}
 		.sheet(isPresented: Binding(get: { store.isAddBankSheetPresented }, set: { value, _ in  store.send(value ? .addBankButtonTapped : .addBankDismiss) })) {
 			NavigationView {
-				AddBankView() { name in
+				CommonInputView("Название банка") { name in
 					store.send(.saveBank(name))
 				}
 				.navigationTitle("Добавить новый банк")
@@ -60,7 +61,7 @@ struct SelectBankScreen: View {
 		}
 		.sheet(item: Binding(get: { store.bankToBeRenamed }, set: { _ in store.send(.dismissRenameBankSheet) })) { bank in
 			NavigationView {
-				AddBankView(bankName: bank.name) { name in
+				CommonInputView("Название банка", text: bank.name) { name in
 					store.send(.onBankRenamed(name))
 				}
 				.navigationTitle("Переименовать банк")
@@ -68,6 +69,34 @@ struct SelectBankScreen: View {
 			}
 			.presentationDetents([.medium])
 			.presentationBackground(.regularMaterial)
+		}
+	}
+}
+
+import Domain
+
+private extension SelectBankScreen {
+	struct ItemView: View {
+		let bank: Bank
+		
+		var body: some View {
+			VStack(alignment: .leading, spacing: .zero) {
+				Text(bank.name)
+					.font(.title2.bold())
+				
+				HStack {
+					if bank.cards.isEmpty {
+						Text("Нет карт")
+					} else {
+						Text("Карты:")
+						Text(bank.cardsList)
+							.truncationMode(.tail)
+					}
+					Spacer()
+				}
+			}
+			.lineLimit(1)
+			.contentShape(Rectangle())
 		}
 	}
 }

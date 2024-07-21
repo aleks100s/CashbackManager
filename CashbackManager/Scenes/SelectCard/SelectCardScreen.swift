@@ -5,8 +5,9 @@
 //  Created by Alexander on 19.06.2024.
 //
 
-import SwiftUI
+import CommonInput
 import DesignSystem
+import SwiftUI
 
 struct SelectCardScreen: View {
 	@State private var store: SelectCardStore
@@ -56,7 +57,7 @@ struct SelectCardScreen: View {
 		}
 		.sheet(isPresented: Binding(get: { store.isAddCardSheetPresented }, set: { _, _ in store.send(.dismissAddCard)})) {
 			NavigationView {
-				AddCardView { cardName in
+				CommonInputView("Название карты") { cardName in
 					store.send(.saveCard(cardName))
 				}
 				.navigationTitle("Добавить новую карту")
@@ -67,7 +68,7 @@ struct SelectCardScreen: View {
 		}
 		.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissRenameCard)})) { card in
 			NavigationView {
-				AddCardView(cardName: card.name) { cardName in
+				CommonInputView("Название карты", text: card.name) { cardName in
 					store.send(.cardRenamed(cardName))
 				}
 				.navigationTitle("Переименовать карту")

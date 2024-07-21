@@ -5,8 +5,9 @@
 //  Created by Alexander on 26.06.2024.
 //
 
-import SwiftUI
+import CommonInput
 import DesignSystem
+import SwiftUI
 
 struct AddCashbackScreen: View {
 	@State var store: AddCashbackStore
@@ -115,7 +116,7 @@ struct AddCashbackScreen: View {
 			)
 		) {
 			NavigationView {
-				InputPercentView(percentString: String(format: "%.0f", store.percent * 100)) { value in
+				CommonInputView("Процент", text: String(format: "%.0f", store.percent * 100)) { value in
 					store.send(.updatePercentString(value))
 				}
 			}
