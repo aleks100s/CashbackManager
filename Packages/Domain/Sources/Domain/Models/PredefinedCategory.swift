@@ -37,9 +37,11 @@ public enum PredefinedCategory: CaseIterable {
 	case music
 	case supermarkets
 	case shops
+	case digitalGoods
 	case electronicDevices
 	case restaurants
 	case fastfood
+	case yandex
 	case communicationAndTelecom
 	case photoAndVideo
 	case souvenirs

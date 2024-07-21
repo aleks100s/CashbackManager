@@ -17,11 +17,11 @@ public struct PersistanceManager: IPersistanceManager {
 	public init(
 		encoder: JSONEncoder = JSONEncoder(),
 		decoder: JSONDecoder = JSONDecoder(),
-		defaults: UserDefaults = .standard
+		defaults: UserDefaults?
 	) {
 		self.encoder = encoder
 		self.decoder = decoder
-		self.defaults = defaults
+		self.defaults = defaults ?? .standard
 	}
 	
 	public func save(models: [some Model], for key: PersistanceKey) {
@@ -57,6 +57,8 @@ private extension PersistanceKey {
 			"banks"
 		case .categories:
 			"categories"
+		case .widgetCurrentCard:
+			"widgetCurrentCard"
 		}
 	}
 	
@@ -66,6 +68,8 @@ private extension PersistanceKey {
 			[Bank].self
 		case .categories:
 			[Domain.Category].self
+		case .widgetCurrentCard:
+			[Card].self
 		}
 	}
 }

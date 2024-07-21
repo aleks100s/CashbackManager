@@ -8,4 +8,5 @@
 public enum PersistanceKey {
 	case banks
 	case categories
+	case widgetCurrentCard
 }

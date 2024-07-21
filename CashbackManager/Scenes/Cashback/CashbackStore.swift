@@ -8,6 +8,7 @@
 import Domain
 import Foundation
 import Store
+import WidgetKit
 
 typealias CashbackStore = Store<CashbackState, CashbackEffectHandler>
 
@@ -72,8 +73,11 @@ final class CashbackEffectHandler: EffectHandler {
 		case .navigateToAddCashback(let card):
 			coordinator.navigateToAddCashback(card: card)
 		case .fetchCard(let id):
-			let card = cashbackService.getCard(by: id)
-			return .cardFetched(card)
+			if let card = cashbackService.getCard(by: id) {
+				cashbackService.save(currentCard: card)
+				WidgetCenter.shared.reloadAllTimelines()
+				return .cardFetched(card)
+			}
 		case .updateCard(let card):
 			cashbackService.update(card: card)
 		}

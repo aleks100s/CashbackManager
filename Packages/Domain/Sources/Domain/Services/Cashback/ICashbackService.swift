@@ -16,4 +16,6 @@ public protocol ICashbackService {
 	func delete(card: Card)
 	func getCard(by id: UUID) -> Card?
 	func getBank(by id: UUID) -> Bank?
+	func save(currentCard: Card)
+	func getCurrentCard() -> Card?
 }

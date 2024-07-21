@@ -89,6 +89,14 @@ public final class CashbackService: ICashbackService {
 		self.banks = banks
 	}
 	
+	public func save(currentCard: Card) {
+		persistanceManager.save(models: [currentCard], for: .widgetCurrentCard)
+	}
+	
+	public func getCurrentCard() -> Card? {
+		(persistanceManager.readModels(for: .widgetCurrentCard) as? [Card])?.first
+	}
+	
 	private func persistBanks() {
 		persistanceManager.save(models: banks, for: .banks)
 	}
