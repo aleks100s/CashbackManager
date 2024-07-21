@@ -37,18 +37,24 @@ struct SelectBankScreen: View {
 			.onDelete { indexSet in
 				store.send(.onBankDeleted(indexSet))
 			}
-			
-			Button {
-				store.send(.addBankButtonTapped)
-			} label: {
-				Text("Добавить новый банк")
-			}
 		}
 		.navigationTitle("Выбери банк")
 		.onAppear {
 			store.send(.viewDidAppear)
 		}
-		.sheet(isPresented: Binding(get: { store.isAddBankSheetPresented }, set: { value, _ in  store.send(value ? .addBankButtonTapped : .addBankDismiss) })) {
+		.toolbar {
+			ToolbarItem(placement: .bottomBar) {
+				Button("Добавить новый банк") {
+					store.send(.addBankButtonTapped)
+				}
+			}
+		}
+		.sheet(
+			isPresented: Binding(
+				get: { store.isAddBankSheetPresented },
+				set: { value, _ in  store.send(value ? .addBankButtonTapped : .addBankDismiss) }
+			)
+		) {
 			NavigationView {
 				CommonInputView("Название банка") { name in
 					store.send(.saveBank(name))

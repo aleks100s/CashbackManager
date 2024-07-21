@@ -7,12 +7,15 @@
 
 import Domain
 import SwiftUI
-import DesignSystem
 
-struct CategoryView: View {
-	let category: Domain.Category
+public struct CategoryView: View {
+	private let category: Domain.Category
 	
-	var body: some View {
+	public init(category: Domain.Category) {
+		self.category = category
+	}
+	
+	public var body: some View {
 		HStack(alignment: .center) {
 			CategoryMarkerView(category: category)
 			Text(category.name)

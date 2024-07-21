@@ -17,12 +17,15 @@ struct BanksListScreen: View {
 	
 	var body: some View {
 		contentView
+			.navigationTitle("Мои кэшбеки")
+			.onAppear {
+				store.send(.onAppear)
+			}
 			.searchable(
 				text: Binding(get: { store.searchText }, set: { store.send(.searchTextChanged($0)) }),
-				placement: .navigationBarDrawer(displayMode: .always),
+				placement: .navigationBarDrawer(displayMode: .automatic),
 				prompt: "Категория кэшбека"
 			)
-			.navigationTitle("Мои кэшбеки")
 			.toolbar {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Добавить кэшбек", systemImage: "plus") {
@@ -30,8 +33,16 @@ struct BanksListScreen: View {
 					}
 				}
 			}
-			.onAppear {
-				store.send(.onAppear)
+			.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissCardRename) })) { card in
+				NavigationView {
+					CommonInputView("Название карты", text: card.name) { cardName in
+						store.send(.cardRenamed(cardName))
+					}
+					.navigationTitle("Переименовать карту")
+					.navigationBarTitleDisplayMode(.inline)
+				}
+				.presentationDetents([.medium])
+				.presentationBackground(.regularMaterial)
 			}
 	}
 	
@@ -40,8 +51,14 @@ struct BanksListScreen: View {
 		if store.state.filteredBanks.isEmpty {
 			VStack(alignment: .center, spacing: 16) {
 				Text("Пока здесь пусто")
-				Button("Добавить кэшбек") {
-					store.send(.onAddCashbackTap)
+			}
+			.if(store.searchText.isEmpty) {
+				$0.toolbar {
+					ToolbarItem(placement: .bottomBar) {
+						Button("Добавить кэшбек") {
+							store.send(.onAddCashbackTap)
+						}
+					}
 				}
 			}
 		} else {
@@ -63,17 +80,6 @@ struct BanksListScreen: View {
 			}
 			.scrollDismissesKeyboard(.interactively)
 			.background(Color.cmScreenBackground)
-			.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissCardRename) })) { card in
-				NavigationView {
-					CommonInputView("Название карты", text: card.name) { cardName in
-						store.send(.cardRenamed(cardName))
-					}
-					.navigationTitle("Переименовать карту")
-					.navigationBarTitleDisplayMode(.inline)
-				}
-				.presentationDetents([.medium])
-				.presentationBackground(.regularMaterial)
-			}
 		}
 	}
 }

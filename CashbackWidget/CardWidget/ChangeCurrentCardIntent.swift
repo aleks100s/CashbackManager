@@ -26,7 +26,7 @@ struct ChangeCurrentCardIntent: AppIntent {
 	func perform() async throws -> some IntentResult {
 		let service = CashbackService(persistanceManager: PersistanceManager(defaults: UserDefaults(suiteName: "group.com.alextos.cashback")))
 		let banks = service.getBanks()
-		let cards = banks.flatMap(\.cards)
+		let cards = banks.flatMap(\.cards).filter { !$0.cashback.isEmpty }
 		var nextCard: Card?
 		if let id = UUID(uuidString: cardId),
 			let card = service.getCard(by: id),

@@ -34,7 +34,6 @@
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
 		27A5D8552C394EFF00B93512 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D8052C394EFE00B93512 /* ServiceContainer.swift */; };
-		27A5D8572C394EFF00B93512 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D8092C394EFF00B93512 /* CategoryView.swift */; };
 		27A5D8582C394EFF00B93512 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D80A2C394EFF00B93512 /* SelectCategoryView.swift */; };
 		27A5D8592C394EFF00B93512 /* AddCashbackAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D80C2C394EFF00B93512 /* AddCashbackAssembly.swift */; };
 		27A5D85A2C394EFF00B93512 /* AddCashbackCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D80D2C394EFF00B93512 /* AddCashbackCoordinator.swift */; };
@@ -131,7 +130,6 @@
 		27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackManagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CashbackApplication.swift; sourceTree = "<group>"; };
 		27A5D8052C394EFE00B93512 /* ServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
-		27A5D8092C394EFF00B93512 /* CategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		27A5D80A2C394EFF00B93512 /* SelectCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		27A5D80C2C394EFF00B93512 /* AddCashbackAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCashbackAssembly.swift; sourceTree = "<group>"; };
 		27A5D80D2C394EFF00B93512 /* AddCashbackCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCashbackCoordinator.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 		27368B712C3A972B00FC0475 /* SelectCategory */ = {
 			isa = PBXGroup;
 			children = (
-				27A5D8092C394EFF00B93512 /* CategoryView.swift */,
 				27A5D80A2C394EFF00B93512 /* SelectCategoryView.swift */,
 			);
 			path = SelectCategory;
@@ -608,7 +605,6 @@
 				27A5D85C2C394EFF00B93512 /* AddCashbackStore.swift in Sources */,
 				27A5D8682C394EFF00B93512 /* CashbackScreen.swift in Sources */,
 				27A5D8642C394EFF00B93512 /* BanksListScreen.swift in Sources */,
-				27A5D8572C394EFF00B93512 /* CategoryView.swift in Sources */,
 				27A5D86C2C394EFF00B93512 /* SelectBankAssembly.swift in Sources */,
 				27A5D8592C394EFF00B93512 /* AddCashbackAssembly.swift in Sources */,
 				27A5D8622C394EFF00B93512 /* BanksListAssembly.swift in Sources */,

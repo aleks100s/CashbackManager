@@ -12,6 +12,8 @@ public struct CardView: View {
 	private let card: Card
 	
 	@Environment(\.colorScheme) private var colorScheme
+	@Environment(\.viewSize) private var size
+	
 	private var shadowColor: Color {
 		switch colorScheme {
 		case .light:
@@ -22,68 +24,54 @@ public struct CardView: View {
 			.clear
 		}
 	}
-	
-	@Environment(\.viewSize) private var size
 		
 	public init(card: Card) {
 		self.card = card
 	}
 	
 	public var body: some View {
-		VStack(alignment: .leading, spacing: vSpacing) {
+		VStack(alignment: .leading, spacing: size.vSpacing) {
 			Text(card.name)
 				.foregroundStyle(.secondary)
 			
 			if !card.cashback.isEmpty {
-				VStack(alignment: .leading) {
-					HStack(alignment: .center, spacing: .zero) {
-						ForEach(card.cashback, id: \.category.name) { cashback in
-							CategoryMarkerView(category: cashback.category)
-								.padding(.trailing, -12)
-						}
-					}
-					
-					Text(card.cashbackDescription)
-				}
-			} else {
-				Text(card.cashbackDescription)
+				CategoriesView(cashback: card.cashback)
 			}
+			
+			Text(card.cashbackDescription)
 		}
-		.font(size == .default ? .body : .caption)
 		.frame(maxWidth: .infinity, alignment: .leading)
-		.padding(.horizontal, hPadding)
-		.padding(.vertical, vPadding)
-		.background(Color.cmCardBackground)
-		.cornerRadius(10)
-		.shadow(color: shadowColor, radius: 5, x: 0, y: 5)
+		.if(size == .default) { view in
+			view
+				.padding(.horizontal, 12)
+				.padding(.vertical, 12)
+				.background(Color.cmCardBackground)
+				.cornerRadius(10)
+				.shadow(color: shadowColor, radius: 5, x: 0, y: 5)
+		}
 	}
 }
 
-// MARK: - Size
+private struct CategoriesView: View {
+	let cashback: [Cashback]
+	
+	@Environment(\.viewSize) private var size
+	
+	var body: some View {
+		HStack(alignment: .center, spacing: .zero) {
+			ForEach(cashback, id: \.category.name) { cashback in
+				CategoryMarkerView(category: cashback.category)
+					.padding(.trailing, -12)
+			}
+		}
+	}
+}
 
-private extension CardView {
+private extension ViewSize {
 	var vSpacing: CGFloat {
-		switch size {
+		switch self {
 		case .default:
 			16
-		case .widget:
-			8
-		}
-	}
-	
-	var hPadding: CGFloat {
-		switch size {
-		case .default:
-			12
-		case .widget:
-			8
-		}
-	}
-	
-	var vPadding: CGFloat {
-		switch size {
-		case .default:
-			12
 		case .widget:
 			8
 		}

@@ -17,63 +17,46 @@ struct SelectCardScreen: View {
 	}
 	
 	var body: some View {
-		Group {
-			if store.bank.cards.isEmpty {
-				VStack {
-					Spacer()
-					
-					HStack {
-						Spacer()
-						
-						CMProminentButton("Добавить карту") {
-							store.send(.onAddCardTapped)
-						}
-						
-						Spacer()
-					}
-					
-					Spacer()
-				}
-			} else {
-				ScrollView {
-					LazyVStack(alignment: .leading, spacing: 16) {
-						ForEach(store.bank.cards) { card in
-							Button {
-								store.send(.onCardSelected(card))
-							} label: {
-								CardView(card: card)
-									.contextMenu {
-										Text(card.name)
-										Button {
-											store.send(.onCardRename(card))
-										} label: {
-											Text("Переименовать карту")
-										}
-										Button(role: .destructive) {
-											store.send(.onCardDeleted(card))
-										} label: {
-											Text("Удалить карту")
-										}
-									} preview: {
-										CashbackListView(cashback: card.cashback)
-									}
-
+		ScrollView {
+			LazyVStack(alignment: .leading, spacing: 16) {
+				ForEach(store.bank.cards) { card in
+					Button {
+						store.send(.onCardSelected(card))
+					} label: {
+						CardView(card: card)
+							.contextMenu {
+								Text(card.name)
+								Button {
+									store.send(.onCardRename(card))
+								} label: {
+									Text("Переименовать карту")
+								}
+								Button(role: .destructive) {
+									store.send(.onCardDeleted(card))
+								} label: {
+									Text("Удалить карту")
+								}
+							} preview: {
+								CashbackListView(cashback: card.cashback)
 							}
-							.buttonStyle(.plain)
-						}
-						
-						Button("Добавить карту") {
-							store.send(.onAddCardTapped)
-						}
+
 					}
-					.padding(.horizontal, 12)
+					.buttonStyle(.plain)
 				}
 			}
+			.padding(.horizontal, 12)
 		}
 		.background(Color.cmScreenBackground)
 		.navigationTitle("Выбери карту")
 		.onAppear {
 			store.send(.viewDidAppear)
+		}
+		.toolbar {
+			ToolbarItem(placement: .bottomBar) {
+				Button("Добавить карту") {
+					store.send(.onAddCardTapped)
+				}
+			}
 		}
 		.sheet(isPresented: Binding(get: { store.isAddCardSheetPresented }, set: { _, _ in store.send(.dismissAddCard)})) {
 			NavigationView {

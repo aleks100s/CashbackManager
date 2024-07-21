@@ -21,24 +21,19 @@ struct AddCashbackScreen: View {
 				VStack(alignment: .leading, spacing: 32) {
 					Spacer()
 					
-					HStack {
-						if let category = store.selectedCategory {
-							Button {
-								store.send(.selectCategoryTapped)
-							} label: {
-								HStack {
-									CategoryView(category: category)
-									
-									Text(store.percent, format: .percent)
-										.padding()
-								}
+					if let category = store.selectedCategory {
+						Button {
+							store.send(.selectCategoryTapped)
+						} label: {
+							HStack {
+								CategoryView(category: category)
+								
+								Text(store.percent, format: .percent)
+									.padding()
 							}
-							.buttonStyle(PlainButtonStyle())
-						} else {
-							CMProminentButton("Выбрать категорию") {
-								store.send(.selectCategoryTapped)
-							}
+							.contentShape(Rectangle())
 						}
+						.buttonStyle(PlainButtonStyle())
 					}
 					
 					if store.selectedCategory != nil {
@@ -75,6 +70,14 @@ struct AddCashbackScreen: View {
 					store.send(.saveCashbackTapped)
 				}
 				.disabled(store.selectedCategory == nil || store.percent == 0)
+			}
+			
+			if store.selectedCategory == nil {
+				ToolbarItem(placement: .bottomBar) {
+					Button("Выбрать категорию") {
+						store.send(.selectCategoryTapped)
+					}
+				}
 			}
 		}
 		.sheet(
