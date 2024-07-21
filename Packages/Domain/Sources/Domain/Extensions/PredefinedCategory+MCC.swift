@@ -90,6 +90,10 @@ public extension PredefinedCategory {
 			[5137, 5139, 5611, 5621, 5631, 5641, 5651, 5661, 5681, 5691, 5697, 5698, 5699, 5931, 5944, 5949, 5950, 7631]
 		case .sbp:
 			[]
+		case .digitalGoods:
+			[5818]
+		case .yandex:
+			[4121]
 		}
 	}
 }

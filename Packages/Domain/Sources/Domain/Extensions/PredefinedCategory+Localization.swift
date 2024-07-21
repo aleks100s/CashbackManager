@@ -90,6 +90,10 @@ public extension PredefinedCategory {
 			"Одежда и обувь"
 		case .sbp:
 			"QR-код СБП"
+		case .digitalGoods:
+			"Цифровые товары"
+		case .yandex:
+			"Сервисы Яндекса"
 		}
 	}
 }
