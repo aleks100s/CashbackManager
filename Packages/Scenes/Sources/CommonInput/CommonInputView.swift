@@ -32,7 +32,7 @@ public struct CommonInputView: View {
 		ScrollView {
 			VStack(alignment: .center, spacing: 16) {
 				CMTextField(placeholder, text: $text)
-					.keyboardType(.decimalPad)
+					.keyboardType(keyboardType)
 					.focused($isFocused)
 				
 				CMProminentButton("Сохранить") {
