@@ -22,7 +22,7 @@ struct CashbackWidgetEntryView : View {
 						.font(.caption)
 						.tint(.orange)
 						.controlSize(.small)
-						.padding()
+						.padding(8)
 				}
 		} else {
 			Text("Пока нет добавленных карт с кэшбеком")

@@ -6,6 +6,7 @@
 //
 
 import CommonInput
+import DesignSystem
 import Domain
 import SwiftUI
 
@@ -19,15 +20,30 @@ struct SelectCategoryView: View {
 	@State private var isAddCategorySheetPresented = false
 	
 	var body: some View {
-		List {
-			ForEach(categories) { category in
-				Button {
-					onSelect(category)
-				} label: {
-					CategoryView(category: category)
-						.contentShape(Rectangle())
+		Group {
+			if categories.isEmpty {
+				ZStack(alignment: .center) {
+					VStack(alignment: .center, spacing: 16) {
+						Text("Категории не найдены")
+						
+						CMProminentButton("Добавить свою") {
+							isAddCategorySheetPresented = true
+						}
+					}
 				}
-				.buttonStyle(PlainButtonStyle())
+				.background(Color.cmScreenBackground)
+			} else {
+				List {
+					ForEach(categories) { category in
+						Button {
+							onSelect(category)
+						} label: {
+							CategoryView(category: category)
+								.contentShape(Rectangle())
+						}
+						.buttonStyle(PlainButtonStyle())
+					}
+				}
 			}
 		}
 		.searchable(

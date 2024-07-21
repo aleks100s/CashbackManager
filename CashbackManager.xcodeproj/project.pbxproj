@@ -327,18 +327,10 @@
 			path = CashbackManagerUITests;
 			sourceTree = "<group>";
 		};
-		27A5D80B2C394EFF00B93512 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				27368B712C3A972B00FC0475 /* SelectCategory */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		27A5D8102C394EFF00B93512 /* AddCashback */ = {
 			isa = PBXGroup;
 			children = (
-				27A5D80B2C394EFF00B93512 /* Views */,
+				27368B712C3A972B00FC0475 /* SelectCategory */,
 				27A5D80C2C394EFF00B93512 /* AddCashbackAssembly.swift */,
 				27A5D80D2C394EFF00B93512 /* AddCashbackCoordinator.swift */,
 				27A5D80E2C394EFF00B93512 /* AddCashbackScreen.swift */,

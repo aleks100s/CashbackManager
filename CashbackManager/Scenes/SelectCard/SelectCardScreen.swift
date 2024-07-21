@@ -17,38 +17,58 @@ struct SelectCardScreen: View {
 	}
 	
 	var body: some View {
-		ScrollView {
-			LazyVStack(alignment: .leading, spacing: 16) {
-				ForEach(store.bank.cards) { card in
-					Button {
-						store.send(.onCardSelected(card))
-					} label: {
-						CardView(card: card)
-							.contextMenu {
-								Text(card.name)
-								Button {
-									store.send(.onCardRename(card))
-								} label: {
-									Text("Переименовать карту")
-								}
-								Button(role: .destructive) {
-									store.send(.onCardDeleted(card))
-								} label: {
-									Text("Удалить карту")
-								}
-							} preview: {
-								CashbackListView(cashback: card.cashback)
-							}
-
+		Group {
+			if store.bank.cards.isEmpty {
+				VStack {
+					Spacer()
+					
+					HStack {
+						Spacer()
+						
+						CMProminentButton("Добавить карту") {
+							store.send(.onAddCardTapped)
+						}
+						
+						Spacer()
 					}
-					.buttonStyle(.plain)
+					
+					Spacer()
 				}
-				
-				Button("Добавить карту") {
-					store.send(.onAddCardTapped)
+			} else {
+				ScrollView {
+					LazyVStack(alignment: .leading, spacing: 16) {
+						ForEach(store.bank.cards) { card in
+							Button {
+								store.send(.onCardSelected(card))
+							} label: {
+								CardView(card: card)
+									.contextMenu {
+										Text(card.name)
+										Button {
+											store.send(.onCardRename(card))
+										} label: {
+											Text("Переименовать карту")
+										}
+										Button(role: .destructive) {
+											store.send(.onCardDeleted(card))
+										} label: {
+											Text("Удалить карту")
+										}
+									} preview: {
+										CashbackListView(cashback: card.cashback)
+									}
+
+							}
+							.buttonStyle(.plain)
+						}
+						
+						Button("Добавить карту") {
+							store.send(.onAddCardTapped)
+						}
+					}
+					.padding(.horizontal, 12)
 				}
 			}
-			.padding(.horizontal, 12)
 		}
 		.background(Color.cmScreenBackground)
 		.navigationTitle("Выбери карту")
