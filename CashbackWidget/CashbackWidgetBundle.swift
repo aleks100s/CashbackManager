@@ -11,6 +11,6 @@ import SwiftUI
 @main
 struct CashbackWidgetBundle: WidgetBundle {
     var body: some Widget {
-        CashbackWidget()
+        CardWidget()
     }
 }

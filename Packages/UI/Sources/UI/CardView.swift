@@ -8,8 +8,9 @@
 import Domain
 import SwiftUI
 
-public struct CardView: View {
+public struct CardView: View {	
 	private let card: Card
+	private let size: ViewSize
 	
 	@Environment(\.colorScheme) private var colorScheme
 	private var shadowColor: Color {
@@ -22,13 +23,14 @@ public struct CardView: View {
 			.clear
 		}
 	}
-	
-	public init(card: Card) {
+		
+	public init(card: Card, size: ViewSize = .default) {
 		self.card = card
+		self.size = size
 	}
 	
 	public var body: some View {
-		VStack(alignment: .leading, spacing: 16) {
+		VStack(alignment: .leading, spacing: vSpacing) {
 			Text(card.name)
 				.foregroundStyle(.secondary)
 			
@@ -49,12 +51,42 @@ public struct CardView: View {
 				Text(card.cashbackDescription)
 			}
 		}
+		.font(size == .default ? .body : .caption)
 		.frame(maxWidth: .infinity, alignment: .leading)
-		.padding(.horizontal, 12)
-		.padding(.vertical, 12)
+		.padding(.horizontal, hPadding)
+		.padding(.vertical, vPadding)
 		.background(Color(UIColor.tertiarySystemBackground))
 		.cornerRadius(10)
 		.shadow(color: shadowColor, radius: 5, x: 0, y: 5)
+	}
+}
+
+private extension CardView {
+	var vSpacing: CGFloat {
+		switch size {
+		case .default:
+			16
+		case .widget:
+			8
+		}
+	}
+	
+	var hPadding: CGFloat {
+		switch size {
+		case .default:
+			12
+		case .widget:
+			8
+		}
+	}
+	
+	var vPadding: CGFloat {
+		switch size {
+		case .default:
+			12
+		case .widget:
+			8
+		}
 	}
 }
 

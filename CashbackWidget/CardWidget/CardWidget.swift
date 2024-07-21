@@ -1,5 +1,5 @@
 //
-//  CashbackWidget.swift
+//  CardWidget.swift
 //  CashbackWidget
 //
 //  Created by Alexander on 20.07.2024.
@@ -8,11 +8,11 @@
 import WidgetKit
 import SwiftUI
 
-struct CashbackWidget: Widget {
-    let kind: String = "CashbackWidget"
+struct CardWidget: Widget {
+    static let kind: String = "CardWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+		StaticConfiguration(kind: Self.kind, provider: CardWidgetProvider()) { entry in
             if #available(iOS 17.0, *) {
                 CashbackWidgetEntryView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)
@@ -25,11 +25,4 @@ struct CashbackWidget: Widget {
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
     }
-}
-
-#Preview(as: .systemSmall) {
-    CashbackWidget()
-} timeline: {
-	Entry(date: .now, card: .sberCard)
-    Entry(date: .now, card: nil)
 }

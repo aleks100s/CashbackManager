@@ -31,14 +31,14 @@ struct ChangeCurrentCardIntent: AppIntent {
 		if let id = UUID(uuidString: cardId),
 			let card = service.getCard(by: id),
 			let index = cards.firstIndex(of: card),
-			index < cards.endIndex {
+			index < cards.endIndex - 1 {
 			nextCard = cards[index + 1]
 		} else {
 			nextCard = cards.first
 		}
 		if let nextCard {
 			service.save(currentCard: nextCard)
-			WidgetCenter.shared.reloadAllTimelines()
+			WidgetCenter.shared.reloadTimelines(ofKind: CardWidget.kind)
 		}
 		return .result()
 	}
