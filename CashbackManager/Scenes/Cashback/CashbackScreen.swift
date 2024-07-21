@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UI
+import DesignSystem
 
 struct CashbackScreen: View {
 	@State private var store: CashbackStore

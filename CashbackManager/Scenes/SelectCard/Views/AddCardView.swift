@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UI
+import DesignSystem
 
 struct AddCardView: View {
 	@State var cardName = ""

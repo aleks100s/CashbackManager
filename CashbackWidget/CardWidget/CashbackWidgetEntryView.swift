@@ -7,7 +7,7 @@
 
 import AppIntents
 import SwiftUI
-import UI
+import DesignSystem
 import WidgetKit
 
 struct CashbackWidgetEntryView : View {
@@ -15,7 +15,8 @@ struct CashbackWidgetEntryView : View {
 
 	var body: some View {
 		if let card = entry.card {
-			CardView(card: card, size: .widget)
+			CardView(card: card)
+				.viewSize(.widget)
 				.overlay(alignment: .topTrailing) {
 					Button("Другая", systemImage: "arrow.circlepath", intent: ChangeCurrentCardIntent(cardId: card.id.uuidString))
 						.font(.caption)

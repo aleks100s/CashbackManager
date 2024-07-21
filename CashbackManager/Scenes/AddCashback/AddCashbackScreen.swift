@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UI
+import DesignSystem
 
 struct AddCashbackScreen: View {
 	@State var store: AddCashbackStore
@@ -63,7 +63,7 @@ struct AddCashbackScreen: View {
 				Spacer()
 			}
 		}
-		.background(Color(UIColor.secondarySystemBackground))
+		.background(Color.cmScreenBackground)
 		.onTapGesture {
 			isFocused = false
 		}

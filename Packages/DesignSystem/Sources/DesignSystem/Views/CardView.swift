@@ -8,25 +8,25 @@
 import Domain
 import SwiftUI
 
-public struct CardView: View {	
+public struct CardView: View {
 	private let card: Card
-	private let size: ViewSize
 	
 	@Environment(\.colorScheme) private var colorScheme
 	private var shadowColor: Color {
 		switch colorScheme {
 		case .light:
-			Color(UIColor.quaternarySystemFill).opacity(0.5)
+			.cmShadowColor
 		case .dark:
 			.clear
 		@unknown default:
 			.clear
 		}
 	}
+	
+	@Environment(\.viewSize) private var size
 		
-	public init(card: Card, size: ViewSize = .default) {
+	public init(card: Card) {
 		self.card = card
-		self.size = size
 	}
 	
 	public var body: some View {
@@ -35,17 +35,15 @@ public struct CardView: View {
 				.foregroundStyle(.secondary)
 			
 			if !card.cashback.isEmpty {
-				ViewThatFits {					
-					VStack(alignment: .leading) {
-						HStack(alignment: .center, spacing: .zero) {
-							ForEach(card.cashback, id: \.category.name) { cashback in
-								CategoryMarkerView(category: cashback.category)
-									.padding(.trailing, -12)
-							}
+				VStack(alignment: .leading) {
+					HStack(alignment: .center, spacing: .zero) {
+						ForEach(card.cashback, id: \.category.name) { cashback in
+							CategoryMarkerView(category: cashback.category)
+								.padding(.trailing, -12)
 						}
-						
-						Text(card.cashbackDescription)
 					}
+					
+					Text(card.cashbackDescription)
 				}
 			} else {
 				Text(card.cashbackDescription)
@@ -55,11 +53,13 @@ public struct CardView: View {
 		.frame(maxWidth: .infinity, alignment: .leading)
 		.padding(.horizontal, hPadding)
 		.padding(.vertical, vPadding)
-		.background(Color(UIColor.tertiarySystemBackground))
+		.background(Color.cmCardBackground)
 		.cornerRadius(10)
 		.shadow(color: shadowColor, radius: 5, x: 0, y: 5)
 	}
 }
+
+// MARK: - Size
 
 private extension CardView {
 	var vSpacing: CGFloat {

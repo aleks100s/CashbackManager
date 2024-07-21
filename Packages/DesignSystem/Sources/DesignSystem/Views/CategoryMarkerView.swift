@@ -10,31 +10,41 @@ import SwiftUI
 
 public struct CategoryMarkerView: View {
 	private let category: Domain.Category
-	private let size: ViewSize
-	
-	public init(category: Domain.Category, size: ViewSize = .default) {
+
+	@Environment(\.viewSize) private var size
+
+	public init(category: Domain.Category) {
 		self.category = category
-		self.size = size
 	}
 	
 	public var body: some View {
-		coloredCircle(Color(UIColor.systemBackground), side: outerCircleSide)
+		ColoredCircle(color: .cmStrokeColor, side: outerCircleSide)
 			.overlay {
-				coloredCircle(.red, side: innerCircleSide)
+				ColoredCircle(color: .red, side: innerCircleSide)
 					.overlay {
 						Text(category.emoji)
 							.font(size == .default ? .body : .caption)
 					}
 			}
 	}
-	
-	@ViewBuilder
-	private func coloredCircle(_ color: Color, side: CGFloat) -> some View {
-		color.opacity(0.7)
-			.frame(width: side, height: side)
-			.clipShape(Circle())
+}
+
+// MARK: - ColoredCircle
+
+private extension CategoryMarkerView {
+	struct ColoredCircle: View {
+		let color: Color
+		let side: CGFloat
+		
+		var body: some View {
+			color.opacity(0.7)
+				.frame(width: side, height: side)
+				.clipShape(Circle())
+		}
 	}
 }
+
+// MARK: - Size
 
 private extension CategoryMarkerView {
 	var outerCircleSide: CGFloat {

@@ -7,7 +7,7 @@
 
 import Domain
 import SwiftUI
-import UI
+import DesignSystem
 
 struct BankView: View {
 	enum Action {

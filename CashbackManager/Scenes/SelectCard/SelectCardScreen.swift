@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UI
+import DesignSystem
 
 struct SelectCardScreen: View {
 	@State private var store: SelectCardStore
@@ -49,7 +49,7 @@ struct SelectCardScreen: View {
 			}
 			.padding(.horizontal, 12)
 		}
-		.background(Color(uiColor: .secondarySystemBackground))
+		.background(Color.cmScreenBackground)
 		.navigationTitle("Выбери карту")
 		.onAppear {
 			store.send(.viewDidAppear)

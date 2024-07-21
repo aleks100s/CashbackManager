@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UI
+import DesignSystem
 
 struct AddCategoryView: View {
 	let onSaveButtonTapped: (String) -> Void

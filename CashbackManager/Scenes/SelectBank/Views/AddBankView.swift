@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UI
+import DesignSystem
 
 struct AddBankView: View {
 	@State var bankName: String = ""
@@ -17,10 +17,10 @@ struct AddBankView: View {
 	var body: some View {
 		ScrollView {
 			VStack(alignment: .center, spacing: 16) {
-				CMTextField("Банк", text: $bankName)
+				CMTextField("Название банка", text: $bankName)
 					.focused($isFocused)
 				
-				Button("Сохранить") {
+				CMProminentButton("Сохранить") {
 					onSaveButtonTapped(bankName)
 				}
 				.disabled(bankName.isEmpty)

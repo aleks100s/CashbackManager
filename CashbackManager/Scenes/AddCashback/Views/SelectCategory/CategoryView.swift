@@ -7,7 +7,7 @@
 
 import Domain
 import SwiftUI
-import UI
+import DesignSystem
 
 struct CategoryView: View {
 	let category: Domain.Category
