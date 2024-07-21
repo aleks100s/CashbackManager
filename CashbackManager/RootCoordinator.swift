@@ -30,7 +30,7 @@ struct RootCoordinator: View {
 	@MainActor @ViewBuilder
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
-		case .selectBank(let banks):
+		case .selectBank:
 			SelectBankAssembly.assemble(coordinator: self, cashbackService: serviceContainer.cashbackService)
 		case .selectCard(let bank):
 			SelectCardAssembly.assemble(bank: bank, coordinator: self, cashbackService: serviceContainer.cashbackService)
