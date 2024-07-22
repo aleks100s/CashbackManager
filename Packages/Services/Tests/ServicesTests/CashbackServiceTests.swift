@@ -27,108 +27,89 @@ final class CashbackServiceTests: XCTestCase {
 	
 	func test_init() {
 		XCTAssertEqual(persistanceManager.readModelsCallsCount, 1)
-		XCTAssertEqual(persistanceManager.readModelsReceivedKeys, [.banks])
+		XCTAssertEqual(persistanceManager.readModelsReceivedKeys, [.cards])
 	}
 	
 	func test_getCards() {
 		// Given
-		let bank = Card.arbitrary()
-		initService(with: [bank])
+		let card = Card.arbitrary()
+		initService(with: [card])
 		
 		// When
-		let result = service.getBanks()
+		let result = service.getCards()
 		
 		// Then
-		XCTAssertEqual(result, [bank])
+		XCTAssertEqual(result, [card])
 	}
 	
-	func test_updateBank_bankExists() {
+	func test_saveCard() {
 		// Given
-		var bank = Bank.arbitrary()
-		initService(with: [bank])
+		let card = Card.arbitrary()
 		
 		// When
-		bank.cards.append(.arbitrary())
-		service.update(bank: bank)
+		service.save(card: card)
 		
 		// Then
-		XCTAssertEqual(service.getBanks(), [bank])
-	}
-	
-	func test_updateBank_bankNotExist() {
-		// Given
-		let bank = Bank.arbitrary()
-		initService(with: [bank])
-		
-		// When
-		service.update(bank: .arbitrary())
-		
-		// Then
-		XCTAssertEqual(service.getBanks(), [bank])
+		XCTAssertEqual(persistanceManager.saveModelsReceivedKeys, [.cards])
+		XCTAssertEqual(persistanceManager.saveModelsReceivedModels as? [[Card]], [[card]])
 	}
 	
 	func test_updateCard_cardExists() {
 		// Given
 		var card = Card.arbitrary(cashback: [.arbitrary(category: .arbitrary())])
-		let bank = Bank.arbitrary(cards: [card])
-		initService(with: [bank])
+		initService(with: [card])
 		
 		// When
 		card.cashback.remove(at: 0)
 		service.update(card: card)
-		let result = service.getBanks()
+		let result = service.getCards()
 		
 		// Then
-		XCTAssertTrue(result[0].cards.contains(card))
+		XCTAssertTrue(result.contains(card))
 	}
 	
 	func test_updateCard_cardNotExists() {
 		// Given
 		var card = Card.arbitrary(cashback: [.arbitrary(category: .arbitrary()), .arbitrary(category: .arbitrary()), .arbitrary(category: .arbitrary())])
-		let bank = Bank.arbitrary(cards: [.arbitrary(), .arbitrary()])
-		initService(with: [bank])
+		initService(with: [card])
 		
 		// When
 		card.cashback.remove(at: 1)
-		service.update(card: card)
-		let result = service.getBanks()
+		service.update(card: Card.arbitrary())
+		let result = service.getCards()
 		
 		// Then
-		XCTAssertFalse(result[0].cards.contains(card))
+		XCTAssertFalse(result.contains(card))
 	}
 	
 	func test_deleteCard_cardExists() {
 		// Given
 		let card = Card.arbitrary()
-		let bank = Bank.arbitrary(cards: [card])
-		initService(with: [bank])
+		initService(with: [card])
 		
 		// When
 		service.delete(card: card)
-		let result = service.getBanks()
+		let result = service.getCards()
 		
 		// Then
-		XCTAssertTrue(result[0].cards.isEmpty)
+		XCTAssertTrue(result.isEmpty)
 	}
 	
 	func test_deleteCard_cardNotExists() {
 		// Given
-		let card = Card.arbitrary()
-		let bank = Bank.arbitrary(cards: [.arbitrary()])
-		initService(with: [bank])
+		initService(with: [Card.arbitrary()])
 		
 		// When
-		service.delete(card: card)
-		let result = service.getBanks()
+		service.delete(card: Card.arbitrary())
+		let result = service.getCards()
 		
 		// Then
-		XCTAssertFalse(result[0].cards.isEmpty)
+		XCTAssertFalse(result.isEmpty)
 	}
 	
 	func test_getCard_wrongId() {
 		// Given
-		let bank = Bank.arbitrary(cards: [.arbitrary(), .arbitrary(), .arbitrary()])
-		initService(with: [bank])
+		initService(with: [Card.arbitrary()])
 		
 		// When
 		let result = service.getCard(by: UUID())
@@ -140,49 +121,13 @@ final class CashbackServiceTests: XCTestCase {
 	func test_getCard_correctId() {
 		// Given
 		let card = Card.arbitrary()
-		let bank = Bank.arbitrary(cards: [card])
-		initService(with: [bank])
+		initService(with: [card])
 		
 		// When
 		let result = service.getCard(by: card.id)
 		
 		// Then
 		XCTAssertEqual(result, card)
-	}
-	
-	func test_getBank_wrongId() {
-		// Given
-		let bank = Bank.arbitrary()
-		initService(with: [bank])
-		
-		// When
-		let result = service.getBank(by: UUID())
-		
-		// Then
-		XCTAssertNil(result)
-	}
-	
-	func test_getBank_correctId() {
-		// Given
-		let bank = Bank.arbitrary()
-		initService(with: [bank])
-		
-		// When
-		let result = service.getBank(by: bank.id)
-		
-		// Then
-		XCTAssertEqual(result, bank)
-	}
-
-	func test_updateBanks() {
-		// Given
-		initService(with: [.arbitrary()])
-		
-		// When
-		service.update(banks: [Bank.arbitrary()])
-		
-		// Then
-		XCTAssertEqual(service.getBanks().count, 1)
 	}
 	
 	func test_saveCurrentCard() {
@@ -205,15 +150,15 @@ final class CashbackServiceTests: XCTestCase {
 		let result = service.getCurrentCard()
 		
 		// Then
-		XCTAssertEqual(persistanceManager.readModelsReceivedKeys, [.banks, .widgetCurrentCard])
+		XCTAssertEqual(persistanceManager.readModelsReceivedKeys, [.cards, .widgetCurrentCard])
 		XCTAssertEqual(result, card)
 	}
 }
 
 private extension CashbackServiceTests {
-	func initService(with banks: [Bank]) {
+	func initService(with cards: [Card]) {
 		persistanceManager = .init()
-		persistanceManager.readModelsReturnValue = banks
+		persistanceManager.readModelsReturnValue = cards
 		service = .init(persistanceManager: persistanceManager)
 	}
 }
