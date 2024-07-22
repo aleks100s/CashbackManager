@@ -22,8 +22,8 @@ struct CardWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Мои кэшбеки")
+        .description("Показывает кэшбек на всех картах.")
 		.supportedFamilies([.systemMedium])
     }
 }

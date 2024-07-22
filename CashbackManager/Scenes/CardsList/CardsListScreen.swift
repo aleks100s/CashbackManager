@@ -70,7 +70,7 @@ struct CardsListScreen: View {
 			}
 		} else {
 			ScrollView {
-				LazyVStack(spacing: .zero) {
+				LazyVStack(spacing: 16) {
 					ForEach(store.filteredCards) { card in
 						Button {
 							store.send(.onCardSelected(card))
