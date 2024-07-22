@@ -34,9 +34,9 @@ private struct ColoredCircle: View {
 	let side: CGFloat
 	   
 	var body: some View {
-		color.opacity(0.7)
+		Circle()
+			.fill(color.opacity(0.7).gradient)
 			.frame(width: side, height: side)
-			.clipShape(Circle())
 	}
 }
 

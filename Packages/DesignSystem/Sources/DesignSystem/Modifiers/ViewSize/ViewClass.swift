@@ -1,4 +1,4 @@
-public enum ViewSize {
+public enum ViewClass {
 	case widget
 	case `default`
 }

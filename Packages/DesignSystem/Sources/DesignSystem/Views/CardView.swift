@@ -12,7 +12,7 @@ public struct CardView: View {
 	private let card: Card
 	
 	@Environment(\.colorScheme) private var colorScheme
-	@Environment(\.viewSize) private var size
+	@Environment(\.viewClass) private var viewClass
 	
 	private var shadowColor: Color {
 		switch colorScheme {
@@ -24,13 +24,22 @@ public struct CardView: View {
 			.clear
 		}
 	}
+	
+	private var descriptionFont: Font {
+		switch viewClass {
+		case .default:
+			.body
+		case .widget:
+			.callout
+		}
+	}
 		
 	public init(card: Card) {
 		self.card = card
 	}
 	
 	public var body: some View {
-		VStack(alignment: .leading, spacing: size.vSpacing) {
+		VStack(alignment: .leading, spacing: viewClass.vSpacing) {
 			Text(card.name)
 				.foregroundStyle(.secondary)
 			
@@ -39,9 +48,13 @@ public struct CardView: View {
 			}
 			
 			Text(card.cashbackDescription)
+				.font(descriptionFont)
+				.if(viewClass == .widget) {
+					$0.lineLimit(2, reservesSpace: true)
+				}
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
-		.if(size == .default) { view in
+		.if(viewClass == .default) { view in
 			view
 				.padding(.horizontal, 12)
 				.padding(.vertical, 12)
@@ -55,7 +68,7 @@ public struct CardView: View {
 private struct CategoriesView: View {
 	let cashback: [Cashback]
 	
-	@Environment(\.viewSize) private var size
+	@Environment(\.viewClass) private var viewClass
 	
 	var body: some View {
 		HStack(alignment: .center, spacing: .zero) {
@@ -67,7 +80,7 @@ private struct CategoriesView: View {
 	}
 }
 
-private extension ViewSize {
+private extension ViewClass {
 	var vSpacing: CGFloat {
 		switch self {
 		case .default:

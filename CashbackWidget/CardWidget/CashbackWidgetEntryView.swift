@@ -16,7 +16,7 @@ struct CashbackWidgetEntryView : View {
 	var body: some View {
 		if let card = entry.card {
 			CardView(card: card)
-				.viewSize(.widget)
+				.viewClass(.widget)
 				.overlay(alignment: .topTrailing) {
 					Button("Другая", systemImage: "arrow.circlepath", intent: ChangeCurrentCardIntent(cardId: card.id.uuidString))
 						.font(.caption)
