@@ -1,17 +1,18 @@
 //
-//  BanksListScreen.swift
+//  CardsListScreen.swift
 //  CashbackManager
 //
 //  Created by Alexander on 15.06.2024.
 //
 
 import CommonInput
+import DesignSystem
 import SwiftUI
 
-struct BanksListScreen: View {
-	@State private var store: BanksListStore
+struct CardsListScreen: View {
+	@State private var store: CardsListStore
 		
-	init(store: BanksListStore) {
+	init(store: CardsListStore) {
 		self.store = store
 	}
 	
@@ -21,7 +22,7 @@ struct BanksListScreen: View {
 			.onAppear {
 				store.send(.onAppear)
 			}
-			.if(!store.allBanks.isEmpty) {
+			.if(!store.allCards.isEmpty) {
 				$0.searchable(
 					text: Binding(get: { store.searchText }, set: { store.send(.searchTextChanged($0)) }),
 					placement: .navigationBarDrawer(displayMode: .automatic),
@@ -30,10 +31,21 @@ struct BanksListScreen: View {
 			}
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
-					Button("Добавить кэшбек") {
-						store.send(.onAddCashbackTap)
+					Button("Добавить карту") {
+						store.send(.onAddCardTapped)
 					}
 				}
+			}
+			.sheet(isPresented: Binding(get: { store.isAddCardSheetPresented }, set: { _, _ in store.send(.dismissAddCard)})) {
+				NavigationView {
+					CommonInputView("Название карты") { cardName in
+						store.send(.saveCard(cardName))
+					}
+					.navigationTitle("Добавить новую карту")
+					.navigationBarTitleDisplayMode(.inline)
+				}
+				.presentationDetents([.medium])
+				.presentationBackground(.regularMaterial)
 			}
 			.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissCardRename) })) { card in
 				NavigationView {
@@ -50,7 +62,7 @@ struct BanksListScreen: View {
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if store.state.filteredBanks.isEmpty {
+		if store.state.filteredCards.isEmpty {
 			if store.searchText.isEmpty {
 				ContentUnavailableView("Нет сохраненных кэшбеков", systemImage: "rublesign.circle")
 			} else {
@@ -59,19 +71,32 @@ struct BanksListScreen: View {
 		} else {
 			ScrollView {
 				LazyVStack(spacing: .zero) {
-					ForEach(store.state.filteredBanks) { bank in
-						BankView(bank: bank) { card, action in
-							switch action {
-							case .select:
-								store.send(.onCardSelected(card))
-							case .rename:
-								store.send(.onCardRenameTapped(card))
-							case .delete:
-								store.send(.onCardDeleted(card))
-							}
+					ForEach(store.filteredCards) { card in
+						Button {
+							store.send(.onCardSelected(card))
+						} label: {
+							CardView(card: card)
+								.contextMenu {
+									Text(card.name)
+									Button {
+										store.send(.onCardRenameTapped(card))
+									} label: {
+										Text("Переименовать карту")
+									}
+									Button(role: .destructive) {
+										store.send(.onCardDeleted(card))
+									} label: {
+										Text("Удалить карту")
+									}
+								} preview: {
+									CashbackListView(cashback: card.cashback)
+								}
+
 						}
+						.buttonStyle(.plain)
 					}
 				}
+				.padding(.horizontal, 12)
 			}
 			.scrollDismissesKeyboard(.interactively)
 			.background(Color.cmScreenBackground)

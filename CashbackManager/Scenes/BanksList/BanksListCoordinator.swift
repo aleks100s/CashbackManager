@@ -1,5 +1,5 @@
 //
-//  BanksListCoordinator.swift
+//  CardsListCoordinator.swift
 //  CashbackManager
 //
 //  Created by Alexander on 20.06.2024.
@@ -7,12 +7,10 @@
 
 import Domain
 
-protocol BanksListCoordinator {
-	func onAddCashbackTap(banks: [Bank])
+protocol CardsListCoordinator {
 	func onCardSelected(card: Card)
 }
 
-struct FakeBanksListCoordinator: BanksListCoordinator {
-	func onAddCashbackTap(banks: [Bank]) {}
+struct FakeCardsListCoordinator: CardsListCoordinator {
 	func onCardSelected(card: Card) {}
 }

@@ -1,5 +1,5 @@
 //
-//  BanksListAssembly.swift
+//  CardsListAssembly.swift
 //  CashbackManager
 //
 //  Created by Alexander on 20.06.2024.
@@ -8,16 +8,16 @@
 import Domain
 import SwiftUI
 
-enum BanksListAssembly {
+enum CardsListAssembly {
 	@MainActor
 	static func assemble(
-		banksCoordinator: BanksListCoordinator,
+		banksCoordinator: CardsListCoordinator,
 		cashbackService: ICashbackService
 	) -> some View {
-		let effectHandler = BanksListEffectHandler(coordinator: banksCoordinator, cashbackService: cashbackService)
-		let state = BanksListState()
-		let store = BanksListStore(state: state, effectHandler: effectHandler)
-		let view = BanksListScreen(store: store)
+		let effectHandler = CardsListEffectHandler(coordinator: banksCoordinator, cashbackService: cashbackService)
+		let state = CardsListState()
+		let store = CardsListStore(state: state, effectHandler: effectHandler)
+		let view = CardsListScreen(store: store)
 		return view
 	}
 }

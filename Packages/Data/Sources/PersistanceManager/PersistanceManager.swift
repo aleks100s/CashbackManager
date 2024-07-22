@@ -53,8 +53,8 @@ public struct PersistanceManager: IPersistanceManager {
 private extension PersistanceKey {
 	var value: String {
 		switch self {
-		case .banks:
-			"banks"
+		case .cards:
+			"cards"
 		case .categories:
 			"categories"
 		case .widgetCurrentCard:
@@ -64,8 +64,8 @@ private extension PersistanceKey {
 	
 	var type: Decodable.Type {
 		switch self {
-		case .banks:
-			[Bank].self
+		case .cards:
+			[Card].self
 		case .categories:
 			[Domain.Category].self
 		case .widgetCurrentCard:

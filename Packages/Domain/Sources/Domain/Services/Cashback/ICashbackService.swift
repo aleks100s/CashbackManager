@@ -8,14 +8,11 @@
 import Foundation
 
 public protocol ICashbackService {
-	func getBanks() -> [Bank]
-	func save(bank: Bank)
-	func update(banks: [Bank])
-	func update(bank: Bank)
+	func getCards() -> [Card]
+	func save(card: Card)
 	func update(card: Card)
 	func delete(card: Card)
 	func getCard(by id: UUID) -> Card?
-	func getBank(by id: UUID) -> Bank?
 	func save(currentCard: Card)
 	func getCurrentCard() -> Card?
 }

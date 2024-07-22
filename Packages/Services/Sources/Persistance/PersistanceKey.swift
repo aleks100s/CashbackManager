@@ -6,7 +6,7 @@
 //
 
 public enum PersistanceKey {
-	case banks
+	case cards
 	case categories
 	case widgetCurrentCard
 }

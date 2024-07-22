@@ -10,9 +10,9 @@ import Foundation
 import Persistance
 
 public final class CashbackService: ICashbackService {
-	private var banks: [Bank] = [] {
+	private var cards: [Card] = [] {
 		didSet {
-			persistBanks()
+			persistCards()
 		}
 	}
 	
@@ -20,73 +20,37 @@ public final class CashbackService: ICashbackService {
 	
 	public init(persistanceManager: IPersistanceManager) {
 		self.persistanceManager = persistanceManager
-		banks = persistanceManager.readModels(for: .banks) as? [Bank] ?? []
+		cards = persistanceManager.readModels(for: .cards) as? [Card] ?? []
 	}
 	
-	public func getBanks() -> [Bank] {
-		banks
+	public func getCards() -> [Card] {
+		cards
 	}
 	
-	public func save(bank: Bank) {
-		banks.append(bank)
-	}
-	
-	public func update(bank: Bank) {
-		for i in banks.indices {
-			if banks[i].id == bank.id {
-				banks[i] = bank
-				break
-			}
-		}
+	public func save(card: Card) {
+		cards.append(card)
 	}
 	
 	public func update(card: Card) {
-		for i in banks.indices {
-			if banks[i].cards.contains(where: { $0.id == card.id }) {
-				for j in banks[i].cards.indices {
-					if banks[i].cards[j].id == card.id {
-						var cards = banks[i].cards
-						cards[j] = card
-						banks[i].cards = cards
-						break
-					}
-				}
+		for i in cards.indices {
+			if cards[i].id == card.id {
+				cards[i] = card
 				break
 			}
 		}
 	}
 	
 	public func delete(card: Card) {
-		for i in banks.indices {
-			if banks[i].cards.contains(where: { $0.id == card.id }) {
-				banks[i].cards.removeAll(where: { $0.id == card.id })
-				break
-			}
-		}
+		cards.removeAll { $0.id == card.id }
 	}
 	
 	public func getCard(by id: UUID) -> Card? {
-		for bank in banks {
-			for card in bank.cards {
-				if card.id == id {
-					return card
-				}
+		for card in cards {
+			if card.id == id {
+				return card
 			}
 		}
 		return nil
-	}
-	
-	public func getBank(by id: UUID) -> Bank? {
-		for bank in banks {
-			if bank.id == id {
-				return bank
-			}
-		}
-		return nil
-	}
-	
-	public func update(banks: [Bank]) {
-		self.banks = banks
 	}
 	
 	public func save(currentCard: Card) {
@@ -97,7 +61,7 @@ public final class CashbackService: ICashbackService {
 		(persistanceManager.readModels(for: .widgetCurrentCard) as? [Card])?.first
 	}
 	
-	private func persistBanks() {
-		persistanceManager.save(models: banks, for: .banks)
+	private func persistCards() {
+		persistanceManager.save(models: cards, for: .cards)
 	}
 }

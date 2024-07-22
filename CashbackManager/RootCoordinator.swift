@@ -19,7 +19,7 @@ struct RootCoordinator: View {
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {
-			BanksListAssembly.assemble(
+			CardsListAssembly.assemble(
 				banksCoordinator: self,
 				cashbackService: serviceContainer.cashbackService
 			)
@@ -30,10 +30,6 @@ struct RootCoordinator: View {
 	@MainActor @ViewBuilder
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
-		case .selectBank:
-			SelectBankAssembly.assemble(coordinator: self, cashbackService: serviceContainer.cashbackService)
-		case .selectCard(let bank):
-			SelectCardAssembly.assemble(bank: bank, coordinator: self, cashbackService: serviceContainer.cashbackService)
 		case .cardDetail(let card):
 			CashbackAssembly.assemble(
 				card: card,
@@ -46,28 +42,8 @@ struct RootCoordinator: View {
 	}
 }
 
-extension RootCoordinator: BanksListCoordinator {
-	func onAddCashbackTap(banks: [Bank]) {
-		navigationStack.append(.selectBank(banks))
-	}
-	
+extension RootCoordinator: CardsListCoordinator {
 	func onCardSelected(card: Card) {
-		navigationStack.append(.cardDetail(card))
-	}
-	
-	func onBankSelected(bank: Bank) {
-		navigationStack.append(.selectCard(bank))
-	}
-}
-
-extension RootCoordinator: SelectBankCoordinator {
-	func navigateToBankDetail(bank: Bank) {
-		navigationStack.append(.selectCard(bank))
-	}
-}
-
-extension RootCoordinator: SelectCardCoordinator {	
-	func navigateToCardDetail(card: Card) {
 		navigationStack.append(.cardDetail(card))
 	}
 }

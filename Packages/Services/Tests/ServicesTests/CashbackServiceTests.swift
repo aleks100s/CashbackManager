@@ -30,22 +30,9 @@ final class CashbackServiceTests: XCTestCase {
 		XCTAssertEqual(persistanceManager.readModelsReceivedKeys, [.banks])
 	}
 	
-	func test_saveBank() {
+	func test_getCards() {
 		// Given
-		let bank = Bank.arbitrary()
-		
-		// When
-		service.save(bank: bank)
-		
-		// Then
-		XCTAssertEqual(persistanceManager.saveModelsCallsCount, 1)
-		XCTAssertEqual(persistanceManager.saveModelsReceivedKeys, [.banks])
-		XCTAssertEqual(persistanceManager.saveModelsReceivedModels as? [[Bank]], [[bank]])
-	}
-	
-	func test_getBanks() {
-		// Given
-		let bank = Bank.arbitrary()
+		let bank = Card.arbitrary()
 		initService(with: [bank])
 		
 		// When

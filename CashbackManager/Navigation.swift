@@ -8,8 +8,6 @@
 import Domain
 
 enum Navigation: Hashable {
-	case selectBank([Bank])
-	case selectCard(Bank)
 	case cardDetail(Card)
 	case addCashback(Card)
 }
