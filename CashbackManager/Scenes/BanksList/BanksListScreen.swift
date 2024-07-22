@@ -21,14 +21,16 @@ struct BanksListScreen: View {
 			.onAppear {
 				store.send(.onAppear)
 			}
-			.searchable(
-				text: Binding(get: { store.searchText }, set: { store.send(.searchTextChanged($0)) }),
-				placement: .navigationBarDrawer(displayMode: .automatic),
-				prompt: "Категория кэшбека"
-			)
+			.if(!store.allBanks.isEmpty) {
+				$0.searchable(
+					text: Binding(get: { store.searchText }, set: { store.send(.searchTextChanged($0)) }),
+					placement: .navigationBarDrawer(displayMode: .automatic),
+					prompt: "Категория кэшбека"
+				)
+			}
 			.toolbar {
-				ToolbarItem(placement: .topBarTrailing) {
-					Button("Добавить кэшбек", systemImage: "plus") {
+				ToolbarItem(placement: .bottomBar) {
+					Button("Добавить кэшбек") {
 						store.send(.onAddCashbackTap)
 					}
 				}
@@ -49,17 +51,10 @@ struct BanksListScreen: View {
 	@ViewBuilder
 	private var contentView: some View {
 		if store.state.filteredBanks.isEmpty {
-			VStack(alignment: .center, spacing: 16) {
-				Text("Пока здесь пусто")
-			}
-			.if(store.searchText.isEmpty) {
-				$0.toolbar {
-					ToolbarItem(placement: .bottomBar) {
-						Button("Добавить кэшбек") {
-							store.send(.onAddCashbackTap)
-						}
-					}
-				}
+			if store.searchText.isEmpty {
+				ContentUnavailableView("Нет сохраненных кэшбеков", systemImage: "rublesign.circle")
+			} else {
+				ContentUnavailableView("Такой кэшбек не найден", systemImage: "magnifyingglass")
 			}
 		} else {
 			ScrollView {

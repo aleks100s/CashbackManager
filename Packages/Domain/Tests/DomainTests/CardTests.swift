@@ -50,7 +50,7 @@ final class CardTests: XCTestCase {
 		let description = card.cashbackDescription
 		
 		// Then
-		XCTAssertEqual(description, "\(min(percent1, percent2))-\(max(percent1, percent2))% \(category1.name), \(category2.name)")
+		XCTAssertEqual(description, "\(percent1)% \(category1.name), \(percent2)% \(category2.name)")
 	}
 	
 	func test_card_lotsOfCashback_samePercent() {
@@ -67,6 +67,6 @@ final class CardTests: XCTestCase {
 		let description = card.cashbackDescription
 		
 		// Then
-		XCTAssertEqual(description, "\(percent)% \(category1.name), \(category2.name)")
+		XCTAssertEqual(description, "\(percent)% \(category1.name), \(percent)% \(category2.name)")
 	}
 }

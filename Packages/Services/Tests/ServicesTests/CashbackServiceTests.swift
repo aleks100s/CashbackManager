@@ -92,7 +92,7 @@ final class CashbackServiceTests: XCTestCase {
 		let result = service.getBanks()
 		
 		// Then
-		XCTAssertEqual(result[0].cards.contains(card), true)
+		XCTAssertTrue(result[0].cards.contains(card))
 	}
 	
 	func test_updateCard_cardNotExists() {
@@ -107,7 +107,7 @@ final class CashbackServiceTests: XCTestCase {
 		let result = service.getBanks()
 		
 		// Then
-		XCTAssertEqual(result[0].cards.contains(card), false)
+		XCTAssertFalse(result[0].cards.contains(card))
 	}
 	
 	func test_deleteCard_cardExists() {
@@ -121,7 +121,7 @@ final class CashbackServiceTests: XCTestCase {
 		let result = service.getBanks()
 		
 		// Then
-		XCTAssertEqual(result[0].cards.isEmpty, true)
+		XCTAssertTrue(result[0].cards.isEmpty)
 	}
 	
 	func test_deleteCard_cardNotExists() {
@@ -135,7 +135,7 @@ final class CashbackServiceTests: XCTestCase {
 		let result = service.getBanks()
 		
 		// Then
-		XCTAssertEqual(result[0].cards.isEmpty, false)
+		XCTAssertFalse(result[0].cards.isEmpty)
 	}
 	
 	func test_getCard_wrongId() {
@@ -147,7 +147,7 @@ final class CashbackServiceTests: XCTestCase {
 		let result = service.getCard(by: UUID())
 		
 		// Then
-		XCTAssertEqual(result, nil)
+		XCTAssertNil(result)
 	}
 	
 	func test_getCard_correctId() {
@@ -172,7 +172,7 @@ final class CashbackServiceTests: XCTestCase {
 		let result = service.getBank(by: UUID())
 		
 		// Then
-		XCTAssertEqual(result, nil)
+		XCTAssertNil(result)
 	}
 	
 	func test_getBank_correctId() {
@@ -196,6 +196,30 @@ final class CashbackServiceTests: XCTestCase {
 		
 		// Then
 		XCTAssertEqual(service.getBanks().count, 1)
+	}
+	
+	func test_saveCurrentCard() {
+		// Given
+		let card = Card.arbitrary()
+		
+		// When
+		service.save(currentCard: card)
+		
+		// Then
+		XCTAssertEqual(persistanceManager.saveModelsReceivedModels as? [[Card]], [[card]])
+	}
+	
+	func test_getCurrentCard() {
+		// Given
+		let card = Card.arbitrary()
+		persistanceManager.readModelsReturnValue = [card]
+		
+		// When
+		let result = service.getCurrentCard()
+		
+		// Then
+		XCTAssertEqual(persistanceManager.readModelsReceivedKeys, [.banks, .widgetCurrentCard])
+		XCTAssertEqual(result, card)
 	}
 }
 
