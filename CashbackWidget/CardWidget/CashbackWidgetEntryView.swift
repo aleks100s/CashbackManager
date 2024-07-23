@@ -23,6 +23,7 @@ struct CashbackWidgetEntryView : View {
 						.tint(.orange)
 						.controlSize(.small)
 				}
+				.widgetURL(URL(string: "app://cashback/card/\(card.id.uuidString)"))
 		} else {
 			Text("Пока нет добавленных карт с кэшбеком")
 		}

@@ -14,7 +14,11 @@ public extension Card {
 	
 	private var categoriesList: String {
 		cashback.map { cashback in
-			"\(Int(cashback.percent * 100))% \(cashback.category.name)"
+			if (cashback.percent * 1000).truncatingRemainder(dividingBy: 10) == 0 {
+				"\(Int(cashback.percent * 100))% \(cashback.category.name)"
+			} else {
+				"\(String(format: "%.1f", cashback.percent * 100))% \(cashback.category.name)"
+			}
 		}.joined(separator: ", ")
 	}
 }

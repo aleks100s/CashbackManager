@@ -10,11 +10,13 @@ import SwiftUI
 
 struct RootCoordinator: View {
 	private let serviceContainer: ServiceContainer
+	private let urlParser: WidgetURLParser
 	
 	@State private var navigationStack: [Navigation] = []
 	
-	init(serviceContainer: ServiceContainer) {
+	init(serviceContainer: ServiceContainer, urlParser: WidgetURLParser) {
 		self.serviceContainer = serviceContainer
+		self.urlParser = urlParser
 	}
 	
     var body: some View {
@@ -24,6 +26,11 @@ struct RootCoordinator: View {
 				cashbackService: serviceContainer.cashbackService
 			)
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
+		}
+		.onOpenURL { url in
+			if let path = urlParser.parse(url: url) {
+				navigationStack = path
+			}
 		}
     }
 	

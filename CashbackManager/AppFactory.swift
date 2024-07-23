@@ -18,4 +18,8 @@ final class AppFactory {
 	func makeServiceContainer() -> ServiceContainer {
 		ServiceContainerImpl(cashbackService: cashbackService, categoryService: categoryService)
 	}
+	
+	func makeWidgetURLParser() -> WidgetURLParser {
+		WidgetURLParser(cashbackService: cashbackService)
+	}
 }

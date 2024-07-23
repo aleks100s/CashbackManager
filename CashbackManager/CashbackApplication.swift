@@ -13,7 +13,10 @@ struct CashbackApplication: App {
 	
     var body: some Scene {
         WindowGroup {
-			RootCoordinator(serviceContainer: appFactory.makeServiceContainer())
+			RootCoordinator(
+				serviceContainer: appFactory.makeServiceContainer(),
+				urlParser: appFactory.makeWidgetURLParser()
+			)
         }
     }
 }

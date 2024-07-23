@@ -77,7 +77,7 @@ extension CardsListState: StoreState {
 				break
 			}
 			
-			var filteredCards = state.allCards.filter { card in
+			let filteredCards = state.allCards.filter { card in
 				card.cashbackDescription.lowercased().contains(text)
 			}
 			state.filteredCards = filteredCards

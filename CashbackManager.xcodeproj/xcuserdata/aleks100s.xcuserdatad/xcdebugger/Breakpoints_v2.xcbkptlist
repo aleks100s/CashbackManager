@@ -98,36 +98,6 @@
             endingLineNumber = "44"
             landmarkName = "delete(card:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B60897A0-5FD5-4F7B-A5A0-D3DBAD008937 - e06b7c79f2685aa1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CashbackService.CashbackService.delete(card: Domain.Card) -&gt; ()"
-                  moduleName = "ServicesTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/CashbackService/CashbackService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44">
-               </Location>
-               <Location
-                  uuid = "B60897A0-5FD5-4F7B-A5A0-D3DBAD008937 - 55de7da57103f68a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Domain.Card) -&gt; Swift.Bool in CashbackService.CashbackService.delete(card: Domain.Card) -&gt; ()"
-                  moduleName = "ServicesTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/CashbackService/CashbackService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
