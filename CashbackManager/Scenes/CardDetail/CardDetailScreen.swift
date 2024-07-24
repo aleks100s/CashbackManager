@@ -8,10 +8,10 @@
 import SwiftUI
 import DesignSystem
 
-struct CashbackScreen: View {
-	@State private var store: CashbackStore
+struct CardDetailScreen: View {
+	@State private var store: CardDetailStore
 	
-	init(store: CashbackStore) {
+	init(store: CardDetailStore) {
 		self.store = store
 	}
 	

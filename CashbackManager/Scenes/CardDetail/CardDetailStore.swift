@@ -1,5 +1,5 @@
 //
-//  CashbackStore.swift
+//  CardDetailStore.swift
 //  CashbackManager
 //
 //  Created by Alexander on 25.06.2024.
@@ -10,13 +10,13 @@ import Foundation
 import Store
 import WidgetKit
 
-typealias CashbackStore = Store<CashbackState, CashbackEffectHandler>
+typealias CardDetailStore = Store<CardDetailState, CashbackEffectHandler>
 
-struct CashbackState {
+struct CardDetailState {
 	var card: Card
 }
 
-extension CashbackState: StoreState {
+extension CardDetailState: StoreState {
 	enum Input {
 		case viewDidAppear
 		case onAddCashbackTap
@@ -34,7 +34,7 @@ extension CashbackState: StoreState {
 		case cardFetched(Card?)
 	}
 	
-	static func reduce(state: inout CashbackState, with message: Message<Input, Feedback>) -> Effect? {
+	static func reduce(state: inout CardDetailState, with message: Message<Input, Feedback>) -> Effect? {
 		switch message {
 		case .input(.viewDidAppear):
 			return .fetchCard(id: state.card.id)
@@ -58,17 +58,17 @@ extension CashbackState: StoreState {
 typealias CashbackDelegate = (Card) -> Void
 
 final class CashbackEffectHandler: EffectHandler {
-	typealias S = CashbackState
+	typealias S = CardDetailState
 		
-	private let coordinator: CashbackCoordinator
+	private let coordinator: CardDetailCoordinator
 	private let cashbackService: ICashbackService
 	
-	init(coordinator: CashbackCoordinator, cashbackService: ICashbackService) {
+	init(coordinator: CardDetailCoordinator, cashbackService: ICashbackService) {
 		self.coordinator = coordinator
 		self.cashbackService = cashbackService
 	}
 	
-	func handle(effect: CashbackState.Effect) async -> CashbackState.Feedback? {
+	func handle(effect: CardDetailState.Effect) async -> CardDetailState.Feedback? {
 		switch effect {
 		case .navigateToAddCashback(let card):
 			coordinator.navigateToAddCashback(card: card)

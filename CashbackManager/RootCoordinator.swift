@@ -38,7 +38,7 @@ struct RootCoordinator: View {
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
 		case .cardDetail(let card):
-			CashbackAssembly.assemble(
+			CardDetailAssembly.assemble(
 				card: card,
 				coordinator: self,
 				cashbackService: serviceContainer.cashbackService
@@ -55,7 +55,7 @@ extension RootCoordinator: CardsListCoordinator {
 	}
 }
 
-extension RootCoordinator: CashbackCoordinator {
+extension RootCoordinator: CardDetailCoordinator {
 	func navigateToAddCashback(card: Card) {
 		navigationStack.append(.addCashback(card))
 	}
