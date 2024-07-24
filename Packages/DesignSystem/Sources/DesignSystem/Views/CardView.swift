@@ -8,8 +8,9 @@
 import Domain
 import SwiftUI
 
-public struct CardView: View {
+public struct CardView<AddonView: View>: View {
 	private let card: Card
+	private let addon: AddonView
 	
 	@Environment(\.colorScheme) private var colorScheme
 	@Environment(\.viewClass) private var viewClass
@@ -33,15 +34,22 @@ public struct CardView: View {
 			.callout
 		}
 	}
-		
-	public init(card: Card) {
+	
+	public init(card: Card, addon: () -> AddonView = { EmptyView() }) {
 		self.card = card
+		self.addon = addon()
 	}
 	
 	public var body: some View {
 		VStack(alignment: .leading, spacing: viewClass.vSpacing) {
-			Text(card.name)
-				.foregroundStyle(.secondary)
+			HStack(alignment: .center, spacing: .zero) {
+				Text(card.name)
+					.foregroundStyle(.secondary)
+				
+				Spacer()
+				
+				addon
+			}
 			
 			if !card.cashback.isEmpty {
 				CategoriesView(cashback: card.cashback)

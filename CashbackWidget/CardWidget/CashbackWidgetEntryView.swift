@@ -11,28 +11,27 @@ import DesignSystem
 import WidgetKit
 
 struct CashbackWidgetEntryView : View {
-	var entry: CardWidgetProvider.Entry
+	let entry: CardWidgetProvider.Entry
 
 	var body: some View {
 		if let card = entry.card {
-			CardView(card: card)
-				.viewClass(.widget)
-				.overlay(alignment: .topTrailing) {
-					Button("Другая", systemImage: "arrow.circlepath", intent: ChangeCurrentCardIntent(cardId: card.id.uuidString))
-						.font(.caption)
-						.tint(.orange)
-						.controlSize(.small)
+			CardView(card: card) {
+				Group {
+					if entry.hasMoreCards {
+						Button("Другая", systemImage: "arrow.circlepath", intent: ChangeCurrentCardIntent(cardId: card.id.uuidString))
+							.buttonStyle(BorderedProminentButtonStyle())
+							.font(.caption)
+							.tint(.orange)
+							.controlSize(.small)
+					} else {
+						EmptyView()
+					}
 				}
-				.widgetURL(URL(string: "app://cashback/card/\(card.id.uuidString)"))
+			}
+			.viewClass(.widget)
+			.widgetURL(URL(string: "app://cashback/card/\(card.id.uuidString)"))
 		} else {
 			Text("Пока нет добавленных карт с кэшбеком")
 		}
 	}
-}
-
-#Preview(as: .systemMedium) {
-	CardWidget()
-} timeline: {
-	CardWidgetEntry(date: .now, card: .sberCard)
-	CardWidgetEntry(date: .now, card: nil)
 }

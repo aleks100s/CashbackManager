@@ -11,4 +11,5 @@ import WidgetKit
 struct CardWidgetEntry: TimelineEntry {
 	let date: Date
 	let card: Card?
+	let hasMoreCards: Bool
 }
