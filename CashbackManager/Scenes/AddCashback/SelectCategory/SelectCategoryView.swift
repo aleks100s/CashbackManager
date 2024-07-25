@@ -16,7 +16,11 @@ struct SelectCategoryView: View {
 	
 	@State private var searchText = ""
 	@State private var isAddCategorySheetPresented = false
-	@Query private var categories: [Domain.Category]
+	@Query(sort: [
+		SortDescriptor<Domain.Category>(\.priority, order: .reverse),
+		SortDescriptor<Domain.Category>(\.name, order: .forward)
+	])
+	private var categories: [Domain.Category]
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
 	
@@ -25,7 +29,6 @@ struct SelectCategoryView: View {
 			searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText)
 		}
 	}
-	
 	
 	var body: some View {
 		Group {
@@ -44,6 +47,7 @@ struct SelectCategoryView: View {
 				List {
 					ForEach(filteredCategories) { category in
 						Button {
+							category.priority += 1
 							onSelect(category)
 							dismiss()
 						} label: {
