@@ -7,7 +7,6 @@
 
 import Domain
 import Foundation
-import Persistance
 
 public final class CashbackService: ICashbackService {
 	private var cards: [Card] = [] {

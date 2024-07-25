@@ -6,7 +6,6 @@
 //
 
 import Domain
-import Persistance
 
 public final class CategoryService: ICategoryService {
 	private var categories: [Domain.Category] = [] {

@@ -19,7 +19,6 @@ struct AddCashbackScreen: View {
 	@State private var percent = 0.05
 	@State private var selectedCategory: Domain.Category?
 	@State private var isCategorySelectorPresented = false
-	@State private var categorySearchText = ""
 	@FocusState private var isFocused
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
@@ -97,7 +96,7 @@ struct AddCashbackScreen: View {
 		}
 		.sheet(isPresented: $isCategorySelectorPresented) {
 			NavigationView {
-				SelectCategoryView(searchText: $categorySearchText) { category in
+				SelectCategoryView { category in
 					selectedCategory = category
 					isCategorySelectorPresented = false
 				}

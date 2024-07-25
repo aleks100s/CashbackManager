@@ -17,8 +17,14 @@ struct CardsListScreen: View {
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
 	@State private var cardToBeRenamed: Card?
-	@Query private var cards: [Card]
+	@Query(animation: .default) private var cards: [Card]
 	@Environment(\.modelContext) private var context
+	
+	private var filteredCards: [Card] {
+		cards.filter {
+			searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText) || $0.cashbackDescription.localizedStandardContains(searchText)
+		}
+	}
 	
 	var body: some View {
 		contentView
@@ -67,7 +73,7 @@ struct CardsListScreen: View {
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if cards.isEmpty {
+		if filteredCards.isEmpty {
 			if searchText.isEmpty {
 				ContentUnavailableView("Нет сохраненных кэшбеков", systemImage: "rublesign.circle")
 			} else {
@@ -76,7 +82,7 @@ struct CardsListScreen: View {
 		} else {
 			ScrollView {
 				LazyVStack(spacing: 16) {
-					ForEach(cards) { card in
+					ForEach(filteredCards) { card in
 						Button {
 							onCardSelected(card)
 						} label: {
@@ -104,7 +110,6 @@ struct CardsListScreen: View {
 						.buttonStyle(.plain)
 					}
 				}
-				.animation(.default, value: cards)
 				.padding(.horizontal, 12)
 			}
 			.scrollDismissesKeyboard(.interactively)
