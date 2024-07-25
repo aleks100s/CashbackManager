@@ -8,11 +8,13 @@
 import Domain
 import DesignSystem
 import SwiftUI
+import WidgetKit
 
 struct CardDetailScreen: View {
 	let card: Card
 	let onAddCashbackTap: () -> Void
 	
+	@AppStorage("CurrentCardID", store: .appGroup) private var currentCardId: String?
 	@Environment(\.modelContext) private var context
 	
 	var body: some View {
@@ -43,5 +45,13 @@ struct CardDetailScreen: View {
 				}
 			}
 		}
+		.onAppear {
+			currentCardId = card.id.uuidString
+			WidgetCenter.shared.reloadTimelines(ofKind: "CardWidget")
+		}
 	}
+}
+
+private extension UserDefaults {
+	static let appGroup = UserDefaults(suiteName: "group.com.alextos.cashback")
 }

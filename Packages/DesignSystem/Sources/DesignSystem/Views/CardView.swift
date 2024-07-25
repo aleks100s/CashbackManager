@@ -98,7 +98,3 @@ private extension ViewClass {
 		}
 	}
 }
-
-#Preview {
-	CardView(card: .tinkoffBlack)
-}
