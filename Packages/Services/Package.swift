@@ -7,7 +7,6 @@ let package = Package(
     name: "Services",
 	platforms: [.iOS(.v17)],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "CategoryService",
             targets: ["CategoryService"]
@@ -15,22 +14,11 @@ let package = Package(
 		.library(
 			name: "CashbackService",
 			targets: ["CashbackService"]
-		),
-		.library(
-			name: "Persistance",
-			targets: ["Persistance"]
 		)
     ],
 	dependencies: [.package(name: "Domain", path: "./Domain")],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(name: "Persistance", dependencies: ["Domain"]),
-		.target(name: "CategoryService", dependencies: ["Domain", "Persistance"]),
-		.target(name: "CashbackService", dependencies: ["Domain", "Persistance"]),
-        .testTarget(
-            name: "ServicesTests",
-            dependencies: ["Persistance", "CategoryService", "CashbackService"]
-		),
+		.target(name: "CategoryService", dependencies: ["Domain"]),
+		.target(name: "CashbackService", dependencies: ["Domain"]),
     ]
 )

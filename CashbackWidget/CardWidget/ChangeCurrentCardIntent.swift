@@ -8,7 +8,7 @@
 import AppIntents
 import CashbackService
 import Domain
-import PersistanceManager
+import SwiftData
 import WidgetKit
 
 struct ChangeCurrentCardIntent: AppIntent {
@@ -24,21 +24,37 @@ struct ChangeCurrentCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some IntentResult {
-		let service = CashbackService(persistanceManager: PersistanceManager(defaults: UserDefaults(suiteName: "group.com.alextos.cashback")))
-		let cards = service.getCards().filter { !$0.cashback.isEmpty }
+		guard let container = try? ModelContainer(for: Card.self, Cashback.self, Domain.Category.self) else { return .result() }
+		
+		let context = ModelContext(container)
+		
+		let allCardsPredicate = #Predicate<Card> { !$0.cashback.isEmpty }
+		let allCardsDescriptor = FetchDescriptor(predicate: allCardsPredicate)
+		let allCards = (try? context.fetch(allCardsDescriptor)) ?? []
+		
 		var nextCard: Card?
-		if let id = UUID(uuidString: cardId),
-			let card = service.getCard(by: id),
-			let index = cards.firstIndex(of: card),
-			index < cards.endIndex - 1 {
-			nextCard = cards[index + 1]
+		if let id = UUID(uuidString: cardId) {
+			let currentCardPredicate = #Predicate<Card> { $0.id == id && !$0.cashback.isEmpty }
+			let currentCardDescriptor = FetchDescriptor(predicate: currentCardPredicate)
+			if let card = (try? context.fetch(currentCardDescriptor).first) ?? allCards.first,
+			   let index = allCards.firstIndex(of: card),
+			   index < allCards.endIndex - 1 {
+				nextCard = allCards[index + 1]
+			} else {
+				nextCard = allCards.first
+			}
 		} else {
-			nextCard = cards.first
+			nextCard = allCards.first
 		}
+		
 		if let nextCard {
-			service.save(currentCard: nextCard)
+			UserDefaults.appGroup?.set(nextCard.id.uuidString, forKey: "CurrentCardID")
 			WidgetCenter.shared.reloadTimelines(ofKind: CardWidget.kind)
 		}
 		return .result()
 	}
+}
+
+private extension UserDefaults {
+	static let appGroup = UserDefaults(suiteName: "group.com.alextos.cashback")
 }

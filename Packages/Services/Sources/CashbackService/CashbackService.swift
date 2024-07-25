@@ -7,7 +7,6 @@
 
 import Domain
 import Foundation
-import Persistance
 
 public final class CashbackService: ICashbackService {
 	private var cards: [Card] = [] {
@@ -16,12 +15,8 @@ public final class CashbackService: ICashbackService {
 		}
 	}
 	
-	private let persistanceManager: IPersistanceManager
 	
-	public init(persistanceManager: IPersistanceManager) {
-		self.persistanceManager = persistanceManager
-		cards = persistanceManager.readModels(for: .cards) as? [Card] ?? []
-	}
+	public init() {}
 	
 	public func getCards() -> [Card] {
 		cards
@@ -54,14 +49,13 @@ public final class CashbackService: ICashbackService {
 	}
 	
 	public func save(currentCard: Card) {
-		persistanceManager.save(models: [currentCard], for: .widgetCurrentCard)
+		
 	}
 	
 	public func getCurrentCard() -> Card? {
-		(persistanceManager.readModels(for: .widgetCurrentCard) as? [Card])?.first
+		nil
 	}
 	
 	private func persistCards() {
-		persistanceManager.save(models: cards, for: .cards)
 	}
 }

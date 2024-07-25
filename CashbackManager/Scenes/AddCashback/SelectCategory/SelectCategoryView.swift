@@ -8,20 +8,31 @@
 import CommonInput
 import DesignSystem
 import Domain
+import SwiftData
 import SwiftUI
 
 struct SelectCategoryView: View {
-	let categories: [Domain.Category]
-	let searchText: String
 	let onSelect: (Domain.Category) -> Void
-	let onSearchTextChange: (String) -> Void
-	let onSaveCategoryButtonTapped: (String) -> Void
 	
+	@State private var searchText = ""
 	@State private var isAddCategorySheetPresented = false
+	@Query(sort: [
+		SortDescriptor<Domain.Category>(\.priority, order: .reverse),
+		SortDescriptor<Domain.Category>(\.name, order: .forward)
+	])
+	private var categories: [Domain.Category]
+	@Environment(\.dismiss) private var dismiss
+	@Environment(\.modelContext) private var context
+	
+	private var filteredCategories: [Domain.Category] {
+		categories.filter {
+			searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText)
+		}
+	}
 	
 	var body: some View {
 		Group {
-			if categories.isEmpty {
+			if filteredCategories.isEmpty {
 				ZStack(alignment: .center) {
 					VStack(alignment: .center, spacing: 16) {
 						Text("Категории не найдены")
@@ -34,9 +45,11 @@ struct SelectCategoryView: View {
 				.background(Color.cmScreenBackground)
 			} else {
 				List {
-					ForEach(categories) { category in
+					ForEach(filteredCategories) { category in
 						Button {
+							category.priority += 1
 							onSelect(category)
+							dismiss()
 						} label: {
 							CategoryView(category: category)
 								.contentShape(Rectangle())
@@ -47,13 +60,13 @@ struct SelectCategoryView: View {
 			}
 		}
 		.searchable(
-			text: Binding(get: { searchText }, set: { onSearchTextChange($0) }),
+			text: $searchText,
 			placement: .navigationBarDrawer(displayMode: .always),
 			prompt: "Название категории"
 		)
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
-				Button("Добавить") {
+				Button("Создать") {
 					isAddCategorySheetPresented = true
 				}
 			}
@@ -61,7 +74,8 @@ struct SelectCategoryView: View {
 		.sheet(isPresented: $isAddCategorySheetPresented) {
 			NavigationView {
 				CommonInputView("Название категории") { categoryName in
-					onSaveCategoryButtonTapped(categoryName)
+					let category = Category(name: categoryName, emoji: String(categoryName.first ?? "?"))
+					context.insert(category)
 					isAddCategorySheetPresented = false
 				}
 			}

@@ -13,6 +13,11 @@ struct RootCoordinator: View {
 	private let urlParser: WidgetURLParser
 	
 	@State private var navigationStack: [Navigation] = []
+	@State private var cardToAddCashback: Card?
+	
+	@AppStorage("IsFirstLaunch") private var isFirstLaunch = true
+
+	@Environment(\.modelContext) private var context
 	
 	init(serviceContainer: ServiceContainer, urlParser: WidgetURLParser) {
 		self.serviceContainer = serviceContainer
@@ -21,16 +26,26 @@ struct RootCoordinator: View {
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {
-			CardsListAssembly.assemble(
-				banksCoordinator: self,
-				cashbackService: serviceContainer.cashbackService
-			)
+			CardsListScreen { card in
+				navigationStack.append(.cardDetail(card))
+			}
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
+		}
+		.sheet(item: $cardToAddCashback) { card in
+			NavigationView {
+				AddCashbackScreen(card: card)
+			}
 		}
 		.onOpenURL { url in
 			if let path = urlParser.parse(url: url) {
 				navigationStack = path
 			}
+		}
+		.onAppear {
+			if isFirstLaunch {
+				prepopulateDatabase()
+			}
+			isFirstLaunch = false
 		}
     }
 	
@@ -38,31 +53,16 @@ struct RootCoordinator: View {
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
 		case .cardDetail(let card):
-			CardDetailAssembly.assemble(
-				card: card,
-				coordinator: self,
-				cashbackService: serviceContainer.cashbackService
-			)
-		case .addCashback(let card):
-			AddCashbackAssembly.assemble(card: card, coordinator: self, categoryService: serviceContainer.categoryService, cashbackService: serviceContainer.cashbackService)
+			CardDetailScreen(card: card) {
+				cardToAddCashback = card
+			}
 		}
 	}
-}
-
-extension RootCoordinator: CardsListCoordinator {
-	func onCardSelected(card: Card) {
-		navigationStack.append(.cardDetail(card))
-	}
-}
-
-extension RootCoordinator: CardDetailCoordinator {
-	func navigateToAddCashback(card: Card) {
-		navigationStack.append(.addCashback(card))
-	}
-}
-
-extension RootCoordinator: AddCashbackCoordinator {
-	func navigateBack() {
-		_ = navigationStack.popLast()
+	
+	private func prepopulateDatabase() {
+		let categories = PredefinedCategory.allCases.map(\.asCategory)
+		for category in categories {
+			context.insert(category)
+		}
 	}
 }

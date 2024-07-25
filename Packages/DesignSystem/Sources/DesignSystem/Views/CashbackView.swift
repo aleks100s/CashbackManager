@@ -31,7 +31,3 @@ public struct CashbackView: View {
 		}
 	}
 }
-
-#Preview {
-	CashbackView(cashback: .arbitrary(category: PredefinedCategory.restaurants.asCategory, percent: 0.05))
-}

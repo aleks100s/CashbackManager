@@ -5,42 +5,53 @@
 //  Created by Alexander on 19.06.2024.
 //
 
-import SwiftUI
+import Domain
 import DesignSystem
+import SwiftUI
+import WidgetKit
 
 struct CardDetailScreen: View {
-	@State private var store: CardDetailStore
+	let card: Card
+	let onAddCashbackTap: () -> Void
 	
-	init(store: CardDetailStore) {
-		self.store = store
-	}
+	@AppStorage("CurrentCardID", store: .appGroup) private var currentCardId: String?
+	@Environment(\.modelContext) private var context
 	
 	var body: some View {
 		List {
-			ForEach(store.card.cashback) { cashback in
+			ForEach(card.cashback) { cashback in
 				CashbackView(cashback: cashback)
 					.contextMenu {
 						Button(role: .destructive) {
-							store.send(.onDeleteCashbackMenuTap(cashback))
+							context.delete(cashback)
+							card.cashback.removeAll(where: { $0.id == cashback.id })
 						} label: {
 							Text("Удалить")
 						}
 					}
 			}
 			.onDelete { indexSet in
-				store.send(.onDeleteCashbackTap(indexSet))
+				for index in indexSet {
+					context.delete(card.cashback[index])
+					card.cashback.remove(at: index)
+				}
 			}
 		}
-		.navigationTitle(store.card.name)
+		.navigationTitle(card.name)
 		.toolbar {
 			ToolbarItem(placement: .bottomBar) {
 				Button("Добавить кэшбек") {
-					store.send(.onAddCashbackTap)
+					onAddCashbackTap()
 				}
 			}
 		}
 		.onAppear {
-			store.send(.viewDidAppear)
+			currentCardId = card.id.uuidString
+			WidgetCenter.shared.reloadTimelines(ofKind: "CardWidget")
 		}
 	}
+}
+
+private extension UserDefaults {
+	static let appGroup = UserDefaults(suiteName: "group.com.alextos.cashback")
 }

@@ -62,8 +62,8 @@
             filePath = "Packages/Services/Tests/ServicesTests/CashbackServiceTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "test_deleteCard_cardNotExists()"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,25 +78,9 @@
             filePath = "Packages/Services/Tests/ServicesTests/CashbackServiceTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "test_deleteCard_cardNotExists()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B60897A0-5FD5-4F7B-A5A0-D3DBAD008937"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Packages/Services/Sources/CashbackService/CashbackService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "delete(card:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,10 +94,56 @@
             filePath = "Packages/Services/Sources/CashbackService/CashbackService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "cards"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7CA7F39C-D161-441A-9DC3-349943A7B9AE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Packages/Services/Sources/CashbackService/CashbackService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "update(card:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7CA7F39C-D161-441A-9DC3-349943A7B9AE - 48b6a2ad6ba37efd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CashbackService.CashbackService.update(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/CashbackService/CashbackService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30">
+               </Location>
+               <Location
+                  uuid = "7CA7F39C-D161-441A-9DC3-349943A7B9AE - 48b6a2ad6ba37efd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CashbackService.CashbackService.update(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/CashbackService/CashbackService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

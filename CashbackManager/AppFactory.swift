@@ -8,12 +8,10 @@
 import Foundation
 import CashbackService
 import CategoryService
-import PersistanceManager
 
 final class AppFactory {
-	private lazy var persistanceManager = PersistanceManager(defaults: UserDefaults(suiteName: "group.com.alextos.cashback"))
-	private lazy var cashbackService = CashbackService(persistanceManager: persistanceManager)
-	private lazy var categoryService = CategoryService(persistanceManager: persistanceManager)
+	private lazy var cashbackService = CashbackService()
+	private lazy var categoryService = CategoryService()
 	
 	func makeServiceContainer() -> ServiceContainer {
 		ServiceContainerImpl(cashbackService: cashbackService, categoryService: categoryService)
