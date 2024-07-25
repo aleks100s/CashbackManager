@@ -33,7 +33,16 @@ struct CardsListScreen: View {
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
 					Button("Добавить карту") {
-						
+						withAnimation {
+							let category1 = Domain.Category(name: "Кафе", emoji: "K")
+							let cashback1 = Cashback(category: category1, percent: 0.05)
+							let category2 = Domain.Category(name: "Такси", emoji: "Т")
+							let cashback2 = Cashback(category: category2, percent: 0.05)
+							let category3 = Domain.Category(name: "Все покупки", emoji: "ВП")
+							let cashback3 = Cashback(category: category3, percent: 0.01)
+							let card = Card(name: "qwerty", cashback: [cashback1, cashback2, cashback3])
+							context.insert(card)
+						}
 					}
 				}
 			}
@@ -101,6 +110,7 @@ struct CardsListScreen: View {
 						.buttonStyle(.plain)
 					}
 				}
+				.animation(.default, value: cards)
 				.padding(.horizontal, 12)
 			}
 			.scrollDismissesKeyboard(.interactively)

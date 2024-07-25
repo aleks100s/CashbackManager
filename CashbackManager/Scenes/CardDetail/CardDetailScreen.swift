@@ -5,42 +5,43 @@
 //  Created by Alexander on 19.06.2024.
 //
 
-import SwiftUI
+import Domain
 import DesignSystem
+import SwiftUI
 
 struct CardDetailScreen: View {
-	@State private var store: CardDetailStore
+	let card: Card
+	let onAddCashbackTap: () -> Void
 	
-	init(store: CardDetailStore) {
-		self.store = store
-	}
+	@Environment(\.modelContext) private var context
 	
 	var body: some View {
 		List {
-			ForEach(store.card.cashback) { cashback in
+			ForEach(card.cashback) { cashback in
 				CashbackView(cashback: cashback)
 					.contextMenu {
 						Button(role: .destructive) {
-							store.send(.onDeleteCashbackMenuTap(cashback))
+							context.delete(cashback)
+							try! context.save()
 						} label: {
 							Text("Удалить")
 						}
 					}
 			}
 			.onDelete { indexSet in
-				store.send(.onDeleteCashbackTap(indexSet))
-			}
-		}
-		.navigationTitle(store.card.name)
-		.toolbar {
-			ToolbarItem(placement: .bottomBar) {
-				Button("Добавить кэшбек") {
-					store.send(.onAddCashbackTap)
+				for index in indexSet {
+					context.delete(card.cashback[index])
+					try! context.save()
 				}
 			}
 		}
-		.onAppear {
-			store.send(.viewDidAppear)
+		.navigationTitle(card.name)
+		.toolbar {
+			ToolbarItem(placement: .bottomBar) {
+				Button("Добавить кэшбек") {
+					onAddCashbackTap()
+				}
+			}
 		}
 	}
 }
