@@ -62,7 +62,7 @@ struct SelectCategoryView: View {
 		)
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
-				Button("Добавить") {
+				Button("Создать") {
 					isAddCategorySheetPresented = true
 				}
 			}
