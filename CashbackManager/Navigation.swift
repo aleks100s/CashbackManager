@@ -9,5 +9,4 @@ import Domain
 
 enum Navigation: Hashable {
 	case cardDetail(Card)
-	case addCashback(Card)
 }

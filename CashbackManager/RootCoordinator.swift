@@ -13,6 +13,7 @@ struct RootCoordinator: View {
 	private let urlParser: WidgetURLParser
 	
 	@State private var navigationStack: [Navigation] = []
+	@State private var cardToAddCashback: Card?
 	
 	@AppStorage("IsFirstLaunch") private var isFirstLaunch = true
 
@@ -29,6 +30,11 @@ struct RootCoordinator: View {
 				navigationStack.append(.cardDetail(card))
 			}
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
+		}
+		.sheet(item: $cardToAddCashback) { card in
+			NavigationView {
+				AddCashbackScreen(card: card)
+			}
 		}
 		.onOpenURL { url in
 			if let path = urlParser.parse(url: url) {
@@ -48,10 +54,8 @@ struct RootCoordinator: View {
 		switch destination {
 		case .cardDetail(let card):
 			CardDetailScreen(card: card) {
-				navigationStack.append(.addCashback(card))
+				cardToAddCashback = card
 			}
-		case .addCashback(let card):
-			AddCashbackScreen(card: card)
 		}
 	}
 	

@@ -251,15 +251,15 @@
 		27A5D7CF2C394EC400B93512 /* CashbackManager */ = {
 			isa = PBXGroup;
 			children = (
-				27368BE32C4CC62600FC0475 /* CashbackManager.entitlements */,
+				27A5D8302C394EFF00B93512 /* Scenes */,
 				27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */,
 				27A5D8432C394EFF00B93512 /* AppFactory.swift */,
 				27A5D8052C394EFE00B93512 /* ServiceContainer.swift */,
 				27A5D84B2C394EFF00B93512 /* RootCoordinator.swift */,
 				27A5D84C2C394EFF00B93512 /* Navigation.swift */,
 				27733D162C4F789C0009B05A /* WidgetURLParser.swift */,
+				27368BE32C4CC62600FC0475 /* CashbackManager.entitlements */,
 				27A5D84A2C394EFF00B93512 /* Assets.xcassets */,
-				27A5D8302C394EFF00B93512 /* Scenes */,
 			);
 			path = CashbackManager;
 			sourceTree = "<group>";
