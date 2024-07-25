@@ -1,5 +1,5 @@
 //
-//  CashbackScreen.swift
+//  CashbackView.swift
 //  CashbackManager
 //
 //  Created by Alexander on 19.06.2024.
@@ -7,17 +7,23 @@
 
 import Domain
 import DesignSystem
+import SwiftData
 import SwiftUI
 import WidgetKit
 
-struct CardDetailScreen: View {
-	let card: Card
-	let onAddCashbackTap: () -> Void
+public struct CardDetailView: View {
+	private let card: Card
+	private let onAddCashbackTap: () -> Void
 	
 	@AppStorage("CurrentCardID", store: .appGroup) private var currentCardId: String?
 	@Environment(\.modelContext) private var context
 	
-	var body: some View {
+	public init(card: Card, onAddCashbackTap: @escaping () -> Void) {
+		self.card = card
+		self.onAddCashbackTap = onAddCashbackTap
+	}
+	
+	public var body: some View {
 		List {
 			ForEach(card.cashback) { cashback in
 				CashbackView(cashback: cashback)

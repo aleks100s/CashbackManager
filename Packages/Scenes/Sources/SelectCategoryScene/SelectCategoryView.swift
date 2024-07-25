@@ -5,14 +5,14 @@
 //  Created by Alexander on 26.06.2024.
 //
 
-import CommonInput
+import CommonInputSheet
 import DesignSystem
 import Domain
 import SwiftData
 import SwiftUI
 
-struct SelectCategoryView: View {
-	let onSelect: (Domain.Category) -> Void
+public struct SelectCategoryView: View {
+	private let onSelect: (Domain.Category) -> Void
 	
 	@State private var searchText = ""
 	@State private var isAddCategorySheetPresented = false
@@ -30,7 +30,11 @@ struct SelectCategoryView: View {
 		}
 	}
 	
-	var body: some View {
+	public init(onSelect: @escaping (Domain.Category) -> Void) {
+		self.onSelect = onSelect
+	}
+	
+	public var body: some View {
 		Group {
 			if filteredCategories.isEmpty {
 				ZStack(alignment: .center) {

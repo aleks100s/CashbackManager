@@ -1,18 +1,18 @@
 //
-//  CardsListScreen.swift
+//  CardsListView.swift
 //  CashbackManager
 //
 //  Created by Alexander on 15.06.2024.
 //
 
-import CommonInput
+import CommonInputSheet
 import DesignSystem
 import Domain
 import SwiftData
 import SwiftUI
 
-struct CardsListScreen: View {
-	let onCardSelected: (Card) -> Void
+public struct CardsListView: View {
+	private let onCardSelected: (Card) -> Void
 	
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
@@ -26,7 +26,11 @@ struct CardsListScreen: View {
 		}
 	}
 	
-	var body: some View {
+	public init(onCardSelected: @escaping (Card) -> Void) {
+		self.onCardSelected = onCardSelected
+	}
+	
+	public var body: some View {
 		contentView
 			.navigationTitle("Мои кэшбеки")
 			.if(!cards.isEmpty) {

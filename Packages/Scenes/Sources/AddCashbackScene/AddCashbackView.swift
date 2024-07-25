@@ -1,29 +1,40 @@
 //
-//  AddCashbackScreen.swift
+//  AddCashbackView.swift
 //  CashbackManager
 //
 //  Created by Alexander on 26.06.2024.
 //
 
-import CommonInput
 import DesignSystem
 import Domain
+import SelectCategoryScene
 import SwiftData
 import SwiftUI
 
-struct AddCashbackScreen: View {
-	let card: Card
+public struct AddCashbackView: View {
+	private let card: Card
 	
 	private let percentPresets = [0.01, 0.015, 0.02, 0.03, 0.05, 0.07, 0.1, 0.15, 0.2, 0.25]
 	
 	@State private var percent = 0.05
 	@State private var selectedCategory: Domain.Category?
 	@State private var isCategorySelectorPresented = false
-	@FocusState private var isFocused
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
 	
-	var body: some View {
+	private var numberFomatter: NumberFormatter {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .percent
+		formatter.maximumFractionDigits = 1
+		formatter.minimumFractionDigits = 0
+		return formatter
+	}
+	
+	public init(card: Card) {
+		self.card = card
+	}
+	
+	public var body: some View {
 		ScrollView(.vertical) {
 			HStack {
 				Spacer()
@@ -46,12 +57,8 @@ struct AddCashbackScreen: View {
 					}
 					
 					if selectedCategory != nil {
-						ScrollView(.horizontal) {
+						ScrollView(.horizontal, showsIndicators: false) {
 							LazyHStack {
-								CMProminentButton("Другой процент") {
-									
-								}
-								
 								ForEach(percentPresets, id: \.self) { percent in
 									Button {
 										self.percent = percent
@@ -69,9 +76,6 @@ struct AddCashbackScreen: View {
 			}
 		}
 		.background(Color.cmScreenBackground)
-		.onTapGesture {
-			isFocused = false
-		}
 		.navigationTitle("Добавить кэшбек")
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {

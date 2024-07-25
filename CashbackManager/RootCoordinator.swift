@@ -5,6 +5,9 @@
 //  Created by Alexander on 10.06.2024.
 //
 
+import AddCashbackScene
+import CardDetailScene
+import CardsListScene
 import Domain
 import SwiftUI
 
@@ -26,14 +29,14 @@ struct RootCoordinator: View {
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {
-			CardsListScreen { card in
+			CardsListView { card in
 				navigationStack.append(.cardDetail(card))
 			}
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
 		}
 		.sheet(item: $cardToAddCashback) { card in
 			NavigationView {
-				AddCashbackScreen(card: card)
+				AddCashbackView(card: card)
 			}
 		}
 		.onOpenURL { url in
@@ -53,7 +56,7 @@ struct RootCoordinator: View {
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
 		case .cardDetail(let card):
-			CardDetailScreen(card: card) {
+			CardDetailView(card: card) {
 				cardToAddCashback = card
 			}
 		}
