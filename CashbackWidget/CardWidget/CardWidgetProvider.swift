@@ -6,7 +6,6 @@
 //
 
 import CashbackService
-import PersistanceManager
 import WidgetKit
 
 struct CardWidgetProvider: TimelineProvider {
@@ -20,7 +19,7 @@ struct CardWidgetProvider: TimelineProvider {
 	}
 
 	func getTimeline(in context: Context, completion: @escaping (Timeline<CardWidgetEntry>) -> ()) {
-		let service = CashbackService(persistanceManager: PersistanceManager(defaults: UserDefaults(suiteName: "group.com.alextos.cashback")))
+		let service = CashbackService()
 		let card = service.getCurrentCard()
 		let hasMoreCards = service.getCards().filter { !$0.cashback.isEmpty }.count > 1
 		let entries: [Entry] = [

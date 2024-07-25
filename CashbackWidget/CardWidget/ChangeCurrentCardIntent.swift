@@ -8,7 +8,6 @@
 import AppIntents
 import CashbackService
 import Domain
-import PersistanceManager
 import WidgetKit
 
 struct ChangeCurrentCardIntent: AppIntent {
@@ -24,7 +23,7 @@ struct ChangeCurrentCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some IntentResult {
-		let service = CashbackService(persistanceManager: PersistanceManager(defaults: UserDefaults(suiteName: "group.com.alextos.cashback")))
+		let service = CashbackService()
 		let cards = service.getCards().filter { !$0.cashback.isEmpty }
 		var nextCard: Card?
 		if let id = UUID(uuidString: cardId),

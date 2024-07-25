@@ -7,24 +7,25 @@
 
 import CommonInput
 import DesignSystem
+import Domain
+import SwiftData
 import SwiftUI
 
 struct CardsListScreen: View {
-	@State private var store: CardsListStore
-		
-	init(store: CardsListStore) {
-		self.store = store
-	}
+	let onCardSelected: (Card) -> Void
+	
+	@Environment(\.modelContext) private var context
+	@State private var searchText = ""
+	@State private var isAddCardSheetPresented = false
+	@State private var cardToBeRenamed: Card?
+	@Query private var cards: [Card]
 	
 	var body: some View {
 		contentView
 			.navigationTitle("Мои кэшбеки")
-			.onAppear {
-				store.send(.onAppear)
-			}
-			.if(!store.allCards.isEmpty) {
+			.if(!cards.isEmpty) {
 				$0.searchable(
-					text: Binding(get: { store.searchText }, set: { store.send(.searchTextChanged($0)) }),
+					text: $searchText,
 					placement: .navigationBarDrawer(displayMode: .automatic),
 					prompt: "Категория кэшбека"
 				)
@@ -32,14 +33,16 @@ struct CardsListScreen: View {
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
 					Button("Добавить карту") {
-						store.send(.onAddCardTapped)
+						
 					}
 				}
 			}
-			.sheet(isPresented: Binding(get: { store.isAddCardSheetPresented }, set: { _, _ in store.send(.dismissAddCard)})) {
+			.sheet(isPresented: $isAddCardSheetPresented) {
 				NavigationView {
 					CommonInputView("Название карты") { cardName in
-						store.send(.saveCard(cardName))
+						let card = Card(name: cardName)
+						context.insert(card)
+						isAddCardSheetPresented = false
 					}
 					.navigationTitle("Добавить новую карту")
 					.navigationBarTitleDisplayMode(.inline)
@@ -47,10 +50,12 @@ struct CardsListScreen: View {
 				.presentationDetents([.medium])
 				.presentationBackground(.regularMaterial)
 			}
-			.sheet(item: Binding(get: { store.cardToBeRenamed }, set: { _ in store.send(.dismissCardRename) })) { card in
+			.sheet(item: $cardToBeRenamed) { card in
 				NavigationView {
 					CommonInputView("Название карты", text: card.name) { cardName in
-						store.send(.cardRenamed(cardName))
+						card.name = cardName
+						context.insert(card)
+						cardToBeRenamed = nil
 					}
 					.navigationTitle("Переименовать карту")
 					.navigationBarTitleDisplayMode(.inline)
@@ -62,8 +67,8 @@ struct CardsListScreen: View {
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if store.state.filteredCards.isEmpty {
-			if store.searchText.isEmpty {
+		if cards.isEmpty {
+			if searchText.isEmpty {
 				ContentUnavailableView("Нет сохраненных кэшбеков", systemImage: "rublesign.circle")
 			} else {
 				ContentUnavailableView("Такой кэшбек не найден", systemImage: "magnifyingglass")
@@ -71,20 +76,20 @@ struct CardsListScreen: View {
 		} else {
 			ScrollView {
 				LazyVStack(spacing: 16) {
-					ForEach(store.filteredCards) { card in
+					ForEach(cards) { card in
 						Button {
-							store.send(.onCardSelected(card))
+							onCardSelected(card)
 						} label: {
 							CardView(card: card)
 								.contextMenu {
 									Text(card.name)
 									Button {
-										store.send(.onCardRenameTapped(card))
+										cardToBeRenamed = card
 									} label: {
 										Text("Переименовать карту")
 									}
 									Button(role: .destructive) {
-										store.send(.onCardDeleted(card))
+										context.delete(card)
 									} label: {
 										Text("Удалить карту")
 									}

@@ -21,10 +21,9 @@ struct RootCoordinator: View {
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {
-			CardsListAssembly.assemble(
-				banksCoordinator: self,
-				cashbackService: serviceContainer.cashbackService
-			)
+			CardsListScreen { card in
+				navigationStack.append(.cardDetail(card))
+			}
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
 		}
 		.onOpenURL { url in
@@ -46,12 +45,6 @@ struct RootCoordinator: View {
 		case .addCashback(let card):
 			AddCashbackAssembly.assemble(card: card, coordinator: self, categoryService: serviceContainer.categoryService, cashbackService: serviceContainer.cashbackService)
 		}
-	}
-}
-
-extension RootCoordinator: CardsListCoordinator {
-	func onCardSelected(card: Card) {
-		navigationStack.append(.cardDetail(card))
 	}
 }
 

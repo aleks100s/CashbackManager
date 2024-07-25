@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftData
 
-public struct Card: Model {
+@Model
+public final class Card {
 	public let id: UUID
 	public var name: String
 	public var cashback: [Cashback]

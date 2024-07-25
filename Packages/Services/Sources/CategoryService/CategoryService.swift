@@ -9,18 +9,13 @@ import Domain
 import Persistance
 
 public final class CategoryService: ICategoryService {
-	private let persistanceManager: IPersistanceManager
-	
 	private var categories: [Domain.Category] = [] {
 		didSet {
 			persistCategories()
 		}
 	}
 	
-	public init(persistanceManager: IPersistanceManager) {
-		self.persistanceManager = persistanceManager
-		self.categories = persistanceManager.readModels(for: .categories) as? [Domain.Category] ?? []
-	}
+	public init() {}
 	
 	public func getCategories() -> [Domain.Category] {
 		let predefinedCategories = PredefinedCategory.allCases.map(\.asCategory)
@@ -33,6 +28,5 @@ public final class CategoryService: ICategoryService {
 	}
 	
 	private func persistCategories() {
-		persistanceManager.save(models: categories, for: .categories)
 	}
 }

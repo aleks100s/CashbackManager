@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftData
 
-public struct Cashback: Model {
+@Model
+public final class Cashback {
 	public let id: UUID
 	public let category: Category
 	public let percent: Double

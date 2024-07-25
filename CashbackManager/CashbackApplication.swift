@@ -5,6 +5,8 @@
 //  Created by Alexander on 10.06.2024.
 //
 
+import Domain
+import SwiftData
 import SwiftUI
 
 @main
@@ -18,5 +20,6 @@ struct CashbackApplication: App {
 				urlParser: appFactory.makeWidgetURLParser()
 			)
         }
+		.modelContainer(for: [Card.self, Cashback.self, Domain.Category.self])
     }
 }

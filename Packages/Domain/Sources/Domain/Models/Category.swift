@@ -5,15 +5,17 @@
 //  Created by Alexander on 14.06.2024.
 //
 
-public struct Category: Model {
+import Foundation
+import SwiftData
+
+@Model
+public final class Category {
+	public let id: UUID
 	public let name: String
 	public let emoji: String
 	
-	public var id: String {
-		name
-	}
-	
-	public init(name: String, emoji: String) {
+	public init(id: UUID = UUID(), name: String, emoji: String) {
+		self.id = id
 		self.name = name
 		self.emoji = emoji
 	}
