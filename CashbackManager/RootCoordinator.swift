@@ -14,6 +14,10 @@ struct RootCoordinator: View {
 	
 	@State private var navigationStack: [Navigation] = []
 	
+	@AppStorage("IsFirstLaunch") private var isFirstLaunch = true
+
+	@Environment(\.modelContext) private var context
+	
 	init(serviceContainer: ServiceContainer, urlParser: WidgetURLParser) {
 		self.serviceContainer = serviceContainer
 		self.urlParser = urlParser
@@ -31,6 +35,12 @@ struct RootCoordinator: View {
 				navigationStack = path
 			}
 		}
+		.onAppear {
+			if isFirstLaunch {
+				prepopulateDatabase()
+			}
+			isFirstLaunch = false
+		}
     }
 	
 	@MainActor @ViewBuilder
@@ -42,6 +52,13 @@ struct RootCoordinator: View {
 			}
 		case .addCashback(let card):
 			AddCashbackScreen(card: card)
+		}
+	}
+	
+	private func prepopulateDatabase() {
+		let categories = PredefinedCategory.allCases.map(\.asCategory)
+		for category in categories {
+			context.insert(category)
 		}
 	}
 }

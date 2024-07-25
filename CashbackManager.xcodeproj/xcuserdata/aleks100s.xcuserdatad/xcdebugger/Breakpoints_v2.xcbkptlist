@@ -114,6 +114,36 @@
             endingLineNumber = "30"
             landmarkName = "update(card:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7CA7F39C-D161-441A-9DC3-349943A7B9AE - 48b6a2ad6ba37efd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CashbackService.CashbackService.update(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/CashbackService/CashbackService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30">
+               </Location>
+               <Location
+                  uuid = "7CA7F39C-D161-441A-9DC3-349943A7B9AE - 48b6a2ad6ba37efd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CashbackService.CashbackService.update(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/CashbackService/CashbackService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
