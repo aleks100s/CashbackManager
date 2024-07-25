@@ -8,16 +8,17 @@
 import CommonInput
 import DesignSystem
 import Domain
+import SwiftData
 import SwiftUI
 
 struct SelectCategoryView: View {
-	let categories: [Domain.Category]
-	let searchText: String
+	@Binding var searchText: String
 	let onSelect: (Domain.Category) -> Void
-	let onSearchTextChange: (String) -> Void
-	let onSaveCategoryButtonTapped: (String) -> Void
 	
 	@State private var isAddCategorySheetPresented = false
+	@Query private var categories: [Domain.Category]
+	@Environment(\.dismiss) private var dismiss
+	@Environment(\.modelContext) private var context
 	
 	var body: some View {
 		Group {
@@ -37,6 +38,7 @@ struct SelectCategoryView: View {
 					ForEach(categories) { category in
 						Button {
 							onSelect(category)
+							dismiss()
 						} label: {
 							CategoryView(category: category)
 								.contentShape(Rectangle())
@@ -47,7 +49,7 @@ struct SelectCategoryView: View {
 			}
 		}
 		.searchable(
-			text: Binding(get: { searchText }, set: { onSearchTextChange($0) }),
+			text: $searchText,
 			placement: .navigationBarDrawer(displayMode: .always),
 			prompt: "Название категории"
 		)
@@ -61,7 +63,8 @@ struct SelectCategoryView: View {
 		.sheet(isPresented: $isAddCategorySheetPresented) {
 			NavigationView {
 				CommonInputView("Название категории") { categoryName in
-					onSaveCategoryButtonTapped(categoryName)
+					let category = Category(name: categoryName, emoji: String(categoryName.first ?? "?"))
+					context.insert(category)
 					isAddCategorySheetPresented = false
 				}
 			}

@@ -14,11 +14,11 @@ import SwiftUI
 struct CardsListScreen: View {
 	let onCardSelected: (Card) -> Void
 	
-	@Environment(\.modelContext) private var context
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
 	@State private var cardToBeRenamed: Card?
 	@Query private var cards: [Card]
+	@Environment(\.modelContext) private var context
 	
 	var body: some View {
 		contentView
@@ -33,16 +33,7 @@ struct CardsListScreen: View {
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
 					Button("Добавить карту") {
-						withAnimation {
-							let category1 = Domain.Category(name: "Кафе", emoji: "K")
-							let cashback1 = Cashback(category: category1, percent: 0.05)
-							let category2 = Domain.Category(name: "Такси", emoji: "Т")
-							let cashback2 = Cashback(category: category2, percent: 0.05)
-							let category3 = Domain.Category(name: "Все покупки", emoji: "ВП")
-							let cashback3 = Cashback(category: category3, percent: 0.01)
-							let card = Card(name: "qwerty", cashback: [cashback1, cashback2, cashback3])
-							context.insert(card)
-						}
+						isAddCardSheetPresented = true
 					}
 				}
 			}
@@ -99,6 +90,9 @@ struct CardsListScreen: View {
 									}
 									Button(role: .destructive) {
 										context.delete(card)
+										for cashback in card.cashback {
+											context.delete(cashback)
+										}
 									} label: {
 										Text("Удалить карту")
 									}

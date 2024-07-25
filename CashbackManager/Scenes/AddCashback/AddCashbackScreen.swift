@@ -16,14 +16,11 @@ struct AddCashbackScreen: View {
 	
 	private let percentPresets = [0.01, 0.015, 0.02, 0.03, 0.05, 0.07, 0.1, 0.15, 0.2, 0.25]
 	
-	@FocusState private var isFocused
 	@State private var percent = 0.05
 	@State private var selectedCategory: Domain.Category?
 	@State private var isCategorySelectorPresented = false
 	@State private var categorySearchText = ""
-	
-	@Query private var categories: [Domain.Category]
-	
+	@FocusState private var isFocused
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
 	
@@ -100,14 +97,9 @@ struct AddCashbackScreen: View {
 		}
 		.sheet(isPresented: $isCategorySelectorPresented) {
 			NavigationView {
-				SelectCategoryView(categories: categories, searchText: categorySearchText) { category in
+				SelectCategoryView(searchText: $categorySearchText) { category in
 					selectedCategory = category
 					isCategorySelectorPresented = false
-				} onSearchTextChange: { text in
-					categorySearchText = text
-				} onSaveCategoryButtonTapped: { newCategoryName in
-					let category = Category(name: newCategoryName, emoji: String(newCategoryName.first ?? "?"))
-					context.insert(category)
 				}
 			}
 			.navigationTitle("Выбор категории")
