@@ -7,12 +7,25 @@
 
 import CommonInput
 import DesignSystem
+import Domain
+import SwiftData
 import SwiftUI
 
 struct AddCashbackScreen: View {
-	@State var store: AddCashbackStore
+	let card: Card
+	
+	private let percentPresets = [0.01, 0.015, 0.02, 0.03, 0.05, 0.07, 0.1, 0.15, 0.2, 0.25]
+	
 	@FocusState private var isFocused
-	@State private var percentString = "5"
+	@State private var percent = 0.05
+	@State private var selectedCategory: Domain.Category?
+	@State private var isCategorySelectorPresented = false
+	@State private var categorySearchText = ""
+	
+	@Query private var categories: [Domain.Category]
+	
+	@Environment(\.dismiss) private var dismiss
+	@Environment(\.modelContext) private var context
 	
 	var body: some View {
 		ScrollView(.vertical) {
@@ -21,14 +34,14 @@ struct AddCashbackScreen: View {
 				VStack(alignment: .leading, spacing: 32) {
 					Spacer()
 					
-					if let category = store.selectedCategory {
+					if let category = selectedCategory {
 						Button {
-							store.send(.selectCategoryTapped)
+							isCategorySelectorPresented = true
 						} label: {
 							HStack {
 								CategoryView(category: category)
 								
-								Text(store.percent, format: .percent)
+								Text(percent, format: .percent)
 									.padding()
 							}
 							.contentShape(Rectangle())
@@ -36,16 +49,16 @@ struct AddCashbackScreen: View {
 						.buttonStyle(PlainButtonStyle())
 					}
 					
-					if store.selectedCategory != nil {
+					if selectedCategory != nil {
 						ScrollView(.horizontal) {
 							LazyHStack {
 								CMProminentButton("Другой процент") {
-									store.send(.onInputPercentButtonTapped)
+									
 								}
 								
-								ForEach(store.percentPresets, id: \.self) { percent in
+								ForEach(percentPresets, id: \.self) { percent in
 									Button {
-										store.send(.updatePercent(percent))
+										self.percent = percent
 									} label: {
 										Text(percent, format: .percent)
 									}
@@ -67,69 +80,40 @@ struct AddCashbackScreen: View {
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Сохранить") {
-					store.send(.saveCashbackTapped)
+					if let selectedCategory {
+						let cashback = Cashback(category: selectedCategory, percent: percent)
+						context.insert(cashback)
+						card.cashback.append(cashback)
+						dismiss()
+					}
 				}
-				.disabled(store.selectedCategory == nil || store.percent == 0)
+				.disabled(selectedCategory == nil || percent == 0)
 			}
 			
-			if store.selectedCategory == nil {
+			if selectedCategory == nil {
 				ToolbarItem(placement: .bottomBar) {
 					Button("Выбрать категорию") {
-						store.send(.selectCategoryTapped)
+						isCategorySelectorPresented = true
 					}
 				}
 			}
 		}
-		.sheet(
-			isPresented: Binding(
-				get: { store.isCategorySelectorPresented },
-				set: { value, _ in
-					if value {
-						store.send(.selectCategoryTapped)
-					} else {
-						store.send(.dismissSelection)
-					}
-				}
-			)
-		) {
+		.sheet(isPresented: $isCategorySelectorPresented) {
 			NavigationView {
-				SelectCategoryView(categories: store.filteredCategories, searchText: store.searchText) { category in
-					store.send(.categorySelected(category))
+				SelectCategoryView(categories: categories, searchText: categorySearchText) { category in
+					selectedCategory = category
+					isCategorySelectorPresented = false
 				} onSearchTextChange: { text in
-					store.send(.searchTextChanged(text))
+					categorySearchText = text
 				} onSaveCategoryButtonTapped: { newCategoryName in
-					store.send(.saveNewCategory(newCategoryName))
+					let category = Category(name: newCategoryName, emoji: String(newCategoryName.first ?? "?"))
+					context.insert(category)
 				}
 			}
 			.navigationTitle("Выбор категории")
 			.navigationBarTitleDisplayMode(.inline)
 			.presentationDetents([.large])
 			.presentationBackground(.regularMaterial)
-		}
-		.sheet(
-			isPresented: Binding(
-				get: { store.isPercentInputSheetPresented },
-				set: { value, _ in
-					if value {
-						store.send(.onInputPercentButtonTapped)
-					} else {
-						store.send(.dismissInputPercentSheet)
-					}
-				}
-			)
-		) {
-			NavigationView {
-				CommonInputView("Процент", text: String(format: "%.0f", store.percent * 100)) { value in
-					store.send(.updatePercentString(value))
-				}
-			}
-			.navigationTitle("Процент кэщбека")
-			.navigationBarTitleDisplayMode(.inline)
-			.presentationDetents([.medium])
-			.presentationBackground(.regularMaterial)
-		}
-		.onAppear {
-			store.send(.viewDidAppear)
 		}
 	}
 }

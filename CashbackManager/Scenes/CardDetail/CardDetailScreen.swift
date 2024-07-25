@@ -22,7 +22,7 @@ struct CardDetailScreen: View {
 					.contextMenu {
 						Button(role: .destructive) {
 							context.delete(cashback)
-							try! context.save()
+							card.cashback.removeAll(where: { $0.id == cashback.id })
 						} label: {
 							Text("Удалить")
 						}
@@ -31,7 +31,7 @@ struct CardDetailScreen: View {
 			.onDelete { indexSet in
 				for index in indexSet {
 					context.delete(card.cashback[index])
-					try! context.save()
+					card.cashback.remove(at: index)
 				}
 			}
 		}

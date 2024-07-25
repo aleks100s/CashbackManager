@@ -41,13 +41,7 @@ struct RootCoordinator: View {
 				navigationStack.append(.addCashback(card))
 			}
 		case .addCashback(let card):
-			AddCashbackAssembly.assemble(card: card, coordinator: self, categoryService: serviceContainer.categoryService, cashbackService: serviceContainer.cashbackService)
+			AddCashbackScreen(card: card)
 		}
-	}
-}
-
-extension RootCoordinator: AddCashbackCoordinator {
-	func navigateBack() {
-		_ = navigationStack.popLast()
 	}
 }
