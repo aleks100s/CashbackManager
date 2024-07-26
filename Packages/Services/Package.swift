@@ -12,13 +12,15 @@ let package = Package(
             targets: ["CategoryService"]
 		),
 		.library(
-			name: "CashbackService",
-			targets: ["CashbackService"]
+			name: "CardsService",
+			targets: ["CardsService"]
 		)
     ],
-	dependencies: [.package(name: "Domain", path: "./Domain")],
+	dependencies: [
+		.package(name: "Domain", path: "./Domain")
+	],
     targets: [
 		.target(name: "CategoryService", dependencies: ["Domain"]),
-		.target(name: "CashbackService", dependencies: ["Domain"]),
+		.target(name: "CardsService", dependencies: ["Domain"]),
     ]
 )

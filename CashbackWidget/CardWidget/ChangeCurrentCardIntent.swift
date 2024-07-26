@@ -6,8 +6,9 @@
 //
 
 import AppIntents
-import CashbackService
+import CardsService
 import Domain
+import Shared
 import SwiftData
 import WidgetKit
 
@@ -24,19 +25,13 @@ struct ChangeCurrentCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some IntentResult {
-		guard let container = try? ModelContainer(for: Card.self, Cashback.self, Domain.Category.self) else { return .result() }
-		
-		let context = ModelContext(container)
-		
-		let allCardsPredicate = #Predicate<Card> { !$0.cashback.isEmpty }
-		let allCardsDescriptor = FetchDescriptor(predicate: allCardsPredicate)
-		let allCards = (try? context.fetch(allCardsDescriptor)) ?? []
-		
+		guard let service = WidgetFactory.makeCardsService() else { return .result() }
+
+		let allCards = service.getAllCards()
 		var nextCard: Card?
 		if let id = UUID(uuidString: cardId) {
-			let currentCardPredicate = #Predicate<Card> { $0.id == id && !$0.cashback.isEmpty }
-			let currentCardDescriptor = FetchDescriptor(predicate: currentCardPredicate)
-			if let card = (try? context.fetch(currentCardDescriptor).first) ?? allCards.first,
+			if let card = service.getCard(by: id) ?? allCards.first,
+			   !card.cashback.isEmpty,
 			   let index = allCards.firstIndex(of: card),
 			   index < allCards.endIndex - 1 {
 				nextCard = allCards[index + 1]
@@ -48,13 +43,9 @@ struct ChangeCurrentCardIntent: AppIntent {
 		}
 		
 		if let nextCard {
-			UserDefaults.appGroup?.set(nextCard.id.uuidString, forKey: "CurrentCardID")
-			WidgetCenter.shared.reloadTimelines(ofKind: CardWidget.kind)
+			UserDefaults.appGroup?.set(nextCard.id.uuidString, forKey: Constants.currentCardID)
+			WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 		}
 		return .result()
 	}
-}
-
-private extension UserDefaults {
-	static let appGroup = UserDefaults(suiteName: "group.com.alextos.cashback")
 }

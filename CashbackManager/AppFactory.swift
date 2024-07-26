@@ -5,19 +5,14 @@
 //  Created by Alexander on 27.06.2024.
 //
 
+import Domain
 import Foundation
-import CashbackService
+import CardsService
 import CategoryService
+import SwiftData
 
-final class AppFactory {
-	private lazy var cashbackService = CashbackService()
-	private lazy var categoryService = CategoryService()
-	
-	func makeServiceContainer() -> ServiceContainer {
-		ServiceContainerImpl(cashbackService: cashbackService, categoryService: categoryService)
-	}
-	
-	func makeWidgetURLParser() -> WidgetURLParser {
-		WidgetURLParser(cashbackService: cashbackService)
+final class AppFactory {	
+	func makeWidgetURLParser(with container: ModelContainer) -> WidgetURLParser {
+		WidgetURLParser(cardsService: CardsService(context: ModelContext(container)))
 	}
 }

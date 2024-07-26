@@ -29,6 +29,7 @@ let package = Package(
 		),
     ],
 	dependencies: [
+		.package(name: "Shared", path: "./Shared"),
 		.package(name: "Domain", path: "./Domain"),
 		.package(name: "DesignSystem", path: "./DesignSystem")
 	],
@@ -47,7 +48,7 @@ let package = Package(
 		),
 		.target(
 			name: "CardDetailScene",
-			dependencies: ["Domain", "DesignSystem"]
+			dependencies: ["Shared", "Domain", "DesignSystem"]
 		),
 		.target(
 			name: "CardsListScene",

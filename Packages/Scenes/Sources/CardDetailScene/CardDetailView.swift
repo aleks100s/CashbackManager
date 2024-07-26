@@ -7,6 +7,7 @@
 
 import Domain
 import DesignSystem
+import Shared
 import SwiftData
 import SwiftUI
 import WidgetKit
@@ -53,11 +54,7 @@ public struct CardDetailView: View {
 		}
 		.onAppear {
 			currentCardId = card.id.uuidString
-			WidgetCenter.shared.reloadTimelines(ofKind: "CardWidget")
+			WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 		}
 	}
-}
-
-private extension UserDefaults {
-	static let appGroup = UserDefaults(suiteName: "group.com.alextos.cashback")
 }

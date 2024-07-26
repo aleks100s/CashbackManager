@@ -13,13 +13,14 @@ import SwiftUI
 struct CashbackApplication: App {
 	private let appFactory = AppFactory()
 	
+	private var container: ModelContainer {
+		try! ModelContainer(for: Card.self, Cashback.self, Domain.Category.self)
+	}
+	
     var body: some Scene {
         WindowGroup {
-			RootCoordinator(
-				serviceContainer: appFactory.makeServiceContainer(),
-				urlParser: appFactory.makeWidgetURLParser()
-			)
+			RootCoordinator(urlParser: appFactory.makeWidgetURLParser(with: container))
         }
-		.modelContainer(for: [Card.self, Cashback.self, Domain.Category.self])
+		.modelContainer(container)
     }
 }

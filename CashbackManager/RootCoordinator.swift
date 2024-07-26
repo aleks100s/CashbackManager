@@ -12,8 +12,7 @@ import Domain
 import SwiftUI
 
 struct RootCoordinator: View {
-	private let serviceContainer: ServiceContainer
-	private let urlParser: WidgetURLParser
+	let urlParser: WidgetURLParser
 	
 	@State private var navigationStack: [Navigation] = []
 	@State private var cardToAddCashback: Card?
@@ -21,11 +20,6 @@ struct RootCoordinator: View {
 	@AppStorage("IsFirstLaunch") private var isFirstLaunch = true
 
 	@Environment(\.modelContext) private var context
-	
-	init(serviceContainer: ServiceContainer, urlParser: WidgetURLParser) {
-		self.serviceContainer = serviceContainer
-		self.urlParser = urlParser
-	}
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {

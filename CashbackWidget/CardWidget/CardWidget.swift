@@ -6,13 +6,12 @@
 //
 
 import WidgetKit
+import Shared
 import SwiftUI
 
 struct CardWidget: Widget {
-    static let kind: String = "CardWidget"
-
     var body: some WidgetConfiguration {
-		StaticConfiguration(kind: Self.kind, provider: CardWidgetProvider()) { entry in
+		StaticConfiguration(kind: Constants.cardWidgetKind, provider: CardWidgetProvider()) { entry in
             if #available(iOS 17.0, *) {
                 CashbackWidgetEntryView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)
