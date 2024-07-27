@@ -1,5 +1,5 @@
 //
-//  RootCoordinator.swift
+//  Coordinator.swift
 //  CashbackManager
 //
 //  Created by Alexander on 10.06.2024.
@@ -11,7 +11,7 @@ import CardsListScene
 import Domain
 import SwiftUI
 
-struct RootCoordinator: View {
+struct Coordinator: View {
 	let urlParser: WidgetURLParser
 	
 	@State private var navigationStack: [Navigation] = []

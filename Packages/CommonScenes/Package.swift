@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Scenes",
+    name: "CommonScenes",
 	platforms: [.iOS(.v17)],
     products: [
         .library(
@@ -15,21 +15,8 @@ let package = Package(
 			name: "SelectCategoryScene",
 			targets: ["SelectCategoryScene"]
 		),
-		.library(
-			name: "AddCashbackScene",
-			targets: ["AddCashbackScene"]
-		),
-		.library(
-			name: "CardDetailScene",
-			targets: ["CardDetailScene"]
-		),
-		.library(
-			name: "CardsListScene",
-			targets: ["CardsListScene"]
-		),
     ],
 	dependencies: [
-		.package(name: "Shared", path: "./Shared"),
 		.package(name: "Domain", path: "./Domain"),
 		.package(name: "DesignSystem", path: "./DesignSystem")
 	],
@@ -40,18 +27,6 @@ let package = Package(
 		),
 		.target(
 			name: "SelectCategoryScene",
-			dependencies: ["Domain", "DesignSystem", "CommonInputSheet"]
-		),
-		.target(
-			name: "AddCashbackScene",
-			dependencies: ["Domain", "DesignSystem", "SelectCategoryScene"]
-		),
-		.target(
-			name: "CardDetailScene",
-			dependencies: ["Shared", "Domain", "DesignSystem"]
-		),
-		.target(
-			name: "CardsListScene",
 			dependencies: ["Domain", "DesignSystem", "CommonInputSheet"]
 		),
     ]
