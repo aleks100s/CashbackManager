@@ -14,18 +14,34 @@ let package = Package(
     ],
 	dependencies: [
 		.package(name: "Domain", path: "./Domain"),
+		.package(name: "CommonScenes", path: "./CommonScenes")
 	],
     targets: [
         .target(
 			name: "PlaceFeature",
 			dependencies: [
 				"PlacesListScene",
+				"PlaceDetailScene",
+				"AddPlaceScene"
 			]
 		),
 		.target(
 			name: "PlacesListScene",
 			dependencies: [
 				"Domain",
+			]
+		),
+		.target(
+			name: "PlaceDetailScene",
+			dependencies: [
+				"Domain",
+			]
+		),
+		.target(
+			name: "AddPlaceScene",
+			dependencies: [
+				"Domain",
+				.product(name: "SelectCategoryScene", package: "CommonScenes")
 			]
 		)
     ]
