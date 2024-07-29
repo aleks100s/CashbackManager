@@ -35,6 +35,7 @@ let package = Package(
 		.target(
 			name: "AddCashbackScene",
 			dependencies: [
+				"Shared",
 				"Domain",
 				"DesignSystem",
 				.product(name: "SelectCategoryScene", package: "CommonScenes")

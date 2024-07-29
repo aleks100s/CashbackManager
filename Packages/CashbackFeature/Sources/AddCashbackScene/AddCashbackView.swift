@@ -5,9 +5,12 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import CoreSpotlight
 import DesignSystem
 import Domain
+import MobileCoreServices
 import SelectCategoryScene
+import Shared
 import SwiftData
 import SwiftUI
 
@@ -21,14 +24,7 @@ public struct AddCashbackView: View {
 	@State private var isCategorySelectorPresented = false
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
-	
-	private var numberFomatter: NumberFormatter {
-		let formatter = NumberFormatter()
-		formatter.numberStyle = .percent
-		formatter.maximumFractionDigits = 1
-		formatter.minimumFractionDigits = 0
-		return formatter
-	}
+	@Environment(\.displayScale) var displayScale
 	
 	public init(card: Card) {
 		self.card = card
@@ -80,12 +76,8 @@ public struct AddCashbackView: View {
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Сохранить") {
-					if let selectedCategory {
-						let cashback = Cashback(category: selectedCategory, percent: percent)
-						context.insert(cashback)
-						card.cashback.append(cashback)
-						dismiss()
-					}
+					createCashback()
+					dismiss()
 				}
 				.disabled(selectedCategory == nil || percent == 0)
 			}
@@ -109,6 +101,60 @@ public struct AddCashbackView: View {
 			.navigationBarTitleDisplayMode(.inline)
 			.presentationDetents([.large])
 			.presentationBackground(.regularMaterial)
+		}
+	}
+	
+	@MainActor
+	private func createCashback() {
+		if let selectedCategory {
+			let cashback = Cashback(category: selectedCategory, percent: percent)
+			context.insert(cashback)
+			card.cashback.append(cashback)
+			index(cashback: cashback)
+			index(card: card)
+		}
+	}
+	
+	@MainActor
+	private func renderCategoryMarker(category: Domain.Category) -> UIImage? {
+		let renderer = ImageRenderer(content: CategoryMarkerView(category: category))
+		renderer.scale = displayScale
+		return renderer.uiImage
+	}
+	
+	@MainActor
+	private func index(cashback: Cashback) {
+		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
+		attributeSet.title = cashback.description
+		attributeSet.contentDescription = card.name
+		let image = renderCategoryMarker(category: cashback.category)
+		attributeSet.thumbnailData = image?.pngData()
+
+		let item = CSSearchableItem(uniqueIdentifier: cashback.id.uuidString, domainIdentifier: "com.alextos.CashbackManager", attributeSet: attributeSet)
+		CSSearchableIndex.default().indexSearchableItems([item]) { error in
+			if let error = error {
+				print("Indexing error: \(error.localizedDescription)")
+			} else {
+				print("Search item successfully indexed!")
+			}
+		}
+	}
+	
+	@MainActor
+	private func index(card: Card) {
+		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
+		attributeSet.title = card.name
+		attributeSet.contentDescription = card.cashbackDescription
+		let image = UIImage(named: "AppIcon", in: .main, with: nil)
+		attributeSet.thumbnailData = image?.pngData()
+
+		let item = CSSearchableItem(uniqueIdentifier: card.id.uuidString, domainIdentifier: "com.alextos.CashbackManager", attributeSet: attributeSet)
+		CSSearchableIndex.default().indexSearchableItems([item]) { error in
+			if let error = error {
+				print("Indexing error: \(error.localizedDescription)")
+			} else {
+				print("Search item successfully indexed!")
+			}
 		}
 	}
 }

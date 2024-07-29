@@ -5,6 +5,7 @@
 //  Created by Alexander on 19.06.2024.
 //
 
+import CoreSpotlight
 import Domain
 import DesignSystem
 import Shared
@@ -30,8 +31,7 @@ public struct CardDetailView: View {
 				CashbackView(cashback: cashback)
 					.contextMenu {
 						Button(role: .destructive) {
-							context.delete(cashback)
-							card.cashback.removeAll(where: { $0.id == cashback.id })
+							delete(cashback: cashback)
 						} label: {
 							Text("Удалить")
 						}
@@ -39,8 +39,7 @@ public struct CardDetailView: View {
 			}
 			.onDelete { indexSet in
 				for index in indexSet {
-					context.delete(card.cashback[index])
-					card.cashback.remove(at: index)
+					deleteCashback(index: index)
 				}
 			}
 		}
@@ -55,6 +54,49 @@ public struct CardDetailView: View {
 		.onAppear {
 			currentCardId = card.id.uuidString
 			WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+		}
+	}
+	
+	private func delete(cashback: Cashback) {
+		deindex(cashback: cashback)
+		context.delete(cashback)
+		card.cashback.removeAll(where: { $0.id == cashback.id })
+		Task { @MainActor in
+			index(card: card)
+		}
+	}
+	
+	private func deleteCashback(index: Int) {
+		deindex(cashback: card.cashback[index])
+		context.delete(card.cashback[index])
+		card.cashback.remove(at: index)
+	}
+	
+	private func deindex(cashback: Cashback) {
+		CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [cashback.id.uuidString]) { error in
+			if let error = error {
+				print("Deindexing error: \(error.localizedDescription)")
+			} else {
+				print("Search item successfully removed!")
+			}
+		}
+	}
+	
+	@MainActor
+	private func index(card: Card) {
+		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
+		attributeSet.title = card.name
+		attributeSet.contentDescription = card.cashbackDescription
+		let image = UIImage(named: "AppIcon", in: .main, with: nil)
+		attributeSet.thumbnailData = image?.pngData()
+
+		let item = CSSearchableItem(uniqueIdentifier: card.id.uuidString, domainIdentifier: "com.alextos.CashbackManager", attributeSet: attributeSet)
+		CSSearchableIndex.default().indexSearchableItems([item]) { error in
+			if let error = error {
+				print("Indexing error: \(error.localizedDescription)")
+			} else {
+				print("Search item successfully indexed!")
+			}
 		}
 	}
 }
