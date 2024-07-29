@@ -43,17 +43,23 @@ public struct PlacesListView: View {
 		} else {
 			List {
 				ForEach(places) { place in
-					VStack(alignment: .leading, spacing: 8) {
-						Text(place.name)
-						Text(place.category.name)
-					}
-					.contextMenu {
-						Button(role: .destructive) {
-							context.delete(place)
-						} label: {
-							Text("Удалить")
+					Button {
+						onPlaceSelected(place)
+					} label: {
+						VStack(alignment: .leading, spacing: 8) {
+							Text(place.name)
+							Text(place.category.name)
+						}
+						.contentShape(.rect)
+						.contextMenu {
+							Button(role: .destructive) {
+								context.delete(place)
+							} label: {
+								Text("Удалить")
+							}
 						}
 					}
+					.buttonStyle(.plain)
 				}
 				.onDelete { indexSet in
 					for index in indexSet {

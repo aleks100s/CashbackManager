@@ -14,6 +14,7 @@ let package = Package(
     ],
 	dependencies: [
 		.package(name: "Domain", path: "./Domain"),
+		.package(name: "DesignSystem", path: "./DesignSystem"),
 		.package(name: "CommonScenes", path: "./CommonScenes")
 	],
     targets: [
@@ -41,6 +42,7 @@ let package = Package(
 			name: "AddPlaceScene",
 			dependencies: [
 				"Domain",
+				"DesignSystem",
 				.product(name: "SelectCategoryScene", package: "CommonScenes")
 			]
 		)
