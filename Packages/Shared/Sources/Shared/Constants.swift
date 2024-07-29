@@ -6,6 +6,7 @@
 //
 
 public enum Constants {
+	public static let appIdentifier = "com.alextos.CashbackManager"
 	public static let appGroup = "group.com.alextos.cashback"
 	public static let currentCardID = "CurrentCardID"
 	public static let cardWidgetKind = "CardWidget"

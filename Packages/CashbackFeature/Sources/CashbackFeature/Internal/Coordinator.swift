@@ -12,14 +12,13 @@ import Domain
 import SwiftUI
 
 struct Coordinator: View {
-	let urlParser: WidgetURLParser
-	
 	@State private var navigationStack: [Navigation] = []
 	@State private var cardToAddCashback: Card?
 	
 	@AppStorage("IsFirstLaunch") private var isFirstLaunch = true
 
 	@Environment(\.modelContext) private var context
+	@Environment(\.widgetURLParser) private var urlParser
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {
@@ -34,7 +33,7 @@ struct Coordinator: View {
 			}
 		}
 		.onOpenURL { url in
-			if let path = urlParser.parse(url: url) {
+			if let path = urlParser?.parse(url: url) {
 				navigationStack = path
 			}
 		}

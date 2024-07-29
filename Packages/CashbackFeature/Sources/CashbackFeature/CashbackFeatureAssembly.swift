@@ -11,7 +11,8 @@ import SwiftUI
 
 public enum CashbackFeatureAssembly {
 	public static func assemble(container: ModelContainer) -> some View {
-		Coordinator(urlParser: makeWidgetURLParser(with: container))
+		Coordinator()
+			.environment(\.widgetURLParser, makeWidgetURLParser(with: container))
 	}
 	
 	private static func makeWidgetURLParser(with container: ModelContainer) -> WidgetURLParser {

@@ -7,20 +7,24 @@ let package = Package(
     name: "Services",
 	platforms: [.iOS(.v17)],
     products: [
-        .library(
-            name: "CategoryService",
-            targets: ["CategoryService"]
-		),
 		.library(
 			name: "CardsService",
 			targets: ["CardsService"]
-		)
+		),
+		.library(
+			name: "SearchService",
+			targets: ["SearchService"]
+		),
     ],
 	dependencies: [
+		.package(name: "Shared", path: "./Shared"),
 		.package(name: "Domain", path: "./Domain")
 	],
     targets: [
-		.target(name: "CategoryService", dependencies: ["Domain"]),
 		.target(name: "CardsService", dependencies: ["Domain"]),
+		.target(
+			name: "SearchService",
+			dependencies: ["Domain", "Shared"]
+		),
     ]
 )

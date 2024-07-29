@@ -10,7 +10,7 @@ import Domain
 import SwiftData
 
 enum WidgetFactory {
-	static func makeCardsService() -> CardsService? {
+	static func makeCardsService() -> ICardsService? {
 		guard let container = try? ModelContainer(for: Card.self, Cashback.self, Domain.Category.self) else { return nil }
 		
 		let context = ModelContext(container)

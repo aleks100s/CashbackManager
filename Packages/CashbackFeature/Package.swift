@@ -38,19 +38,26 @@ let package = Package(
 				"Shared",
 				"Domain",
 				"DesignSystem",
-				.product(name: "SelectCategoryScene", package: "CommonScenes")
+				.product(name: "SelectCategoryScene", package: "CommonScenes"),
+				.product(name: "SearchService", package: "Services")
 			]
 		),
 		.target(
 			name: "CardDetailScene",
-			dependencies: ["Shared", "Domain", "DesignSystem"]
+			dependencies: [
+				"Shared",
+				"Domain",
+				"DesignSystem",
+				.product(name: "SearchService", package: "Services")
+			]
 		),
 		.target(
 			name: "CardsListScene",
 			dependencies: [
 				"Domain",
 				"DesignSystem",
-				.product(name: "SelectCategoryScene", package: "CommonScenes")
+				.product(name: "SelectCategoryScene", package: "CommonScenes"),
+				.product(name: "SearchService", package: "Services")
 			]
 		),
     ]

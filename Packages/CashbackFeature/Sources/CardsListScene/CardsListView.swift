@@ -6,9 +6,9 @@
 //
 
 import CommonInputSheet
-import CoreSpotlight
 import DesignSystem
 import Domain
+import SearchService
 import SwiftData
 import SwiftUI
 
@@ -20,6 +20,7 @@ public struct CardsListView: View {
 	@State private var cardToBeRenamed: Card?
 	@Query(animation: .default) private var cards: [Card]
 	@Environment(\.modelContext) private var context
+	@Environment(\.searchService) var searchService
 	
 	private var filteredCards: [Card] {
 		cards.filter {
@@ -122,53 +123,15 @@ public struct CardsListView: View {
 	@MainActor
 	private func create(card: Card) {
 		context.insert(card)
-		index(card: card)
-	}
-	
-	@MainActor
-	private func index(card: Card) {
-		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
-		attributeSet.title = card.name
-		attributeSet.contentDescription = card.cashbackDescription
-		let image = UIImage(named: "AppIcon", in: .main, with: nil)
-		attributeSet.thumbnailData = image?.pngData()
-
-		let item = CSSearchableItem(uniqueIdentifier: card.id.uuidString, domainIdentifier: "com.alextos.CashbackManager", attributeSet: attributeSet)
-		CSSearchableIndex.default().indexSearchableItems([item]) { error in
-			if let error = error {
-				print("Indexing error: \(error.localizedDescription)")
-			} else {
-				print("Search item successfully indexed!")
-			}
-		}
+		searchService?.index(card: card)
 	}
 	
 	private func delete(card: Card) {
-		deindex(card: card)
+		searchService?.deindex(card: card)
 		context.delete(card)
 		for cashback in card.cashback {
-			deindex(cashback: cashback)
+			searchService?.deindex(cashback: cashback)
 			context.delete(cashback)
-		}
-	}
-	
-	private func deindex(card: Card) {
-		CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [card.id.uuidString]) { error in
-			if let error = error {
-				print("Deindexing error: \(error.localizedDescription)")
-			} else {
-				print("Search item successfully removed!")
-			}
-		}
-	}
-	
-	private func deindex(cashback: Cashback) {
-		CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [cashback.id.uuidString]) { error in
-			if let error = error {
-				print("Deindexing error: \(error.localizedDescription)")
-			} else {
-				print("Search item successfully removed!")
-			}
 		}
 	}
 }

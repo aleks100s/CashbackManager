@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2714FEA72C54CA3A0014CFE0 /* PlaceFeature */; };
+		2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 2714FEA92C57C3580014CFE0 /* SearchService */; };
 		27208E732C54C4970097794D /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 27208E722C54C4970097794D /* CashbackFeature */; };
 		272CA8D42C54C6E600A00E90 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 272CA8D32C54C6E600A00E90 /* Domain */; };
 		27368B6B2C395E5800FC0475 /* BanksStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368B622C395E5800FC0475 /* BanksStoreTests.swift */; };
@@ -124,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				272CA8D42C54C6E600A00E90 /* Domain in Frameworks */,
+				2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */,
 				2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */,
 				27208E732C54C4970097794D /* CashbackFeature in Frameworks */,
 				27368B802C426E8E00FC0475 /* (null) in Frameworks */,
@@ -301,6 +303,7 @@
 				27208E722C54C4970097794D /* CashbackFeature */,
 				272CA8D32C54C6E600A00E90 /* Domain */,
 				2714FEA72C54CA3A0014CFE0 /* PlaceFeature */,
+				2714FEA92C57C3580014CFE0 /* SearchService */,
 			);
 			productName = CashbackManager;
 			productReference = 27A5D7CD2C394EC400B93512 /* CashbackManager.app */;
@@ -690,7 +693,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -725,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9.0;
+				MARKETING_VERSION = 0.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -864,6 +867,10 @@
 		2714FEA72C54CA3A0014CFE0 /* PlaceFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PlaceFeature;
+		};
+		2714FEA92C57C3580014CFE0 /* SearchService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SearchService;
 		};
 		27208E722C54C4970097794D /* CashbackFeature */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -5,10 +5,9 @@
 //  Created by Alexander on 26.06.2024.
 //
 
-import CoreSpotlight
 import DesignSystem
 import Domain
-import MobileCoreServices
+import SearchService
 import SelectCategoryScene
 import Shared
 import SwiftData
@@ -25,7 +24,8 @@ public struct AddCashbackView: View {
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
 	@Environment(\.displayScale) var displayScale
-	
+	@Environment(\.searchService) var searchService
+		
 	public init(card: Card) {
 		self.card = card
 	}
@@ -111,7 +111,7 @@ public struct AddCashbackView: View {
 			context.insert(cashback)
 			card.cashback.append(cashback)
 			index(cashback: cashback)
-			index(card: card)
+			searchService?.index(card: card)
 		}
 	}
 	
@@ -124,37 +124,7 @@ public struct AddCashbackView: View {
 	
 	@MainActor
 	private func index(cashback: Cashback) {
-		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
-		attributeSet.title = cashback.description
-		attributeSet.contentDescription = card.name
 		let image = renderCategoryMarker(category: cashback.category)
-		attributeSet.thumbnailData = image?.pngData()
-
-		let item = CSSearchableItem(uniqueIdentifier: cashback.id.uuidString, domainIdentifier: "com.alextos.CashbackManager", attributeSet: attributeSet)
-		CSSearchableIndex.default().indexSearchableItems([item]) { error in
-			if let error = error {
-				print("Indexing error: \(error.localizedDescription)")
-			} else {
-				print("Search item successfully indexed!")
-			}
-		}
-	}
-	
-	@MainActor
-	private func index(card: Card) {
-		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
-		attributeSet.title = card.name
-		attributeSet.contentDescription = card.cashbackDescription
-		let image = UIImage(named: "AppIcon", in: .main, with: nil)
-		attributeSet.thumbnailData = image?.pngData()
-
-		let item = CSSearchableItem(uniqueIdentifier: card.id.uuidString, domainIdentifier: "com.alextos.CashbackManager", attributeSet: attributeSet)
-		CSSearchableIndex.default().indexSearchableItems([item]) { error in
-			if let error = error {
-				print("Indexing error: \(error.localizedDescription)")
-			} else {
-				print("Search item successfully indexed!")
-			}
-		}
+		searchService?.index(cashback: cashback, cardName: card.name, image: image)
 	}
 }

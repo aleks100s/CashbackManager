@@ -5,13 +5,16 @@
 //  Created by Alexander on 23.07.2024.
 //
 
-import CardsService
 import Domain
 import Foundation
 import SwiftData
 
 struct WidgetURLParser {
-	let cardsService: CardsService
+	private let cardsService: ICardsService
+	
+	init(cardsService: ICardsService) {
+		self.cardsService = cardsService
+	}
 	
 	func parse(url: URL) -> [Navigation]? {
 		let components = url.pathComponents

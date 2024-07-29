@@ -9,7 +9,7 @@ import Domain
 import Foundation
 import SwiftData
 
-public struct CardsService {
+public struct CardsService: ICardsService {
 	private let context: ModelContext
 	
 	public init(context: ModelContext) {

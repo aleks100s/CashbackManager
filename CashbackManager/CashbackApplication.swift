@@ -8,6 +8,7 @@
 import CashbackFeature
 import Domain
 import PlaceFeature
+import SearchService
 import SwiftData
 import SwiftUI
 
@@ -33,5 +34,6 @@ struct CashbackApplication: App {
 			
         }
 		.modelContainer(container)
+		.environment(\.searchService, SearchService())
     }
 }
