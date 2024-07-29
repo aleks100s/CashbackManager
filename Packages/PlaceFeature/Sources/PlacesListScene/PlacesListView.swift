@@ -6,6 +6,8 @@
 //
 
 import Domain
+import SearchService
+import Shared
 import SwiftData
 import SwiftUI
 
@@ -15,6 +17,7 @@ public struct PlacesListView: View {
 	
 	@Query private var places: [Place]
 	@Environment(\.modelContext) private var context
+	@Environment(\.searchService) private var searchService
 	
 	public init(
 		onPlaceSelected: @escaping (Place) -> Void,
@@ -39,7 +42,7 @@ public struct PlacesListView: View {
 	@ViewBuilder
 	private var contentView: some View {
 		if places.isEmpty {
-			ContentUnavailableView("Нет сохраненных мест", systemImage: "mappin.circle")
+			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.mapPin)
 		} else {
 			List {
 				ForEach(places) { place in
@@ -53,7 +56,7 @@ public struct PlacesListView: View {
 						.contentShape(.rect)
 						.contextMenu {
 							Button(role: .destructive) {
-								context.delete(place)
+								delete(place: place)
 							} label: {
 								Text("Удалить")
 							}
@@ -63,10 +66,20 @@ public struct PlacesListView: View {
 				}
 				.onDelete { indexSet in
 					for index in indexSet {
-						context.delete(places[index])
+						deletePlace(index: index)
 					}
 				}
 			}
 		}
+	}
+	
+	func deletePlace(index: Int) {
+		let place = places[index]
+		delete(place: place)
+	}
+	
+	func delete(place: Place) {
+		searchService?.deindex(place: place)
+		context.delete(place)
 	}
 }

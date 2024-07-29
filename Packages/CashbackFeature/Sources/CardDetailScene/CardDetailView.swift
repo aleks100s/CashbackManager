@@ -58,17 +58,14 @@ public struct CardDetailView: View {
 		}
 	}
 	
+	private func deleteCashback(index: Int) {
+		delete(cashback: card.cashback[index])
+	}
+	
 	private func delete(cashback: Cashback) {
 		searchService?.deindex(cashback: cashback)
 		context.delete(cashback)
 		card.cashback.removeAll(where: { $0.id == cashback.id })
-		searchService?.index(card: card)
-	}
-	
-	private func deleteCashback(index: Int) {
-		searchService?.deindex(cashback: card.cashback[index])
-		context.delete(card.cashback[index])
-		card.cashback.remove(at: index)
 		searchService?.index(card: card)
 	}
 }

@@ -7,6 +7,7 @@
 
 import DesignSystem
 import Domain
+import SearchService
 import SelectCategoryScene
 import SwiftUI
 
@@ -17,6 +18,7 @@ public struct AddPlaceView: View {
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
+	@Environment(\.searchService) private var searchService
 	
 	private var isInputCorrect: Bool {
 		selectedCategory != nil && !placeName.isEmpty
@@ -45,11 +47,8 @@ public struct AddPlaceView: View {
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Сохранить") {
-					if let selectedCategory {
-						let place = Place(name: placeName, category: selectedCategory)
-						context.insert(place)
-						dismiss()
-					}
+					createPlace()
+					dismiss()
 				}
 				.disabled(!isInputCorrect)
 			}
@@ -60,5 +59,13 @@ public struct AddPlaceView: View {
 				isCategorySelectorPresented = false
 			}
 		}
+	}
+	
+	private func createPlace() {
+		guard let selectedCategory else { return }
+		
+		let place = Place(name: placeName, category: selectedCategory)
+		context.insert(place)
+		searchService?.index(place: place)
 	}
 }

@@ -6,6 +6,11 @@
 //
 
 public enum Constants {
+	public enum SFSymbols {
+		public static let mapPin = "mappin.circle"
+		public static let rubleSign = "rublesign.circle"
+	}
+	
 	public static let appIdentifier = "com.alextos.CashbackManager"
 	public static let appGroup = "group.com.alextos.cashback"
 	public static let currentCardID = "CurrentCardID"

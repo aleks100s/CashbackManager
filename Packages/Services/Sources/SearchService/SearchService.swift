@@ -14,7 +14,8 @@ public struct SearchService: ISearchService {
 	public init() {}
 	
 	public func index(card: Card) {
-		let attributeSet = createAttributes(title: card.name, description: card.cashbackDescription)
+		let image = UIImage(systemName: Constants.SFSymbols.rubleSign)
+		let attributeSet = createAttributes(title: card.name, description: card.cashbackDescription, image: image)
 		index(id: card.id, attributes: attributeSet)
 	}
 	
@@ -23,12 +24,22 @@ public struct SearchService: ISearchService {
 		index(id: cashback.id, attributes: attributeSet)
 	}
 	
+	public func index(place: Place) {
+		let image = UIImage(systemName: Constants.SFSymbols.mapPin)
+		let attributeSet = createAttributes(title: place.name, description: place.category.name, image: image)
+		index(id: place.id, attributes: attributeSet)
+	}
+	
 	public func deindex(card: Card) {
 		deindex(id: card.id)
 	}
 	
 	public func deindex(cashback: Cashback) {
 		deindex(id: cashback.id)
+	}
+	
+	public func deindex(place: Place) {
+		deindex(id: place.id)
 	}
 	
 	private func createAttributes(

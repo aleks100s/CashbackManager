@@ -9,6 +9,7 @@ import CashbackFeature
 import Domain
 import PlaceFeature
 import SearchService
+import Shared
 import SwiftData
 import SwiftUI
 
@@ -23,12 +24,12 @@ struct CashbackApplication: App {
 			TabView {
 				CashbackFeatureAssembly.assemble(container: container)
 					.tabItem {
-						Label("Кэшбек", systemImage: "rublesign.circle")
+						Label("Кэшбек", systemImage: Constants.SFSymbols.rubleSign)
 					}
 				
 				PlaceFeatureAssembly.assemble()
 					.tabItem {
-						Label("Места", systemImage: "mappin.circle")
+						Label("Места", systemImage: Constants.SFSymbols.mapPin)
 					}
 			}
 			

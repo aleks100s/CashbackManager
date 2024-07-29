@@ -15,7 +15,8 @@ let package = Package(
 	dependencies: [
 		.package(name: "Domain", path: "./Domain"),
 		.package(name: "DesignSystem", path: "./DesignSystem"),
-		.package(name: "CommonScenes", path: "./CommonScenes")
+		.package(name: "CommonScenes", path: "./CommonScenes"),
+		.package(name: "Services", path: "./Services"),
 	],
     targets: [
         .target(
@@ -30,6 +31,7 @@ let package = Package(
 			name: "PlacesListScene",
 			dependencies: [
 				"Domain",
+				.product(name: "SearchService", package: "Services")
 			]
 		),
 		.target(
@@ -43,7 +45,8 @@ let package = Package(
 			dependencies: [
 				"Domain",
 				"DesignSystem",
-				.product(name: "SelectCategoryScene", package: "CommonScenes")
+				.product(name: "SelectCategoryScene", package: "CommonScenes"),
+				.product(name: "SearchService", package: "Services")
 			]
 		)
     ]

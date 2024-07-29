@@ -10,6 +10,8 @@ import UIKit
 public protocol ISearchService {
 	func index(card: Card)
 	func index(cashback: Cashback, cardName: String, image: UIImage?)
+	func index(place: Place)
 	func deindex(card: Card)
 	func deindex(cashback: Cashback)
+	func deindex(place: Place)
 }
