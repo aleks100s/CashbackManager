@@ -24,8 +24,7 @@ public struct SearchService: ISearchService {
 		index(id: cashback.id, attributes: attributeSet)
 	}
 	
-	public func index(place: Place) {
-		let image = UIImage(systemName: Constants.SFSymbols.mapPin)
+	public func index(place: Place, image: UIImage?) {
 		let attributeSet = createAttributes(title: place.name, description: place.category.name, image: image)
 		index(id: place.id, attributes: attributeSet)
 	}

@@ -19,6 +19,7 @@ public struct AddPlaceView: View {
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
+	@Environment(\.displayScale) var displayScale
 	
 	private var isInputCorrect: Bool {
 		selectedCategory != nil && !placeName.isEmpty
@@ -62,11 +63,20 @@ public struct AddPlaceView: View {
 		}
 	}
 	
+	@MainActor
 	private func createPlace() {
 		guard let selectedCategory else { return }
 		
 		let place = Place(name: placeName, category: selectedCategory)
 		context.insert(place)
-		searchService?.index(place: place)
+		let image = renderPlaceMarker(place: place)
+		searchService?.index(place: place, image: image)
+	}
+	
+	@MainActor
+	private func renderPlaceMarker(place: Place) -> UIImage? {
+		let renderer = ImageRenderer(content: PlaceMarkerView(name: place.name))
+		renderer.scale = displayScale
+		return renderer.uiImage
 	}
 }
