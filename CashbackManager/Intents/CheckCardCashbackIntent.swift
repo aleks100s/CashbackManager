@@ -7,7 +7,6 @@
 
 import AppIntents
 import CardsService
-import Domain
 import SwiftData
 
 struct CheckCardCashbackIntent: AppIntent {

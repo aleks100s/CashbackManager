@@ -15,6 +15,7 @@
 		2714FEB32C58B41A0014CFE0 /* CheckCategoryCardsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB22C58B41A0014CFE0 /* CheckCategoryCardsIntent.swift */; };
 		2714FEB62C58B44F0014CFE0 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB52C58B44F0014CFE0 /* AppFactory.swift */; };
 		2714FEB82C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB72C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift */; };
+		2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB92C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift */; };
 		27208E732C54C4970097794D /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 27208E722C54C4970097794D /* CashbackFeature */; };
 		272CA8D42C54C6E600A00E90 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 272CA8D32C54C6E600A00E90 /* Domain */; };
 		27368B6B2C395E5800FC0475 /* BanksStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368B622C395E5800FC0475 /* BanksStoreTests.swift */; };
@@ -86,6 +87,7 @@
 		2714FEB22C58B41A0014CFE0 /* CheckCategoryCardsIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCategoryCardsIntent.swift; sourceTree = "<group>"; };
 		2714FEB52C58B44F0014CFE0 /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		2714FEB72C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPlaceCategoryIntent.swift; sourceTree = "<group>"; };
+		2714FEB92C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPlaceCardIntent.swift; sourceTree = "<group>"; };
 		272CA8D52C54C85800A00E90 /* CommonScenes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonScenes; sourceTree = "<group>"; };
 		27368B622C395E5800FC0475 /* BanksStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanksStoreTests.swift; sourceTree = "<group>"; };
 		27368B6F2C395E8300FC0475 /* CashbackManager.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CashbackManager.xctestplan; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				2714FEB02C58B1150014CFE0 /* CheckCardCashbackIntent.swift */,
 				2714FEB22C58B41A0014CFE0 /* CheckCategoryCardsIntent.swift */,
 				2714FEB72C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift */,
+				2714FEB92C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift */,
 			);
 			path = Intents;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				2714FEB32C58B41A0014CFE0 /* CheckCategoryCardsIntent.swift in Sources */,
 				27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */,
 				2714FEB82C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift in Sources */,
+				2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */,
 				2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */,
 				2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,

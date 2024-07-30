@@ -45,5 +45,14 @@ struct CashbackShortcuts: AppShortcutsProvider {
 			shortTitle: "Какая категория в заведении?",
 			systemImageName: "mappin.circle"
 		)
+		
+		AppShortcut(
+			intent: CheckPlaceCardIntent(),
+			phrases: [
+				"Какой картой платить в заведении?"
+			],
+			shortTitle: "Какой картой платить в заведении?",
+			systemImageName: "mappin"
+		)
 	}
 }
