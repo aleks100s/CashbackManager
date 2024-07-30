@@ -11,6 +11,7 @@
 		2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 2714FEA92C57C3580014CFE0 /* SearchService */; };
 		2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEAC2C58A0F80014CFE0 /* CashbackShortcuts.swift */; };
 		2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEAE2C58A1E40014CFE0 /* CreateCardIntent.swift */; };
+		2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB02C58B1150014CFE0 /* CheckCardCashbackIntent.swift */; };
 		27208E732C54C4970097794D /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 27208E722C54C4970097794D /* CashbackFeature */; };
 		272CA8D42C54C6E600A00E90 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 272CA8D32C54C6E600A00E90 /* Domain */; };
 		27368B6B2C395E5800FC0475 /* BanksStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368B622C395E5800FC0475 /* BanksStoreTests.swift */; };
@@ -78,6 +79,7 @@
 		2714FEA62C54C93F0014CFE0 /* PlaceFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlaceFeature; sourceTree = "<group>"; };
 		2714FEAC2C58A0F80014CFE0 /* CashbackShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackShortcuts.swift; sourceTree = "<group>"; };
 		2714FEAE2C58A1E40014CFE0 /* CreateCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardIntent.swift; sourceTree = "<group>"; };
+		2714FEB02C58B1150014CFE0 /* CheckCardCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCardCashbackIntent.swift; sourceTree = "<group>"; };
 		272CA8D52C54C85800A00E90 /* CommonScenes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonScenes; sourceTree = "<group>"; };
 		27368B622C395E5800FC0475 /* BanksStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanksStoreTests.swift; sourceTree = "<group>"; };
 		27368B6F2C395E8300FC0475 /* CashbackManager.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CashbackManager.xctestplan; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				2714FEAC2C58A0F80014CFE0 /* CashbackShortcuts.swift */,
 				2714FEAE2C58A1E40014CFE0 /* CreateCardIntent.swift */,
+				2714FEB02C58B1150014CFE0 /* CheckCardCashbackIntent.swift */,
 			);
 			path = Intents;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			files = (
 				27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */,
 				2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */,
+				2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

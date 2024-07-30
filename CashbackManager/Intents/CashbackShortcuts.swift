@@ -15,8 +15,17 @@ struct CashbackShortcuts: AppShortcutsProvider {
 			phrases: [
 				"Добавь новую карту"
 			],
-			shortTitle: "Команда добавления новой карты",
-			systemImageName: "rublesign.circle"
+			shortTitle: "Добавь новую карту",
+			systemImageName: "creditcard"
+		)
+		
+		AppShortcut(
+			intent: CreateCardIntent(),
+			phrases: [
+				"Какой кэшбек на карте?"
+			],
+			shortTitle: "Какой кэшбек на карте?",
+			systemImageName: "rublesign"
 		)
 	}
 }

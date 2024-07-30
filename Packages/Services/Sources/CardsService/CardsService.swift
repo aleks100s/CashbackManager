@@ -29,6 +29,19 @@ public struct CardsService: ICardsService {
 		return try? context.fetch(descriptor).first
 	}
 	
+	public func getCard(by name: String) -> Card? {
+		var predicate = #Predicate<Card> { $0.name == name }
+		var descriptor = FetchDescriptor(predicate: predicate)
+		let initialResult = try? context.fetch(descriptor)
+		if initialResult?.isEmpty == true {
+			predicate = #Predicate<Card> { $0.name.contains(name) }
+			descriptor = FetchDescriptor(predicate: predicate)
+			return try? context.fetch(descriptor).first
+		} else {
+			return initialResult?.first
+		}
+	}
+	
 	public func getAllCards() -> [Card] {
 		let allCardsPredicate = #Predicate<Card> { !$0.cashback.isEmpty }
 		let allCardsDescriptor = FetchDescriptor(predicate: allCardsPredicate)
