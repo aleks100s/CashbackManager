@@ -5,6 +5,7 @@
 //  Created by Alexander on 15.06.2024.
 //
 
+import AppIntents
 import CommonInputSheet
 import DesignSystem
 import Domain
@@ -113,6 +114,8 @@ public struct CardsListView: View {
 						}
 						.buttonStyle(.plain)
 					}
+					
+					ShortcutsLink()
 				}
 				.padding(.horizontal, 12)
 			}

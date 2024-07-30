@@ -8,6 +8,7 @@
 import Foundation
 
 public protocol ICardsService {
+	func createCard(name: String) -> Card
 	func getCard(by id: UUID) -> Card?
 	func getAllCards() -> [Card]
 }

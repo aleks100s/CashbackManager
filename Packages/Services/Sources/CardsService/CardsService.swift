@@ -16,6 +16,13 @@ public struct CardsService: ICardsService {
 		self.context = context
 	}
 	
+	public func createCard(name: String) -> Card {
+		let card = Card(name: name)
+		context.insert(card)
+		try? context.save()
+		return card
+	}
+	
 	public func getCard(by id: UUID) -> Card? {
 		let predicate = #Predicate<Card> { $0.id == id }
 		let descriptor = FetchDescriptor(predicate: predicate)
