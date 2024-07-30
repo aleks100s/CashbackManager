@@ -24,8 +24,7 @@ struct CreateCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let container = try? ModelContainer(for: Card.self, Cashback.self, Domain.Category.self) else { return .result(dialog: "Не удалось создать карту") }
-		
+		let container = AppFactory.provideModelContainer()
 		let context = ModelContext(container)
 		let cardsService = CardsService(context: context)
 		let searchService = SearchService()

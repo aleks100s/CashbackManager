@@ -15,10 +15,8 @@ import SwiftUI
 
 @main
 struct CashbackApplication: App {
-	private var container: ModelContainer {
-		try! ModelContainer(for: Card.self, Cashback.self, Domain.Category.self, Place.self)
-	}
-	
+	private let container = AppFactory.provideModelContainer()
+
     var body: some Scene {
         WindowGroup {
 			TabView {

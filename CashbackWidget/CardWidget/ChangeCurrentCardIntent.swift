@@ -30,7 +30,7 @@ struct ChangeCurrentCardIntent: AppIntent {
 		let allCards = service.getAllCards()
 		var nextCard: Card?
 		if let id = UUID(uuidString: cardId) {
-			if let card = service.getCard(by: id) ?? allCards.first,
+			if let card = service.getCard(id: id) ?? allCards.first,
 			   !card.cashback.isEmpty,
 			   let index = allCards.firstIndex(of: card),
 			   index < allCards.endIndex - 1 {

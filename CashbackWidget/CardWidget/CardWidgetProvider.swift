@@ -28,7 +28,7 @@ struct CardWidgetProvider: TimelineProvider {
 		else { return }
 
 		let allCards = service.getAllCards()
-		guard let card = service.getCard(by: cardId) ?? allCards.first, !card.cashback.isEmpty else { return }
+		guard let card = service.getCard(id: cardId) ?? allCards.first, !card.cashback.isEmpty else { return }
 		
 		let entries: [Entry] = [
 			.init(date: Date(), card: card, hasMoreCards: allCards.count > 1)

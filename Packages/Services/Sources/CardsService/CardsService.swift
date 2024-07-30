@@ -23,28 +23,33 @@ public struct CardsService: ICardsService {
 		return card
 	}
 	
-	public func getCard(by id: UUID) -> Card? {
-		let predicate = #Predicate<Card> { $0.id == id }
-		let descriptor = FetchDescriptor(predicate: predicate)
-		return try? context.fetch(descriptor).first
+	public func getCard(id: UUID) -> Card? {
+		fetch(by: #Predicate<Card> { $0.id == id }).first
 	}
 	
-	public func getCard(by name: String) -> Card? {
-		var predicate = #Predicate<Card> { $0.name == name }
-		var descriptor = FetchDescriptor(predicate: predicate)
-		let initialResult = try? context.fetch(descriptor)
-		if initialResult?.isEmpty == true {
-			predicate = #Predicate<Card> { $0.name.contains(name) }
-			descriptor = FetchDescriptor(predicate: predicate)
-			return try? context.fetch(descriptor).first
+	public func getCard(name: String) -> Card? {
+		let initialResult = fetch(by: #Predicate<Card> { $0.name == name })
+		if initialResult.isEmpty {
+			return fetch(by: #Predicate<Card> { $0.name.contains(name) }).first
 		} else {
-			return initialResult?.first
+			return initialResult.first
 		}
 	}
 	
 	public func getAllCards() -> [Card] {
-		let allCardsPredicate = #Predicate<Card> { !$0.cashback.isEmpty }
-		let allCardsDescriptor = FetchDescriptor(predicate: allCardsPredicate)
-		return (try? context.fetch(allCardsDescriptor)) ?? []
+		fetch(by: #Predicate<Card> { !$0.cashback.isEmpty })
+	}
+	
+	public func getCards(categoryName: String) -> [Card] {
+		fetch(by: #Predicate<Card> { card in
+			card.cashback.contains { cashback in
+				cashback.category.name.contains(categoryName)
+			}
+		})
+	}
+	
+	private func fetch(by predicate: Predicate<Card>) -> [Card] {
+		let descriptor = FetchDescriptor(predicate: predicate)
+		return (try? context.fetch(descriptor)) ?? []
 	}
 }
