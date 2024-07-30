@@ -56,7 +56,6 @@ public struct SelectCategoryView: View {
 							dismiss()
 						} label: {
 							CategoryView(category: category)
-								.contentShape(Rectangle())
 						}
 						.buttonStyle(PlainButtonStyle())
 					}

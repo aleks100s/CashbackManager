@@ -31,6 +31,7 @@ let package = Package(
 			name: "PlacesListScene",
 			dependencies: [
 				"Domain",
+				"DesignSystem",
 				.product(name: "SearchService", package: "Services")
 			]
 		),

@@ -26,20 +26,3 @@ public struct CategoryMarkerView: View {
 			}
 	}
 }
-
-// MARK: - ColoredCircle
-
-private struct ColoredCircle: View {
-	let color: Color
-	let side: CGFloat
-	   
-	var body: some View {
-		Circle()
-			.fill(color.opacity(0.7).gradient)
-			.frame(width: side, height: side)
-	}
-}
-
-#Preview {
-	CategoryMarkerView(category: PredefinedCategory.restaurants.asCategory)
-}

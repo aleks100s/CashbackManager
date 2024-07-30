@@ -34,6 +34,7 @@ public struct CardsListView: View {
 	
 	public var body: some View {
 		contentView
+			.background(Color.cmScreenBackground)
 			.navigationTitle("Мои кэшбеки")
 			.if(!cards.isEmpty) {
 				$0.searchable(
@@ -116,7 +117,6 @@ public struct CardsListView: View {
 				.padding(.horizontal, 12)
 			}
 			.scrollDismissesKeyboard(.interactively)
-			.background(Color.cmScreenBackground)
 		}
 	}
 	

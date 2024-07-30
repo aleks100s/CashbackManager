@@ -21,5 +21,6 @@ public struct CategoryView: View {
 			Text(category.name)
 			Spacer()
 		}
+		.contentShape(Rectangle())
 	}
 }	

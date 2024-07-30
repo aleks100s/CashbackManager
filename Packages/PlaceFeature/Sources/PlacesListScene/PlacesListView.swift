@@ -5,6 +5,7 @@
 //  Created by Alexander on 27.07.2024.
 //
 
+import DesignSystem
 import Domain
 import SearchService
 import Shared
@@ -49,18 +50,15 @@ public struct PlacesListView: View {
 					Button {
 						onPlaceSelected(place)
 					} label: {
-						VStack(alignment: .leading, spacing: 8) {
-							Text(place.name)
-							Text(place.category.name)
-						}
-						.contentShape(.rect)
-						.contextMenu {
-							Button(role: .destructive) {
-								delete(place: place)
-							} label: {
-								Text("Удалить")
+						PlaceView(place: place)
+							.contentShape(.rect)
+							.contextMenu {
+								Button(role: .destructive) {
+									delete(place: place)
+								} label: {
+									Text("Удалить")
+								}
 							}
-						}
 					}
 					.buttonStyle(.plain)
 				}
