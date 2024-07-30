@@ -30,6 +30,7 @@ public struct PlacesListView: View {
 	
 	public var body: some View {
 		contentView
+			.background(Color.cmScreenBackground)
 			.navigationTitle("Сохраненные места")
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {

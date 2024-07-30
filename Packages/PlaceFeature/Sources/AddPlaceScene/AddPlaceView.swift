@@ -43,6 +43,7 @@ public struct AddPlaceView: View {
 			}
 			.padding()
 		}
+		.background(Color.cmScreenBackground)
 		.navigationTitle("Новое место")
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {

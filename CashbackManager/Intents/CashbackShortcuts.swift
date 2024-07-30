@@ -36,5 +36,14 @@ struct CashbackShortcuts: AppShortcutsProvider {
 			shortTitle: "Какой картой платить в категории?",
 			systemImageName: "creditcard.viewfinder"
 		)
+		
+		AppShortcut(
+			intent: CheckPlaceCategoryIntent(),
+			phrases: [
+				"Какая категория в заведении?"
+			],
+			shortTitle: "Какая категория в заведении?",
+			systemImageName: "mappin.circle"
+		)
 	}
 }

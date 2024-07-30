@@ -30,7 +30,7 @@ public struct CardsService: ICardsService {
 	public func getCard(name: String) -> Card? {
 		let initialResult = fetch(by: #Predicate<Card> { $0.name == name })
 		if initialResult.isEmpty {
-			return fetch(by: #Predicate<Card> { $0.name.contains(name) }).first
+			return fetch(by: #Predicate<Card> { $0.name.localizedStandardContains(name) }).first
 		} else {
 			return initialResult.first
 		}
@@ -43,7 +43,7 @@ public struct CardsService: ICardsService {
 	public func getCards(categoryName: String) -> [Card] {
 		fetch(by: #Predicate<Card> { card in
 			card.cashback.contains { cashback in
-				cashback.category.name.contains(categoryName)
+				cashback.category.name.localizedStandardContains(categoryName)
 			}
 		})
 	}
