@@ -56,10 +56,16 @@ public struct AddPlaceView: View {
 			}
 		}
 		.sheet(isPresented: $isCategorySelectorPresented) {
-			SelectCategoryView { category in
-				selectedCategory = category
-				isCategorySelectorPresented = false
+			NavigationView {
+				SelectCategoryView { category in
+					selectedCategory = category
+					isCategorySelectorPresented = false
+				}
 			}
+			.navigationTitle("Выбор категории")
+			.navigationBarTitleDisplayMode(.inline)
+			.presentationDetents([.large])
+			.presentationBackground(.regularMaterial)
 		}
 	}
 	

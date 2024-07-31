@@ -16,9 +16,16 @@ public struct PlacesListView: View {
 	private let onPlaceSelected: (Place) -> Void
 	private let onAddPlaceButtonTapped: () -> Void
 	
+	@State private var searchText = ""
 	@Query private var places: [Place]
 	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
+	
+	private var filteredPlaces: [Place] {
+		places.filter {
+			searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText)
+		}
+	}
 	
 	public init(
 		onPlaceSelected: @escaping (Place) -> Void,
@@ -32,6 +39,13 @@ public struct PlacesListView: View {
 		contentView
 			.background(Color.cmScreenBackground)
 			.navigationTitle("Сохраненные места")
+			.if(!places.isEmpty) {
+				$0.searchable(
+					text: $searchText,
+					placement: .navigationBarDrawer(displayMode: .automatic),
+					prompt: "Название заведения"
+				)
+			}
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
 					Button("Добавить место") {
@@ -43,11 +57,11 @@ public struct PlacesListView: View {
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if places.isEmpty {
+		if filteredPlaces.isEmpty {
 			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.mapPin)
 		} else {
 			List {
-				ForEach(places) { place in
+				ForEach(filteredPlaces) { place in
 					Button {
 						onPlaceSelected(place)
 					} label: {
