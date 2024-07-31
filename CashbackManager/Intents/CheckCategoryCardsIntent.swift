@@ -10,7 +10,7 @@ import CardsService
 import SwiftData
 
 struct CheckCategoryCardsIntent: AppIntent {
-	static var title: LocalizedStringResource = "Какой картой платить в категории?"
+	static var title: LocalizedStringResource = "Чем платить в категории?"
 	
 	@Parameter(title: "Название категории")
 	var categoryName: String
@@ -26,6 +26,6 @@ struct CheckCategoryCardsIntent: AppIntent {
 		let context = ModelContext(container)
 		let cardsService = CardsService(context: context)
 		let cards = cardsService.getCards(categoryName: categoryName)
-		return .result(dialog: "\(cards.isEmpty ? "Не удалось найти карту" : cards.map(\.name).joined(separator: ", "))")
+		return .result(dialog: "\(cards.isEmpty ? "Не удалось найти карту с категорией \(categoryName)" : cards.map(\.name).joined(separator: ", "))")
 	}
 }

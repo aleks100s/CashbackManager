@@ -29,7 +29,7 @@ struct CheckPlaceCategoryIntent: AppIntent {
 		if let place = (try? context.fetch(descriptor))?.first {
 			return .result(dialog: "\(place.category.name)")
 		} else {
-			return .result(dialog: "Не удалось найти заведение")
+			return .result(dialog: "Не удалось найти заведение \(placeName)")
 		}
 	}
 }

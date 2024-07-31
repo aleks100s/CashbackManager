@@ -13,7 +13,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCardIntent(),
 			phrases: [
-				"Добавь новую карту"
+				"Добавь новую карту",
+				"Создай новую карту"
 			],
 			shortTitle: "Добавь новую карту",
 			systemImageName: "creditcard"
@@ -22,7 +23,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCardIntent(),
 			phrases: [
-				"Какой кэшбек на карте?"
+				"Какой кэшбек на карте?",
+				"Какой кэшбек по карте?"
 			],
 			shortTitle: "Какой кэшбек на карте?",
 			systemImageName: "rublesign"
@@ -31,7 +33,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCardIntent(),
 			phrases: [
-				"Какой картой платить в категории?"
+				"Какой картой платить в категории?",
+				"Чем платить в категории?"
 			],
 			shortTitle: "Какой картой платить в категории?",
 			systemImageName: "creditcard.viewfinder"
@@ -40,7 +43,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCategoryIntent(),
 			phrases: [
-				"Какая категория в заведении?"
+				"Какая категория в заведении?",
+				"Какая категория у заведения?"
 			],
 			shortTitle: "Какая категория в заведении?",
 			systemImageName: "mappin.circle"
@@ -49,7 +53,9 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCardIntent(),
 			phrases: [
-				"Какой картой платить в заведении?"
+				"Какой картой платить в заведении?",
+				"Чем платить в заведении?",
+				"Чем платить?"
 			],
 			shortTitle: "Какой картой платить в заведении?",
 			systemImageName: "mappin"

@@ -26,6 +26,6 @@ struct CheckCardCashbackIntent: AppIntent {
 		let context = ModelContext(container)
 		let cardsService = CardsService(context: context)
 		let card = cardsService.getCard(name: cardName)
-		return .result(dialog: "\(card?.cashbackDescription ?? "Не удалось найти карту")")
+		return .result(dialog: "\(card?.cashbackDescription ?? "Не удалось найти карту \(cardName)")")
 	}
 }

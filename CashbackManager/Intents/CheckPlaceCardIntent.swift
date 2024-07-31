@@ -11,7 +11,7 @@ import Domain
 import SwiftData
 
 struct CheckPlaceCardIntent: AppIntent {
-	static var title: LocalizedStringResource = "Какой картой платить в заведении?"
+	static var title: LocalizedStringResource = "Чем платить в заведении?"
 	
 	@Parameter(title: "Название заведения")
 	var placeName: String
@@ -33,10 +33,10 @@ struct CheckPlaceCardIntent: AppIntent {
 			if !cards.isEmpty {
 				return .result(dialog: "\(cards.map(\.name).joined(separator: ", "))")
 			} else {
-				return .result(dialog: "Не удалось найти подходящие карты")
+				return .result(dialog: "Не удалось найти подходящие карты с категорией \(place.category.name)")
 			}
 		} else {
-			return .result(dialog: "Не удалось найти заведение")
+			return .result(dialog: "Не удалось найти заведение \(placeName)")
 		}
 	}
 }
