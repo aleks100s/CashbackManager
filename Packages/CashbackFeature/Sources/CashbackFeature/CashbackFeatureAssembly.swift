@@ -9,6 +9,7 @@ import CardsService
 import SwiftData
 import SwiftUI
 
+@MainActor
 public enum CashbackFeatureAssembly {
 	public static func assemble(container: ModelContainer) -> some View {
 		Coordinator()
@@ -16,6 +17,6 @@ public enum CashbackFeatureAssembly {
 	}
 	
 	private static func makeWidgetURLParser(with container: ModelContainer) -> WidgetURLParser {
-		WidgetURLParser(cardsService: CardsService(context: ModelContext(container)))
+		WidgetURLParser(cardsService: CardsService(context: container.mainContext))
 	}
 }
