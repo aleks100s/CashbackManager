@@ -10,7 +10,7 @@ import CardsService
 import SwiftData
 
 struct CheckCategoryCardsIntent: AppIntent {
-	static var title: LocalizedStringResource = "Чем платить в категории?"
+	static var title: LocalizedStringResource = "Карта в категории"
 	
 	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var categoryName: String

@@ -14,6 +14,7 @@ import WidgetKit
 
 struct ChangeCurrentCardIntent: AppIntent {
 	static var title: LocalizedStringResource = "Change Card"
+	static var isDiscoverable = false
 	
 	@Parameter(title: "Card ID")
 	var cardId: String

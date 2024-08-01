@@ -11,7 +11,7 @@ import SearchService
 import SwiftData
 
 struct CreateCardIntent: AppIntent {
-	static var title: LocalizedStringResource = "Добавь новую карту"
+	static var title: LocalizedStringResource = "Новая карта"
 	
 	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
