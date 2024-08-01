@@ -13,8 +13,10 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCardIntent(),
 			phrases: [
+				"Добавь новую карту в \(.applicationName)",
+				"Создай новую карту в \(.applicationName)",
 				"Добавь новую карту",
-				"Создай новую карту"
+				"Создай новую карту",
 			],
 			shortTitle: "Добавь новую карту",
 			systemImageName: "creditcard"
@@ -23,6 +25,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCardIntent(),
 			phrases: [
+				"Какой кэшбек на карте в \(.applicationName)?",
+				"Какой кэшбек по карте в \(.applicationName)?",
 				"Какой кэшбек на карте?",
 				"Какой кэшбек по карте?"
 			],
@@ -33,6 +37,9 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCardIntent(),
 			phrases: [
+				"Какой картой платить в категории \(.applicationName)?",
+				"Чем платить в категории \(.applicationName)?",
+				"На какой карте есть категория \(.applicationName)?",
 				"Какой картой платить в категории?",
 				"Чем платить в категории?",
 				"На какой карте есть категория?"
@@ -44,6 +51,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCategoryIntent(),
 			phrases: [
+				"Какая категория в заведении \(.applicationName)?",
+				"Какая категория у заведения \(.applicationName)?",
 				"Какая категория в заведении?",
 				"Какая категория у заведения?"
 			],
@@ -54,6 +63,9 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCardIntent(),
 			phrases: [
+				"Какой картой платить в заведении \(.applicationName)?",
+				"Чем платить в заведении \(.applicationName)?",
+				"Чем платить \(.applicationName)?",
 				"Какой картой платить в заведении?",
 				"Чем платить в заведении?",
 				"Чем платить?"
