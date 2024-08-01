@@ -11,6 +11,7 @@ import SwiftData
 
 struct CheckPlaceCategoryIntent: AppIntent {
 	static var title: LocalizedStringResource = "Категория в заведении"
+	static var description: IntentDescription? = "Запрашивает название заведения и выдает его категорию кэшбека"
 	
 	@Parameter(title: "Название заведения", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String

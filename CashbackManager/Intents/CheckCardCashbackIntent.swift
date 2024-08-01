@@ -11,6 +11,7 @@ import SwiftData
 
 struct CheckCardCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Кэшбек на карте"
+	static var description: IntentDescription? = "Запрашивает имя карты и выдает кэшбеки по ней"
 	
 	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
