@@ -39,6 +39,7 @@
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
 		27A5D88A2C394EFF00B93512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A5D84A2C394EFF00B93512 /* Assets.xcassets */; };
+		27EE77BB2C5C020900D12827 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB52C58B44F0014CFE0 /* AppFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,9 +264,9 @@
 			children = (
 				2714FEAB2C58A0DD0014CFE0 /* Intents */,
 				27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */,
+				2714FEB52C58B44F0014CFE0 /* AppFactory.swift */,
 				27368BE32C4CC62600FC0475 /* CashbackManager.entitlements */,
 				27A5D84A2C394EFF00B93512 /* Assets.xcassets */,
-				2714FEB52C58B44F0014CFE0 /* AppFactory.swift */,
 			);
 			path = CashbackManager;
 			sourceTree = "<group>";
@@ -466,6 +467,7 @@
 				27368BDA2C4BB67200FC0475 /* ChangeCurrentCardIntent.swift in Sources */,
 				27368BC22C4BB11100FC0475 /* CashbackWidgetBundle.swift in Sources */,
 				27368BD52C4BB20A00FC0475 /* CardWidgetProvider.swift in Sources */,
+				27EE77BB2C5C020900D12827 /* AppFactory.swift in Sources */,
 				27368BC42C4BB11100FC0475 /* CardWidget.swift in Sources */,
 				274861FE2C53488800788C1A /* WidgetFactory.swift in Sources */,
 				27368BD72C4BB22700FC0475 /* CashbackWidgetEntryView.swift in Sources */,

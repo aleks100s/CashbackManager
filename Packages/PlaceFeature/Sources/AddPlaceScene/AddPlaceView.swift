@@ -75,6 +75,7 @@ public struct AddPlaceView: View {
 		
 		let place = Place(name: placeName, category: selectedCategory)
 		context.insert(place)
+		try! context.save()
 		let image = renderPlaceMarker(place: place)
 		searchService?.index(place: place, image: image)
 	}

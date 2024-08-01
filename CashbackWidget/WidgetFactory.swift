@@ -11,8 +11,7 @@ import SwiftData
 
 enum WidgetFactory {
 	static func makeCardsService() -> ICardsService? {
-		guard let container = try? ModelContainer(for: Card.self, Cashback.self, Domain.Category.self) else { return nil }
-		
+		let container = AppFactory.provideModelContainer()
 		let context = ModelContext(container)
 		return CardsService(context: context)
 	}
