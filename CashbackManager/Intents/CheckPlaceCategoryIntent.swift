@@ -12,7 +12,7 @@ import SwiftData
 struct CheckPlaceCategoryIntent: AppIntent {
 	static var title: LocalizedStringResource = "Какая категория в заведении?"
 	
-	@Parameter(title: "Название заведения")
+	@Parameter(title: "Название заведения", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String
 	
 	init(placeName: String) {

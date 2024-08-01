@@ -13,7 +13,7 @@ import SwiftData
 struct CreateCardIntent: AppIntent {
 	static var title: LocalizedStringResource = "Добавь новую карту"
 	
-	@Parameter(title: "Название карты")
+	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
 	
 	init(cardName: String) {
