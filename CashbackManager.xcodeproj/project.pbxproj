@@ -119,6 +119,7 @@
 		27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackManagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CashbackApplication.swift; sourceTree = "<group>"; };
 		27A5D84A2C394EFF00B93512 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		27EE77BC2C5D437600D12827 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +263,7 @@
 		27A5D7CF2C394EC400B93512 /* CashbackManager */ = {
 			isa = PBXGroup;
 			children = (
+				27EE77BC2C5D437600D12827 /* Info.plist */,
 				2714FEAB2C58A0DD0014CFE0 /* Intents */,
 				27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */,
 				2714FEB52C58B44F0014CFE0 /* AppFactory.swift */,
@@ -720,6 +722,7 @@
 				DEVELOPMENT_TEAM = 579X949DTW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CashbackManager/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Кэшбеки";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -731,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.14.1;
+				MARKETING_VERSION = 0.14.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -755,6 +758,7 @@
 				DEVELOPMENT_TEAM = 579X949DTW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CashbackManager/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Кэшбеки";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -766,7 +770,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.14.1;
+				MARKETING_VERSION = 0.14.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
