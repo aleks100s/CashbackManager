@@ -12,6 +12,7 @@ import SwiftData
 public final class Card {
 	public let id: UUID
 	public var name: String
+	@Relationship(deleteRule: .cascade)
 	public var cashback: [Cashback]
 
 	public init(id: UUID = UUID(), name: String, cashback: [Cashback] = []) {
