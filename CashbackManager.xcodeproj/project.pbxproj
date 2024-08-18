@@ -239,8 +239,8 @@
 				27368BF22C4CEE4800FC0475 /* Config.xcconfig */,
 				27368B6F2C395E8300FC0475 /* CashbackManager.xctestplan */,
 				27368BE42C4CC65100FC0475 /* CashbackWidgetExtension.entitlements */,
-				27368B7C2C426DA300FC0475 /* Packages */,
 				27A5D7CF2C394EC400B93512 /* CashbackManager */,
+				27368B7C2C426DA300FC0475 /* Packages */,
 				27A5D7E02C394EC500B93512 /* CashbackManagerTests */,
 				27A5D7EA2C394EC500B93512 /* CashbackManagerUITests */,
 				27368BC02C4BB11100FC0475 /* CashbackWidget */,
@@ -734,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.14.2;
+				MARKETING_VERSION = 0.15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -770,7 +770,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.14.2;
+				MARKETING_VERSION = 0.15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
