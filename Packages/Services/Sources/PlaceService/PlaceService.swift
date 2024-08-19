@@ -22,6 +22,7 @@ public struct PlaceService: IPlaceService {
 		return (try? context.fetch(descriptor))?.first
 	}
 	
+	@discardableResult
 	public func createPlace(name: String, category: Domain.Category) -> Place {
 		let place = Place(name: name, category: category)
 		context.insert(place)
