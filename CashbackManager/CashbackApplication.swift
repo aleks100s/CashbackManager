@@ -35,5 +35,6 @@ struct CashbackApplication: App {
 		.modelContainer(container)
 		.environment(\.searchService, AppFactory.provideSearchService())
 		.environment(\.categoryService, AppFactory.provideCategoryService())
+		.environment(\.placeService, AppFactory.providePlaceService())
     }
 }

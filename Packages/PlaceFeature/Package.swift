@@ -32,7 +32,8 @@ let package = Package(
 			dependencies: [
 				"Domain",
 				"DesignSystem",
-				.product(name: "SearchService", package: "Services")
+				.product(name: "SearchService", package: "Services"),
+				.product(name: "PlaceService", package: "Services")
 			]
 		),
 		.target(
@@ -47,7 +48,8 @@ let package = Package(
 				"Domain",
 				"DesignSystem",
 				.product(name: "SelectCategoryScene", package: "CommonScenes"),
-				.product(name: "SearchService", package: "Services")
+				.product(name: "SearchService", package: "Services"),
+				.product(name: "PlaceService", package: "Services")
 			]
 		)
     ]

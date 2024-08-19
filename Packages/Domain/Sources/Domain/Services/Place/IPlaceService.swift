@@ -1,8 +1,11 @@
 //
-//  File.swift
-//  
+//  IPlaceService.swift
+//
 //
 //  Created by Alexander on 19.08.2024.
 //
 
-import Foundation
+public protocol IPlaceService {
+	func createPlace(name: String, category: Category) -> Place
+	func delete(place: Place)
+}

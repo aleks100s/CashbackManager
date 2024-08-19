@@ -7,6 +7,7 @@
 
 import CategoryService
 import Domain
+import PlaceService
 import SearchService
 import SwiftData
 
@@ -24,5 +25,10 @@ enum AppFactory {
 	@MainActor 
 	static func provideCategoryService() -> CategoryService {
 		CategoryService(context: container.mainContext)
+	}
+	
+	@MainActor
+	static func providePlaceService() -> PlaceService {
+		PlaceService(context: container.mainContext)
 	}
 }

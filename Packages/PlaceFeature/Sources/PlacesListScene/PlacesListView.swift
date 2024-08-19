@@ -7,6 +7,7 @@
 
 import DesignSystem
 import Domain
+import PlaceService
 import SearchService
 import Shared
 import SwiftData
@@ -18,8 +19,8 @@ public struct PlacesListView: View {
 	
 	@State private var searchText = ""
 	@Query private var places: [Place]
-	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
+	@Environment(\.placeService) private var placeService
 	
 	private var filteredPlaces: [Place] {
 		places.filter {
@@ -93,6 +94,6 @@ public struct PlacesListView: View {
 	
 	func delete(place: Place) {
 		searchService?.deindex(place: place)
-		context.delete(place)
+		placeService?.delete(place: place)
 	}
 }

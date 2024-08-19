@@ -1,8 +1,19 @@
 //
-//  File.swift
-//  
+//  Environment+PlaceService.swift
+//
 //
 //  Created by Alexander on 20.08.2024.
 //
 
-import Foundation
+import SwiftUI
+
+private struct PlaceServiceKey: EnvironmentKey {
+	static let defaultValue: PlaceService? = nil
+}
+
+public extension EnvironmentValues {
+	var placeService: PlaceService? {
+		get { self[PlaceServiceKey.self] }
+		set { self[PlaceServiceKey.self] = newValue }
+	}
+}

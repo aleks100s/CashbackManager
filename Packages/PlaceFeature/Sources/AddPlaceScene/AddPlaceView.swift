@@ -7,6 +7,7 @@
 
 import DesignSystem
 import Domain
+import PlaceService
 import SearchService
 import SelectCategoryScene
 import SwiftUI
@@ -17,8 +18,8 @@ public struct AddPlaceView: View {
 	@State private var isCategorySelectorPresented = false
 	
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
+	@Environment(\.placeService) private var placeService
 	@Environment(\.displayScale) var displayScale
 	
 	private var isInputCorrect: Bool {
@@ -73,9 +74,8 @@ public struct AddPlaceView: View {
 	private func createPlace() {
 		guard let selectedCategory else { return }
 		
-		let place = Place(name: placeName, category: selectedCategory)
-		context.insert(place)
-		try! context.save()
+		guard let place = placeService?.createPlace(name: placeName, category: selectedCategory) else { return }
+		
 		let image = renderPlaceMarker(place: place)
 		searchService?.index(place: place, image: image)
 	}

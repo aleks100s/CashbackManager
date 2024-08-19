@@ -15,6 +15,14 @@ let package = Package(
 			name: "SearchService",
 			targets: ["SearchService"]
 		),
+		.library(
+			name: "PlaceService",
+			targets: ["PlaceService"]
+		),
+		.library(
+			name: "CategoryService",
+			targets: ["CategoryService"]
+		),
     ],
 	dependencies: [
 		.package(name: "Shared", path: "./Shared"),
