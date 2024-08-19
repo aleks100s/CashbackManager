@@ -22,11 +22,13 @@ struct CreatePlaceIntent: AppIntent {
 	func perform() async throws -> some ProvidesDialog {
 		let placeService = await AppFactory.providePlaceService()
 		let categoryService = await AppFactory.provideCategoryService()
+		let searchService = await AppFactory.provideSearchService()
 		guard let category = categoryService.getCategory(by: categoryName) else {
 			return .result(dialog: "Не получилось найти категорию \(categoryName) и добавить место")
 		}
 		
-		placeService.createPlace(name: placeName, category: category)
+		let place = placeService.createPlace(name: placeName, category: category)
+		searchService.index(place: place, image: nil)
 		return .result(dialog: "Новое место \(placeName) добавлено!")
 	}
 }
