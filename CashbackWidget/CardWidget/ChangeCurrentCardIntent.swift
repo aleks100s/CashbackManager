@@ -26,8 +26,7 @@ struct ChangeCurrentCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some IntentResult {
-		guard let service = WidgetFactory.makeCardsService() else { return .result() }
-
+		let service = await AppFactory.provideCardsService()
 		let allCards = service.getAllCards()
 		var nextCard: Card?
 		if let id = UUID(uuidString: cardId) {

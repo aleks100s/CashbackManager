@@ -24,10 +24,8 @@ struct CreateCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let container = AppFactory.provideModelContainer()
-		let context = ModelContext(container)
-		let cardsService = CardsService(context: context)
-		let searchService = SearchService()
+		let cardsService = await AppFactory.provideCardsService()
+		let searchService =  await AppFactory.provideSearchService()
 		if cardName.isEmpty {
 			cardName = "Карта"
 		}

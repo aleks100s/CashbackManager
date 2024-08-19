@@ -24,13 +24,10 @@ struct CheckPlaceCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let container = AppFactory.provideModelContainer()
-		let context = ModelContext(container)
-		let predicate = #Predicate<Place> { $0.name.localizedStandardContains(placeName) }
-		let descriptor = FetchDescriptor(predicate: predicate)
-		if let place = (try? context.fetch(descriptor))?.first {
-			let service = CardsService(context: context)
-			let cards = service.getCards(categoryName: place.category.name)
+		let placeService = await AppFactory.providePlaceService()
+		let cardsService = await AppFactory.provideCardsService()
+		if let place = placeService.getPlace(by: placeName) {
+			let cards = cardsService.getCards(categoryName: place.category.name)
 			if !cards.isEmpty {
 				return .result(dialog: "Для оплаты в \(placeName) используйте карты: \(cards.map(\.name).joined(separator: ", "))")
 			} else {

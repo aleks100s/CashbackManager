@@ -14,6 +14,7 @@ import SwiftData
 import SwiftUI
 
 @main
+@MainActor
 struct CashbackApplication: App {
 	private let container = AppFactory.provideModelContainer()
 

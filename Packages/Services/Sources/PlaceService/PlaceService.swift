@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Foundation
 import SwiftData
 
 public struct PlaceService: IPlaceService {
@@ -15,7 +16,13 @@ public struct PlaceService: IPlaceService {
 		self.context = context
 	}
 	
-	public func createPlace(name: String, category: Category) -> Place {
+	public func getPlace(by name: String) -> Place? {
+		let predicate = #Predicate<Place> { $0.name.localizedStandardContains(name) }
+		let descriptor = FetchDescriptor(predicate: predicate)
+		return (try? context.fetch(descriptor))?.first
+	}
+	
+	public func createPlace(name: String, category: Domain.Category) -> Place {
 		let place = Place(name: name, category: category)
 		context.insert(place)
 		return place

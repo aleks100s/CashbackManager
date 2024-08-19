@@ -23,11 +23,8 @@ struct CheckPlaceCategoryIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let container = AppFactory.provideModelContainer()
-		let context = ModelContext(container)
-		let predicate = #Predicate<Place> { $0.name.localizedStandardContains(placeName) }
-		let descriptor = FetchDescriptor(predicate: predicate)
-		if let place = (try? context.fetch(descriptor))?.first {
+		let placeService = await AppFactory.providePlaceService()
+		if let place = placeService.getPlace(by: placeName) {
 			return .result(dialog: "\(placeName) относится к категории \(place.category.name)")
 		} else {
 			return .result(dialog: "Не удалось найти заведение \(placeName)")

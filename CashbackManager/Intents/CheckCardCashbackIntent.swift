@@ -23,9 +23,7 @@ struct CheckCardCashbackIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let container = AppFactory.provideModelContainer()
-		let context = ModelContext(container)
-		let cardsService = CardsService(context: context)
+		let cardsService = await AppFactory.provideCardsService()
 		let card = cardsService.getCard(name: cardName)
 		return .result(dialog: "\(card?.cashbackDescription ?? "Не удалось найти карту \(cardName)")")
 	}

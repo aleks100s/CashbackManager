@@ -21,12 +21,13 @@ struct CardWidgetProvider: TimelineProvider {
 		completion(entry)
 	}
 
+	@MainActor
 	func getTimeline(in context: Context, completion: @escaping (Timeline<CardWidgetEntry>) -> ()) {
 		guard let cardIdString = UserDefaults.appGroup?.value(forKey: Constants.currentCardID) as? String,
-			let cardId = UUID(uuidString: cardIdString),
-			let service = WidgetFactory.makeCardsService()
+			let cardId = UUID(uuidString: cardIdString)
 		else { return }
 
+		let service = AppFactory.provideCardsService()
 		let allCards = service.getAllCards()
 		guard let card = service.getCard(id: cardId) ?? allCards.first, !card.cashback.isEmpty else { return }
 		
