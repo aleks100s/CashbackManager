@@ -13,4 +13,5 @@ public protocol ICardsService {
 	func getCard(name: String) -> Card?
 	func getAllCards() -> [Card]
 	func getCards(categoryName: String) -> [Card]
+	func delete(card: Card)
 }

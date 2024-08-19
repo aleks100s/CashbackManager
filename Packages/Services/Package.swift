@@ -34,5 +34,7 @@ let package = Package(
 			name: "SearchService",
 			dependencies: ["Domain", "Shared"]
 		),
+		.target(name: "PlaceService", dependencies: ["Domain"]),
+		.target(name: "CategoryService", dependencies: ["Domain"]),
     ]
 )

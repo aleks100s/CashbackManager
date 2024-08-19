@@ -48,6 +48,10 @@ public struct CardsService: ICardsService {
 		})
 	}
 	
+	public func delete(card: Card) {
+		context.delete(card)
+	}
+	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {
 		let descriptor = FetchDescriptor(predicate: predicate)
 		return (try? context.fetch(descriptor)) ?? []
