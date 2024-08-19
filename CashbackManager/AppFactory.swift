@@ -5,7 +5,9 @@
 //  Created by Alexander on 30.07.2024.
 //
 
+import CategoryService
 import Domain
+import SearchService
 import SwiftData
 
 enum AppFactory {
@@ -13,5 +15,14 @@ enum AppFactory {
 	
 	static func provideModelContainer() -> ModelContainer {
 		container
+	}
+	
+	static func provideSearchService() -> SearchService {
+		SearchService()
+	}
+	
+	@MainActor 
+	static func provideCategoryService() -> CategoryService {
+		CategoryService(context: container.mainContext)
 	}
 }

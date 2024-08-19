@@ -5,6 +5,7 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import CategoryService
 import CommonInputSheet
 import DesignSystem
 import Domain
@@ -22,7 +23,7 @@ public struct SelectCategoryView: View {
 	])
 	private var categories: [Domain.Category]
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.modelContext) private var context
+	@Environment(\.categoryService) private var categoryService
 	
 	private var filteredCategories: [Domain.Category] {
 		categories.filter {
@@ -77,8 +78,7 @@ public struct SelectCategoryView: View {
 		.sheet(isPresented: $isAddCategorySheetPresented) {
 			NavigationView {
 				CommonInputView("Название категории") { categoryName in
-					let category = Category(name: categoryName, emoji: String(categoryName.first ?? "?"))
-					context.insert(category)
+					categoryService?.createCategory(name: categoryName)
 					isAddCategorySheetPresented = false
 				}
 			}

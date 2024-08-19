@@ -18,7 +18,8 @@ let package = Package(
     ],
 	dependencies: [
 		.package(name: "Domain", path: "./Domain"),
-		.package(name: "DesignSystem", path: "./DesignSystem")
+		.package(name: "DesignSystem", path: "./DesignSystem"),
+		.package(name: "Services", path: "./Services")
 	],
     targets: [
         .target(
@@ -27,7 +28,12 @@ let package = Package(
 		),
 		.target(
 			name: "SelectCategoryScene",
-			dependencies: ["Domain", "DesignSystem", "CommonInputSheet"]
+			dependencies: [
+				"Domain",
+				"DesignSystem",
+				"CommonInputSheet",
+				.product(name: "CategoryService", package: "Services")
+			]
 		),
     ]
 )

@@ -33,6 +33,7 @@ struct CashbackApplication: App {
 			
         }
 		.modelContainer(container)
-		.environment(\.searchService, SearchService())
+		.environment(\.searchService, AppFactory.provideSearchService())
+		.environment(\.categoryService, AppFactory.provideCategoryService())
     }
 }
