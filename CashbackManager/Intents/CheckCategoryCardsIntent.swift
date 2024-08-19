@@ -28,6 +28,11 @@ struct CheckCategoryCardsIntent: AppIntent {
 		let context = ModelContext(container)
 		let cardsService = CardsService(context: context)
 		let cards = cardsService.getCards(categoryName: categoryName)
-		return .result(dialog: "\(cards.isEmpty ? "Не удалось найти карту с категорией \(categoryName)" : cards.map(\.name).joined(separator: ", "))")
+		let result = if cards.isEmpty {
+			"Не удалось найти карту с категорией \(categoryName)"
+		} else {
+			"Для оплаты в категории \(categoryName) используйте карты: \(cards.map(\.name).joined(separator: ", "))"
+		}
+		return .result(dialog: "\(result)")
 	}
 }

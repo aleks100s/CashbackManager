@@ -28,7 +28,7 @@ struct CheckPlaceCategoryIntent: AppIntent {
 		let predicate = #Predicate<Place> { $0.name.localizedStandardContains(placeName) }
 		let descriptor = FetchDescriptor(predicate: predicate)
 		if let place = (try? context.fetch(descriptor))?.first {
-			return .result(dialog: "\(place.category.name)")
+			return .result(dialog: "\(placeName) относится к категории \(place.category.name)")
 		} else {
 			return .result(dialog: "Не удалось найти заведение \(placeName)")
 		}

@@ -32,7 +32,7 @@ struct CheckPlaceCardIntent: AppIntent {
 			let service = CardsService(context: context)
 			let cards = service.getCards(categoryName: place.category.name)
 			if !cards.isEmpty {
-				return .result(dialog: "\(cards.map(\.name).joined(separator: ", "))")
+				return .result(dialog: "Для оплаты в \(placeName) используйте карты: \(cards.map(\.name).joined(separator: ", "))")
 			} else {
 				return .result(dialog: "Не удалось найти подходящие карты с категорией \(place.category.name)")
 			}
