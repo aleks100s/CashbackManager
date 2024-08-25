@@ -108,5 +108,49 @@ struct CashbackShortcuts: AppShortcutsProvider {
 			shortTitle: "Карта в заведении",
 			systemImageName: "mappin"
 		)
+		
+		AppShortcut(
+			intent: CreatePlaceIntent(),
+			phrases: [
+				"Добавь новое место в \(.applicationName)",
+				"Добавь новое место для \(.applicationName)",
+				"Добавь место в \(.applicationName)",
+				"Создай место для \(.applicationName)",
+				"Добавь новое заведение в \(.applicationName)",
+				"Добавь новое заведение для \(.applicationName)",
+				"Добавь заведение в \(.applicationName)",
+				"Создай заведение для \(.applicationName)",
+			],
+			shortTitle: "Новое место",
+			systemImageName: "storefront"
+		)
+		
+		AppShortcut(
+			intent: CreateCategoryIntent(),
+			phrases: [
+				"Добавь новую категорию \(.applicationName)",
+				"Добавь новую категорию для \(.applicationName)",
+				"Добавь категорию \(.applicationName)",
+				"Создай категорию \(.applicationName)",
+				"Добавь новую категорию в \(.applicationName)",
+				"Добавь новую категорию для \(.applicationName)",
+				"Добавь категорию в \(.applicationName)",
+				"Создай категорию для \(.applicationName)",
+			],
+			shortTitle: "Новая категория",
+			systemImageName: "list.bullet"
+		)
+		
+		AppShortcut(
+			intent: CreateCashbackIntent(),
+			phrases: [
+				"Добавь новый \(.applicationName)",
+				"Добавь \(.applicationName)",
+				"Создай новый \(.applicationName)",
+				"Создай \(.applicationName)",
+			],
+			shortTitle: "Новый кэшбек",
+			systemImageName: "plus"
+		)
 	}
 }

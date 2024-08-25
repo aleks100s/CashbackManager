@@ -10,7 +10,7 @@ import Domain
 import Shared
 import UIKit
 
-public struct SearchService: ISearchService {
+public struct SearchService: ISearchService, @unchecked Sendable {
 	public init() {}
 	
 	public func index(card: Card) {

@@ -16,6 +16,9 @@ struct CheckCardCashbackIntent: AppIntent {
 	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
 	
+	@Dependency
+	private var cardsService: CardsService
+	
 	init(cardName: String) {
 		self.cardName = cardName
 	}
@@ -23,7 +26,6 @@ struct CheckCardCashbackIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let cardsService = await AppFactory.provideCardsService()
 		let card = cardsService.getCard(name: cardName)
 		return .result(dialog: "\(card?.cashbackDescription ?? "Не удалось найти карту \(cardName)")")
 	}

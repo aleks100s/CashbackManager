@@ -7,6 +7,7 @@
 
 import AppIntents
 import Domain
+import PlaceService
 import SwiftData
 
 struct CheckPlaceCategoryIntent: AppIntent {
@@ -15,6 +16,9 @@ struct CheckPlaceCategoryIntent: AppIntent {
 	
 	@Parameter(title: "Название заведения", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String
+	
+	@Dependency
+	private var placeService: PlaceService
 	
 	init(placeName: String) {
 		self.placeName = placeName

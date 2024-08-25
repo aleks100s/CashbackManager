@@ -17,6 +17,12 @@ struct CreateCardIntent: AppIntent {
 	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
 	
+	@Dependency
+	private var cardsService: CardsService
+	
+	@Dependency
+	private var searchService: SearchService
+	
 	init(cardName: String) {
 		self.cardName = cardName
 	}
@@ -24,8 +30,6 @@ struct CreateCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let cardsService = await AppFactory.provideCardsService()
-		let searchService =  await AppFactory.provideSearchService()
 		if cardName.isEmpty {
 			cardName = "Карта"
 		}

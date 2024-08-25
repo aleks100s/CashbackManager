@@ -6,10 +6,13 @@
 //
 
 import AppIntents
+import CardsService
+import CategoryService
 import Domain
 
 struct CreateCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Новый кэшбек"
+	static var description: IntentDescription? = "Добавляет новый кэшбек в указанной категории на карту"
 		
 	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
@@ -20,15 +23,19 @@ struct CreateCashbackIntent: AppIntent {
 	@Parameter(title: "Процент")
 	var percent: Double
 	
+	@Dependency
+	private var cardsService: CardsService
+	
+	@Dependency
+	private var categoryService: CategoryService
+	
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let cardsService = await AppFactory.provideCardsService()
 		guard let card = cardsService.getCard(name: cardName) else {
 			return .result(dialog: "Карта \"\(cardName)\" не найдена")
 		}
 		
-		let categoryService = await AppFactory.provideCategoryService()
 		guard let category = categoryService.getCategory(by: categoryName) else {
 			return .result(dialog: "Не получилось найти категорию \(categoryName)")
 		}

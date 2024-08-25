@@ -5,6 +5,7 @@
 //  Created by Alexander on 10.06.2024.
 //
 
+import AppIntents
 import CashbackFeature
 import Domain
 import PlaceFeature
@@ -17,6 +18,21 @@ import SwiftUI
 @MainActor
 struct CashbackApplication: App {
 	private let container = AppFactory.provideModelContainer()
+	private let searchService = AppFactory.provideSearchService()
+	private let categoryService = AppFactory.provideCategoryService()
+	private let placeService = AppFactory.providePlaceService()
+	private let cardsService = AppFactory.provideCardsService()
+	
+	init() {
+		let searchService = self.searchService
+		let categoryService = self.categoryService
+		let placeService = self.placeService
+		let cardsService = self.cardsService
+		AppDependencyManager.shared.add(dependency: searchService)
+		AppDependencyManager.shared.add(dependency: categoryService)
+		AppDependencyManager.shared.add(dependency: placeService)
+		AppDependencyManager.shared.add(dependency: cardsService)
+	}
 
     var body: some Scene {
         WindowGroup {
@@ -34,8 +50,8 @@ struct CashbackApplication: App {
 			
         }
 		.modelContainer(container)
-		.environment(\.searchService, AppFactory.provideSearchService())
-		.environment(\.categoryService, AppFactory.provideCategoryService())
-		.environment(\.placeService, AppFactory.providePlaceService())
+		.environment(\.searchService, searchService)
+		.environment(\.categoryService, categoryService)
+		.environment(\.placeService, placeService)
     }
 }

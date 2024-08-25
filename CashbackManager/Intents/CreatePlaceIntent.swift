@@ -6,10 +6,14 @@
 //
 
 import AppIntents
+import CategoryService
+import PlaceService
+import SearchService
 import SwiftData
 
 struct CreatePlaceIntent: AppIntent {
 	static var title: LocalizedStringResource = "Новое место"
+	static var description: IntentDescription? = "Добавляет новое место и ассоциирует категорию кэшбека"
 		
 	@Parameter(title: "Название места", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String
@@ -17,12 +21,18 @@ struct CreatePlaceIntent: AppIntent {
 	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var categoryName: String
 	
+	@Dependency
+	private var placeService: PlaceService
+	
+	@Dependency
+	private var searchService: SearchService
+	
+	@Dependency
+	private var categoryService: CategoryService
+	
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let placeService = await AppFactory.providePlaceService()
-		let categoryService = await AppFactory.provideCategoryService()
-		let searchService = await AppFactory.provideSearchService()
 		guard let category = categoryService.getCategory(by: categoryName) else {
 			return .result(dialog: "Не получилось найти категорию \(categoryName) и добавить место")
 		}

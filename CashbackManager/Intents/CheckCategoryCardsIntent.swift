@@ -13,9 +13,11 @@ struct CheckCategoryCardsIntent: AppIntent {
 	static var title: LocalizedStringResource = "Карта в категории"
 	static var description: IntentDescription? = "Запрашивает название категории и выдает все карты с кэшбеком в этой категории"
 
-	
 	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var categoryName: String
+	
+	@Dependency
+	private var cardsService: CardsService
 	
 	init(categoryName: String) {
 		self.categoryName = categoryName
@@ -24,7 +26,6 @@ struct CheckCategoryCardsIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let cardsService = await AppFactory.provideCardsService()
 		let cards = cardsService.getCards(categoryName: categoryName)
 		let result = if cards.isEmpty {
 			"Не удалось найти карту с категорией \(categoryName)"

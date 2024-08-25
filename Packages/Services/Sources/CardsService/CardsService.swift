@@ -9,7 +9,7 @@ import Domain
 import Foundation
 import SwiftData
 
-public struct CardsService: ICardsService {
+public struct CardsService: ICardsService, @unchecked Sendable {
 	private let context: ModelContext
 	
 	public init(context: ModelContext) {

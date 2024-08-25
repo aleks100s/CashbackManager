@@ -8,6 +8,7 @@
 import AppIntents
 import CardsService
 import Domain
+import PlaceService
 import SwiftData
 
 struct CheckPlaceCardIntent: AppIntent {
@@ -17,6 +18,12 @@ struct CheckPlaceCardIntent: AppIntent {
 	@Parameter(title: "Название заведения", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String
 	
+	@Dependency
+	private var placeService: PlaceService
+	
+	@Dependency
+	private var cardsService: CardsService
+	
 	init(placeName: String) {
 		self.placeName = placeName
 	}
@@ -24,8 +31,6 @@ struct CheckPlaceCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let placeService = await AppFactory.providePlaceService()
-		let cardsService = await AppFactory.provideCardsService()
 		if let place = placeService.getPlace(by: placeName) {
 			let cards = cardsService.getCards(categoryName: place.category.name)
 			if !cards.isEmpty {
