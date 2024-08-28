@@ -144,10 +144,14 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCashbackIntent(),
 			phrases: [
-				"Добавь новый \(.applicationName)",
+				"Добавь новые \(.applicationName)",
 				"Добавь \(.applicationName)",
-				"Создай новый \(.applicationName)",
+				"Создай новые \(.applicationName)",
 				"Создай \(.applicationName)",
+				"Добавь новые \(.applicationName) на карту",
+				"Добавь \(.applicationName) на карту",
+				"Создай новые \(.applicationName) на карте",
+				"Создай \(.applicationName) на карте",
 			],
 			shortTitle: "Новый кэшбек",
 			systemImageName: "plus"

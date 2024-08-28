@@ -60,6 +60,11 @@ public struct SelectCategoryView: View {
 						}
 						.buttonStyle(PlainButtonStyle())
 					}
+					.onDelete { indexSet in
+						for index in indexSet {
+							deleteCategory(index: index)
+						}
+					}
 				}
 			}
 		}
@@ -87,5 +92,9 @@ public struct SelectCategoryView: View {
 			.presentationDetents([.medium])
 			.presentationBackground(.regularMaterial)
 		}
+	}
+	
+	func deleteCategory(index: Int) {
+		categoryService?.delete(category: categories[index])
 	}
 }

@@ -10,4 +10,5 @@ public protocol ICategoryService {
 	func getCategory(by name: String) -> Category?
 	@discardableResult
 	func createCategory(name: String) -> Category
+	func delete(category: Category)
 }
