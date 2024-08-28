@@ -30,6 +30,6 @@ struct DeleteCategoryIntent: AppIntent {
 		}
 		
 		categoryService.delete(category: category)
-		return .result(dialog: "Категория кэшбека \"\(categoryName)\" удалена!")
+		return .result(dialog: "Категория кэшбека \"\(category.name)\" удалена!")
 	}
 }
