@@ -52,6 +52,10 @@ public struct CardsService: ICardsService, @unchecked Sendable {
 		context.delete(card)
 	}
 	
+	public func delete(cashback: Cashback, card: Card) {
+		card.cashback.removeAll { $0.id == cashback.id }
+	}
+	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {
 		let descriptor = FetchDescriptor(predicate: predicate)
 		return (try? context.fetch(descriptor)) ?? []

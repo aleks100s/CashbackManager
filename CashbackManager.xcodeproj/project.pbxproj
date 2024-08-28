@@ -20,6 +20,7 @@
 		2723208E2C7F8367005B658A /* DeleteCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723208D2C7F8367005B658A /* DeleteCategoryIntent.swift */; };
 		272320902C7F85E0005B658A /* DeletePlaceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723208F2C7F85E0005B658A /* DeletePlaceIntent.swift */; };
 		272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272320912C7F867C005B658A /* DeleteCardIntent.swift */; };
+		272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272320932C7F86EA005B658A /* DeleteCashbackIntent.swift */; };
 		272CA8D42C54C6E600A00E90 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 272CA8D32C54C6E600A00E90 /* Domain */; };
 		27368B6B2C395E5800FC0475 /* BanksStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368B622C395E5800FC0475 /* BanksStoreTests.swift */; };
 		27368B802C426E8E00FC0475 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -103,6 +104,7 @@
 		2723208D2C7F8367005B658A /* DeleteCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryIntent.swift; sourceTree = "<group>"; };
 		2723208F2C7F85E0005B658A /* DeletePlaceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePlaceIntent.swift; sourceTree = "<group>"; };
 		272320912C7F867C005B658A /* DeleteCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCardIntent.swift; sourceTree = "<group>"; };
+		272320932C7F86EA005B658A /* DeleteCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCashbackIntent.swift; sourceTree = "<group>"; };
 		272CA8D52C54C85800A00E90 /* CommonScenes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonScenes; sourceTree = "<group>"; };
 		27368B622C395E5800FC0475 /* BanksStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanksStoreTests.swift; sourceTree = "<group>"; };
 		27368B6F2C395E8300FC0475 /* CashbackManager.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CashbackManager.xctestplan; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				2723208D2C7F8367005B658A /* DeleteCategoryIntent.swift */,
 				2723208F2C7F85E0005B658A /* DeletePlaceIntent.swift */,
 				272320912C7F867C005B658A /* DeleteCardIntent.swift */,
+				272320932C7F86EA005B658A /* DeleteCashbackIntent.swift */,
 			);
 			path = Intents;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */,
 				2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */,
 				272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */,
+				272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -772,7 +776,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.16.0;
+				MARKETING_VERSION = 0.17.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -808,7 +812,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.16.0;
+				MARKETING_VERSION = 0.17.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

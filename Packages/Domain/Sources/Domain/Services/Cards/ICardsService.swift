@@ -14,4 +14,5 @@ public protocol ICardsService {
 	func getAllCards() -> [Card]
 	func getCards(categoryName: String) -> [Card]
 	func delete(card: Card)
+	func delete(cashback: Cashback, card: Card)
 }
