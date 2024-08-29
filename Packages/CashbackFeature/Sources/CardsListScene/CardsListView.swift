@@ -46,36 +46,14 @@ public struct CardsListView: View {
 			}
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
-					Button("Добавить карту") {
-						isAddCardSheetPresented = true
-					}
+					addCardButton
 				}
 			}
 			.sheet(isPresented: $isAddCardSheetPresented) {
-				NavigationView {
-					CommonInputView("Название карты") { cardName in
-						let card = Card(name: cardName)
-						create(card: card)
-						isAddCardSheetPresented = false
-					}
-					.navigationTitle("Добавить новую карту")
-					.navigationBarTitleDisplayMode(.inline)
-				}
-				.presentationDetents([.medium])
-				.presentationBackground(.regularMaterial)
+				addCardSheet
 			}
 			.sheet(item: $cardToBeRenamed) { card in
-				NavigationView {
-					CommonInputView("Название карты", text: card.name) { cardName in
-						card.name = cardName
-						context.insert(card)
-						cardToBeRenamed = nil
-					}
-					.navigationTitle("Переименовать карту")
-					.navigationBarTitleDisplayMode(.inline)
-				}
-				.presentationDetents([.medium])
-				.presentationBackground(.regularMaterial)
+				renameCardSheet(card)
 			}
 	}
 	
@@ -91,28 +69,7 @@ public struct CardsListView: View {
 			ScrollView {
 				LazyVStack(spacing: 16) {
 					ForEach(filteredCards) { card in
-						Button {
-							onCardSelected(card)
-						} label: {
-							CardView(card: card)
-								.contextMenu {
-									Text(card.name)
-									Button {
-										cardToBeRenamed = card
-									} label: {
-										Text("Переименовать карту")
-									}
-									Button(role: .destructive) {
-										delete(card: card)
-									} label: {
-										Text("Удалить карту")
-									}
-								} preview: {
-									CashbackListView(cashback: card.cashback)
-								}
-
-						}
-						.buttonStyle(.plain)
+						cardView(card)
 					}
 					
 					ShortcutsLink()
@@ -124,9 +81,83 @@ public struct CardsListView: View {
 	}
 	
 	@MainActor
-	private func create(card: Card) {
+	private var addCardSheet: some View {
+		NavigationView {
+			CommonInputView("Название карты") { cardName in
+				create(cardName: cardName)
+			}
+			.navigationTitle("Добавить новую карту")
+			.navigationBarTitleDisplayMode(.inline)
+		}
+		.presentationDetents([.medium])
+		.presentationBackground(.regularMaterial)
+	}
+	
+	private var addCardButton: some View {
+		Button("Добавить карту") {
+			isAddCardSheetPresented = true
+		}
+	}
+	
+	private func renameCardSheet(_ card: Card) -> some View {
+		NavigationView {
+			CommonInputView("Название карты", text: card.name) { cardName in
+				onCardNameChanged(cardName, card: card)
+			}
+			.navigationTitle("Переименовать карту")
+			.navigationBarTitleDisplayMode(.inline)
+		}
+		.presentationDetents([.medium])
+		.presentationBackground(.regularMaterial)
+	}
+	
+	private func cardView(_ card: Card) -> some View {
+		Button {
+			onCardSelected(card)
+		} label: {
+			CardView(card: card)
+				.contextMenu {
+					Text(card.name)
+					
+					renameCardButton(card)
+					
+					deleteCardButton(card)
+				} preview: {
+					CashbackListView(cashback: card.cashback)
+				}
+
+		}
+		.buttonStyle(.plain)
+	}
+	
+	private func renameCardButton(_ card: Card) -> some View {
+		Button {
+			cardToBeRenamed = card
+		} label: {
+			Text("Переименовать карту")
+		}
+	}
+	
+	private func deleteCardButton(_ card: Card) -> some View {
+		Button(role: .destructive) {
+			delete(card: card)
+		} label: {
+			Text("Удалить карту")
+		}
+	}
+	
+	private func onCardNameChanged(_ cardName: String, card: Card) {
+		card.name = cardName
+		context.insert(card)
+		cardToBeRenamed = nil
+	}
+		
+	@MainActor
+	private func create(cardName: String) {
+		let card = Card(name: cardName)
 		context.insert(card)
 		searchService?.index(card: card)
+		isAddCardSheetPresented = false
 	}
 	
 	private func delete(card: Card) {

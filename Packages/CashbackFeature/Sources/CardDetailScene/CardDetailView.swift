@@ -33,9 +33,7 @@ public struct CardDetailView: View {
 			.navigationTitle(card.name)
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
-					Button("Добавить кэшбек") {
-						onAddCashbackTap()
-					}
+					addCashbackButton
 				}
 			}
 			.onAppear {
@@ -53,11 +51,7 @@ public struct CardDetailView: View {
 				ForEach(card.cashback) { cashback in
 					CashbackView(cashback: cashback)
 						.contextMenu {
-							Button(role: .destructive) {
-								delete(cashback: cashback)
-							} label: {
-								Text("Удалить")
-							}
+							deleteCashbackButton(cashback: cashback)
 						}
 				}
 				.onDelete { indexSet in
@@ -66,6 +60,20 @@ public struct CardDetailView: View {
 					}
 				}
 			}
+		}
+	}
+	
+	private var addCashbackButton: some View {
+		Button("Добавить кэшбек") {
+			onAddCashbackTap()
+		}
+	}
+	
+	private func deleteCashbackButton(cashback: Cashback) -> some View {
+		Button(role: .destructive) {
+			delete(cashback: cashback)
+		} label: {
+			Text("Удалить")
 		}
 	}
 	

@@ -29,6 +29,20 @@ public struct AddPlaceView: View {
 	public init() {}
 	
 	public var body: some View {
+		contentView
+			.background(Color.cmScreenBackground)
+			.navigationTitle("Новое место")
+			.toolbar {
+				ToolbarItem(placement: .topBarTrailing) {
+					saveButton
+				}
+			}
+			.sheet(isPresented: $isCategorySelectorPresented) {
+				selectCategorySheet
+			}
+	}
+	
+	private var contentView: some View {
 		ScrollView {
 			VStack {
 				CMTextField("Название", text: $placeName)
@@ -45,29 +59,28 @@ public struct AddPlaceView: View {
 			}
 			.padding()
 		}
-		.background(Color.cmScreenBackground)
-		.navigationTitle("Новое место")
-		.toolbar {
-			ToolbarItem(placement: .topBarTrailing) {
-				Button("Сохранить") {
-					createPlace()
-					dismiss()
-				}
-				.disabled(!isInputCorrect)
+	}
+	
+	private var selectCategorySheet: some View {
+		NavigationView {
+			SelectCategoryView { category in
+				selectedCategory = category
+				isCategorySelectorPresented = false
 			}
 		}
-		.sheet(isPresented: $isCategorySelectorPresented) {
-			NavigationView {
-				SelectCategoryView { category in
-					selectedCategory = category
-					isCategorySelectorPresented = false
-				}
-			}
-			.navigationTitle("Выбор категории")
-			.navigationBarTitleDisplayMode(.inline)
-			.presentationDetents([.large])
-			.presentationBackground(.regularMaterial)
+		.navigationTitle("Выбор категории")
+		.navigationBarTitleDisplayMode(.inline)
+		.presentationDetents([.large])
+		.presentationBackground(.regularMaterial)
+	}
+	
+	@MainActor
+	private var saveButton: some View {
+		Button("Сохранить") {
+			createPlace()
+			dismiss()
 		}
+		.disabled(!isInputCorrect)
 	}
 	
 	@MainActor

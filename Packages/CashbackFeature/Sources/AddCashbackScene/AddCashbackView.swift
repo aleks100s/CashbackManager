@@ -33,6 +33,26 @@ public struct AddCashbackView: View {
 	}
 	
 	public var body: some View {
+		contentView
+			.background(Color.cmScreenBackground)
+			.navigationTitle("Добавить кэшбек")
+			.toolbar {
+				ToolbarItem(placement: .topBarTrailing) {
+					saveButton
+				}
+				
+				if selectedCategory == nil {
+					ToolbarItem(placement: .bottomBar) {
+						selectCategoryButton
+					}
+				}
+			}
+			.sheet(isPresented: $isCategorySelectorPresented) {
+				selectCategorySheet
+			}
+	}
+	
+	private var contentView: some View {
 		ScrollView(.vertical) {
 			HStack {
 				Spacer()
@@ -40,69 +60,47 @@ public struct AddCashbackView: View {
 					Spacer()
 					
 					if let category = selectedCategory {
-						Button {
+						CategorySelectorView(category: category, percent: percent) {
 							isCategorySelectorPresented = true
-						} label: {
-							HStack {
-								CategoryView(category: category)
-								
-								Text(percent, format: .percent)
-									.padding()
-							}
-							.contentShape(Rectangle())
 						}
-						.buttonStyle(PlainButtonStyle())
 					}
 					
 					if selectedCategory != nil {
-						ScrollView(.horizontal, showsIndicators: false) {
-							LazyHStack {
-								ForEach(percentPresets, id: \.self) { percent in
-									Button {
-										self.percent = percent
-									} label: {
-										Text(percent, format: .percent)
-									}
-									.buttonStyle(BorderedProminentButtonStyle())
-									.padding()
-								}
-							}
+						PercentSelectorView(percentPresets: percentPresets) { percent in
+							self.percent = percent
 						}
 					}
 				}
 				Spacer()
 			}
 		}
-		.background(Color.cmScreenBackground)
-		.navigationTitle("Добавить кэшбек")
-		.toolbar {
-			ToolbarItem(placement: .topBarTrailing) {
-				Button("Сохранить") {
-					createCashback()
-					dismiss()
-				}
-				.disabled(selectedCategory == nil || percent == 0)
-			}
-			
-			if selectedCategory == nil {
-				ToolbarItem(placement: .bottomBar) {
-					Button("Выбрать категорию") {
-						isCategorySelectorPresented = true
-					}
-				}
+	}
+	
+	private var selectCategorySheet: some View {
+		NavigationView {
+			SelectCategoryView { category in
+				selectedCategory = category
+				isCategorySelectorPresented = false
 			}
 		}
-		.sheet(isPresented: $isCategorySelectorPresented) {
-			NavigationView {
-				SelectCategoryView { category in
-					selectedCategory = category
-					isCategorySelectorPresented = false
-				}
-			}
-			.navigationTitle("Выбор категории")
-			.navigationBarTitleDisplayMode(.inline)
-			.presentationDetents([.large])
-			.presentationBackground(.regularMaterial)
+		.navigationTitle("Выбор категории")
+		.navigationBarTitleDisplayMode(.inline)
+		.presentationDetents([.large])
+		.presentationBackground(.regularMaterial)
+	}
+	
+	@MainActor
+	private var saveButton: some View {
+		Button("Сохранить") {
+			createCashback()
+			dismiss()
+		}
+		.disabled(selectedCategory == nil || percent == 0)
+	}
+	
+	private var selectCategoryButton: some View {
+		Button("Выбрать категорию") {
+			isCategorySelectorPresented = true
 		}
 	}
 	
@@ -127,5 +125,49 @@ public struct AddCashbackView: View {
 	private func index(cashback: Cashback) {
 		let image = renderCategoryMarker(category: cashback.category)
 		searchService?.index(cashback: cashback, cardName: card.name, image: image)
+	}
+}
+
+private extension AddCashbackView {
+	struct CategorySelectorView: View {
+		let category: Domain.Category
+		let percent: Double
+		let onTap: () -> Void
+		
+		var body: some View {
+			Button {
+				onTap()
+			} label: {
+				HStack {
+					CategoryView(category: category)
+					
+					Text(percent, format: .percent)
+						.padding()
+				}
+				.contentShape(Rectangle())
+			}
+			.buttonStyle(PlainButtonStyle())
+		}
+	}
+	
+	struct PercentSelectorView: View {
+		let percentPresets: [Double]
+		let onPercentSelect: (Double) -> Void
+		
+		var body: some View {
+			ScrollView(.horizontal, showsIndicators: false) {
+				LazyHStack {
+					ForEach(percentPresets, id: \.self) { percent in
+						Button {
+							onPercentSelect(percent)
+						} label: {
+							Text(percent, format: .percent)
+						}
+						.buttonStyle(BorderedProminentButtonStyle())
+						.padding()
+					}
+				}
+			}
+		}
 	}
 }

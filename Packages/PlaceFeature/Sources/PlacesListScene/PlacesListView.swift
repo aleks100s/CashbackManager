@@ -49,9 +49,7 @@ public struct PlacesListView: View {
 			}
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
-					Button("Добавить место") {
-						onAddPlaceButtonTapped()
-					}
+					addPlaceButton
 				}
 			}
 	}
@@ -69,11 +67,7 @@ public struct PlacesListView: View {
 						PlaceView(place: place)
 							.contentShape(.rect)
 							.contextMenu {
-								Button(role: .destructive) {
-									delete(place: place)
-								} label: {
-									Text("Удалить")
-								}
+								deletePlaceButton(place)
 							}
 					}
 					.buttonStyle(.plain)
@@ -87,12 +81,26 @@ public struct PlacesListView: View {
 		}
 	}
 	
-	func deletePlace(index: Int) {
+	private var addPlaceButton: some View {
+		Button("Добавить место") {
+			onAddPlaceButtonTapped()
+		}
+	}
+	
+	private func deletePlaceButton(_ place: Place) -> some View {
+		Button(role: .destructive) {
+			delete(place: place)
+		} label: {
+			Text("Удалить")
+		}
+	}
+	
+	private func deletePlace(index: Int) {
 		let place = places[index]
 		delete(place: place)
 	}
 	
-	func delete(place: Place) {
+	private func delete(place: Place) {
 		searchService?.deindex(place: place)
 		placeService?.delete(place: place)
 	}
