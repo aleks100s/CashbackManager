@@ -69,6 +69,7 @@ public struct AddCashbackView: View {
 						PercentSelectorView(percentPresets: percentPresets) { percent in
 							self.percent = percent
 						}
+						.sensoryFeedback(.impact, trigger: percent)
 					}
 				}
 				Spacer()
@@ -102,6 +103,7 @@ public struct AddCashbackView: View {
 		Button("Выбрать категорию") {
 			isCategorySelectorPresented = true
 		}
+		.sensoryFeedback(.impact, trigger: isCategorySelectorPresented)
 	}
 	
 	@MainActor

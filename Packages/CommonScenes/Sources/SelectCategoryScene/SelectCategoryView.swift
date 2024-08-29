@@ -36,29 +36,37 @@ public struct SelectCategoryView: View {
 	}
 	
 	public var body: some View {
+		contentView
+			.searchable(
+				text: $searchText,
+				placement: .navigationBarDrawer(displayMode: .always),
+				prompt: "Название категории"
+			)
+			.toolbar {
+				ToolbarItem(placement: .topBarTrailing) {
+					createButton
+				}
+			}
+			.sheet(isPresented: $isAddCategorySheetPresented) {
+				addCategorySheet
+			}
+	}
+	
+	private var contentView: some View {
 		Group {
 			if filteredCategories.isEmpty {
 				ZStack(alignment: .center) {
 					VStack(alignment: .center, spacing: 16) {
 						Text("Категории не найдены")
 						
-						CMProminentButton("Добавить свою") {
-							isAddCategorySheetPresented = true
-						}
+						addCategoryButton
 					}
 				}
 				.background(Color.cmScreenBackground)
 			} else {
 				List {
 					ForEach(filteredCategories) { category in
-						Button {
-							category.priority += 1
-							onSelect(category)
-							dismiss()
-						} label: {
-							CategoryView(category: category)
-						}
-						.buttonStyle(PlainButtonStyle())
+						categoryButtonView(category)
 					}
 					.onDelete { indexSet in
 						for index in indexSet {
@@ -68,30 +76,44 @@ public struct SelectCategoryView: View {
 				}
 			}
 		}
-		.searchable(
-			text: $searchText,
-			placement: .navigationBarDrawer(displayMode: .always),
-			prompt: "Название категории"
-		)
-		.toolbar {
-			ToolbarItem(placement: .topBarTrailing) {
-				Button("Создать") {
-					isAddCategorySheetPresented = true
-				}
+	}
+	
+	private var addCategoryButton: some View {
+		CMProminentButton("Добавить свою") {
+			isAddCategorySheetPresented = true
+		}
+		.sensoryFeedback(.impact, trigger: isAddCategorySheetPresented)
+	}
+	
+	private var addCategorySheet: some View {
+		NavigationView {
+			CommonInputView("Название категории") { categoryName in
+				categoryService?.createCategory(name: categoryName)
+				isAddCategorySheetPresented = false
 			}
 		}
-		.sheet(isPresented: $isAddCategorySheetPresented) {
-			NavigationView {
-				CommonInputView("Название категории") { categoryName in
-					categoryService?.createCategory(name: categoryName)
-					isAddCategorySheetPresented = false
-				}
-			}
-			.navigationTitle("Создать категорию")
-			.navigationBarTitleDisplayMode(.inline)
-			.presentationDetents([.medium])
-			.presentationBackground(.regularMaterial)
+		.navigationTitle("Создать категорию")
+		.navigationBarTitleDisplayMode(.inline)
+		.presentationDetents([.medium])
+		.presentationBackground(.regularMaterial)
+	}
+	
+	private var createButton: some View {
+		Button("Создать") {
+			isAddCategorySheetPresented = true
 		}
+		.sensoryFeedback(.impact, trigger: isAddCategorySheetPresented)
+	}
+	
+	private func categoryButtonView(_ category: Domain.Category) -> some View {
+		Button {
+			category.priority += 1
+			onSelect(category)
+			dismiss()
+		} label: {
+			CategoryView(category: category)
+		}
+		.buttonStyle(PlainButtonStyle())
 	}
 	
 	func deleteCategory(index: Int) {
