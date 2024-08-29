@@ -9,7 +9,7 @@ import Domain
 import Foundation
 import SwiftData
 
-public struct CardsService: ICardsService, @unchecked Sendable {
+public struct CardsService: @unchecked Sendable {
 	private let context: ModelContext
 	
 	public init(context: ModelContext) {
@@ -50,6 +50,10 @@ public struct CardsService: ICardsService, @unchecked Sendable {
 	
 	public func delete(card: Card) {
 		context.delete(card)
+	}
+	
+	public func add(cashback: Cashback, card: Card) {
+		card.cashback.append(cashback)
 	}
 	
 	public func delete(cashback: Cashback, card: Card) {

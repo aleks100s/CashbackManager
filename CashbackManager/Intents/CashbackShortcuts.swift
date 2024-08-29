@@ -19,7 +19,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Создай карту для \(.applicationName)",
 			],
 			shortTitle: "Новая карта",
-			systemImageName: "creditcard"
+			systemImageName: "plus"
 		)
 		
 		AppShortcut(
@@ -45,7 +45,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Что за \(.applicationName) у карты?",
 			],
 			shortTitle: "Кэшбек на карте",
-			systemImageName: "rublesign"
+			systemImageName: "creditcard.viewfinder"
 		)
 		
 		AppShortcut(
@@ -91,7 +91,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Что за \(.applicationName) у места?",
 			],
 			shortTitle: "Категория в заведении",
-			systemImageName: "mappin.circle"
+			systemImageName: "storefront"
 		)
 		
 		AppShortcut(
@@ -106,7 +106,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Карта для \(.applicationName)",
 			],
 			shortTitle: "Карта в заведении",
-			systemImageName: "mappin"
+			systemImageName: "storefront"
 		)
 		
 		AppShortcut(
@@ -122,7 +122,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Создай заведение для \(.applicationName)",
 			],
 			shortTitle: "Новое место",
-			systemImageName: "storefront"
+			systemImageName: "plus"
 		)
 		
 		AppShortcut(
@@ -138,7 +138,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Создай категорию для \(.applicationName)",
 			],
 			shortTitle: "Новая категория",
-			systemImageName: "list.bullet"
+			systemImageName: "plus"
 		)
 		
 		AppShortcut(
@@ -155,6 +155,26 @@ struct CashbackShortcuts: AppShortcutsProvider {
 			],
 			shortTitle: "Новый кэшбек",
 			systemImageName: "plus"
+		)
+		
+		AppShortcut(
+			intent: DeleteCardIntent(),
+			phrases: [
+				"Удали карту с \(.applicationName)",
+				"Удали карту \(.applicationName)",
+			],
+			shortTitle: "Удалить карту",
+			systemImageName: "trashbin"
+		)
+		
+		AppShortcut(
+			intent: DeletePlaceIntent(),
+			phrases: [
+				"Удали место \(.applicationName)",
+				"Удали заведение \(.applicationName)",
+			],
+			shortTitle: "Удалить место",
+			systemImageName: "trashbin"
 		)
 	}
 }

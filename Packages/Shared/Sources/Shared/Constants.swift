@@ -7,8 +7,8 @@
 
 public enum Constants {
 	public enum SFSymbols {
-		public static let mapPin = "mappin.circle"
-		public static let rubleSign = "rublesign.circle"
+		public static let places = "storefront"
+		public static let cashback = "rublesign.circle"
 	}
 	
 	public static let appIdentifier = "com.alextos.CashbackManager"

@@ -59,7 +59,7 @@ public struct PlacesListView: View {
 	@ViewBuilder
 	private var contentView: some View {
 		if filteredPlaces.isEmpty {
-			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.mapPin)
+			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
 		} else {
 			List {
 				ForEach(filteredPlaces) { place in

@@ -5,6 +5,7 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import CardsService
 import DesignSystem
 import Domain
 import SearchService
@@ -25,6 +26,7 @@ public struct AddCashbackView: View {
 	@Environment(\.modelContext) private var context
 	@Environment(\.displayScale) var displayScale
 	@Environment(\.searchService) var searchService
+	@Environment(\.cardsService) var cardsService
 		
 	public init(card: Card) {
 		self.card = card
@@ -108,8 +110,7 @@ public struct AddCashbackView: View {
 	private func createCashback() {
 		if let selectedCategory {
 			let cashback = Cashback(category: selectedCategory, percent: percent)
-			context.insert(cashback)
-			card.cashback.append(cashback)
+			cardsService?.add(cashback: cashback, card: card)
 			index(cashback: cashback)
 			searchService?.index(card: card)
 		}

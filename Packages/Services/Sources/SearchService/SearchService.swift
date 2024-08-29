@@ -10,11 +10,11 @@ import Domain
 import Shared
 import UIKit
 
-public struct SearchService: ISearchService, @unchecked Sendable {
+public struct SearchService: @unchecked Sendable {
 	public init() {}
 	
 	public func index(card: Card) {
-		let image = UIImage(systemName: Constants.SFSymbols.rubleSign)
+		let image = UIImage(systemName: Constants.SFSymbols.cashback)
 		let attributeSet = createAttributes(title: card.name, description: card.cashbackDescription, image: image)
 		index(id: card.id, attributes: attributeSet)
 	}

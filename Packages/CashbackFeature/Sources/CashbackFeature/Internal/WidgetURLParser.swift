@@ -5,14 +5,14 @@
 //  Created by Alexander on 23.07.2024.
 //
 
-import Domain
+import CardsService
 import Foundation
 import SwiftData
 
 struct WidgetURLParser {
-	private let cardsService: ICardsService
+	private let cardsService: CardsService
 	
-	init(cardsService: ICardsService) {
+	init(cardsService: CardsService) {
 		self.cardsService = cardsService
 	}
 	

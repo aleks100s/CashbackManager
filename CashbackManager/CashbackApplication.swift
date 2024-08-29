@@ -39,12 +39,12 @@ struct CashbackApplication: App {
 			TabView {
 				CashbackFeatureAssembly.assemble(container: container)
 					.tabItem {
-						Label("Кэшбек", systemImage: Constants.SFSymbols.rubleSign)
+						Label("Кэшбек", systemImage: Constants.SFSymbols.cashback)
 					}
 				
 				PlaceFeatureAssembly.assemble()
 					.tabItem {
-						Label("Места", systemImage: Constants.SFSymbols.mapPin)
+						Label("Места", systemImage: Constants.SFSymbols.places)
 					}
 			}
 			

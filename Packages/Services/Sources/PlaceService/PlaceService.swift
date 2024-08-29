@@ -9,7 +9,7 @@ import Domain
 import Foundation
 import SwiftData
 
-public struct PlaceService: IPlaceService, @unchecked Sendable {
+public struct PlaceService: @unchecked Sendable {
 	private let context: ModelContext
 	
 	public init(context: ModelContext) {
