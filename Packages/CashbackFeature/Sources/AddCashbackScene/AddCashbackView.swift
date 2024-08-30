@@ -110,7 +110,7 @@ public struct AddCashbackView: View {
 	private func createCashback() {
 		if let selectedCategory {
 			let cashback = Cashback(category: selectedCategory, percent: percent)
-			cardsService?.add(cashback: cashback, card: card)
+			card.cashback.append(cashback)
 			index(cashback: cashback)
 			searchService?.index(card: card)
 		}

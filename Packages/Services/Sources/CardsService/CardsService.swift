@@ -52,12 +52,9 @@ public struct CardsService: @unchecked Sendable {
 		context.delete(card)
 	}
 	
-	public func add(cashback: Cashback, card: Card) {
-		card.cashback.append(cashback)
-	}
-	
 	public func delete(cashback: Cashback, card: Card) {
 		card.cashback.removeAll { $0.id == cashback.id }
+		context.delete(cashback)
 	}
 	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {
