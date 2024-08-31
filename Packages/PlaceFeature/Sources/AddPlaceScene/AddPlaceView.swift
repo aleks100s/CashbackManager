@@ -44,7 +44,7 @@ public struct AddPlaceView: View {
 	
 	private var contentView: some View {
 		ScrollView {
-			VStack {
+			VStack(alignment: .center, spacing: 32) {
 				CMTextField("Название", text: $placeName)
 				
 				Button {
@@ -56,6 +56,7 @@ public struct AddPlaceView: View {
 						Text("Категория кэшбека")
 					}
 				}
+				.buttonStyle(BorderedProminentButtonStyle())
 			}
 			.padding()
 		}

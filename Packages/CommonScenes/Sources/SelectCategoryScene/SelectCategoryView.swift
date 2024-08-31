@@ -55,12 +55,20 @@ public struct SelectCategoryView: View {
 	private var contentView: some View {
 		Group {
 			if filteredCategories.isEmpty {
-				ZStack(alignment: .center) {
-					VStack(alignment: .center, spacing: 16) {
+				HStack {
+					Spacer()
+					
+					VStack(alignment: .center, spacing: 32) {
+						Spacer()
+						
 						Text("Категории не найдены")
 						
 						addCategoryButton
+						
+						Spacer()
 					}
+					
+					Spacer()
 				}
 				.background(Color.cmScreenBackground)
 			} else {
