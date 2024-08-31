@@ -66,7 +66,7 @@ public struct AddCashbackView: View {
 					}
 					
 					if selectedCategory != nil {
-						PercentSelectorView(percentPresets: percentPresets) { percent in
+						PercentSelectorView(percentPresets: percentPresets, percent: percent) { percent in
 							self.percent = percent
 						}
 						.sensoryFeedback(.impact, trigger: percent)
@@ -153,22 +153,37 @@ private extension AddCashbackView {
 	}
 	
 	struct PercentSelectorView: View {
+		private static let formatter = {
+			let formatter = NumberFormatter()
+			formatter.maximumFractionDigits = 1
+			formatter.minimumFractionDigits = 0
+			return formatter
+		}()
+		
 		let percentPresets: [Double]
 		let onPercentSelect: (Double) -> Void
+		@State var percent: Double
+		
+		init(percentPresets: [Double], percent: Double, onPercentSelect: @escaping (Double) -> Void) {
+			self.percentPresets = percentPresets
+			self.percent = percent * 100
+			self.onPercentSelect = onPercentSelect
+		}
 		
 		var body: some View {
-			ScrollView(.horizontal, showsIndicators: false) {
-				LazyHStack {
-					ForEach(percentPresets, id: \.self) { percent in
-						Button {
-							onPercentSelect(percent)
-						} label: {
-							Text(percent, format: .percent)
-						}
-						.buttonStyle(BorderedProminentButtonStyle())
-						.padding()
-					}
+			HStack {
+				Text("Процент")
+				
+				TextField(value: $percent, formatter: Self.formatter) {
+					Text("Процент кэшбека")
 				}
+				.keyboardType(.decimalPad)
+				.textFieldStyle(.roundedBorder)
+				.onChange(of: percent) { _, newValue in
+					onPercentSelect(newValue / 100)
+				}
+				
+				Text("%")
 			}
 		}
 	}
