@@ -164,6 +164,8 @@ private extension AddCashbackView {
 		let onPercentSelect: (Double) -> Void
 		@State var percent: Double
 		
+		@FocusState private var isFocused
+		
 		init(percentPresets: [Double], percent: Double, onPercentSelect: @escaping (Double) -> Void) {
 			self.percentPresets = percentPresets
 			self.percent = percent * 100
@@ -179,9 +181,14 @@ private extension AddCashbackView {
 				}
 				.keyboardType(.decimalPad)
 				.textFieldStyle(.roundedBorder)
+				.focused($isFocused)
 				.onChange(of: percent) { _, newValue in
 					onPercentSelect(newValue / 100)
 				}
+				.onTapGesture {
+					isFocused = false
+				}
+				.scrollDismissesKeyboard(.interactively)
 				
 				Text("%")
 			}

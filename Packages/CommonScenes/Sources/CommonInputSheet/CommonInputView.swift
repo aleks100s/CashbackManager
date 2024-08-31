@@ -30,7 +30,7 @@ public struct CommonInputView: View {
 	
 	public var body: some View {
 		ScrollView {
-			VStack(alignment: .center, spacing: 16) {
+			VStack(alignment: .center, spacing: 32) {
 				CMTextField(placeholder, text: $text)
 					.keyboardType(keyboardType)
 					.focused($isFocused)
