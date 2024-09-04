@@ -164,7 +164,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Удали карту \(.applicationName)",
 			],
 			shortTitle: "Удалить карту",
-			systemImageName: "trashbin"
+			systemImageName: "trash"
 		)
 		
 		AppShortcut(
@@ -174,7 +174,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Удали заведение \(.applicationName)",
 			],
 			shortTitle: "Удалить место",
-			systemImageName: "trashbin"
+			systemImageName: "trash"
 		)
 	}
 }

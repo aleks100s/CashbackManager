@@ -56,6 +56,7 @@ public struct AddCashbackView: View {
 		ScrollView(.vertical) {
 			HStack {
 				Spacer()
+				
 				VStack(alignment: .leading, spacing: 32) {
 					Spacer()
 					
@@ -63,15 +64,20 @@ public struct AddCashbackView: View {
 						CategorySelectorView(category: category, percent: percent) {
 							isCategorySelectorPresented = true
 						}
-					}
-					
-					if selectedCategory != nil {
+						
 						PercentSelectorView(percentPresets: percentPresets, percent: percent) { percent in
 							self.percent = percent
 						}
 						.sensoryFeedback(.impact, trigger: percent)
 					}
+					
+					if card.has(category: selectedCategory) {
+						Text("Нельзя добавить две одинаковые категории для одной карты")
+							.font(.caption)
+							.foregroundStyle(.red)
+					}
 				}
+				
 				Spacer()
 			}
 		}
@@ -96,7 +102,7 @@ public struct AddCashbackView: View {
 			createCashback()
 			dismiss()
 		}
-		.disabled(selectedCategory == nil || percent == 0)
+		.disabled(selectedCategory == nil || percent == 0 || card.has(category: selectedCategory))
 	}
 	
 	private var selectCategoryButton: some View {

@@ -12,6 +12,12 @@ public extension Card {
 		return categoriesList
 	}
 	
+	func has(category: Category?) -> Bool {
+		guard let category else { return false }
+		
+		return cashback.map(\.category).contains(category)
+	}
+	
 	private var categoriesList: String {
 		cashback.map(\.description).joined(separator: ", ")
 	}

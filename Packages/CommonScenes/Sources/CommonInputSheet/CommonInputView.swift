@@ -46,5 +46,8 @@ public struct CommonInputView: View {
 			isFocused = false
 		}
 		.scrollDismissesKeyboard(.interactively)
+		.onAppear {
+			isFocused = true
+		}
 	}
 }
