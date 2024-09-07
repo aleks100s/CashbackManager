@@ -7,6 +7,7 @@
 
 import AppIntents
 import CardsService
+import CategoryService
 import SwiftData
 
 struct CheckCategoryCardsIntent: AppIntent {
@@ -19,6 +20,9 @@ struct CheckCategoryCardsIntent: AppIntent {
 	@Dependency
 	private var cardsService: CardsService
 	
+	@Dependency
+	private var categoryService: CategoryService
+	
 	init(categoryName: String) {
 		self.categoryName = categoryName
 	}
@@ -26,7 +30,11 @@ struct CheckCategoryCardsIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let cards = cardsService.getCards(categoryName: categoryName)
+		guard let category = categoryService.getCategory(by: categoryName) else {
+			return .result(dialog: "Категория \"\(categoryName)\" не найдена")
+		}
+
+		let cards = cardsService.getCards(category: category)
 		let result = if cards.isEmpty {
 			"Не удалось найти карту с категорией \(categoryName)"
 		} else {

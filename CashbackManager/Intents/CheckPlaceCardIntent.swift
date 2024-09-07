@@ -7,6 +7,7 @@
 
 import AppIntents
 import CardsService
+import CategoryService
 import Domain
 import PlaceService
 import SwiftData
@@ -24,6 +25,9 @@ struct CheckPlaceCardIntent: AppIntent {
 	@Dependency
 	private var cardsService: CardsService
 	
+	@Dependency
+	private var categoryService: CategoryService
+	
 	init(placeName: String) {
 		self.placeName = placeName
 	}
@@ -31,15 +35,15 @@ struct CheckPlaceCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		if let place = placeService.getPlace(by: placeName) {
-			let cards = cardsService.getCards(categoryName: place.category.name)
-			if !cards.isEmpty {
-				return .result(dialog: "Для оплаты в \(placeName) используйте карты: \(cards.map(\.name).joined(separator: ", "))")
-			} else {
-				return .result(dialog: "Не удалось найти подходящие карты с категорией \(place.category.name)")
-			}
-		} else {
+		guard let place = placeService.getPlace(by: placeName) else {
 			return .result(dialog: "Не удалось найти заведение \(placeName)")
+		}
+		
+		let cards = cardsService.getCards(category: place.category)
+		if !cards.isEmpty {
+			return .result(dialog: "Для оплаты в \(placeName) используйте карты: \(cards.map(\.name).joined(separator: ", "))")
+		} else {
+			return .result(dialog: "Не удалось найти подходящие карты с категорией \(place.category.name)")
 		}
 	}
 }

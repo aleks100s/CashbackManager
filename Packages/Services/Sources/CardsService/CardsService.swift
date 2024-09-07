@@ -40,10 +40,10 @@ public struct CardsService: @unchecked Sendable {
 		fetch(by: #Predicate<Card> { !$0.cashback.isEmpty })
 	}
 	
-	public func getCards(categoryName: String) -> [Card] {
-		fetch(by: #Predicate<Card> { card in
+	public func getCards(category: Domain.Category) -> [Card] {
+		fetch(by: #Predicate<Card> { [id = category.id] card in
 			card.cashback.contains { cashback in
-				cashback.category.name.localizedStandardContains(categoryName)
+				cashback.category.id == id
 			}
 		})
 	}
