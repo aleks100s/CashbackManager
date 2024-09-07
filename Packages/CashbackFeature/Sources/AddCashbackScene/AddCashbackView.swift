@@ -17,7 +17,7 @@ import SwiftUI
 public struct AddCashbackView: View {
 	private let card: Card
 	
-	private let percentPresets = [0.01, 0.015, 0.02, 0.03, 0.05, 0.07, 0.08, 0.1, 0.15, 0.2, 0.25, 0.3, 0.5]
+	private let percentPresets = [0.01, 0.03, 0.05, 0.1]
 	
 	@State private var percent = 0.05
 	@State private var selectedCategory: Domain.Category?
@@ -27,7 +27,7 @@ public struct AddCashbackView: View {
 	@Environment(\.displayScale) var displayScale
 	@Environment(\.searchService) var searchService
 	@Environment(\.cardsService) var cardsService
-		
+	
 	public init(card: Card) {
 		self.card = card
 	}
@@ -81,6 +81,7 @@ public struct AddCashbackView: View {
 				Spacer()
 			}
 		}
+		.scrollDismissesKeyboard(.interactively)
 	}
 	
 	private var selectCategorySheet: some View {
@@ -179,24 +180,41 @@ private extension AddCashbackView {
 		}
 		
 		var body: some View {
-			HStack {
-				Text("Процент")
+			VStack {
+				HStack {
+					Text("Процент")
+					
+					TextField(value: $percent, formatter: Self.formatter) {
+						Text("Процент кэшбека")
+					}
+					.keyboardType(.decimalPad)
+					.textFieldStyle(.roundedBorder)
+					.focused($isFocused)
+					.onChange(of: percent) { _, newValue in
+						onPercentSelect(newValue / 100)
+					}
+					.onTapGesture {
+						isFocused = false
+					}
+					
+					Text("%")
+				}
 				
-				TextField(value: $percent, formatter: Self.formatter) {
-					Text("Процент кэшбека")
+				if isFocused {
+					HStack {
+						Spacer()
+						
+						ForEach(percentPresets, id: \.self) { preset in
+							Button {
+								percent = preset * 100
+							} label: {
+								Text(preset, format: .percent)
+							}
+							
+							Spacer()
+						}
+					}
 				}
-				.keyboardType(.decimalPad)
-				.textFieldStyle(.roundedBorder)
-				.focused($isFocused)
-				.onChange(of: percent) { _, newValue in
-					onPercentSelect(newValue / 100)
-				}
-				.onTapGesture {
-					isFocused = false
-				}
-				.scrollDismissesKeyboard(.interactively)
-				
-				Text("%")
 			}
 		}
 	}
