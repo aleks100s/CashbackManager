@@ -13,6 +13,7 @@ import SearchService
 import Shared
 import SwiftData
 import SwiftUI
+import UserNotifications
 
 @main
 @MainActor
@@ -22,6 +23,9 @@ struct CashbackApplication: App {
 	private let categoryService = AppFactory.provideCategoryService()
 	private let placeService = AppFactory.providePlaceService()
 	private let cardsService = AppFactory.provideCardsService()
+	
+	@AppStorage("isMonthlyNotificationScheduled")
+	private var isMonthlyNotificationScheduled = false
 	
 	init() {
 		let searchService = self.searchService
@@ -47,11 +51,55 @@ struct CashbackApplication: App {
 						Label("Места", systemImage: Constants.SFSymbols.places)
 					}
 			}
-			
+			.task {
+				requestNotificationPermission()
+			}
         }
 		.modelContainer(container)
 		.environment(\.searchService, searchService)
 		.environment(\.categoryService, categoryService)
 		.environment(\.placeService, placeService)
     }
+
+	private func requestNotificationPermission() {
+		let center = UNUserNotificationCenter.current()
+		center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+			if granted {
+				scheduleMonthlyNotificationIfNeeded()
+			}
+		}
+	}
+	
+	private func scheduleMonthlyNotificationIfNeeded() {
+		guard !isMonthlyNotificationScheduled else {
+			return
+		}
+		
+		let center = UNUserNotificationCenter.current()
+
+		// Определение компонента времени для первого числа каждого месяца в 10:00 утра, например
+		var dateComponents = DateComponents()
+		dateComponents.day = 1
+		dateComponents.hour = 10
+
+		// Создание триггера с повторением каждый месяц
+		let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+
+		// Создание содержимого уведомления
+		let content = UNMutableNotificationContent()
+		content.title = "Пора добавить кэшбек"
+		content.body = "Не забудьте выбрать кэшбек в этом месяце"
+		content.sound = .default
+
+		// Создание уникального идентификатора для уведомления
+		let identifier = Constants.appIdentifier
+
+		// Создание запроса уведомления
+		let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+
+		// Добавление запроса
+		center.add(request) { _ in }
+		
+		isMonthlyNotificationScheduled = true
+	}
 }
