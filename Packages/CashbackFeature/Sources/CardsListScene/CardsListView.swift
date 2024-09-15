@@ -14,6 +14,8 @@ import SwiftData
 import SwiftUI
 
 public struct CardsListView: View {
+	private let addCardIntent: any AppIntent
+	private let checkCategoryCardIntent: any AppIntent
 	private let onCardSelected: (Card) -> Void
 	
 	@State private var searchText = ""
@@ -29,7 +31,13 @@ public struct CardsListView: View {
 		}
 	}
 	
-	public init(onCardSelected: @escaping (Card) -> Void) {
+	public init(
+		addCardIntent: any AppIntent,
+		checkCategoryCardIntent: any AppIntent,
+		onCardSelected: @escaping (Card) -> Void
+	) {
+		self.addCardIntent = addCardIntent
+		self.checkCategoryCardIntent = checkCategoryCardIntent
 		self.onCardSelected = onCardSelected
 	}
 	
@@ -67,14 +75,15 @@ public struct CardsListView: View {
 			}
 		} else {
 			ScrollView {
+				IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
+					.padding(.horizontal, 20)
+				
 				LazyVStack(spacing: 16) {
 					ForEach(filteredCards) { card in
 						cardView(card)
 					}
-					
-					ShortcutsLink()
 				}
-				.padding(.horizontal, 12)
+				.padding(.horizontal, 20)
 			}
 			.scrollDismissesKeyboard(.interactively)
 		}
@@ -83,14 +92,14 @@ public struct CardsListView: View {
 	@MainActor
 	private var addCardSheet: some View {
 		NavigationView {
-			CommonInputView("Название карты") { cardName in
+			CommonInputView("Название карты", intent: addCardIntent, hint: "В следующий раз, чтобы добавить карту") { cardName in
 				create(cardName: cardName)
 			}
 			.navigationTitle("Добавить новую карту")
 			.navigationBarTitleDisplayMode(.inline)
 		}
 		.presentationDetents([.medium])
-		.presentationBackground(.regularMaterial)
+		.presentationBackground(Color.cmScreenBackground)
 	}
 	
 	private var addCardButton: some View {

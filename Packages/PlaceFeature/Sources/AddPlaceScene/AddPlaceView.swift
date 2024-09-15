@@ -5,6 +5,7 @@
 //  Created by Alexander on 29.07.2024.
 //
 
+import AppIntents
 import DesignSystem
 import Domain
 import PlaceService
@@ -13,6 +14,9 @@ import SelectCategoryScene
 import SwiftUI
 
 public struct AddPlaceView: View {
+	private let addPlaceIntent: any AppIntent
+	private let addCategoryIntent: any AppIntent
+	
 	@State private var placeName = ""
 	@State private var selectedCategory: Domain.Category?
 	@State private var isCategorySelectorPresented = false
@@ -26,7 +30,10 @@ public struct AddPlaceView: View {
 		selectedCategory != nil && !placeName.isEmpty
 	}
 	
-	public init() {}
+	public init(addPlaceIntent: any AppIntent, addCategoryIntent: any AppIntent) {
+		self.addPlaceIntent = addPlaceIntent
+		self.addCategoryIntent = addCategoryIntent
+	}
 	
 	public var body: some View {
 		contentView
@@ -47,6 +54,8 @@ public struct AddPlaceView: View {
 			VStack(alignment: .center, spacing: 32) {
 				CMTextField("Название", text: $placeName)
 				
+				IntentTipView(intent: addPlaceIntent, text: "В следующий раз, чтобы добавить место")
+				
 				Button {
 					isCategorySelectorPresented = true
 				} label: {
@@ -64,7 +73,7 @@ public struct AddPlaceView: View {
 	
 	private var selectCategorySheet: some View {
 		NavigationView {
-			SelectCategoryView { category in
+			SelectCategoryView(addCategoryIntent: addCategoryIntent) { category in
 				selectedCategory = category
 				isCategorySelectorPresented = false
 			}

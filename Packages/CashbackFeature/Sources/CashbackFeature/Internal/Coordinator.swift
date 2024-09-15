@@ -6,12 +6,19 @@
 //
 
 import AddCashbackScene
+import AppIntents
 import CardDetailScene
 import CardsListScene
 import Domain
 import SwiftUI
 
 struct Coordinator: View {
+	let addCardIntent: any AppIntent
+	let checkCategoryCardIntent: any AppIntent
+	let cardCashbackIntent: any AppIntent
+	let addCategoryIntent: any AppIntent
+	let addCashbackIntent: any AppIntent
+	
 	@State private var navigationStack: [Navigation] = []
 	@State private var cardToAddCashback: Card?
 	
@@ -22,15 +29,16 @@ struct Coordinator: View {
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {
-			CardsListView { card in
+			CardsListView(addCardIntent: addCardIntent, checkCategoryCardIntent: checkCategoryCardIntent) { card in
 				navigationStack.append(.cardDetail(card))
 			}
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
 		}
 		.sheet(item: $cardToAddCashback) { card in
 			NavigationView {
-				AddCashbackView(card: card)
+				AddCashbackView(card: card, addCategoryIntent: addCategoryIntent, addCashbackIntent: addCashbackIntent)
 			}
+			.presentationDetents([.medium])
 		}
 		.onOpenURL { url in
 			if let path = urlParser?.parse(url: url) {
@@ -49,7 +57,7 @@ struct Coordinator: View {
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
 		case .cardDetail(let card):
-			CardDetailView(card: card) {
+			CardDetailView(card: card, cardCashbackIntent: cardCashbackIntent) {
 				cardToAddCashback = card
 			}
 		}

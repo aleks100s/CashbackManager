@@ -13,9 +13,9 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCardIntent(),
 			phrases: [
+				"Добавь карту в \(.applicationName)",
 				"Добавь новую карту в \(.applicationName)",
 				"Создай новую карту для \(.applicationName)",
-				"Добавь карту в \(.applicationName)",
 				"Создай карту для \(.applicationName)",
 			],
 			shortTitle: "Новая карта",
@@ -25,10 +25,10 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckCardCashbackIntent(),
 			phrases: [
+				"Какие \(.applicationName) на карте?",
 				"Какой \(.applicationName) на карте?",
 				"Какой \(.applicationName) по карте?",
 				"Какой \(.applicationName) у карты?",
-				"Какие \(.applicationName) на карте?",
 				"Какие \(.applicationName) по карте?",
 				"Какие \(.applicationName) у карты?",
 				"\(.applicationName) на карте?",
@@ -51,8 +51,9 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckCategoryCardsIntent(),
 			phrases: [
-				"Какой картой платить в категории \(.applicationName)?",
+				"На какой карте есть \(.applicationName)?",
 				"Чем платить в категории \(.applicationName)?",
+				"Какой картой платить в категории \(.applicationName)?",
 				"На какой карте есть категория \(.applicationName)?",
 				"Где есть категория \(.applicationName)?",
 				"У какой карты есть категория \(.applicationName)?",
@@ -73,6 +74,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCategoryIntent(),
 			phrases: [
+				"Какие \(.applicationName) в заведении?",
+				"Какие \(.applicationName) в месте?",
 				"Какая категория \(.applicationName) в заведении?",
 				"Какая категория \(.applicationName) у заведения?",
 				"Что за категория \(.applicationName) в заведении?",
@@ -112,9 +115,9 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreatePlaceIntent(),
 			phrases: [
+				"Добавь место в \(.applicationName)",
 				"Добавь новое место в \(.applicationName)",
 				"Добавь новое место для \(.applicationName)",
-				"Добавь место в \(.applicationName)",
 				"Создай место для \(.applicationName)",
 				"Добавь новое заведение в \(.applicationName)",
 				"Добавь новое заведение для \(.applicationName)",
@@ -128,13 +131,12 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCategoryIntent(),
 			phrases: [
+				"Добавь категорию в \(.applicationName)",
 				"Добавь новую категорию \(.applicationName)",
 				"Добавь новую категорию для \(.applicationName)",
-				"Добавь категорию \(.applicationName)",
 				"Создай категорию \(.applicationName)",
 				"Добавь новую категорию в \(.applicationName)",
 				"Добавь новую категорию для \(.applicationName)",
-				"Добавь категорию в \(.applicationName)",
 				"Создай категорию для \(.applicationName)",
 			],
 			shortTitle: "Новая категория",

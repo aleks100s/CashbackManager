@@ -5,6 +5,7 @@
 //  Created by Alexander on 27.07.2024.
 //
 
+import AppIntents
 import DesignSystem
 import Domain
 import PlaceService
@@ -14,6 +15,7 @@ import SwiftData
 import SwiftUI
 
 public struct PlacesListView: View {
+	private let checkPlaceIntent: any AppIntent
 	private let onPlaceSelected: (Place) -> Void
 	private let onAddPlaceButtonTapped: () -> Void
 	
@@ -29,9 +31,11 @@ public struct PlacesListView: View {
 	}
 	
 	public init(
+		checkPlaceIntent: any AppIntent,
 		onPlaceSelected: @escaping (Place) -> Void,
 		onAddPlaceButtonTapped: @escaping () -> Void
 	) {
+		self.checkPlaceIntent = checkPlaceIntent
 		self.onPlaceSelected = onPlaceSelected
 		self.onAddPlaceButtonTapped = onAddPlaceButtonTapped
 	}
@@ -60,6 +64,13 @@ public struct PlacesListView: View {
 			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
 		} else {
 			List {
+				Section {
+					IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
+				}
+				.listSectionSpacing(8)
+				.listRowBackground(Color.clear)
+				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+				
 				ForEach(filteredPlaces) { place in
 					Button {
 						onPlaceSelected(place)

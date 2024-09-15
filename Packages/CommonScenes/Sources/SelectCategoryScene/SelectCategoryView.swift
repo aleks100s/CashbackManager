@@ -5,6 +5,7 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import AppIntents
 import CategoryService
 import CommonInputSheet
 import DesignSystem
@@ -13,6 +14,7 @@ import SwiftData
 import SwiftUI
 
 public struct SelectCategoryView: View {
+	private let addCategoryIntent: any AppIntent
 	private let onSelect: (Domain.Category) -> Void
 	
 	@State private var searchText = ""
@@ -31,20 +33,23 @@ public struct SelectCategoryView: View {
 		}
 	}
 	
-	public init(onSelect: @escaping (Domain.Category) -> Void) {
+	public init(addCategoryIntent: any AppIntent, onSelect: @escaping (Domain.Category) -> Void) {
+		self.addCategoryIntent = addCategoryIntent
 		self.onSelect = onSelect
 	}
 	
 	public var body: some View {
 		contentView
+			.navigationTitle("Выбор категории кэшбека")
+			.navigationBarTitleDisplayMode(.inline)
 			.searchable(
 				text: $searchText,
 				placement: .navigationBarDrawer(displayMode: .always),
 				prompt: "Название категории"
 			)
 			.toolbar {
-				ToolbarItem(placement: .topBarTrailing) {
-					createButton
+				ToolbarItem(placement: .bottomBar) {
+					addCategoryButton
 				}
 			}
 			.sheet(isPresented: $isAddCategorySheetPresented) {
@@ -86,28 +91,21 @@ public struct SelectCategoryView: View {
 		}
 	}
 	
-	private var addCategoryButton: some View {
-		CMProminentButton("Добавить свою") {
-			isAddCategorySheetPresented = true
-		}
-		.sensoryFeedback(.impact, trigger: isAddCategorySheetPresented)
-	}
-	
 	private var addCategorySheet: some View {
 		NavigationView {
-			CommonInputView("Название категории") { categoryName in
+			CommonInputView("Название категории", text: searchText, intent: addCategoryIntent, hint: "Чтобы быстро добавить категорию") { categoryName in
 				categoryService?.createCategory(name: categoryName)
 				isAddCategorySheetPresented = false
 			}
+			.navigationTitle("Создать категорию")
+			.navigationBarTitleDisplayMode(.inline)
 		}
-		.navigationTitle("Создать категорию")
-		.navigationBarTitleDisplayMode(.inline)
 		.presentationDetents([.medium])
-		.presentationBackground(.regularMaterial)
+		.presentationBackground(Color.cmScreenBackground)
 	}
 	
-	private var createButton: some View {
-		Button("Создать") {
+	private var addCategoryButton: some View {
+		Button("Добавить свою категорию") {
 			isAddCategorySheetPresented = true
 		}
 		.sensoryFeedback(.impact, trigger: isAddCategorySheetPresented)

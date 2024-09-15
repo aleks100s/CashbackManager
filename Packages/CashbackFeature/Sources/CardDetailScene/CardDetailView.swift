@@ -5,6 +5,7 @@
 //  Created by Alexander on 19.06.2024.
 //
 
+import AppIntents
 import Domain
 import DesignSystem
 import SearchService
@@ -15,6 +16,7 @@ import WidgetKit
 
 public struct CardDetailView: View {
 	private let card: Card
+	private let cardCashbackIntent: any AppIntent
 	private let onAddCashbackTap: () -> Void
 	
 	@AppStorage("CurrentCardID", store: .appGroup) private var currentCardId: String?
@@ -22,8 +24,9 @@ public struct CardDetailView: View {
 	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
 
-	public init(card: Card, onAddCashbackTap: @escaping () -> Void) {
+	public init(card: Card, cardCashbackIntent: any AppIntent, onAddCashbackTap: @escaping () -> Void) {
 		self.card = card
+		self.cardCashbackIntent = cardCashbackIntent
 		self.onAddCashbackTap = onAddCashbackTap
 	}
 	
@@ -48,6 +51,13 @@ public struct CardDetailView: View {
 			ContentUnavailableView("Нет сохраненных кэшбеков", systemImage: "rublesign.circle")
 		} else {
 			List {
+				Section {
+					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбеки на карте")
+				}
+				.listSectionSpacing(8)
+				.listRowBackground(Color.clear)
+				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+				
 				ForEach(card.cashback) { cashback in
 					CashbackView(cashback: cashback)
 						.contextMenu {

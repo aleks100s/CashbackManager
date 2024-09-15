@@ -5,6 +5,7 @@
 //  Created by Alexander on 26.06.2024.
 //
 
+import AppIntents
 import CardsService
 import DesignSystem
 import Domain
@@ -16,6 +17,8 @@ import SwiftUI
 
 public struct AddCashbackView: View {
 	private let card: Card
+	private let addCategoryIntent: any AppIntent
+	private let addCashbackIntent: any AppIntent
 	
 	private let percentPresets = [0.01, 0.03, 0.05, 0.1]
 	
@@ -28,22 +31,25 @@ public struct AddCashbackView: View {
 	@Environment(\.searchService) var searchService
 	@Environment(\.cardsService) var cardsService
 	
-	public init(card: Card) {
+	public init(card: Card, addCategoryIntent: any AppIntent, addCashbackIntent: any AppIntent) {
 		self.card = card
+		self.addCategoryIntent = addCategoryIntent
+		self.addCashbackIntent = addCashbackIntent
 	}
 	
 	public var body: some View {
 		contentView
 			.background(Color.cmScreenBackground)
 			.navigationTitle("Добавить кэшбек")
+			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				ToolbarItem(placement: .topBarTrailing) {
-					saveButton
-				}
-				
 				if selectedCategory == nil {
 					ToolbarItem(placement: .bottomBar) {
 						selectCategoryButton
+					}
+				} else {
+					ToolbarItem(placement: .bottomBar) {
+						saveButton
 					}
 				}
 			}
@@ -54,39 +60,42 @@ public struct AddCashbackView: View {
 	
 	private var contentView: some View {
 		ScrollView(.vertical) {
-			HStack {
-				Spacer()
+			VStack(alignment: .leading) {
+				IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбек")
 				
-				VStack(alignment: .leading, spacing: 32) {
+				HStack {
 					Spacer()
 					
-					if let category = selectedCategory {
-						CategorySelectorView(category: category, percent: percent) {
-							isCategorySelectorPresented = true
+					VStack(alignment: .leading, spacing: 32) {
+						if let category = selectedCategory {
+							CategorySelectorView(category: category, percent: percent) {
+								isCategorySelectorPresented = true
+							}
+							
+							PercentSelectorView(percentPresets: percentPresets, percent: percent) { percent in
+								self.percent = percent
+							}
+							.sensoryFeedback(.impact, trigger: percent)
 						}
 						
-						PercentSelectorView(percentPresets: percentPresets, percent: percent) { percent in
-							self.percent = percent
+						if card.has(category: selectedCategory) {
+							Text("Нельзя добавить две одинаковые категории для одной карты")
+								.font(.caption)
+								.foregroundStyle(.red)
 						}
-						.sensoryFeedback(.impact, trigger: percent)
 					}
 					
-					if card.has(category: selectedCategory) {
-						Text("Нельзя добавить две одинаковые категории для одной карты")
-							.font(.caption)
-							.foregroundStyle(.red)
-					}
+					Spacer()
 				}
-				
-				Spacer()
 			}
+			.padding()
 		}
 		.scrollDismissesKeyboard(.interactively)
 	}
 	
 	private var selectCategorySheet: some View {
 		NavigationView {
-			SelectCategoryView { category in
+			SelectCategoryView(addCategoryIntent: addCategoryIntent) { category in
 				selectedCategory = category
 				isCategorySelectorPresented = false
 			}
@@ -200,19 +209,17 @@ private extension AddCashbackView {
 					Text("%")
 				}
 				
-				if isFocused {
-					HStack {
-						Spacer()
-						
-						ForEach(percentPresets, id: \.self) { preset in
-							Button {
-								percent = preset * 100
-							} label: {
-								Text(preset, format: .percent)
-							}
-							
-							Spacer()
+				HStack {
+					Spacer()
+					
+					ForEach(percentPresets, id: \.self) { preset in
+						Button {
+							percent = preset * 100
+						} label: {
+							Text(preset, format: .percent)
 						}
+						
+						Spacer()
 					}
 				}
 			}

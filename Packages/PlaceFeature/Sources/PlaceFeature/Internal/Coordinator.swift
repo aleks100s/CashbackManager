@@ -6,17 +6,22 @@
 //
 
 import AddPlaceScene
+import AppIntents
 import PlacesListScene
 import PlaceDetailScene
 import SwiftUI
 
 struct Coordinator: View {
+	let addPlaceIntent: any AppIntent
+	let checkPlaceIntent: any AppIntent
+	let addCategoryIntent: any AppIntent
+	
 	@State private var path = [Navigation]()
 	@State private var isAddPlaceSheetPresented = false
 	
 	var body: some View {
 		NavigationStack(path: $path) {
-			PlacesListView { place in
+			PlacesListView(checkPlaceIntent: checkPlaceIntent) { place in
 				path.append(.placeDetail(place))
 			} onAddPlaceButtonTapped: {
 				isAddPlaceSheetPresented = true
@@ -25,7 +30,7 @@ struct Coordinator: View {
 		}
 		.sheet(isPresented: $isAddPlaceSheetPresented) {
 			NavigationView {
-				AddPlaceView()
+				AddPlaceView(addPlaceIntent: addPlaceIntent, addCategoryIntent: addCategoryIntent)
 			}
 		}
 	}

@@ -41,15 +41,26 @@ struct CashbackApplication: App {
     var body: some Scene {
         WindowGroup {
 			TabView {
-				CashbackFeatureAssembly.assemble(container: container)
-					.tabItem {
-						Label("Кэшбек", systemImage: Constants.SFSymbols.cashback)
-					}
+				CashbackFeatureAssembly.assemble(
+					container: container,
+					addCardIntent: CreateCardIntent(),
+					checkCategoryCardIntent: CheckCategoryCardsIntent(),
+					cardCashbackIntent: CheckCardCashbackIntent(),
+					addCategoryIntent: CreateCategoryIntent(),
+					addCashbackIntent: CreateCashbackIntent()
+				)
+				.tabItem {
+					Label("Кэшбек", systemImage: Constants.SFSymbols.cashback)
+				}
 				
-				PlaceFeatureAssembly.assemble()
-					.tabItem {
-						Label("Места", systemImage: Constants.SFSymbols.places)
-					}
+				PlaceFeatureAssembly.assemble(
+					addPlaceIntent: CreatePlaceIntent(),
+					checkPlaceIntent: CheckPlaceCategoryIntent(),
+					addCategoryIntent: CreateCategoryIntent()
+				)
+				.tabItem {
+					Label("Места", systemImage: Constants.SFSymbols.places)
+				}
 			}
 			.task {
 				requestNotificationPermission()
