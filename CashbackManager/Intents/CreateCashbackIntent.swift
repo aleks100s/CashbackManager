@@ -43,6 +43,6 @@ struct CreateCashbackIntent: AppIntent {
 		let cashback = Cashback(category: category, percent: percent / 100)
 		card.cashback.append(cashback)
 		
-		return .result(dialog: "Новая категория кэшбека \"\(categoryName)\" \(percent) добавлена на карту \(cardName)!")
+		return .result(dialog: "Новая категория кэшбека \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!")
 	}
 }

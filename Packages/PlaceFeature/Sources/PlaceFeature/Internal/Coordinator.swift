@@ -32,6 +32,7 @@ struct Coordinator: View {
 			NavigationView {
 				AddPlaceView(addPlaceIntent: addPlaceIntent, addCategoryIntent: addCategoryIntent)
 			}
+			.presentationDetents([.medium])
 		}
 	}
 	
