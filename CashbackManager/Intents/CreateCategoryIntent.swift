@@ -11,7 +11,7 @@ import SwiftData
 
 struct CreateCategoryIntent: AppIntent {
 	static var title: LocalizedStringResource = "Новая категория"
-	static var description: IntentDescription? = "Добавляет новую категорию кэшбека"
+	static var description: IntentDescription? = "Добавляет новую категорию кэшбэка"
 		
 	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var categoryName: String
@@ -27,7 +27,7 @@ struct CreateCategoryIntent: AppIntent {
 	
 	func perform() async throws -> some ProvidesDialog {
 		categoryService.createCategory(name: categoryName)
-		return .result(dialog: "Новая категория кэшбека \"\(categoryName)\" добавлена!")
+		return .result(dialog: "Новая категория кэшбэка \"\(categoryName)\" добавлена!")
 	}
 }
 

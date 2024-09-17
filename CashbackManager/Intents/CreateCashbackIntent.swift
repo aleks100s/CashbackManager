@@ -11,8 +11,8 @@ import CategoryService
 import Domain
 
 struct CreateCashbackIntent: AppIntent {
-	static var title: LocalizedStringResource = "Новый кэшбек"
-	static var description: IntentDescription? = "Добавляет новый кэшбек в указанной категории на карту"
+	static var title: LocalizedStringResource = "Новый кэшбэк"
+	static var description: IntentDescription? = "Добавляет новый кэшбэк в указанной категории на карту"
 		
 	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
@@ -43,6 +43,6 @@ struct CreateCashbackIntent: AppIntent {
 		let cashback = Cashback(category: category, percent: percent / 100)
 		card.cashback.append(cashback)
 		
-		return .result(dialog: "Новая категория кэшбека \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!")
+		return .result(dialog: "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!")
 	}
 }

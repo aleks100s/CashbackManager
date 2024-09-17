@@ -44,12 +44,12 @@ public struct CardsListView: View {
 	public var body: some View {
 		contentView
 			.background(Color.cmScreenBackground)
-			.navigationTitle("Мои кэшбеки")
+			.navigationTitle("Мои кэшбэки")
 			.if(!cards.isEmpty) {
 				$0.searchable(
 					text: $searchText,
 					placement: .navigationBarDrawer(displayMode: .automatic),
-					prompt: "Категория кэшбека"
+					prompt: "Категория кэшбэка"
 				)
 			}
 			.toolbar {
@@ -69,9 +69,9 @@ public struct CardsListView: View {
 	private var contentView: some View {
 		if filteredCards.isEmpty {
 			if searchText.isEmpty {
-				ContentUnavailableView("Нет сохраненных кэшбеков", systemImage: "rublesign.circle")
+				ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
 			} else {
-				ContentUnavailableView("Такой кэшбек не найден", systemImage: "magnifyingglass")
+				ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")
 			}
 		} else {
 			ScrollView {

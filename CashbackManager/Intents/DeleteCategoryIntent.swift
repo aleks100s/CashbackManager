@@ -10,7 +10,7 @@ import CategoryService
 
 struct DeleteCategoryIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить категорию"
-	static var description: IntentDescription? = "Удаляет категорию кэшбека"
+	static var description: IntentDescription? = "Удаляет категорию кэшбэка"
 		
 	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var categoryName: String
@@ -30,6 +30,6 @@ struct DeleteCategoryIntent: AppIntent {
 		}
 		
 		categoryService.delete(category: category)
-		return .result(dialog: "Категория кэшбека \"\(category.name)\" удалена!")
+		return .result(dialog: "Категория кэшбэка \"\(category.name)\" удалена!")
 	}
 }

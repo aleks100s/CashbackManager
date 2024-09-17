@@ -10,8 +10,8 @@ import CardsService
 import CategoryService
 
 struct DeleteCashbackIntent: AppIntent {
-	static var title: LocalizedStringResource = "Удалить кэшбек"
-	static var description: IntentDescription? = "Удаляет кэшбек по названию карты и категории"
+	static var title: LocalizedStringResource = "Удалить кэшбэк"
+	static var description: IntentDescription? = "Удаляет кэшбэк по названию карты и категории"
 		
 	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var cardName: String
@@ -42,10 +42,10 @@ struct DeleteCashbackIntent: AppIntent {
 		}
 		
 		guard let cashback = card.cashback.first(where: { $0.category.id == category.id }) else {
-			return .result(dialog: "Не получилось найти кэшбек с категорией \(category.name)")
+			return .result(dialog: "Не получилось найти кэшбэк с категорией \(category.name)")
 		}
 		
 		cardsService.delete(cashback: cashback, card: card)
-		return .result(dialog: "Кэшбек \"\(category.name)\" удален с карты \(card.name)!")
+		return .result(dialog: "Кэшбэк \"\(category.name)\" удален с карты \(card.name)!")
 	}
 }

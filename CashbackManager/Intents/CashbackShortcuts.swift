@@ -25,8 +25,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckCardCashbackIntent(),
 			phrases: [
-				"Какие \(.applicationName) на карте?",
 				"Какой \(.applicationName) на карте?",
+				"Какие \(.applicationName) на карте?",
 				"Какой \(.applicationName) по карте?",
 				"Какой \(.applicationName) у карты?",
 				"Какие \(.applicationName) по карте?",
@@ -44,7 +44,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Что за \(.applicationName) по карте?",
 				"Что за \(.applicationName) у карты?",
 			],
-			shortTitle: "Кэшбек на карте",
+			shortTitle: "Кэшбэк на карте",
 			systemImageName: "creditcard.viewfinder"
 		)
 		
@@ -74,13 +74,13 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCategoryIntent(),
 			phrases: [
+				"Какой \(.applicationName) в заведении?",
 				"Какие \(.applicationName) в заведении?",
 				"Какие \(.applicationName) в месте?",
 				"Какая категория \(.applicationName) в заведении?",
 				"Какая категория \(.applicationName) у заведения?",
 				"Что за категория \(.applicationName) в заведении?",
 				"Что за категория \(.applicationName) у заведения?",
-				"Какой \(.applicationName) в заведении?",
 				"Какой \(.applicationName) у заведения?",
 				"Что за \(.applicationName) в заведении?",
 				"Что за \(.applicationName) у заведения?",
@@ -100,6 +100,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCardIntent(),
 			phrases: [
+				"Какой \(.applicationName) в заведении?",
 				"Какой картой платить в заведении \(.applicationName)?",
 				"Чем платить в заведении \(.applicationName)?",
 				"Чем платить для \(.applicationName)",
@@ -146,8 +147,8 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CreateCashbackIntent(),
 			phrases: [
-				"Добавь новые \(.applicationName)",
 				"Добавь \(.applicationName)",
+				"Добавь новые \(.applicationName)",
 				"Создай новые \(.applicationName)",
 				"Создай \(.applicationName)",
 				"Добавь новые \(.applicationName) на карту",
@@ -155,7 +156,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 				"Создай новые \(.applicationName) на карте",
 				"Создай \(.applicationName) на карте",
 			],
-			shortTitle: "Новый кэшбек",
+			shortTitle: "Новый кэшбэк",
 			systemImageName: "plus"
 		)
 		

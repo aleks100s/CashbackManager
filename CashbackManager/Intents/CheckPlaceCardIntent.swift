@@ -14,7 +14,7 @@ import SwiftData
 
 struct CheckPlaceCardIntent: AppIntent {
 	static var title: LocalizedStringResource = "Карта в заведении"
-	static var description: IntentDescription? = "Запрашивает название заведения и выдает список карт с кэшбеком в нем"
+	static var description: IntentDescription? = "Запрашивает название заведения и выдает список карт с кэшбэком в нем"
 	
 	@Parameter(title: "Название заведения", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String

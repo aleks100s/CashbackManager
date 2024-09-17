@@ -7,7 +7,7 @@
 
 public extension Card {
 	var cashbackDescription: String {
-		guard !cashback.isEmpty else { return "Нет кэшбека" }
+		guard !cashback.isEmpty else { return "Нет кэшбэка" }
 		
 		return categoriesList
 	}

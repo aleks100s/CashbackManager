@@ -40,7 +40,7 @@ public struct SelectCategoryView: View {
 	
 	public var body: some View {
 		contentView
-			.navigationTitle("Выбор категории кэшбека")
+			.navigationTitle("Выбор категории кэшбэка")
 			.navigationBarTitleDisplayMode(.inline)
 			.searchable(
 				text: $searchText,

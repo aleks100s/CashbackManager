@@ -50,7 +50,7 @@ struct CashbackApplication: App {
 					addCashbackIntent: CreateCashbackIntent()
 				)
 				.tabItem {
-					Label("Кэшбек", systemImage: Constants.SFSymbols.cashback)
+					Label("Кэшбэк", systemImage: Constants.SFSymbols.cashback)
 				}
 				
 				PlaceFeatureAssembly.assemble(
@@ -98,8 +98,8 @@ struct CashbackApplication: App {
 
 		// Создание содержимого уведомления
 		let content = UNMutableNotificationContent()
-		content.title = "Пора добавить кэшбек"
-		content.body = "Не забудьте выбрать кэшбек в этом месяце"
+		content.title = "Пора добавить кэшбэк"
+		content.body = "Не забудьте выбрать кэшбэк в этом месяце"
 		content.sound = .default
 
 		// Создание уникального идентификатора для уведомления

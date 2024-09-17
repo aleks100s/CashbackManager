@@ -6,15 +6,15 @@
 	<array>
 		<dict>
 			<key>INAlternativeAppName</key>
-			<string>Кэшбеков</string>
+			<string>Менеджер кэшбэка</string>
 		</dict>
 		<dict>
 			<key>INAlternativeAppName</key>
-			<string>Кэшбек</string>
+			<string>Кэшбэки</string>
 		</dict>
 		<dict>
 			<key>INAlternativeAppName</key>
-			<string>Кэшбеком</string>
+			<string>Банковский кэшбэк</string>
 		</dict>
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>

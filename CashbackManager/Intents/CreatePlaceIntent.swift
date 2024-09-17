@@ -13,7 +13,7 @@ import SwiftData
 
 struct CreatePlaceIntent: AppIntent {
 	static var title: LocalizedStringResource = "Новое место"
-	static var description: IntentDescription? = "Добавляет новое место и ассоциирует категорию кэшбека"
+	static var description: IntentDescription? = "Добавляет новое место и ассоциирует категорию кэшбэка"
 		
 	@Parameter(title: "Название места", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String

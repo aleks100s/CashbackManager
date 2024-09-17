@@ -40,7 +40,7 @@ public struct AddCashbackView: View {
 	public var body: some View {
 		contentView
 			.background(Color.cmScreenBackground)
-			.navigationTitle("Добавить кэшбек")
+			.navigationTitle("Добавить кэшбэк")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				if selectedCategory == nil {
@@ -61,7 +61,7 @@ public struct AddCashbackView: View {
 	private var contentView: some View {
 		ScrollView(.vertical) {
 			VStack(alignment: .leading) {
-				IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбек")
+				IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбэк")
 				
 				HStack {
 					Spacer()
@@ -194,7 +194,7 @@ private extension AddCashbackView {
 					Text("Процент")
 					
 					TextField(value: $percent, formatter: Self.formatter) {
-						Text("Процент кэшбека")
+						Text("Процент кэшбэка")
 					}
 					.keyboardType(.decimalPad)
 					.textFieldStyle(.roundedBorder)

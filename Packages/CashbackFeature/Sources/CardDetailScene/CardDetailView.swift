@@ -48,11 +48,11 @@ public struct CardDetailView: View {
 	@ViewBuilder
 	private var contentView: some View {
 		if card.cashback.isEmpty {
-			ContentUnavailableView("Нет сохраненных кэшбеков", systemImage: "rublesign.circle")
+			ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
 		} else {
 			List {
 				Section {
-					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбеки на карте")
+					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
 				}
 				.listSectionSpacing(8)
 				.listRowBackground(Color.clear)
@@ -74,7 +74,7 @@ public struct CardDetailView: View {
 	}
 	
 	private var addCashbackButton: some View {
-		Button("Добавить кэшбек") {
+		Button("Добавить кэшбэк") {
 			onAddCashbackTap()
 		}
 	}

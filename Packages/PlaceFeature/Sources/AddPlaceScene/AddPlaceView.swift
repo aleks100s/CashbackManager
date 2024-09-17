@@ -62,7 +62,7 @@ public struct AddPlaceView: View {
 					if let selectedCategory {
 						CategoryView(category: selectedCategory)
 					} else {
-						Text("Категория кэшбека")
+						Text("Категория кэшбэка")
 					}
 				}
 				.buttonStyle(BorderedProminentButtonStyle())
