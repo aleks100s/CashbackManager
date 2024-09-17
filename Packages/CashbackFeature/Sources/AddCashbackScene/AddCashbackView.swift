@@ -42,15 +42,11 @@ public struct AddCashbackView: View {
 			.background(Color.cmScreenBackground)
 			.navigationTitle("Добавить кэшбэк")
 			.navigationBarTitleDisplayMode(.inline)
-			.toolbar {
+			.safeAreaInset(edge: .bottom) {
 				if selectedCategory == nil {
-					ToolbarItem(placement: .bottomBar) {
-						selectCategoryButton
-					}
+					selectCategoryButton
 				} else {
-					ToolbarItem(placement: .bottomBar) {
-						saveButton
-					}
+					saveButton
 				}
 			}
 			.sheet(isPresented: $isCategorySelectorPresented) {
@@ -112,6 +108,7 @@ public struct AddCashbackView: View {
 			createCashback()
 			dismiss()
 		}
+		.padding()
 		.disabled(selectedCategory == nil || percent == 0 || card.has(category: selectedCategory))
 	}
 	
@@ -119,6 +116,7 @@ public struct AddCashbackView: View {
 		Button("Выбрать категорию") {
 			isCategorySelectorPresented = true
 		}
+		.padding()
 		.sensoryFeedback(.impact, trigger: isCategorySelectorPresented)
 	}
 	

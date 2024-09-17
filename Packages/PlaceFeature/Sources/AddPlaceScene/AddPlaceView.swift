@@ -39,10 +39,9 @@ public struct AddPlaceView: View {
 		contentView
 			.background(Color.cmScreenBackground)
 			.navigationTitle("Новое место")
-			.toolbar {
-				ToolbarItem(placement: .topBarTrailing) {
-					saveButton
-				}
+			.navigationBarTitleDisplayMode(.inline)
+			.safeAreaInset(edge: .bottom) {
+				saveButton
 			}
 			.sheet(isPresented: $isCategorySelectorPresented) {
 				selectCategorySheet
@@ -52,9 +51,9 @@ public struct AddPlaceView: View {
 	private var contentView: some View {
 		ScrollView {
 			VStack(alignment: .center, spacing: 32) {
-				CMTextField("Название", text: $placeName)
-				
 				IntentTipView(intent: addPlaceIntent, text: "В следующий раз, чтобы добавить место")
+				
+				CMTextField("Название", text: $placeName)
 				
 				Button {
 					isCategorySelectorPresented = true
@@ -90,6 +89,7 @@ public struct AddPlaceView: View {
 			createPlace()
 			dismiss()
 		}
+		.padding()
 		.disabled(!isInputCorrect)
 	}
 	
