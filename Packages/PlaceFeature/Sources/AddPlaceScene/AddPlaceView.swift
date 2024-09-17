@@ -21,6 +21,8 @@ public struct AddPlaceView: View {
 	@State private var selectedCategory: Domain.Category?
 	@State private var isCategorySelectorPresented = false
 	
+	@FocusState private var isFocused
+	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.searchService) private var searchService
 	@Environment(\.placeService) private var placeService
@@ -46,6 +48,9 @@ public struct AddPlaceView: View {
 			.sheet(isPresented: $isCategorySelectorPresented) {
 				selectCategorySheet
 			}
+			.onAppear {
+				isFocused = true
+			}
 	}
 	
 	private var contentView: some View {
@@ -54,6 +59,7 @@ public struct AddPlaceView: View {
 				IntentTipView(intent: addPlaceIntent, text: "В следующий раз, чтобы добавить место")
 				
 				CMTextField("Название", text: $placeName)
+					.focused($isFocused)
 				
 				Button {
 					isCategorySelectorPresented = true

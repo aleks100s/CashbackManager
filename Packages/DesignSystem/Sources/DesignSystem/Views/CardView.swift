@@ -52,7 +52,7 @@ public struct CardView<AddonView: View>: View {
 			}
 			
 			if !card.cashback.isEmpty {
-				CategoriesView(cashback: card.cashback)
+				CategoriesStackView(cashback: card.cashback)
 			}
 			
 			Text(card.cashbackDescription)
@@ -69,21 +69,6 @@ public struct CardView<AddonView: View>: View {
 				.background(Color.cmCardBackground)
 				.cornerRadius(10)
 				.shadow(color: shadowColor, radius: 5, x: 0, y: 5)
-		}
-	}
-}
-
-private struct CategoriesView: View {
-	let cashback: [Cashback]
-	
-	@Environment(\.viewClass) private var viewClass
-	
-	var body: some View {
-		HStack(alignment: .center, spacing: .zero) {
-			ForEach(cashback, id: \.category.name) { cashback in
-				CategoryMarkerView(category: cashback.category)
-					.padding(.trailing, -12)
-			}
 		}
 	}
 }

@@ -74,17 +74,18 @@ public struct CardsListView: View {
 				ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")
 			}
 		} else {
-			ScrollView {
+			List {
 				IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
-					.padding(.horizontal, 20)
+					.listRowBackground(Color.clear)
+					.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
 				
-				LazyVStack(spacing: 16) {
-					ForEach(filteredCards) { card in
+				ForEach(filteredCards) { card in
+					Section(card.name) {
 						cardView(card)
 					}
 				}
-				.padding(.horizontal, 20)
 			}
+			.listSectionSpacing(8)
 			.scrollDismissesKeyboard(.interactively)
 		}
 	}
@@ -125,7 +126,7 @@ public struct CardsListView: View {
 		Button {
 			onCardSelected(card)
 		} label: {
-			CardView(card: card)
+			CardItemView(card: card)
 				.contextMenu {
 					Text(card.name)
 					

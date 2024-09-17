@@ -67,13 +67,12 @@ public struct PlacesListView: View {
 				Section {
 					IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
 				}
-				.listSectionSpacing(8)
 				.listRowBackground(Color.clear)
 				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
 				
 				ForEach(filteredPlaces) { place in
 					Button {
-						onPlaceSelected(place)
+						// onPlaceSelected(place)
 					} label: {
 						PlaceView(place: place)
 							.contentShape(.rect)
@@ -89,6 +88,7 @@ public struct PlacesListView: View {
 					}
 				}
 			}
+			.listSectionSpacing(8)
 		}
 	}
 	

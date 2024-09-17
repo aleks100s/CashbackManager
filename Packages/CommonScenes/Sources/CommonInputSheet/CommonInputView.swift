@@ -38,13 +38,13 @@ public struct CommonInputView: View {
 	public var body: some View {
 		ScrollView {
 			VStack(alignment: .leading, spacing: 16) {
-				CMTextField(placeholder, text: $text)
-					.keyboardType(keyboardType)
-					.focused($isFocused)
-				
 				if let intent, let hint {
 					IntentTipView(intent: intent, text: hint)
 				}
+				
+				CMTextField(placeholder, text: $text)
+					.keyboardType(keyboardType)
+					.focused($isFocused)
 			}
 			.padding()
 		}

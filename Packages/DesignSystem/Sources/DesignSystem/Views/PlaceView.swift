@@ -26,6 +26,6 @@ public struct PlaceView: View {
 			
 			Spacer()
 		}
-		.contentShape(Rectangle())
+		.contentShape(.rect)
 	}
 }
