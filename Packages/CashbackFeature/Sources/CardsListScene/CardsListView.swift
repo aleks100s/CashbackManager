@@ -136,7 +136,6 @@ public struct CardsListView: View {
 				} preview: {
 					CashbackListView(cashback: card.cashback)
 				}
-
 		}
 		.buttonStyle(.plain)
 	}

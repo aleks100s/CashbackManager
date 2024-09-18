@@ -18,5 +18,7 @@ struct CardItemView: View {
 			
 			Text(card.cashbackDescription)
 		}
+		.frame(maxWidth: .infinity, alignment: .leading)
+		.contentShape(Rectangle())
 	}
 }

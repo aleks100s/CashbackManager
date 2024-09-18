@@ -36,17 +36,20 @@ public struct CommonInputView: View {
 	}
 	
 	public var body: some View {
-		ScrollView {
-			VStack(alignment: .leading, spacing: 16) {
-				if let intent, let hint {
+		List {
+			if let intent, let hint {
+				Section {
 					IntentTipView(intent: intent, text: hint)
 				}
-				
-				CMTextField(placeholder, text: $text)
+				.listRowBackground(Color.clear)
+				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+			}
+			
+			Section {
+				TextField(placeholder, text: $text)
 					.keyboardType(keyboardType)
 					.focused($isFocused)
 			}
-			.padding()
 		}
 		.onTapGesture {
 			isFocused = false

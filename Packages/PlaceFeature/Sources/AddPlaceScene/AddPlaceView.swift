@@ -54,13 +54,20 @@ public struct AddPlaceView: View {
 	}
 	
 	private var contentView: some View {
-		ScrollView {
-			VStack(alignment: .center, spacing: 32) {
-				IntentTipView(intent: addPlaceIntent, text: "В следующий раз, чтобы добавить место")
-				
-				CMTextField("Название", text: $placeName)
+		List {
+			Section {
+				IntentTipView(intent: addPlaceIntent, text: "В следующий раз,чтобы добавить место")
+			}
+			.listRowBackground(Color.clear)
+			.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+			
+			
+			Section {
+				TextField("Название", text: $placeName)
 					.focused($isFocused)
-				
+			}
+			
+			Section {
 				Button {
 					isCategorySelectorPresented = true
 				} label: {
@@ -70,9 +77,7 @@ public struct AddPlaceView: View {
 						Text("Категория кэшбэка")
 					}
 				}
-				.buttonStyle(BorderedProminentButtonStyle())
 			}
-			.padding()
 		}
 	}
 	

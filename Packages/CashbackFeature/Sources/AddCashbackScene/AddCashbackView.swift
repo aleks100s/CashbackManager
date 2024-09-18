@@ -43,11 +43,7 @@ public struct AddCashbackView: View {
 			.navigationTitle("Добавить кэшбэк")
 			.navigationBarTitleDisplayMode(.inline)
 			.safeAreaInset(edge: .bottom) {
-				if selectedCategory == nil {
-					selectCategoryButton
-				} else {
-					saveButton
-				}
+				saveButton
 			}
 			.sheet(isPresented: $isCategorySelectorPresented) {
 				selectCategorySheet
@@ -55,36 +51,36 @@ public struct AddCashbackView: View {
 	}
 	
 	private var contentView: some View {
-		ScrollView(.vertical) {
-			VStack(alignment: .leading) {
+		List {
+			Section {
 				IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбэк")
-				
-				HStack {
-					Spacer()
-					
-					VStack(alignment: .leading, spacing: 32) {
-						if let category = selectedCategory {
-							CategorySelectorView(category: category, percent: percent) {
-								isCategorySelectorPresented = true
-							}
-							
-							PercentSelectorView(percentPresets: percentPresets, percent: percent) { percent in
-								self.percent = percent
-							}
-							.sensoryFeedback(.impact, trigger: percent)
-						}
-						
-						if card.has(category: selectedCategory) {
-							Text("Нельзя добавить две одинаковые категории для одной карты")
-								.font(.caption)
-								.foregroundStyle(.red)
-						}
+			}
+			.listRowBackground(Color.clear)
+			.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+			
+			Section {
+				if let category = selectedCategory {
+					CategorySelectorView(category: category, percent: percent) {
+						isCategorySelectorPresented = true
 					}
-					
-					Spacer()
+				} else {
+					selectCategoryButton
+				}
+			} footer: {
+				if card.has(category: selectedCategory) {
+					Text("Нельзя добавить две одинаковые категории для одной карты")
+						.font(.caption)
+						.foregroundStyle(.red)
 				}
 			}
-			.padding()
+			
+			Section {
+				PercentSelectorView(percentPresets: percentPresets, percent: percent) { percent in
+					self.percent = percent
+				}
+				.sensoryFeedback(.impact, trigger: percent)
+			}
+			
 		}
 		.scrollDismissesKeyboard(.interactively)
 	}
@@ -108,7 +104,9 @@ public struct AddCashbackView: View {
 			createCashback()
 			dismiss()
 		}
+		.frame(maxWidth: .infinity)
 		.padding()
+		.background(.background)
 		.disabled(selectedCategory == nil || percent == 0 || card.has(category: selectedCategory))
 	}
 	
@@ -116,7 +114,6 @@ public struct AddCashbackView: View {
 		Button("Выбрать категорию") {
 			isCategorySelectorPresented = true
 		}
-		.padding()
 		.sensoryFeedback(.impact, trigger: isCategorySelectorPresented)
 	}
 	
@@ -187,38 +184,34 @@ private extension AddCashbackView {
 		}
 		
 		var body: some View {
-			VStack {
-				HStack {
-					Text("Процент")
-					
-					TextField(value: $percent, formatter: Self.formatter) {
-						Text("Процент кэшбэка")
-					}
-					.keyboardType(.decimalPad)
-					.textFieldStyle(.roundedBorder)
-					.focused($isFocused)
-					.onChange(of: percent) { _, newValue in
-						onPercentSelect(newValue / 100)
-					}
-					.onTapGesture {
-						isFocused = false
-					}
-					
-					Text("%")
+			HStack {
+				Text("Процент")
+				
+				TextField(value: $percent, formatter: Self.formatter) {
+					Text("Процент кэшбэка")
+				}
+				.keyboardType(.decimalPad)
+				.textFieldStyle(.roundedBorder)
+				.focused($isFocused)
+				.onChange(of: percent) { _, newValue in
+					onPercentSelect(newValue / 100)
+				}
+				.onTapGesture {
+					isFocused = false
 				}
 				
-				HStack {
-					Spacer()
-					
-					ForEach(percentPresets, id: \.self) { preset in
-						Button {
+				Text("%")
+			}
+			
+			HStack {
+				ForEach(percentPresets, id: \.self) { preset in
+					Text(preset, format: .percent)
+						.foregroundStyle(.blue)
+						.frame(maxWidth: .infinity)
+						.contentShape(Rectangle())
+						.onTapGesture {
 							percent = preset * 100
-						} label: {
-							Text(preset, format: .percent)
 						}
-						
-						Spacer()
-					}
 				}
 			}
 		}

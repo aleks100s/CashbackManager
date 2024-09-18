@@ -88,7 +88,7 @@ public struct PlacesListView: View {
 					}
 				}
 			}
-			.listSectionSpacing(8)
+			.listSectionSpacing(16)
 		}
 	}
 	
