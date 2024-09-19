@@ -14,6 +14,10 @@ public final class Card {
 	public var name: String
 	@Relationship(deleteRule: .cascade)
 	public var cashback: [Cashback]
+	
+	public var sortedCashback: [Cashback] {
+		cashback.sorted(by: { $0.category.name < $1.category.name })
+	}
 
 	public init(id: UUID = UUID(), name: String, cashback: [Cashback] = []) {
 		self.id = id

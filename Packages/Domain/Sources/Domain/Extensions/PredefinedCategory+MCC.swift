@@ -94,6 +94,8 @@ public extension PredefinedCategory {
 			[5818]
 		case .yandex:
 			[4121]
+		case .burgerKing:
+			[]
 		}
 	}
 }

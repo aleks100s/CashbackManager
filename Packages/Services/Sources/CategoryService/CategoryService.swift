@@ -21,7 +21,9 @@ public struct CategoryService: @unchecked Sendable {
 	}
 	
 	public func getCategory(by name: String) -> Domain.Category? {
-		fetch(by: #Predicate<Domain.Category> { $0.name.localizedStandardContains(name) }).first
+		fetch(by: #Predicate<Domain.Category> { category in category.name.localizedStandardContains(name) ||
+			category.synonyms?.localizedStandardContains(name) == true
+		}).first
 	}
 	
 	@discardableResult

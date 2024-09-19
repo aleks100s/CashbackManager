@@ -55,7 +55,7 @@ public extension PredefinedCategory {
 		case .entertainment:
 			"Развлечения"
 		case .exhibitionsAndMuseums:
-			"Выставки и музей"
+			"Выставки и музеи"
 		case .medicineServices:
 			"Медицинские услуги"
 		case .fitness:
@@ -94,6 +94,8 @@ public extension PredefinedCategory {
 			"Цифровые товары"
 		case .yandex:
 			"Сервисы Яндекса"
+		case .burgerKing:
+			"Бургер Кинг"
 		}
 	}
 }

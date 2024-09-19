@@ -15,11 +15,9 @@ public struct SearchService: @unchecked Sendable {
 	public func index(card: Card) {
 		let attributeSet = createAttributes(title: card.name, description: card.cashbackDescription)
 		index(id: card.id, attributes: attributeSet)
-	}
-	
-	public func index(cashback: Cashback, cardName: String) {
-		let attributeSet = createAttributes(title: cashback.description, description: cardName)
-		index(id: cashback.id, attributes: attributeSet)
+		for cashback in card.cashback {
+			index(cashback: cashback, cardName: card.name)
+		}
 	}
 	
 	public func index(place: Place) {
@@ -40,6 +38,11 @@ public struct SearchService: @unchecked Sendable {
 	
 	public func deindex(place: Place) {
 		deindex(id: place.id)
+	}
+	
+	private func index(cashback: Cashback, cardName: String) {
+		let attributeSet = createAttributes(title: cashback.description, description: cardName)
+		index(id: cashback.id, attributes: attributeSet)
 	}
 	
 	private func createAttributes(

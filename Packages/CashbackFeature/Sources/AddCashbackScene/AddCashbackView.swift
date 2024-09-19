@@ -120,7 +120,6 @@ public struct AddCashbackView: View {
 		if let selectedCategory {
 			let cashback = Cashback(category: selectedCategory, percent: percent)
 			card.cashback.append(cashback)
-			searchService?.index(cashback: cashback, cardName: card.name)
 			searchService?.index(card: card)
 		}
 	}

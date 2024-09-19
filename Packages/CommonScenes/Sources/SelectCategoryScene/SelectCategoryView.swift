@@ -28,8 +28,8 @@ public struct SelectCategoryView: View {
 	@Environment(\.categoryService) private var categoryService
 	
 	private var filteredCategories: [Domain.Category] {
-		categories.filter {
-			searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText)
+		categories.filter { category in
+			searchText.isEmpty ? true : category.name.localizedStandardContains(searchText) || (category.synonyms?.localizedStandardContains(searchText) ?? false)
 		}
 	}
 	

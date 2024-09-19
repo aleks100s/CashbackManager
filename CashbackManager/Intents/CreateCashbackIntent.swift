@@ -45,12 +45,11 @@ struct CreateCashbackIntent: AppIntent {
 		}
 		
 		let cashback = Cashback(category: category, percent: percent / 100)
-		guard !card.cashback.contains(cashback) else {
+		guard !card.has(category: category) else {
 			return .result(dialog: "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(categoryName)\"")
 		}
 		
 		card.cashback.append(cashback)
-		searchService.index(cashback: cashback, cardName: card.name)
 		searchService.index(card: card)
 		return .result(dialog: "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!")
 	}

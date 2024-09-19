@@ -21,7 +21,10 @@ public struct CardsListView: View {
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
 	@State private var cardToBeRenamed: Card?
-	@Query(animation: .default) private var cards: [Card]
+	@Query(
+		sort: [SortDescriptor<Card>(\.name, order: .forward)],
+		animation: .default
+	) private var cards: [Card]
 	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) var searchService
 	
@@ -160,6 +163,7 @@ public struct CardsListView: View {
 	private func onCardNameChanged(_ cardName: String, card: Card) {
 		card.name = cardName
 		context.insert(card)
+		searchService?.index(card: card)
 		cardToBeRenamed = nil
 	}
 		

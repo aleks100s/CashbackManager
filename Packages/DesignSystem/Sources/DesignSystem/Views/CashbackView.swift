@@ -20,10 +20,10 @@ public struct CashbackView: View {
 			CategoryMarkerView(category: cashback.category)
 				.padding(.trailing, 8)
 			
-			HStack(alignment: .top, spacing: .zero) {
+			HStack(alignment: .center, spacing: .zero) {
 				Text(cashback.percent, format: .percent)
 					.padding(.trailing, 4)
-					.frame(width: 48, alignment: .leading)
+					.frame(width: 52, alignment: .leading)
 				Text(cashback.category.name)
 			}
 			

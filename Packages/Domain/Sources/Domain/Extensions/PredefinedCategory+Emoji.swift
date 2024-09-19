@@ -94,6 +94,8 @@ public extension PredefinedCategory {
 			"💻"
 		case .yandex:
 			"🤖"
+		case .burgerKing:
+			"🍔"
 		}
 	}
 }

@@ -49,4 +49,5 @@ public enum PredefinedCategory: CaseIterable {
 	case sportGoods
 	case clothesAndShoes
 	case sbp
+	case burgerKing
 }

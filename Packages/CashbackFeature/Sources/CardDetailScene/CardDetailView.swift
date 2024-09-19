@@ -71,7 +71,7 @@ public struct CardDetailView: View {
 				.listRowBackground(Color.clear)
 				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
 				
-				ForEach(card.cashback) { cashback in
+				ForEach(card.sortedCashback) { cashback in
 					CashbackView(cashback: cashback)
 						.contextMenu {
 							deleteCashbackButton(cashback: cashback)
@@ -108,16 +108,16 @@ public struct CardDetailView: View {
 							.hueRotation(.degrees(animateGradient ? 360 : 0))
 							.opacity(0.8)
 					)
+					.onAppear {
+						withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: false)) {
+							animateGradient.toggle()
+						}
+					}
 			}
 			.listRowBackground(Color.clear)
 			.listRowInsets(EdgeInsets(top: .zero, leading: -12, bottom: .zero, trailing: -12))
 			.onChange(of: imageItem) {
 				detectCashbackFromImage()
-			}
-			.onAppear {
-				withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: false)) {
-					animateGradient.toggle()
-				}
 			}
 		} footer: {
 			Text("Будут считаны только кэшбэки, чьи категории представлены в приложении и не добалены на эту карту")
@@ -134,7 +134,7 @@ public struct CardDetailView: View {
 	}
 	
 	private func deleteCashback(index: Int) {
-		delete(cashback: card.cashback[index])
+		delete(cashback: card.sortedCashback[index])
 	}
 	
 	private func delete(cashback: Cashback) {
@@ -155,18 +155,15 @@ public struct CardDetailView: View {
 					} else {
 						DispatchQueue.main.async {
 							for item in result {
-								guard let category = categoryService?.getCategory(by: item.0) else {
+								guard let category = categoryService?.getCategory(by: item.0), !card.has(category: category) else {
 									continue
 								}
 								
 								let cashback = Cashback(category: category, percent: item.1)
-								guard !card.cashback.contains(cashback) else {
-									continue
-								}
-								
 								card.cashback.append(cashback)
-								imageItem = nil
 							}
+							searchService?.index(card: card)
+							imageItem = nil
 						}
 					}
 				}

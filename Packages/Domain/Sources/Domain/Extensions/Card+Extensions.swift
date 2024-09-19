@@ -19,6 +19,6 @@ public extension Card {
 	}
 	
 	private var categoriesList: String {
-		cashback.map(\.description).joined(separator: ", ")
+		sortedCashback.map(\.description).joined(separator: ", ")
 	}
 }

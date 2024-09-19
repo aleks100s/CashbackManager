@@ -20,7 +20,10 @@ public struct PlacesListView: View {
 	private let onAddPlaceButtonTapped: () -> Void
 	
 	@State private var searchText = ""
-	@Query private var places: [Place]
+	
+	@Query(sort: [SortDescriptor<Place>(\.name, order: .forward)])
+	private var places: [Place]
+	
 	@Environment(\.searchService) private var searchService
 	@Environment(\.placeService) private var placeService
 	

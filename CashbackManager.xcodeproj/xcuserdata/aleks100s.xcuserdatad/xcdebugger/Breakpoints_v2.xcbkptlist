@@ -119,48 +119,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4DDECA36-63A6-42B3-8C63-2BCFDC8404DE"
+            uuid = "BBF920AE-FCC5-4333-845D-7C33521BCE0F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
+            filePath = "Packages/Services/Sources/CategoryService/CategoryService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "detectCashbackFromImage()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "97D545BD-64E5-4E84-8F77-D65769F5319F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "detectCashbackFromImage()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2D2E5AD3-23DC-4CDA-B64B-8822FD929E2F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "detectCashbackFromImage()"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "getCategory(by:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
