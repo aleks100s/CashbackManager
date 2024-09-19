@@ -14,7 +14,7 @@ import SearchService
 import Shared
 import SwiftData
 import SwiftUI
-import Vision
+import TextDetectionService
 import WidgetKit
 
 public struct CardDetailView: View {
@@ -30,6 +30,7 @@ public struct CardDetailView: View {
 	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
  	@Environment(\.categoryService) private var categoryService
+	@Environment(\.textDetectionService) private var textDetectionService
 
 	public init(card: Card, cardCashbackIntent: any AppIntent, onAddCashbackTap: @escaping () -> Void) {
 		self.card = card
@@ -108,6 +109,7 @@ public struct CardDetailView: View {
 							.hueRotation(.degrees(animateGradient ? 360 : 0))
 							.opacity(0.8)
 					)
+					.clipped()
 					.onAppear {
 						withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: false)) {
 							animateGradient.toggle()
@@ -117,7 +119,9 @@ public struct CardDetailView: View {
 			.listRowBackground(Color.clear)
 			.listRowInsets(EdgeInsets(top: .zero, leading: -12, bottom: .zero, trailing: -12))
 			.onChange(of: imageItem) {
-				detectCashbackFromImage()
+				Task {
+					await detectCashbackFromImage()
+				}
 			}
 		} footer: {
 			Text("Будут считаны только кэшбэки, чьи категории представлены в приложении и не добалены на эту карту")
@@ -144,90 +148,29 @@ public struct CardDetailView: View {
 		searchService?.index(card: card)
 	}
 	
-	private func detectCashbackFromImage() {
-		Task {
-			if let data = try? await imageItem?.loadTransferable(type: Data.self),
-			   let image = UIImage(data: data) {
-				
-				CashbackDetector().recogniseCashbackCategories(from: image) { result in
-					if result.isEmpty {
-						/// handle case with no categories found
-					} else {
-						DispatchQueue.main.async {
-							for item in result {
-								guard let category = categoryService?.getCategory(by: item.0), !card.has(category: category) else {
-									continue
-								}
-								
-								let cashback = Cashback(category: category, percent: item.1)
-								card.cashback.append(cashback)
-							}
-							searchService?.index(card: card)
-							imageItem = nil
-						}
-					}
-				}
-			} else {
-				print("Failed to load image from gallery")
-			}
-		}
-	}
-}
-
-final class CashbackDetector {
-	func recogniseCashbackCategories(from image: UIImage, completion: @escaping ([(String, Double)]) -> Void) {
-		
-		guard let cgImage = image.cgImage else {
+	private func detectCashbackFromImage() async {
+		guard let data = try? await imageItem?.loadTransferable(type: Data.self), let image = UIImage(data: data) else {
+			print("Failed to load image from gallery")
 			return
 		}
 		
-		let reuqestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-		let request = VNRecognizeTextRequest { (req, error ) in
-			guard let observations = req.results as? [VNRecognizedTextObservation] else {
-				print("nothing found")
-				return
-			}
-			
-			var detectedTexts: [(String, CGRect)] = []
-			
-			for observation in observations {
-				guard let topCandidate = observation.topCandidates(1).first else { continue }
-				detectedTexts.append( (topCandidate.string, observation.boundingBox) )
-			}
-			
-			let categories = self.processDecetectedTexts(detectedTexts, in: image)
-			
-			completion(categories)
-		}
+		let result = await textDetectionService?.recogniseCashbackCategories(from: image) ?? []
+		guard !result.isEmpty else { return }
 		
-		request.recognitionLevel = .accurate
-		request.usesLanguageCorrection = true
-		DispatchQueue.global(qos: .userInitiated).async {
-			do {
-				try reuqestHandler.perform([request])
-			} catch {
-				print("recognition handler error \(error.localizedDescription)")
-			}
-		}
+		await apply(result: result)
 	}
 	
-	private func processDecetectedTexts(_ texts: [(String, CGRect)], in image: UIImage) -> [(String, Double)] {
-		
-		var detectedCashback: [(String, Double)] = []
-		
-		for (text, _) in texts {
-			if let percentRange = text.range(of: #"\d+[.,]?\d*%"#, options: .regularExpression) {
-				let percentage = String(text[percentRange])
-				let lines = text.components(separatedBy: "\n")
-				let name = lines[0]
-					.replacingOccurrences(of: percentage, with: "")
-					.trimmingCharacters(in: .whitespaces)
-				
-				let percent = (Double(text[percentRange].replacingOccurrences(of: "%", with: "")) ?? .zero) / 100
-				detectedCashback.append((name, percent))
+	@MainActor
+	private func apply(result: [(String, Double)]) {
+		for item in result {
+			guard let category = categoryService?.getCategory(by: item.0), !card.has(category: category) else {
+				continue
 			}
+			
+			let cashback = Cashback(category: category, percent: item.1)
+			card.cashback.append(cashback)
 		}
-		
-		return detectedCashback
+		searchService?.index(card: card)
+		imageItem = nil
 	}
 }

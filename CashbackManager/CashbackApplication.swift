@@ -70,6 +70,7 @@ struct CashbackApplication: App {
 		.environment(\.searchService, searchService)
 		.environment(\.categoryService, categoryService)
 		.environment(\.placeService, placeService)
+		.environment(\.textDetectionService, AppFactory.provideTextDetectionService())
     }
 
 	private func requestNotificationPermission() {

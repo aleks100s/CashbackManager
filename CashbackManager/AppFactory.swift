@@ -11,6 +11,7 @@ import Domain
 import PlaceService
 import SearchService
 import SwiftData
+import TextDetectionService
 
 @MainActor
 enum AppFactory {
@@ -19,6 +20,7 @@ enum AppFactory {
 	private static let cardsService = CardsService(context: container.mainContext)
 	private static let categoryService = CategoryService(context: container.mainContext)
 	private static let placeService = PlaceService(context: container.mainContext)
+	private static let textDetectionService = TextDetectionService()
 	
 	static func provideModelContainer() -> ModelContainer {
 		container
@@ -41,5 +43,10 @@ enum AppFactory {
 	@MainActor
 	static func providePlaceService() -> PlaceService {
 		placeService
+	}
+	
+	@MainActor
+	static func provideTextDetectionService() -> TextDetectionService {
+		textDetectionService
 	}
 }

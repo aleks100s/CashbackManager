@@ -48,7 +48,8 @@ let package = Package(
 				"Shared",
 				"Domain",
 				"DesignSystem",
-				.product(name: "SearchService", package: "Services")
+				.product(name: "SearchService", package: "Services"),
+				.product(name: "TextDetectionService", package: "Services"),
 			]
 		),
 		.target(
