@@ -25,6 +25,7 @@ public struct CardDetailView: View {
 	@AppStorage("CurrentCardID", store: .appGroup) private var currentCardId: String?
 	
 	@State private var imageItem: PhotosPickerItem?
+	@State private var animateGradient = false
 
 	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
@@ -54,10 +55,12 @@ public struct CardDetailView: View {
 	@ViewBuilder
 	private var contentView: some View {
 		if card.cashback.isEmpty {
-			VStack {
-				ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+			List {
+				Section {
+					ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+				}
 				
-				detectCashbackButton
+				detectCashbackSectionButton
 			}
 		} else {
 			List {
@@ -80,11 +83,7 @@ public struct CardDetailView: View {
 					}
 				}
 				
-				Section {
-					detectCashbackButton
-				} footer: {
-					Text("Будут считаны только кэшбэки, чьи категории представлены в приложении и не добалены на эту карту")
-				}
+				detectCashbackSectionButton
 			}
 		}
 	}
@@ -95,12 +94,34 @@ public struct CardDetailView: View {
 		}
 	}
 	
-	private var detectCashbackButton: some View {
-		PhotosPicker(selection: $imageItem, matching: .screenshots) {
-			Text("Считать кэшбэки со скриншота")
-		}
-		.onChange(of: imageItem) {
-			detectCashbackFromImage()
+	private var detectCashbackSectionButton: some View {
+		Section {
+			PhotosPicker(selection: $imageItem, matching: .screenshots) {
+				Text("Считать кэшбэки со скриншота")
+					.foregroundStyle(.white)
+					.bold()
+					.padding()
+					.padding(.horizontal, 12)
+					.frame(maxWidth: .infinity, alignment: .leading)
+					.background(
+						LinearGradient(gradient: Gradient(colors: [.red, .orange, .yellow, .green, .blue, .purple]), startPoint: .leading, endPoint: .trailing)
+							.hueRotation(.degrees(animateGradient ? 360 : 0))
+							.opacity(0.8)
+					)
+			}
+			.listRowBackground(Color.clear)
+			.listRowInsets(EdgeInsets(top: .zero, leading: -12, bottom: .zero, trailing: -12))
+			.onChange(of: imageItem) {
+				detectCashbackFromImage()
+			}
+			.onAppear {
+				withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: false)) {
+					animateGradient.toggle()
+				}
+			}
+		} footer: {
+			Text("Будут считаны только кэшбэки, чьи категории представлены в приложении и не добалены на эту карту")
+				.offset(x: -8)
 		}
 	}
 	
