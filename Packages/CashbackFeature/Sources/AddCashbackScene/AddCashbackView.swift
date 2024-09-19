@@ -50,11 +50,7 @@ public struct AddCashbackView: View {
 	
 	private var contentView: some View {
 		List {
-			Section {
-				IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбэк")
-			}
-			.listRowBackground(Color.clear)
-			.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+			IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбэк")
 			
 			Section {
 				if let category = selectedCategory {

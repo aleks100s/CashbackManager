@@ -65,12 +65,7 @@ public struct CardDetailView: View {
 			}
 		} else {
 			List {
-				Section {
-					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
-				}
-				.listSectionSpacing(8)
-				.listRowBackground(Color.clear)
-				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+				IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
 				
 				ForEach(card.sortedCashback) { cashback in
 					CashbackView(cashback: cashback)
@@ -96,6 +91,68 @@ public struct CardDetailView: View {
 	}
 	
 	private var detectCashbackSectionButton: some View {
+		DetectCashbackSectionButton(imageItem: $imageItem, animateGradient: $animateGradient) {
+			Task {
+				await detectCashbackFromImage()
+			}
+		}
+	}
+	
+	private func deleteCashbackButton(cashback: Cashback) -> some View {
+		Button(role: .destructive) {
+			delete(cashback: cashback)
+		} label: {
+			Text("Удалить")
+		}
+	}
+	
+	private func deleteCashback(index: Int) {
+		delete(cashback: card.sortedCashback[index])
+	}
+	
+	private func delete(cashback: Cashback) {
+		searchService?.deindex(cashback: cashback)
+		card.cashback.removeAll(where: { $0.id == cashback.id })
+		context.delete(cashback)
+		searchService?.index(card: card)
+	}
+}
+
+private extension CardDetailView {
+	func detectCashbackFromImage() async {
+		guard let data = try? await imageItem?.loadTransferable(type: Data.self), let image = UIImage(data: data) else {
+			print("Failed to load image from gallery")
+			return
+		}
+		
+		let result = await textDetectionService?.recogniseCashbackCategories(from: image) ?? []
+		guard !result.isEmpty else { return }
+		
+		await apply(result: result)
+	}
+	
+	@MainActor
+	func apply(result: [(String, Double)]) {
+		for item in result {
+			guard let category = categoryService?.getCategory(by: item.0), !card.has(category: category) else {
+				continue
+			}
+			
+			let cashback = Cashback(category: category, percent: item.1)
+			card.cashback.append(cashback)
+		}
+		searchService?.index(card: card)
+		imageItem = nil
+	}
+}
+
+private struct DetectCashbackSectionButton: View {
+	@Binding var imageItem: PhotosPickerItem?
+	@Binding var animateGradient: Bool
+	
+	let onTap: () -> Void
+	
+	var body: some View {
 		Section {
 			PhotosPicker(selection: $imageItem, matching: .screenshots) {
 				Text("Считать кэшбэки со скриншота")
@@ -119,58 +176,11 @@ public struct CardDetailView: View {
 			.listRowBackground(Color.clear)
 			.listRowInsets(EdgeInsets(top: .zero, leading: -12, bottom: .zero, trailing: -12))
 			.onChange(of: imageItem) {
-				Task {
-					await detectCashbackFromImage()
-				}
+				onTap()
 			}
 		} footer: {
 			Text("Будут считаны только кэшбэки, чьи категории представлены в приложении и не добалены на эту карту")
 				.offset(x: -8)
 		}
-	}
-	
-	private func deleteCashbackButton(cashback: Cashback) -> some View {
-		Button(role: .destructive) {
-			delete(cashback: cashback)
-		} label: {
-			Text("Удалить")
-		}
-	}
-	
-	private func deleteCashback(index: Int) {
-		delete(cashback: card.sortedCashback[index])
-	}
-	
-	private func delete(cashback: Cashback) {
-		searchService?.deindex(cashback: cashback)
-		card.cashback.removeAll(where: { $0.id == cashback.id })
-		context.delete(cashback)
-		searchService?.index(card: card)
-	}
-	
-	private func detectCashbackFromImage() async {
-		guard let data = try? await imageItem?.loadTransferable(type: Data.self), let image = UIImage(data: data) else {
-			print("Failed to load image from gallery")
-			return
-		}
-		
-		let result = await textDetectionService?.recogniseCashbackCategories(from: image) ?? []
-		guard !result.isEmpty else { return }
-		
-		await apply(result: result)
-	}
-	
-	@MainActor
-	private func apply(result: [(String, Double)]) {
-		for item in result {
-			guard let category = categoryService?.getCategory(by: item.0), !card.has(category: category) else {
-				continue
-			}
-			
-			let cashback = Cashback(category: category, percent: item.1)
-			card.cashback.append(cashback)
-		}
-		searchService?.index(card: card)
-		imageItem = nil
 	}
 }

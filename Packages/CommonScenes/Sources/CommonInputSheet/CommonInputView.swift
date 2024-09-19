@@ -38,11 +38,7 @@ public struct CommonInputView: View {
 	public var body: some View {
 		List {
 			if let intent, let hint {
-				Section {
-					IntentTipView(intent: intent, text: hint)
-				}
-				.listRowBackground(Color.clear)
-				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+				IntentTipView(intent: intent, text: hint)
 			}
 			
 			Section {

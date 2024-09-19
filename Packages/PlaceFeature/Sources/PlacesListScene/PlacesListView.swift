@@ -67,11 +67,7 @@ public struct PlacesListView: View {
 			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
 		} else {
 			List {
-				Section {
-					IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
-				}
-				.listRowBackground(Color.clear)
-				.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
+				IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
 				
 				ForEach(filteredPlaces) { place in
 					Button {

@@ -80,8 +80,6 @@ public struct CardsListView: View {
 		} else {
 			List {
 				IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
-					.listRowBackground(Color.clear)
-					.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
 				
 				ForEach(filteredCards) { card in
 					Section(card.name) {

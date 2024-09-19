@@ -55,12 +55,7 @@ public struct AddPlaceView: View {
 	
 	private var contentView: some View {
 		List {
-			Section {
-				IntentTipView(intent: addPlaceIntent, text: "В следующий раз,чтобы добавить место")
-			}
-			.listRowBackground(Color.clear)
-			.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
-			
+			IntentTipView(intent: addPlaceIntent, text: "В следующий раз,чтобы добавить место")
 			
 			Section {
 				TextField("Название", text: $placeName)

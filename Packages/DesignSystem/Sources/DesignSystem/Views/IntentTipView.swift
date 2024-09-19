@@ -18,15 +18,20 @@ public struct IntentTipView: View {
 	}
 	
 	public var body: some View {
-		VStack(alignment: .leading, spacing: .zero) {
-			if let text {
-				Text(text)
-					.foregroundStyle(.secondary)
-					.font(.footnote)
-					.bold()
-					.padding(.leading, 8)
+		Section {
+			VStack(alignment: .leading) {
+				if let text {
+					Text(text)
+						.foregroundStyle(.secondary)
+						.font(.footnote)
+						.bold()
+						.padding(.leading, 8)
+				}
+				SiriTipView(intent: intent)
 			}
-			SiriTipView(intent: intent)
 		}
+		.listSectionSpacing(8)
+		.listRowBackground(Color.clear)
+		.listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
 	}
 }
