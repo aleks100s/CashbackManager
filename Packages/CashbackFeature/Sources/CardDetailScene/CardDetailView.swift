@@ -54,7 +54,11 @@ public struct CardDetailView: View {
 	@ViewBuilder
 	private var contentView: some View {
 		if card.cashback.isEmpty {
-			ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+			VStack {
+				ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+				
+				detectCashbackButton
+			}
 		} else {
 			List {
 				Section {
@@ -77,20 +81,26 @@ public struct CardDetailView: View {
 				}
 				
 				Section {
-					PhotosPicker(selection: $imageItem, matching: .screenshots) {
-						Text("Считать кэшбеки со скриншота")
-					}
-					.onChange(of: imageItem) {
-						detectCashbackFromImage()
-					}
+					detectCashbackButton
+				} footer: {
+					Text("Будут считаны только кэшбэки, чьи категории представлены в приложении и не добалены на эту карту")
 				}
 			}
 		}
 	}
 	
 	private var addCashbackButton: some View {
-		Button("Добавить кэшбэк") {
+		Button("Добавить кэшбэк вручную") {
 			onAddCashbackTap()
+		}
+	}
+	
+	private var detectCashbackButton: some View {
+		PhotosPicker(selection: $imageItem, matching: .screenshots) {
+			Text("Считать кэшбэки со скриншота")
+		}
+		.onChange(of: imageItem) {
+			detectCashbackFromImage()
 		}
 	}
 	
@@ -134,6 +144,7 @@ public struct CardDetailView: View {
 								}
 								
 								card.cashback.append(cashback)
+								imageItem = nil
 							}
 						}
 					}
