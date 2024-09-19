@@ -174,9 +174,5 @@ public struct CardsListView: View {
 	private func delete(card: Card) {
 		searchService?.deindex(card: card)
 		context.delete(card)
-		for cashback in card.cashback {
-			searchService?.deindex(cashback: cashback)
-			context.delete(cashback)
-		}
 	}
 }

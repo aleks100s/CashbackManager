@@ -6,7 +6,6 @@
 //
 
 import AppIntents
-import CardsService
 import DesignSystem
 import Domain
 import SearchService
@@ -29,7 +28,6 @@ public struct AddCashbackView: View {
 	@Environment(\.modelContext) private var context
 	@Environment(\.displayScale) var displayScale
 	@Environment(\.searchService) var searchService
-	@Environment(\.cardsService) var cardsService
 	
 	public init(card: Card, addCategoryIntent: any AppIntent, addCashbackIntent: any AppIntent) {
 		self.card = card
@@ -122,22 +120,9 @@ public struct AddCashbackView: View {
 		if let selectedCategory {
 			let cashback = Cashback(category: selectedCategory, percent: percent)
 			card.cashback.append(cashback)
-			index(cashback: cashback)
+			searchService?.index(cashback: cashback, cardName: card.name)
 			searchService?.index(card: card)
 		}
-	}
-	
-	@MainActor
-	private func renderCategoryMarker(category: Domain.Category) -> UIImage? {
-		let renderer = ImageRenderer(content: CategoryMarkerView(category: category))
-		renderer.scale = displayScale
-		return renderer.uiImage
-	}
-	
-	@MainActor
-	private func index(cashback: Cashback) {
-		let image = renderCategoryMarker(category: cashback.category)
-		searchService?.index(cashback: cashback, cardName: card.name, image: image)
 	}
 }
 

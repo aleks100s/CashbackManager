@@ -38,7 +38,7 @@ struct CreatePlaceIntent: AppIntent {
 		}
 		
 		let place = placeService.createPlace(name: placeName, category: category)
-		searchService.index(place: place, image: nil)
+		searchService.index(place: place)
 		return .result(dialog: "Новое место \(placeName) добавлено!")
 	}
 }

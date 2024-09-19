@@ -110,14 +110,6 @@ public struct AddPlaceView: View {
 		
 		guard let place = placeService?.createPlace(name: placeName, category: selectedCategory) else { return }
 		
-		let image = renderPlaceMarker(place: place)
-		searchService?.index(place: place, image: image)
-	}
-	
-	@MainActor
-	private func renderPlaceMarker(place: Place) -> UIImage? {
-		let renderer = ImageRenderer(content: PlaceMarkerView(name: place.name))
-		renderer.scale = displayScale
-		return renderer.uiImage
+		searchService?.index(place: place)
 	}
 }

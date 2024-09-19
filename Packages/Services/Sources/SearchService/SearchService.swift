@@ -8,28 +8,29 @@
 import CoreSpotlight
 import Domain
 import Shared
-import UIKit
 
 public struct SearchService: @unchecked Sendable {
 	public init() {}
 	
 	public func index(card: Card) {
-		let image = UIImage(systemName: Constants.SFSymbols.cashback)
-		let attributeSet = createAttributes(title: card.name, description: card.cashbackDescription, image: image)
+		let attributeSet = createAttributes(title: card.name, description: card.cashbackDescription)
 		index(id: card.id, attributes: attributeSet)
 	}
 	
-	public func index(cashback: Cashback, cardName: String, image: UIImage?) {
-		let attributeSet = createAttributes(title: cashback.description, description: cardName, image: image)
+	public func index(cashback: Cashback, cardName: String) {
+		let attributeSet = createAttributes(title: cashback.description, description: cardName)
 		index(id: cashback.id, attributes: attributeSet)
 	}
 	
-	public func index(place: Place, image: UIImage?) {
-		let attributeSet = createAttributes(title: place.name, description: place.category.name, image: image)
+	public func index(place: Place) {
+		let attributeSet = createAttributes(title: place.name, description: place.category.name)
 		index(id: place.id, attributes: attributeSet)
 	}
 	
 	public func deindex(card: Card) {
+		for cashback in card.cashback {
+			deindex(cashback: cashback)
+		}
 		deindex(id: card.id)
 	}
 	
@@ -43,13 +44,11 @@ public struct SearchService: @unchecked Sendable {
 	
 	private func createAttributes(
 		title: String,
-		description: String,
-		image: UIImage? = nil
+		description: String
 	) -> CSSearchableItemAttributeSet {
 		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
 		attributeSet.title = title
 		attributeSet.contentDescription = description
-		attributeSet.thumbnailData = image?.pngData()
 		return attributeSet
 	}
 	

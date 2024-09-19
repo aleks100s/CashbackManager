@@ -7,6 +7,7 @@
 
 import AppIntents
 import PlaceService
+import SearchService
 
 struct DeletePlaceIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить место"
@@ -17,6 +18,9 @@ struct DeletePlaceIntent: AppIntent {
 	
 	@Dependency
 	private var placeService: PlaceService
+	
+	@Dependency
+	private var searchService: SearchService
 	
 	init() {}
 	
@@ -30,6 +34,7 @@ struct DeletePlaceIntent: AppIntent {
 		}
 		
 		placeService.delete(place: place)
+		searchService.deindex(place: place)
 		return .result(dialog: "Место \"\(place.name)\" удалено!")
 	}
 }

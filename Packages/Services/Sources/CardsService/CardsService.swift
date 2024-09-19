@@ -50,6 +50,9 @@ public struct CardsService: @unchecked Sendable {
 	
 	public func delete(card: Card) {
 		context.delete(card)
+		for cashback in card.cashback {
+			delete(cashback: cashback, card: card)
+		}
 	}
 	
 	public func delete(cashback: Cashback, card: Card) {

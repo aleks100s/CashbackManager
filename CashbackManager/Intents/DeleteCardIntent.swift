@@ -7,6 +7,7 @@
 
 import AppIntents
 import CardsService
+import SearchService
 
 struct DeleteCardIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить карту"
@@ -17,6 +18,9 @@ struct DeleteCardIntent: AppIntent {
 	
 	@Dependency
 	private var cardsService: CardsService
+	
+	@Dependency
+	private var searchService: SearchService
 	
 	init() {}
 	
@@ -30,6 +34,7 @@ struct DeleteCardIntent: AppIntent {
 		}
 		
 		cardsService.delete(card: card)
+		searchService.deindex(card: card)
 		return .result(dialog: "Карта \"\(card.name)\" удалена!")
 	}
 }

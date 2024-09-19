@@ -8,6 +8,7 @@
 import AppIntents
 import CardsService
 import CategoryService
+import SearchService
 
 struct DeleteCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить кэшбэк"
@@ -24,6 +25,9 @@ struct DeleteCashbackIntent: AppIntent {
 	
 	@Dependency
 	private var categoryService: CategoryService
+	
+	@Dependency
+	private var searchService: SearchService
 	
 	init() {}
 	
@@ -45,7 +49,9 @@ struct DeleteCashbackIntent: AppIntent {
 			return .result(dialog: "Не получилось найти кэшбэк с категорией \(category.name)")
 		}
 		
+		searchService.deindex(cashback: cashback)
 		cardsService.delete(cashback: cashback, card: card)
+		searchService.index(card: card)
 		return .result(dialog: "Кэшбэк \"\(category.name)\" удален с карты \(card.name)!")
 	}
 }
