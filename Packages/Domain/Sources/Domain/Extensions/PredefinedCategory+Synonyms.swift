@@ -39,7 +39,7 @@ public extension PredefinedCategory {
 		case .pharmacies:
 			["Аптека", "Фармацея"]
 		case .beautyAndSPA:
-			["Салоны красоты", "Барбершопы"]
+			["Салоны красоты", "Барбершопы", "Красота"]
 		case .cosmeticsAndParfume:
 			["Косметика и парфюмерия", "Магазины косметики"]
 		case .houseAndRenovation:

@@ -128,7 +128,7 @@ private extension CardDetailView {
 		let result = await textDetectionService?.recogniseCashbackCategories(from: image) ?? []
 		guard !result.isEmpty else { return }
 		
-		await apply(result: result)
+		apply(result: result)
 	}
 	
 	@MainActor
@@ -165,12 +165,10 @@ private struct DetectCashbackSectionButton: View {
 						LinearGradient(gradient: Gradient(colors: [.red, .orange, .yellow, .green, .blue, .purple]), startPoint: .leading, endPoint: .trailing)
 							.hueRotation(.degrees(animateGradient ? 360 : 0))
 							.opacity(0.8)
+							.animation(.linear(duration: 3).repeatForever(autoreverses: false), value: animateGradient)
 					)
-					.clipped()
 					.onAppear {
-						withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: false)) {
-							animateGradient.toggle()
-						}
+						animateGradient.toggle()
 					}
 			}
 			.listRowBackground(Color.clear)
