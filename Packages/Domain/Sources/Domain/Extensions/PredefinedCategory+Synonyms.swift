@@ -13,13 +13,13 @@ public extension PredefinedCategory {
 		case .education:
 			["Курсы"]
 		case .airplainTickets:
-			["Авиаперелеты", "Билеты на самолет"]
+			["Авиаперелеты"]
 		case .vipZone:
 			[]
 		case .carRent:
 			["Прокат авто", "Автопрокат"]
 		case .railRoadTickets:
-			["Билеты на поезда", "Железные дороги", "Железнодорожные билеты"]
+			["Железные дороги", "Железнодорожные билеты"]
 		case .tourAgencies:
 			["Туризм"]
 		case .cruises:
@@ -29,7 +29,7 @@ public extension PredefinedCategory {
 		case .dutyFreeShops:
 			["Duty Free"]
 		case .transport:
-			["Городской транспорт"]
+			[""]
 		case .taxi:
 			["Yandex Go", "Яндекс Go"]
 		case .carSharing:
@@ -49,7 +49,7 @@ public extension PredefinedCategory {
 		case .books:
 			["Книжные магазины", "Книжные лавки"]
 		case .zooGoods:
-			["Зоомагазины", "Товары для животных", "Магазины для животных"]
+			["Зоомагазины", "Товары для животных", "Магазины для животных", "Животные"]
 		case .cinema:
 			["Кинотеатры"]
 		case .entertainment:
@@ -83,9 +83,9 @@ public extension PredefinedCategory {
 		case .souvenirs:
 			["Сувенирные магазины"]
 		case .flowers:
-			["Магазины цветов"]
+			["Магазины цветов", "Цветочные"]
 		case .sportGoods:
-			["Магазины спортивных товаров"]
+			["Магазины спортивных товаров", "Спортивные товары"]
 		case .clothesAndShoes:
 			["Аксессуары", "Магазины одежды", "Магазины обуви"]
 		case .sbp:

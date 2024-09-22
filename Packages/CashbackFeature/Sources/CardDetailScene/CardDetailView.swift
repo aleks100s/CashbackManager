@@ -120,6 +120,10 @@ public struct CardDetailView: View {
 
 private extension CardDetailView {
 	func detectCashbackFromImage() async {
+		defer {
+			imageItem = nil
+		}
+		
 		guard let data = try? await imageItem?.loadTransferable(type: Data.self), let image = UIImage(data: data) else {
 			print("Failed to load image from gallery")
 			return
@@ -142,7 +146,6 @@ private extension CardDetailView {
 			card.cashback.append(cashback)
 		}
 		searchService?.index(card: card)
-		imageItem = nil
 	}
 }
 
@@ -154,7 +157,7 @@ private struct DetectCashbackSectionButton: View {
 	
 	var body: some View {
 		Section {
-			PhotosPicker(selection: $imageItem, matching: .screenshots) {
+			PhotosPicker(selection: $imageItem, matching: .any(of: [.screenshots, .images])) {
 				Text("Считать кэшбэки со скриншота")
 					.foregroundStyle(.white)
 					.bold()
