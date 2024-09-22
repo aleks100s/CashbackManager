@@ -7,6 +7,7 @@
 
 import AppIntents
 import CashbackFeature
+import CoreSpotlight
 import Domain
 import PlaceFeature
 import SearchService
@@ -28,7 +29,7 @@ struct CashbackApplication: App {
 	private let categoryService = AppFactory.provideCategoryService()
 	private let placeService = AppFactory.providePlaceService()
 	private let cardsService = AppFactory.provideCardsService()
-	
+		
 	@AppStorage("isMonthlyNotificationScheduled")
 	private var isMonthlyNotificationScheduled = false
 	
@@ -74,8 +75,25 @@ struct CashbackApplication: App {
 			.task {
 				requestNotificationPermission()
 			}
-			.onOpenURL { _ in
-				selectedTab = .cashback
+			.onOpenURL { url in
+				switch url.host() {
+				case Tab.cashback.rawValue:
+					selectedTab = .cashback
+				case Tab.place.rawValue:
+					selectedTab = .place
+				default:
+					break
+				}
+			}
+			.onContinueUserActivity(CSSearchableItemActionType){ userActivity in
+				if let userinfo = userActivity.userInfo as? [String:Any] {
+					let identifier = userinfo["kCSSearchableItemActivityIdentifier"] as? String ?? ""
+					let queryString = userinfo["kCSSearchQueryString"] as? String ?? ""
+					if let url = URL(string: "\(Constants.urlSchemeCard)\(identifier)") {
+						UIApplication.shared.open(url)
+					}
+					print(identifier,queryString)
+				}
 			}
         }
 		.modelContainer(container)

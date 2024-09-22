@@ -15,4 +15,6 @@ public enum Constants {
 	public static let appGroup = "group.com.alextos.cashback"
 	public static let currentCardID = "CurrentCardID"
 	public static let cardWidgetKind = "CardWidget"
+	public static let urlSchemeCard = "cashback://cashback/card/"
+	public static let urlSchemePlace = "cashback://cashback/place/"
 }

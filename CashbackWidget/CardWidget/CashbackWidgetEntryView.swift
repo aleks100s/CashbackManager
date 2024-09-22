@@ -6,8 +6,9 @@
 //
 
 import AppIntents
-import SwiftUI
 import DesignSystem
+import Shared
+import SwiftUI
 import WidgetKit
 
 struct CashbackWidgetEntryView : View {
@@ -29,7 +30,7 @@ struct CashbackWidgetEntryView : View {
 				}
 			}
 			.viewClass(.widget)
-			.widgetURL(URL(string: "app://cashback/card/\(card.id.uuidString)"))
+			.widgetURL(URL(string: "\(Constants.urlSchemeCard)\(card.id.uuidString)"))
 		} else {
 			Text("Пока нет добавленных карт с кэшбэком")
 		}
