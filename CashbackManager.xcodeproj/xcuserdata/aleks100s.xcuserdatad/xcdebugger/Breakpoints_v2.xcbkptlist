@@ -119,147 +119,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BBF920AE-FCC5-4333-845D-7C33521BCE0F"
+            uuid = "260A7257-6946-49D2-9600-6B54A566BE7A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Packages/Services/Sources/CategoryService/CategoryService.swift"
+            filePath = "Packages/Services/Sources/SearchService/SearchService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "getCategory(by:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "createAttributes(title:description:keywords:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A"
+            uuid = "ABAFF876-1ED5-4C41-818F-0FE05056DD84"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
+            filePath = "Packages/CashbackFeature/Sources/CashbackFeature/Internal/WidgetURLParser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "detectCashbackFromImage()"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "parse(url:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - fc307027a3a82c83"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - fc307027a3a82c83"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - a7f1f1cd48f111ea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - 843c866ded83088d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - 843c866ded83088d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - 4c09d5b23765e48f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - a80c7cd512697688"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-               <Location
-                  uuid = "C7A6B87F-340C-4245-8D52-81FE1731265A - a80c7cd512697688"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for CardDetailScene.CardDetailView.detectCashbackFromImage() async -&gt; ()"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

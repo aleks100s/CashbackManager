@@ -18,6 +18,11 @@ import UserNotifications
 @main
 @MainActor
 struct CashbackApplication: App {
+	private enum Tab: String {
+		case cashback
+		case place
+	}
+	
 	private let container = AppFactory.provideModelContainer()
 	private let searchService = AppFactory.provideSearchService()
 	private let categoryService = AppFactory.provideCategoryService()
@@ -26,6 +31,8 @@ struct CashbackApplication: App {
 	
 	@AppStorage("isMonthlyNotificationScheduled")
 	private var isMonthlyNotificationScheduled = false
+	
+	@State private var selectedTab = Tab.cashback
 	
 	init() {
 		let searchService = self.searchService
@@ -40,7 +47,7 @@ struct CashbackApplication: App {
 
     var body: some Scene {
         WindowGroup {
-			TabView {
+			TabView(selection: $selectedTab) {
 				CashbackFeatureAssembly.assemble(
 					container: container,
 					addCardIntent: CreateCardIntent(),
@@ -52,6 +59,7 @@ struct CashbackApplication: App {
 				.tabItem {
 					Label("Кэшбэк", systemImage: Constants.SFSymbols.cashback)
 				}
+				.tag(Tab.cashback)
 				
 				PlaceFeatureAssembly.assemble(
 					addPlaceIntent: CreatePlaceIntent(),
@@ -61,9 +69,13 @@ struct CashbackApplication: App {
 				.tabItem {
 					Label("Места", systemImage: Constants.SFSymbols.places)
 				}
+				.tag(Tab.place)
 			}
 			.task {
 				requestNotificationPermission()
+			}
+			.onOpenURL { _ in
+				selectedTab = .cashback
 			}
         }
 		.modelContainer(container)

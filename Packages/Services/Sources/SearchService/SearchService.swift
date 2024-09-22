@@ -41,17 +41,20 @@ public struct SearchService: @unchecked Sendable {
 	}
 	
 	private func index(cashback: Cashback, cardName: String) {
-		let attributeSet = createAttributes(title: cashback.description, description: cardName)
+		let synonyms = cashback.category.synonyms?.split(separator: ",") ?? []
+		let attributeSet = createAttributes(title: cashback.description, description: cardName, keywords: synonyms.map { String($0) })
 		index(id: cashback.id, attributes: attributeSet)
 	}
 	
 	private func createAttributes(
 		title: String,
-		description: String
+		description: String,
+		keywords: [String]? = nil
 	) -> CSSearchableItemAttributeSet {
 		let attributeSet = CSSearchableItemAttributeSet(itemContentType: UTType.text.identifier)
 		attributeSet.title = title
 		attributeSet.contentDescription = description
+		attributeSet.keywords = keywords
 		return attributeSet
 	}
 	
