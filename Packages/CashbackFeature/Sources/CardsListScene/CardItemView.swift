@@ -14,7 +14,7 @@ struct CardItemView: View {
 	
 	var body: some View {
 		VStack(alignment: .leading) {
-			CategoriesStackView(cashback: card.cashback)
+			CategoriesStackView(cashback: card.sortedCashback)
 			
 			Text(card.cashbackDescription)
 		}

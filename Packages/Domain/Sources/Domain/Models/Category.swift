@@ -10,10 +10,10 @@ import SwiftData
 
 @Model
 public final class Category {
-	public let id: UUID
-	public let name: String
-	public let emoji: String
-	public let synonyms: String?
+	public var id: UUID
+	public var name: String
+	public var emoji: String
+	public var synonyms: String?
 	public var priority: Int
 	
 	public init(id: UUID = UUID(), name: String, emoji: String, synonyms: String? = nil, priority: Int = 0) {

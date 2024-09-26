@@ -10,9 +10,9 @@ import SwiftData
 
 @Model
 public final class Place {
-	public let id: UUID
-	public let name: String
-	public let category: Category
+	public var id: UUID
+	public var name: String
+	public var category: Category
 	
 	public init(id: UUID = UUID(), name: String, category: Category) {
 		self.id = id

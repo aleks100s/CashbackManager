@@ -91,7 +91,7 @@ public extension PredefinedCategory {
 		case .sbp:
 			[]
 		case .digitalGoods:
-			[]
+			["Цифровой контент"]
 		case .yandex:
 			[]
 		case .burgerKing:

@@ -91,9 +91,9 @@ public extension PredefinedCategory {
 		case .sbp:
 			"🤳🏻"
 		case .digitalGoods:
-			"💻"
+			"👾"
 		case .yandex:
-			"🤖"
+			"Я"
 		case .burgerKing:
 			"🍔"
 		}

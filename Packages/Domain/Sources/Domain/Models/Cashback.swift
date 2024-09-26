@@ -10,9 +10,17 @@ import SwiftData
 
 @Model
 public final class Cashback {
-	public let id: UUID
-	public let category: Category
-	public let percent: Double
+	public var id: UUID
+	public var category: Category
+	public var percent: Double
+	
+	public var description: String {
+		if (percent * 1000).truncatingRemainder(dividingBy: 10) == 0 {
+			"\(category.name) \(Int(percent * 100))%"
+		} else {
+			"\(category.name) \(String(format: "%.1f", percent * 100))%"
+		}
+	}
 	
 	public init(id: UUID = UUID(), category: Category, percent: Double) {
 		self.id = id

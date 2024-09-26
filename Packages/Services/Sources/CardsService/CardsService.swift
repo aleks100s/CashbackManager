@@ -37,7 +37,7 @@ public struct CardsService: @unchecked Sendable {
 	}
 	
 	public func getAllCards() -> [Card] {
-		fetch(by: #Predicate<Card> { !$0.cashback.isEmpty })
+		fetch(by: #Predicate<Card> { !$0.isEmpty })
 	}
 	
 	public func getCards(category: Domain.Category) -> [Card] {
