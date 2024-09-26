@@ -172,6 +172,7 @@ public struct CardsListView: View {
 		context.insert(card)
 		searchService?.index(card: card)
 		isAddCardSheetPresented = false
+		onCardSelected(card)
 	}
 	
 	private func delete(card: Card) {
