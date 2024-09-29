@@ -170,7 +170,6 @@ private extension AddCashbackView {
 				TextField(value: $percent, formatter: Self.formatter) {
 					Text("Процент кэшбэка")
 				}
-				.multilineTextAlignment(.trailing)
 				.keyboardType(.decimalPad)
 				.focused($isFocused)
 				.onChange(of: percent) { _, newValue in
