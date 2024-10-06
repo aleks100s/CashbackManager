@@ -22,6 +22,8 @@ public struct PlaceView: View {
 			VStack(alignment: .leading, spacing: 8) {
 				Text(place.name)
 				Text(place.category.name)
+					.font(.callout)
+					.foregroundStyle(.secondary)
 			}
 			
 			Spacer()

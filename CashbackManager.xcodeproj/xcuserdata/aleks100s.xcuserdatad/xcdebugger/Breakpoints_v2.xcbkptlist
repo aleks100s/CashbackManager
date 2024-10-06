@@ -146,50 +146,6 @@
             endingLineNumber = "19"
             landmarkName = "application(_:continue:restorationHandler:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "09975559-68D8-4355-A423-0B253B9690E0 - 39b384ba29ff8ccb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CashbackManager.AppDelegate.application(_: __C.UIApplication, continue: __C.NSUserActivity, restorationHandler: (Swift.Optional&lt;Swift.Array&lt;__C.UIUserActivityRestoring&gt;&gt;) -&gt; ()) -&gt; Swift.Bool"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/CashbackManager/AppDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19">
-               </Location>
-               <Location
-                  uuid = "09975559-68D8-4355-A423-0B253B9690E0 - 39b384ba29ff8ccb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CashbackManager.AppDelegate.application(_: __C.UIApplication, continue: __C.NSUserActivity, restorationHandler: (Swift.Optional&lt;Swift.Array&lt;__C.UIUserActivityRestoring&gt;&gt;) -&gt; ()) -&gt; Swift.Bool"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/CashbackManager/AppDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19">
-               </Location>
-               <Location
-                  uuid = "09975559-68D8-4355-A423-0B253B9690E0 - 39b384ba29ff8ccb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CashbackManager.AppDelegate.application(_: __C.UIApplication, continue: __C.NSUserActivity, restorationHandler: (Swift.Optional&lt;Swift.Array&lt;__C.UIUserActivityRestoring&gt;&gt;) -&gt; ()) -&gt; Swift.Bool"
-                  moduleName = "CashbackManager.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/CashbackManager/AppDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -238,36 +194,6 @@
             endingLineNumber = "32"
             landmarkName = "getTimeline(in:completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "103D9AA9-C7F2-4B0C-A0B5-90CE24588D21 - e8d57c8f2fd4f682"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CashbackWidgetExtension.CardWidgetProvider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;CashbackWidgetExtension.CardWidgetEntry&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "CashbackWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/CashbackWidget/CardWidget/CardWidgetProvider.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32">
-               </Location>
-               <Location
-                  uuid = "103D9AA9-C7F2-4B0C-A0B5-90CE24588D21 - e8d57c8f2fd4f682"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CashbackWidgetExtension.CardWidgetProvider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;CashbackWidgetExtension.CardWidgetEntry&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "CashbackWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/CashbackWidget/CardWidget/CardWidgetProvider.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
