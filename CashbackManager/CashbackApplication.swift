@@ -35,6 +35,8 @@ struct CashbackApplication: App {
 	
 	@State private var selectedTab = Tab.cashback
 	
+	@Environment(\.openURL) private var openURL
+	
 	init() {
 		let searchService = self.searchService
 		let categoryService = self.categoryService
@@ -90,7 +92,7 @@ struct CashbackApplication: App {
 					let identifier = userinfo["kCSSearchableItemActivityIdentifier"] as? String ?? ""
 					let queryString = userinfo["kCSSearchQueryString"] as? String ?? ""
 					if let url = URL(string: "\(Constants.urlSchemeCard)\(identifier)") {
-						UIApplication.shared.open(url)
+						openURL(url)
 					}
 					print(identifier,queryString)
 				}

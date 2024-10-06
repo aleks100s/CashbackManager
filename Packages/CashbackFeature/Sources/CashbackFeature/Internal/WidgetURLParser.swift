@@ -21,7 +21,7 @@ struct WidgetURLParser {
 		if components.count > 2 {
 			switch components[1] {
 			case "card":
-				guard let cardId = UUID(uuidString: components[2]), let card = cardsService.getCard(id: cardId) else {
+				guard let id = UUID(uuidString: components[2]), let card = cardsService.getCard(id: id) ?? cardsService.getCard(cashbackId: id) else {
 					return nil
 				}
 				
