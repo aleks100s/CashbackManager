@@ -96,6 +96,8 @@ public extension PredefinedCategory {
 			"Сервисы Яндекса"
 		case .burgerKing:
 			"Бургер Кинг"
+		case .gasStation:
+			"Заправки"
 		}
 	}
 }

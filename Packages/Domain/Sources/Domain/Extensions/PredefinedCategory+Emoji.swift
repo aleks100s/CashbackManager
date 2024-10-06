@@ -96,6 +96,8 @@ public extension PredefinedCategory {
 			"Я"
 		case .burgerKing:
 			"🍔"
+		case .gasStation:
+			"⛽"
 		}
 	}
 }
