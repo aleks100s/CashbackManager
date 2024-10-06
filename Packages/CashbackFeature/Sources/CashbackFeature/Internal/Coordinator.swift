@@ -10,6 +10,7 @@ import AppIntents
 import CardDetailScene
 import CardsListScene
 import Domain
+import SwiftData
 import SwiftUI
 
 struct Coordinator: View {
@@ -26,6 +27,8 @@ struct Coordinator: View {
 
 	@Environment(\.modelContext) private var context
 	@Environment(\.widgetURLParser) private var urlParser
+	
+	@Query private var categories: [Domain.Category]
 	
     var body: some View {
 		NavigationStack(path: $navigationStack) {
@@ -48,6 +51,8 @@ struct Coordinator: View {
 		.onAppear {
 			if isFirstLaunch {
 				prepopulateDatabase()
+			} else {
+				actualizeDatabase()
 			}
 			isFirstLaunch = false
 		}
@@ -67,6 +72,17 @@ struct Coordinator: View {
 		let categories = PredefinedCategory.allCases.map(\.asCategory)
 		for category in categories {
 			context.insert(category)
+		}
+	}
+	
+	private func actualizeDatabase() {
+		let predefinedCategories = PredefinedCategory.allCases.map(\.asCategory)
+		for predefined in predefinedCategories {
+			if let category = categories.first(where: { $0.name == predefined.name }) {
+				category.synonyms = predefined.synonyms
+			} else {
+				context.insert(predefined)
+			}
 		}
 	}
 }

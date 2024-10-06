@@ -97,7 +97,7 @@ public extension PredefinedCategory {
 		case .burgerKing:
 			["Burger King"]
 		case .gasStation:
-			["Топливо", "Автозаправки", "АЗС"]
+			["Топливо", "Автозаправки", "АЗС", "Бензин"]
 		}
 	}
 }
