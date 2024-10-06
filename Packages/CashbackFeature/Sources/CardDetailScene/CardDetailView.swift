@@ -26,6 +26,7 @@ public struct CardDetailView: View {
 	
 	@State private var imageItem: PhotosPickerItem?
 	@State private var animateGradient = false
+	@State private var isEditing = false
 
 	@Environment(\.modelContext) private var context
 	@Environment(\.searchService) private var searchService
@@ -43,8 +44,16 @@ public struct CardDetailView: View {
 			.background(Color.cmScreenBackground)
 			.navigationTitle(card.name)
 			.toolbar {
-				ToolbarItem(placement: .bottomBar) {
-					addCashbackButton
+				if !isEditing {
+					ToolbarItem(placement: .bottomBar) {
+						addCashbackButton
+					}
+				}
+				
+				if !card.isEmpty {
+					ToolbarItem(placement: .topBarTrailing) {
+						editButton
+					}
 				}
 			}
 			.onAppear {
@@ -79,7 +88,20 @@ public struct CardDetailView: View {
 					}
 				}
 				
-				detectCashbackSectionButton
+				if isEditing {
+					Section {
+						Button("Удалить все кэшбэки с карты", role: .destructive) {
+							for cashback in card.cashback {
+								delete(cashback: cashback)
+							}
+							isEditing.toggle()
+						}
+					} footer: {
+						Text("Данное действие нельзя отменить")
+					}
+				} else {
+					detectCashbackSectionButton
+				}
 			}
 		}
 	}
@@ -87,6 +109,12 @@ public struct CardDetailView: View {
 	private var addCashbackButton: some View {
 		Button("Добавить кэшбэк вручную") {
 			onAddCashbackTap()
+		}
+	}
+	
+	private var editButton: some View {
+		Button(isEditing ? "Готово" : "Править") {
+			isEditing.toggle()
 		}
 	}
 	
