@@ -48,7 +48,7 @@ public struct CardsListView: View {
 	public var body: some View {
 		contentView
 			.background(Color.cmScreenBackground)
-			.navigationTitle("Мои кэшбэки")
+			.navigationTitle("Мои карты")
 			.if(!cards.isEmpty) {
 				$0.searchable(
 					text: $searchText,
@@ -73,7 +73,7 @@ public struct CardsListView: View {
 	private var contentView: some View {
 		if filteredCards.isEmpty {
 			if searchText.isEmpty {
-				ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+				ContentUnavailableView("Нет сохраненных карт", systemImage: "rublesign.circle")
 			} else {
 				ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")
 			}

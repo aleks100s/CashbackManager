@@ -38,6 +38,7 @@
 		27368BEA2C4CDE9A00FC0475 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 27368BE92C4CDE9A00FC0475 /* DesignSystem */; };
 		274861FB2C53463E00788C1A /* CardsService in Frameworks */ = {isa = PBXBuildFile; productRef = 274861FA2C53463E00788C1A /* CardsService */; };
 		274862092C534AB200788C1A /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 274862082C534AB200788C1A /* Shared */; };
+		2755A3102CB9742A002F61EC /* PaymentFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A30F2CB9742A002F61EC /* PaymentFeature */; };
 		277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E52C73C0AA00C26CD8 /* CategoryService */; };
 		277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E72C73C0AF00C26CD8 /* PlaceService */; };
 		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
@@ -129,6 +130,7 @@
 		27368BF22C4CEE4800FC0475 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		274862072C534A6A00788C1A /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
 		2748620C2C54BFC200788C1A /* CashbackFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CashbackFeature; sourceTree = "<group>"; };
+		2755A30E2CB97402002F61EC /* PaymentFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PaymentFeature; sourceTree = "<group>"; };
 		277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryIntent.swift; sourceTree = "<group>"; };
 		277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCashbackIntent.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 				2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */,
 				27208E732C54C4970097794D /* CashbackFeature in Frameworks */,
 				27AB37272C73BBE200A00939 /* CategoryService in Frameworks */,
+				2755A3102CB9742A002F61EC /* PaymentFeature in Frameworks */,
 				27D329D52C9C894B00964504 /* TextDetectionService in Frameworks */,
 				27AB37292C73BBE700A00939 /* PlaceService in Frameworks */,
 				27368B802C426E8E00FC0475 /* (null) in Frameworks */,
@@ -224,6 +227,7 @@
 		27368B7C2C426DA300FC0475 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				2755A30E2CB97402002F61EC /* PaymentFeature */,
 				2714FEA62C54C93F0014CFE0 /* PlaceFeature */,
 				2748620C2C54BFC200788C1A /* CashbackFeature */,
 				274862072C534A6A00788C1A /* Shared */,
@@ -378,6 +382,7 @@
 				27AB37282C73BBE700A00939 /* PlaceService */,
 				27AB372A2C73BE4B00A00939 /* CardsService */,
 				27D329D42C9C894B00964504 /* TextDetectionService */,
+				2755A30F2CB9742A002F61EC /* PaymentFeature */,
 			);
 			productName = CashbackManager;
 			productReference = 27A5D7CD2C394EC400B93512 /* CashbackManager.app */;
@@ -785,7 +790,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -822,7 +827,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -989,6 +994,10 @@
 		274862082C534AB200788C1A /* Shared */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Shared;
+		};
+		2755A30F2CB9742A002F61EC /* PaymentFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PaymentFeature;
 		};
 		277130E52C73C0AA00C26CD8 /* CategoryService */ = {
 			isa = XCSwiftPackageProductDependency;

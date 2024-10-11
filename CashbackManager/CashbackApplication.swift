@@ -9,6 +9,7 @@ import AppIntents
 import CashbackFeature
 import CoreSpotlight
 import Domain
+import PaymentFeature
 import PlaceFeature
 import SearchService
 import Shared
@@ -21,6 +22,7 @@ import UserNotifications
 struct CashbackApplication: App {
 	private enum Tab: String {
 		case cashback
+		case income
 		case place
 	}
 	
@@ -60,9 +62,15 @@ struct CashbackApplication: App {
 					addCashbackIntent: CreateCashbackIntent()
 				)
 				.tabItem {
-					Label("Кэшбэк", systemImage: Constants.SFSymbols.cashback)
+					Label("Карты", systemImage: Constants.SFSymbols.cashback)
 				}
 				.tag(Tab.cashback)
+				
+				IncomeFeatureAssembly.assemble()
+					.tabItem {
+						Label("Выплаты", systemImage: Constants.SFSymbols.income)
+					}
+					.tag(Tab.income)
 				
 				PlaceFeatureAssembly.assemble(
 					addPlaceIntent: CreatePlaceIntent(),

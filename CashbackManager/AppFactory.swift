@@ -15,7 +15,7 @@ import TextDetectionService
 
 @MainActor
 enum AppFactory {
-	private static let container = try! ModelContainer(for: Card.self, Cashback.self, Domain.Category.self, Place.self)
+	private static let container = try! ModelContainer(for: Card.self, Cashback.self, Domain.Category.self, Place.self, Income.self)
 	private static let searchService = SearchService()
 	private static let cardsService = CardsService(context: container.mainContext)
 	private static let categoryService = CategoryService(context: container.mainContext)
