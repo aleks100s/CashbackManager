@@ -51,6 +51,12 @@ public struct SelectCategoryView: View {
 				ToolbarItem(placement: .bottomBar) {
 					addCategoryButton
 				}
+				
+				ToolbarItem(placement: .topBarTrailing) {
+					Button("Отмена") {
+						dismiss()
+					}
+				}
 			}
 			.sheet(isPresented: $isAddCategorySheetPresented) {
 				addCategorySheet

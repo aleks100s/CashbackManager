@@ -73,7 +73,7 @@ public struct CardsListView: View {
 	private var contentView: some View {
 		if filteredCards.isEmpty {
 			if searchText.isEmpty {
-				ContentUnavailableView("Нет сохраненных карт", systemImage: "rublesign.circle")
+				ContentUnavailableView("Нет сохраненных карт", systemImage: "creditcard")
 			} else {
 				ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")
 			}

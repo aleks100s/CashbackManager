@@ -10,11 +10,35 @@ import SwiftData
 import SwiftUI
 
 struct IncomeListView: View {
-	@Query private var incomes: [Income]
+	let addIncomeTapped: () -> Void
 	
 	@Environment(\.modelContext) private var context
+	
+	@Query private var incomes: [Income]
 
 	var body: some View {
+		Group {
+			if incomes.isEmpty {
+				emptyView
+			} else {
+				contentView
+			}
+		}
+		.navigationTitle("Выплаты кэшбэка")
+		.toolbar {
+			ToolbarItem(placement: .bottomBar) {
+				Button("Добавить выплату") {
+					addIncomeTapped()
+				}
+			}
+		}
+	}
+	
+	private var emptyView: some View {
+		ContentUnavailableView("Выплаты не добавлены", systemImage: "rublesign.circle")
+	}
+	
+	private var contentView: some View {
 		List {
 			ForEach(incomes) { income in
 				IncomeView(income: income)
@@ -28,14 +52,6 @@ struct IncomeListView: View {
 			.onDelete { indexSet in
 				for index in indexSet {
 					delete(income: incomes[index])
-				}
-			}
-		}
-		.navigationTitle("Выплаты кэшбэка")
-		.toolbar {
-			ToolbarItem(placement: .bottomBar) {
-				Button("Добавить выплату") {
-					context.insert(Income(amount: 457, date: .now, source: "ВТБ"))
 				}
 			}
 		}

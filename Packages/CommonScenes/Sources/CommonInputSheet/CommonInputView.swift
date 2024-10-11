@@ -18,6 +18,7 @@ public struct CommonInputView: View {
 
 	@State private var text: String = ""
 	@FocusState private var isFocused
+	@Environment(\.dismiss) private var dismiss
 	
 	public init(
 		_ placeholder: LocalizedStringKey,
@@ -60,6 +61,13 @@ public struct CommonInputView: View {
 			}
 			.disabled(text.isEmpty)
 			.padding()
+		}
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing) {
+				Button("Отмена") {
+					dismiss()
+				}
+			}
 		}
 	}
 }

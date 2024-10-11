@@ -42,6 +42,13 @@ public struct AddPlaceView: View {
 			.background(Color.cmScreenBackground)
 			.navigationTitle("Новое место")
 			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .topBarTrailing) {
+					Button("Отмена") {
+						dismiss()
+					}
+				}
+			}
 			.safeAreaInset(edge: .bottom) {
 				saveButton
 			}

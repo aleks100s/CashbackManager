@@ -40,6 +40,13 @@ public struct AddCashbackView: View {
 			.background(Color.cmScreenBackground)
 			.navigationTitle("Добавить кэшбэк")
 			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .topBarTrailing) {
+					Button("Отмена") {
+						dismiss()
+					}
+				}
+			}
 			.safeAreaInset(edge: .bottom) {
 				saveButton
 			}
