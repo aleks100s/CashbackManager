@@ -167,7 +167,7 @@ public struct CardsListView: View {
 		
 	@MainActor
 	private func create(cardName: String) {
-		let card = Card(name: cardName)
+		let card = Card(name: cardName, color: Color.randomColor().toHex())
 		context.insert(card)
 		searchService?.index(card: card)
 		isAddCardSheetPresented = false

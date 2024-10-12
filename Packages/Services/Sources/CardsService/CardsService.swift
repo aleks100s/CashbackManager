@@ -7,7 +7,9 @@
 
 import Domain
 import Foundation
+import Shared
 import SwiftData
+import SwiftUI
 
 public struct CardsService: @unchecked Sendable {
 	private let context: ModelContext
@@ -17,7 +19,7 @@ public struct CardsService: @unchecked Sendable {
 	}
 	
 	public func createCard(name: String) -> Card {
-		let card = Card(name: name)
+		let card = Card(name: name, color: Color.randomColor().toHex())
 		context.insert(card)
 		try? context.save()
 		return card

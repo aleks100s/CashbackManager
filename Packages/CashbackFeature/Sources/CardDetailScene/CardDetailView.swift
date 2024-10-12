@@ -29,6 +29,7 @@ public struct CardDetailView: View {
 	@State private var animateGradient = false
 	@State private var isEditing = false
 	@State private var cardName: String
+	@State private var color: Color
 	
 	@Environment(\.modelContext) private var context
 	@Environment(\.cardsService) private var cardsService
@@ -41,6 +42,7 @@ public struct CardDetailView: View {
 		self.cardCashbackIntent = cardCashbackIntent
 		self.onAddCashbackTap = onAddCashbackTap
 		cardName = card.name
+		color = Color(hex: card.color ?? "")
 	}
 	
 	public var body: some View {
@@ -66,8 +68,9 @@ public struct CardDetailView: View {
 				WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 			}
 			.onChange(of: isEditing) { _, newValue in
-				if !newValue, !cardName.isEmpty, cardName != card.name {
+				if !newValue, !cardName.isEmpty {
 					card.name = cardName
+					card.color = color.toHex()
 					cardsService?.update(card: card)
 				}
 			}
@@ -90,9 +93,11 @@ public struct CardDetailView: View {
 				}
 				
 				if isEditing {
-					Section("Название карты") {
+					Section("Редактировать название и цвет") {
 						TextField("Название карты", text: $cardName)
 							.textFieldStyle(.plain)
+						
+						ColorPicker("Цвет карты", selection: $color)
 					}
 				}
 				

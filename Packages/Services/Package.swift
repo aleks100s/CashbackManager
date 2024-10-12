@@ -37,7 +37,7 @@ let package = Package(
 		.package(name: "Domain", path: "./Domain")
 	],
     targets: [
-		.target(name: "CardsService", dependencies: ["Domain"]),
+		.target(name: "CardsService", dependencies: ["Domain", "Shared"]),
 		.target(
 			name: "SearchService",
 			dependencies: ["Domain", "Shared"]
