@@ -45,7 +45,6 @@ public struct PlacesListView: View {
 	
 	public var body: some View {
 		contentView
-			.background(Color.cmScreenBackground)
 			.navigationTitle("Сохраненные места")
 			.if(!places.isEmpty) {
 				$0.searchable(

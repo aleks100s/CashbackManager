@@ -10,11 +10,13 @@ import SwiftData
 
 @Model
 public final class Income {
+	public var id: UUID
 	public var amount: Int
 	public var date: Date
 	public var source: String?
 	
-	public init(amount: Int, date: Date = .now, source: String? = nil) {
+	public init(id: UUID = UUID(), amount: Int, date: Date = .now, source: String? = nil) {
+		self.id = id
 		self.amount = amount
 		self.date = date
 		self.source = source

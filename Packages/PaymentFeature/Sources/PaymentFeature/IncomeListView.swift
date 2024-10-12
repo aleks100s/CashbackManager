@@ -14,7 +14,9 @@ struct IncomeListView: View {
 	
 	@Environment(\.modelContext) private var context
 	
-	@Query private var incomes: [Income]
+	@Query(sort: [
+		SortDescriptor<Income>(\.date, order: .reverse)
+	]) private var incomes: [Income]
 
 	var body: some View {
 		Group {

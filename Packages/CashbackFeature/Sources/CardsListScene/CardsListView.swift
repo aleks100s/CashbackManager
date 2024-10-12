@@ -47,7 +47,6 @@ public struct CardsListView: View {
 	
 	public var body: some View {
 		contentView
-			.background(Color.cmScreenBackground)
 			.navigationTitle("Мои карты")
 			.if(!cards.isEmpty) {
 				$0.searchable(
