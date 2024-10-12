@@ -46,10 +46,12 @@ struct CashbackApplication: App {
 		let categoryService = self.categoryService
 		let placeService = self.placeService
 		let cardsService = self.cardsService
+		let incomeService = self.incomeService
 		AppDependencyManager.shared.add(dependency: searchService)
 		AppDependencyManager.shared.add(dependency: categoryService)
 		AppDependencyManager.shared.add(dependency: placeService)
 		AppDependencyManager.shared.add(dependency: cardsService)
+		AppDependencyManager.shared.add(dependency: incomeService)
 	}
 
     var body: some Scene {

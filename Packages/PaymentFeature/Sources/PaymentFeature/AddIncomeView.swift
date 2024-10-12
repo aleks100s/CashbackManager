@@ -72,7 +72,7 @@ struct AddIncomeView: View {
 			}
 			
 			Section {
-				TextField("Сумма выплаты", text: $amount)
+				TextField("Размер выплаты", text: $amount)
 					.keyboardType(.numberPad)
 					.focused($isFocused)
 					.onChange(of: amount) {
