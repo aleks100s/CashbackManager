@@ -7,6 +7,7 @@
 
 import AppIntents
 import CategoryService
+import CardsService
 import Domain
 import DesignSystem
 import PhotosUI
@@ -27,8 +28,10 @@ public struct CardDetailView: View {
 	@State private var imageItem: PhotosPickerItem?
 	@State private var animateGradient = false
 	@State private var isEditing = false
-
+	@State private var cardName: String
+	
 	@Environment(\.modelContext) private var context
+	@Environment(\.cardsService) private var cardsService
 	@Environment(\.searchService) private var searchService
  	@Environment(\.categoryService) private var categoryService
 	@Environment(\.textDetectionService) private var textDetectionService
@@ -37,12 +40,14 @@ public struct CardDetailView: View {
 		self.card = card
 		self.cardCashbackIntent = cardCashbackIntent
 		self.onAddCashbackTap = onAddCashbackTap
+		cardName = card.name
 	}
 	
 	public var body: some View {
 		contentView
 			.background(Color.cmScreenBackground)
-			.navigationTitle(card.name)
+			.navigationTitle(cardName)
+			.navigationBarTitleDisplayMode(isEditing ? .inline : .large)
 			.toolbar {
 				if !isEditing {
 					ToolbarItem(placement: .bottomBar) {
@@ -59,6 +64,12 @@ public struct CardDetailView: View {
 			.onAppear {
 				currentCardId = card.id.uuidString
 				WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+			}
+			.onChange(of: isEditing) { _, newValue in
+				if !newValue, !cardName.isEmpty, cardName != card.name {
+					card.name = cardName
+					cardsService?.update(card: card)
+				}
 			}
 	}
 	
@@ -78,15 +89,24 @@ public struct CardDetailView: View {
 					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
 				}
 				
-				ForEach(card.sortedCashback) { cashback in
-					CashbackView(cashback: cashback)
-						.contextMenu {
-							deleteCashbackButton(cashback: cashback)
-						}
+				if isEditing {
+					Section("Название карты") {
+						TextField("Название карты", text: $cardName)
+							.textFieldStyle(.plain)
+					}
 				}
-				.onDelete { indexSet in
-					for index in indexSet {
-						deleteCashback(index: index)
+				
+				Section("Кэшбэки") {
+					ForEach(card.sortedCashback) { cashback in
+						CashbackView(cashback: cashback)
+							.contextMenu {
+								deleteCashbackButton(cashback: cashback)
+							}
+					}
+					.onDelete { indexSet in
+						for index in indexSet {
+							deleteCashback(index: index)
+						}
 					}
 				}
 				
@@ -118,6 +138,7 @@ public struct CardDetailView: View {
 		Button(isEditing ? "Готово" : "Править") {
 			isEditing.toggle()
 		}
+		.disabled(cardName.isEmpty)
 	}
 	
 	private var detectCashbackSectionButton: some View {
