@@ -16,9 +16,9 @@ struct IncomeView: View {
 		VStack(alignment: .leading) {
 			HStack {
 				Image(systemName: Constants.SFSymbols.cashback)
-					.foregroundStyle(Color(hex: income.color ?? ""))
+					.foregroundStyle(Color(hex: income.source?.color ?? ""))
 
-				Text(income.source ?? "Кэшбэк")				
+				Text(income.source?.name ?? "Кэшбэк")
 				
 				Spacer()
 				
