@@ -20,7 +20,7 @@ struct AddIncomeView: View {
 	
 	@Query private var cards: [Card]
 	
-	@State private var source: String?
+	@State private var source: Card?
 	@State private var amount: String = "0"
 	@State private var date: Date = .now
 	
@@ -55,10 +55,10 @@ struct AddIncomeView: View {
 			IntentTipView(intent: createIncomeIntent, text: "Чтобы добавить выплату")
 			
 			Section {
-				Menu(source ?? "Не выбрано") {
+				Menu(source?.name ?? "Не выбрано") {
 					ForEach(cards) { card in
 						Button(card.name) {
-							source = card.name
+							source = card
 						}
 					}
 				}

@@ -14,7 +14,7 @@ struct IncomeView: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			HStack {
-				Text(income.source ?? "Кэшбэк")
+				Text(income.source?.name ?? "Кэшбэк")
 				
 				Spacer()
 				

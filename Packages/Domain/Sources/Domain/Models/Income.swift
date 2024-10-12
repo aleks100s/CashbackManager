@@ -13,9 +13,9 @@ public final class Income {
 	public var id: UUID
 	public var amount: Int
 	public var date: Date
-	public var source: String?
+	public var source: Card?
 	
-	public init(id: UUID = UUID(), amount: Int, date: Date, source: String?) {
+	public init(id: UUID = UUID(), amount: Int, date: Date, source: Card?) {
 		self.id = id
 		self.amount = amount
 		self.date = date

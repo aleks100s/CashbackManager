@@ -16,7 +16,7 @@ public struct IncomeService: @unchecked Sendable {
 		self.context = context
 	}
 	
-	public func createIncome(amount: Int, date: Date = .now, source: String? = nil) {
+	public func createIncome(amount: Int, date: Date = .now, source: Card? = nil) {
 		let income = Income(amount: amount, date: date, source: source)
 		context.insert(income)
 		try? context.save()
