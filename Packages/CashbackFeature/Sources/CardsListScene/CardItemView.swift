@@ -24,7 +24,7 @@ struct CardItemView: View {
 						
 						Spacer()
 												
-						Image(systemName: "creditcard")
+						Image(systemName: Constants.SFSymbols.cashback)
 							.foregroundStyle(Color(hex: card.color ?? ""))
 					}
 					

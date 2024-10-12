@@ -38,16 +38,16 @@ struct CreateIncomeIntent: AppIntent {
 		}
 		
 		if let source {
-			incomeService.createIncome(amount: amount, source: source.name)
+			incomeService.createIncome(amount: amount, source: source.name, color: source.color)
 		} else {
 			let variants = cardsService.getAllCards().map {
-				IncomeEntity(id: $0.id, name: $0.name)
+				IncomeEntity(id: $0.id, name: $0.name, color: $0.color)
 		 }
 			let source = try await $source.requestDisambiguation(
 				among: variants,
 				dialog: IntentDialog(stringLiteral: "Выберите источник выплаты")
 			)
-			incomeService.createIncome(amount: amount, source: source.name)
+			incomeService.createIncome(amount: amount, source: source.name, color: source.color)
 		}
 		
 		return .result(dialog: "Выплата кэшбэка в размере \(amount) рублей добавлена!")
@@ -59,6 +59,7 @@ struct IncomeEntity: AppEntity {
 	
 	let id: UUID
 	let name: String
+	let color: String?
 	
 	var displayRepresentation: DisplayRepresentation {
 		DisplayRepresentation(stringLiteral: name)
@@ -73,7 +74,7 @@ struct IncomeQuery: EntityQuery {
 	
 	func entities(for identifiers: [UUID]) async throws -> [IncomeEntity] {
 		cardsService.getAllCards().map {
-			IncomeEntity(id: $0.id, name: $0.name)
+			IncomeEntity(id: $0.id, name: $0.name, color: $0.color)
 		}
 	}
 }

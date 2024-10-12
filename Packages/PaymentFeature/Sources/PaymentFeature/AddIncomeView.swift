@@ -21,6 +21,7 @@ struct AddIncomeView: View {
 	@Query private var cards: [Card]
 	
 	@State private var source: String?
+	@State private var color: String?
 	@State private var amount: String = "0"
 	@State private var date: Date = .now
 	
@@ -59,6 +60,7 @@ struct AddIncomeView: View {
 					ForEach(cards) { card in
 						Button(card.name) {
 							source = card.name
+							color = card.color
 						}
 					}
 				}
@@ -102,7 +104,7 @@ struct AddIncomeView: View {
 	}
 	
 	private func createIncome() {
-		incomeService?.createIncome(amount: Int(amount) ?? .zero, date: date, source: source)
+		incomeService?.createIncome(amount: Int(amount) ?? .zero, date: date, source: source, color: color)
 	}
 	
 	private func formatAmount() {

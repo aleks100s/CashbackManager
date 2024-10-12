@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Shared
 import SwiftUI
 
 struct IncomeView: View {
@@ -14,7 +15,10 @@ struct IncomeView: View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			HStack {
-				Text(income.source ?? "Кэшбэк")
+				Image(systemName: Constants.SFSymbols.cashback)
+					.foregroundStyle(Color(hex: income.color ?? ""))
+
+				Text(income.source ?? "Кэшбэк")				
 				
 				Spacer()
 				

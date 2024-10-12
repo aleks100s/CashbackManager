@@ -14,11 +14,13 @@ public final class Income {
 	public var amount: Int
 	public var date: Date
 	public var source: String?
+	public var color: String?
 	
-	public init(id: UUID = UUID(), amount: Int, date: Date, source: String?) {
+	public init(id: UUID = UUID(), amount: Int, date: Date, source: String?, color: String?) {
 		self.id = id
 		self.amount = amount
 		self.date = date
 		self.source = source
+		self.color = color
 	}
 }
