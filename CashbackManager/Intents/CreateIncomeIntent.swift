@@ -13,7 +13,7 @@ struct CreateIncomeIntent: AppIntent {
 	static var title: LocalizedStringResource = "Выплата кэшбэка"
 	static var description: IntentDescription? = "Запрашивает размер выплаты и сохраняет ее в приложении"
 	
-	@Parameter(title: "Размер выплаты", inputOptions: String.IntentInputOptions(keyboardType: .numberPad))
+	@Parameter(title: "Размер выплаты в рублях", inputOptions: String.IntentInputOptions(keyboardType: .numberPad))
 	var amount: String
 	
 	@Parameter(title: "Источник выплаты")
