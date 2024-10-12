@@ -8,6 +8,7 @@
 import CardsService
 import CategoryService
 import Domain
+import IncomeService
 import PlaceService
 import SearchService
 import SwiftData
@@ -21,6 +22,7 @@ enum AppFactory {
 	private static let categoryService = CategoryService(context: container.mainContext)
 	private static let placeService = PlaceService(context: container.mainContext)
 	private static let textDetectionService = TextDetectionService()
+	private static let incomeService = IncomeService(context: container.mainContext)
 	
 	static func provideModelContainer() -> ModelContainer {
 		container
@@ -48,5 +50,10 @@ enum AppFactory {
 	@MainActor
 	static func provideTextDetectionService() -> TextDetectionService {
 		textDetectionService
+	}
+	
+	@MainActor
+	static func provideIncomeService() -> IncomeService {
+		incomeService
 	}
 }

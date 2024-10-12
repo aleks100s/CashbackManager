@@ -14,12 +14,14 @@ let package = Package(
 	],
 	dependencies: [
 		.package(name: "Domain", path: "./Domain"),
+		.package(name: "Services", path: "./Services"),
 	],
 	targets: [
 		.target(
 			name: "PaymentFeature",
 			dependencies: [
-				"Domain"
+				"Domain",
+				.product(name: "IncomeService", package: "Services")
 			]
 		)
 	]

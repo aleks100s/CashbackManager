@@ -6,12 +6,13 @@
 //
 
 import Domain
+import IncomeService
 import SwiftData
 import SwiftUI
 
 struct AddIncomeView: View {
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.modelContext) private var context
+	@Environment(\.incomeService) private var incomeService
 	
 	@Query private var cards: [Card]
 	
@@ -95,8 +96,7 @@ struct AddIncomeView: View {
 	}
 	
 	private func createIncome() {
-		let income = Income(amount: Int(amount) ?? .zero, date: date, source: source)
-		context.insert(income)
+		incomeService?.createIncome(amount: Int(amount) ?? .zero, date: date, source: source)
 	}
 	
 	private func formatAmount() {

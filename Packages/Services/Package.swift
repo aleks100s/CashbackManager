@@ -27,6 +27,10 @@ let package = Package(
 			name: "TextDetectionService",
 			targets: ["TextDetectionService"]
 		),
+		.library(
+			name: "IncomeService",
+			targets: ["IncomeService"]
+		)
     ],
 	dependencies: [
 		.package(name: "Shared", path: "./Shared"),
@@ -41,5 +45,6 @@ let package = Package(
 		.target(name: "PlaceService", dependencies: ["Domain"]),
 		.target(name: "CategoryService", dependencies: ["Domain"]),
 		.target(name: "TextDetectionService", dependencies: ["Domain"]),
+		.target(name: "IncomeService", dependencies: ["Domain"])
     ]
 )

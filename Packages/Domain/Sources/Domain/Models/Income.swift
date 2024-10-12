@@ -15,7 +15,7 @@ public final class Income {
 	public var date: Date
 	public var source: String?
 	
-	public init(id: UUID = UUID(), amount: Int, date: Date = .now, source: String? = nil) {
+	public init(id: UUID = UUID(), amount: Int, date: Date, source: String?) {
 		self.id = id
 		self.amount = amount
 		self.date = date

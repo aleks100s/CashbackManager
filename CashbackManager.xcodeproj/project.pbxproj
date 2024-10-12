@@ -39,6 +39,8 @@
 		274861FB2C53463E00788C1A /* CardsService in Frameworks */ = {isa = PBXBuildFile; productRef = 274861FA2C53463E00788C1A /* CardsService */; };
 		274862092C534AB200788C1A /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 274862082C534AB200788C1A /* Shared */; };
 		2755A3102CB9742A002F61EC /* PaymentFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A30F2CB9742A002F61EC /* PaymentFeature */; };
+		2755A3122CBA4B73002F61EC /* IncomeService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3112CBA4B73002F61EC /* IncomeService */; };
+		2755A3142CBA4B7D002F61EC /* IncomeService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3132CBA4B7D002F61EC /* IncomeService */; };
 		277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E52C73C0AA00C26CD8 /* CategoryService */; };
 		277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E72C73C0AF00C26CD8 /* PlaceService */; };
 		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
@@ -150,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27368BE02C4BB85400FC0475 /* Domain in Frameworks */,
+				2755A3122CBA4B73002F61EC /* IncomeService in Frameworks */,
 				27368BEA2C4CDE9A00FC0475 /* DesignSystem in Frameworks */,
 				277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */,
 				277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */,
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				272CA8D42C54C6E600A00E90 /* Domain in Frameworks */,
+				2755A3142CBA4B7D002F61EC /* IncomeService in Frameworks */,
 				2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */,
 				27AB372B2C73BE4B00A00939 /* CardsService in Frameworks */,
 				2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */,
@@ -353,6 +357,7 @@
 				277130E72C73C0AF00C26CD8 /* PlaceService */,
 				277130E92C73C0B200C26CD8 /* SearchService */,
 				27D329D62C9C8A4D00964504 /* TextDetectionService */,
+				2755A3112CBA4B73002F61EC /* IncomeService */,
 			);
 			productName = CashbackWidgetExtension;
 			productReference = 27368BBB2C4BB11000FC0475 /* CashbackWidgetExtension.appex */;
@@ -383,6 +388,7 @@
 				27AB372A2C73BE4B00A00939 /* CardsService */,
 				27D329D42C9C894B00964504 /* TextDetectionService */,
 				2755A30F2CB9742A002F61EC /* PaymentFeature */,
+				2755A3132CBA4B7D002F61EC /* IncomeService */,
 			);
 			productName = CashbackManager;
 			productReference = 27A5D7CD2C394EC400B93512 /* CashbackManager.app */;
@@ -603,7 +609,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager.CashbackWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -634,7 +640,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager.CashbackWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -998,6 +1004,14 @@
 		2755A30F2CB9742A002F61EC /* PaymentFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PaymentFeature;
+		};
+		2755A3112CBA4B73002F61EC /* IncomeService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IncomeService;
+		};
+		2755A3132CBA4B7D002F61EC /* IncomeService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IncomeService;
 		};
 		277130E52C73C0AA00C26CD8 /* CategoryService */ = {
 			isa = XCSwiftPackageProductDependency;

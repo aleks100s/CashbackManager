@@ -9,6 +9,7 @@ import AppIntents
 import CashbackFeature
 import CoreSpotlight
 import Domain
+import IncomeService
 import PaymentFeature
 import PlaceFeature
 import SearchService
@@ -31,6 +32,7 @@ struct CashbackApplication: App {
 	private let categoryService = AppFactory.provideCategoryService()
 	private let placeService = AppFactory.providePlaceService()
 	private let cardsService = AppFactory.provideCardsService()
+	private let incomeService = AppFactory.provideIncomeService()
 		
 	@AppStorage("isMonthlyNotificationScheduled")
 	private var isMonthlyNotificationScheduled = false
@@ -111,6 +113,7 @@ struct CashbackApplication: App {
 		.environment(\.categoryService, categoryService)
 		.environment(\.placeService, placeService)
 		.environment(\.textDetectionService, AppFactory.provideTextDetectionService())
+		.environment(\.incomeService, incomeService)
     }
 
 	private func requestNotificationPermission() {
