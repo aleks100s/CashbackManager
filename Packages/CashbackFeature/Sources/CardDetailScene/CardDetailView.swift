@@ -74,7 +74,9 @@ public struct CardDetailView: View {
 			}
 		} else {
 			List {
-				IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
+				if !isEditing {
+					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
+				}
 				
 				ForEach(card.sortedCashback) { cashback in
 					CashbackView(cashback: cashback)
