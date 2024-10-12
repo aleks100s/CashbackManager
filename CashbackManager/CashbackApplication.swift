@@ -70,11 +70,13 @@ struct CashbackApplication: App {
 				}
 				.tag(Tab.cashback)
 				
-				IncomeFeatureAssembly.assemble()
-					.tabItem {
-						Label("Выплаты", systemImage: Constants.SFSymbols.income)
-					}
-					.tag(Tab.income)
+				IncomeFeatureAssembly.assemble(
+					createIncomeIntent: CreateIncomeIntent()
+				)
+				.tabItem {
+					Label("Выплаты", systemImage: Constants.SFSymbols.income)
+				}
+				.tag(Tab.income)
 				
 				PlaceFeatureAssembly.assemble(
 					addPlaceIntent: CreatePlaceIntent(),

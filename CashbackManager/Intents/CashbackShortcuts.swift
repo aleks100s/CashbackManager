@@ -171,13 +171,16 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		)
 		
 		AppShortcut(
-			intent: DeletePlaceIntent(),
+			intent: CreateIncomeIntent(),
 			phrases: [
-				"Удали место \(.applicationName)а",
-				"Удали заведение \(.applicationName)а",
+				"Добавь выплату \(.applicationName)а",
+				"Создай выплату \(.applicationName)а",
+				"Запиши выплату \(.applicationName)а",
+				"Сохрани выплату \(.applicationName)а",
+				"Запомни выплату \(.applicationName)а",
 			],
-			shortTitle: "Удалить место",
-			systemImageName: "trash"
+			shortTitle: "Выплата кэшбэка",
+			systemImageName: "rublesign"
 		)
 	}
 }

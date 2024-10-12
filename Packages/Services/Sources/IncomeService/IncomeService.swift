@@ -21,4 +21,8 @@ public struct IncomeService: @unchecked Sendable {
 		context.insert(income)
 		try? context.save()
 	}
+	
+	public func delete(income: Income) {
+		context.delete(income)
+	}
 }

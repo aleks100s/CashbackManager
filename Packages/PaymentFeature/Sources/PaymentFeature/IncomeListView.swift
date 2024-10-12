@@ -6,13 +6,14 @@
 //
 
 import Domain
+import IncomeService
 import SwiftData
 import SwiftUI
 
 struct IncomeListView: View {
 	let addIncomeTapped: () -> Void
 	
-	@Environment(\.modelContext) private var context
+	@Environment(\.incomeService) private var incomeService
 	
 	@Query(sort: [
 		SortDescriptor<Income>(\.date, order: .reverse)
@@ -60,6 +61,6 @@ struct IncomeListView: View {
 	}
 	
 	func delete(income: Income) {
-		context.delete(income)
+		incomeService?.delete(income: income)
 	}
 }

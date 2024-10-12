@@ -5,12 +5,16 @@
 //  Created by Alexander on 11.10.2024.
 //
 
+import AppIntents
+import DesignSystem
 import Domain
 import IncomeService
 import SwiftData
 import SwiftUI
 
 struct AddIncomeView: View {
+	let createIncomeIntent: any AppIntent
+	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.incomeService) private var incomeService
 	
@@ -48,6 +52,8 @@ struct AddIncomeView: View {
 	
 	private var contentView: some View {
 		List {
+			IntentTipView(intent: createIncomeIntent, text: "Чтобы добавить выплату")
+			
 			Section {
 				Menu(source ?? "Не выбрано") {
 					ForEach(cards) { card in

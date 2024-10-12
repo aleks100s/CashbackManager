@@ -62,7 +62,7 @@ public struct AddPlaceView: View {
 	
 	private var contentView: some View {
 		List {
-			IntentTipView(intent: addPlaceIntent, text: "В следующий раз,чтобы добавить место")
+			IntentTipView(intent: addPlaceIntent, text: "Чтобы добавить место")
 			
 			Section {
 				TextField("Название", text: $placeName)

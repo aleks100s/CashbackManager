@@ -14,6 +14,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(name: "Domain", path: "./Domain"),
+		.package(name: "DesignSystem", path: "./DesignSystem"),
 		.package(name: "Services", path: "./Services"),
 	],
 	targets: [
@@ -21,6 +22,7 @@ let package = Package(
 			name: "PaymentFeature",
 			dependencies: [
 				"Domain",
+				"DesignSystem",
 				.product(name: "IncomeService", package: "Services")
 			]
 		)
