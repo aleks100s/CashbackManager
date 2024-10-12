@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import CardsService
 import IncomeService
 
 struct CreateIncomeIntent: AppIntent {
@@ -15,8 +16,14 @@ struct CreateIncomeIntent: AppIntent {
 	@Parameter(title: "Размер выплаты", inputOptions: String.IntentInputOptions(keyboardType: .numberPad))
 	var amount: String
 	
+	@Parameter(title: "Источник выплаты")
+	var source: IncomeEntity?
+	
 	@Dependency
 	private var incomeService: IncomeService
+	
+	@Dependency
+	private var cardsService: CardsService
 	
 	init(amount: String) {
 		self.amount = amount
@@ -30,7 +37,43 @@ struct CreateIncomeIntent: AppIntent {
 			return .result(dialog: "Размер выплаты не может быть отрицательным или равным 0")
 		}
 		
-		incomeService.createIncome(amount: amount)
+		if let source {
+			incomeService.createIncome(amount: amount, source: source.name)
+		} else {
+			let variants = cardsService.getAllCards().map {
+				IncomeEntity(id: $0.id, name: $0.name)
+		 }
+			let source = try await $source.requestDisambiguation(
+				among: variants,
+				dialog: IntentDialog(stringLiteral: "Выберите источник выплаты")
+			)
+			incomeService.createIncome(amount: amount, source: source.name)
+		}
+		
 		return .result(dialog: "Выплата кэшбэка в размере \(amount) рублей добавлена!")
+	}
+}
+
+struct IncomeEntity: AppEntity {
+	static var typeDisplayRepresentation: TypeDisplayRepresentation = "Income Entity"
+	
+	let id: UUID
+	let name: String
+	
+	var displayRepresentation: DisplayRepresentation {
+		DisplayRepresentation(stringLiteral: name)
+	}
+	
+	static var defaultQuery = IncomeQuery()
+}
+
+struct IncomeQuery: EntityQuery {
+	@Dependency
+	private var cardsService: CardsService
+	
+	func entities(for identifiers: [UUID]) async throws -> [IncomeEntity] {
+		cardsService.getAllCards().map {
+			IncomeEntity(id: $0.id, name: $0.name)
+		}
 	}
 }
