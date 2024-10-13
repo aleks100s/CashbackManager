@@ -102,7 +102,7 @@ private extension IncomePeriodModel {
 				let model = ChartModel(
 					id: id,
 					label: transaction.source?.name ?? "Прочее",
-					color: transaction.source?.color ?? "#E7E7E7",
+					color: transaction.source?.color ?? "#D7D7D7",
 					value: transaction.amount
 				)
 				chartData[id] = model

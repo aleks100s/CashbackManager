@@ -34,11 +34,13 @@ struct IncomePeriodView: View {
 					}
 				}
 			}
-			.task {
-				do {
-					try await model.onAppear()
-				} catch {
-					print(error)
+			.onFirstAppear {
+				Task {
+					do {
+						try await model.onAppear()
+					} catch {
+						print(error)
+					}
 				}
 			}
 	}
@@ -70,20 +72,29 @@ struct IncomePeriodView: View {
 				}
 				
 				if !model.chartData.isEmpty {
-					GroupBox {
-						Chart(model.chartData) { data in
-							SectorMark(
-								angle: .value(data.label, data.value),
-								innerRadius: .ratio(0.6),
-								angularInset: 3
-							)
-							.cornerRadius(6)
-							.foregroundStyle(Color(hex: data.color))
+					Chart(model.chartData) { data in
+						SectorMark(
+							angle: .value(data.label, data.value),
+							innerRadius: .ratio(0.6),
+							angularInset: 3
+						)
+						.cornerRadius(6)
+						.foregroundStyle(Color(hex: data.color))
+						.annotation(position: .overlay) {
+							Text(data.label)
+								.font(.caption)
+								.background {
+									Text(data.label)
+										.font(.caption)
+										.foregroundStyle(.background)
+										.offset(x: 0, y: 0)
+										.blur(radius: 2)
+								}
 						}
-						.chartLegend(.visible)
-						.scaledToFill()
-						.padding()
 					}
+					.chartLegend(.visible)
+					.scaledToFill()
+					.padding()
 				}
 			}
 

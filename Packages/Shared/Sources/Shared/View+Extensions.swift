@@ -20,3 +20,25 @@ public extension View {
 		}
 	}
 }
+
+struct OnFirstAppearModifier: ViewModifier {
+	@State private var hasAppeared = false
+	
+	let action: () -> Void
+
+	func body(content: Content) -> some View {
+		content
+			.onAppear {
+				if !hasAppeared {
+					action()
+					hasAppeared = true
+				}
+			}
+	}
+}
+
+public extension View {
+	func onFirstAppear(perform action: @escaping () -> Void) -> some View {
+		self.modifier(OnFirstAppearModifier(action: action))
+	}
+}
