@@ -80,24 +80,23 @@ struct IncomePeriodView: View {
 						)
 						.cornerRadius(6)
 						.foregroundStyle(Color(hex: data.color))
+						.annotation(position: .overlay) {
+							Text("\(data.label)\n\(Text(data.value, format: .currency(code: "RUB").precision(.fractionLength(.zero))))")
+								.font(.caption)
+								.multilineTextAlignment(.center)
+								.background {
+									Text("\(data.label)\n\(Text(data.value, format: .currency(code: "RUB").precision(.fractionLength(.zero))))")
+										.font(.caption)
+										.multilineTextAlignment(.center)
+										.foregroundStyle(.background)
+										.offset(x: 0, y: 0)
+										.blur(radius: 2)
+								}
+						}
 					}
 					.chartLegend(.visible)
 					.scaledToFill()
 					.padding()
-					
-					ForEach(model.chartData) { data in
-						HStack {
-							Circle()
-								.fill(Color(hex: data.color))
-								.frame(width: 8)
-							
-							Text(data.label)
-							
-							Spacer()
-							
-							Text(data.value, format: .currency(code: "RUB"))
-						}
-					}
 				}
 			}
 
