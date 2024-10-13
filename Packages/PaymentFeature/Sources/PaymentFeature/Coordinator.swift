@@ -13,10 +13,15 @@ struct Coordinator: View {
 	
 	@State private var isAddIncomePresented = false
 	
+	@Environment(\.incomeService) private var incomeService
+	
 	var body: some View {
 		NavigationStack {
-			IncomeListView {
-				isAddIncomePresented = true
+			if let incomeService {
+				let model = IncomePeriodModel(incomeService: incomeService) {
+					isAddIncomePresented = true
+				}
+				IncomePeriodView(model: model)
 			}
 		}
 		.sheet(isPresented: $isAddIncomePresented) {

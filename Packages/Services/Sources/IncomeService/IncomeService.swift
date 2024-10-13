@@ -26,4 +26,22 @@ public struct IncomeService: @unchecked Sendable {
 		context.delete(income)
 		try? context.save()
 	}
+	
+	public func findMinMaxDates() async throws -> (Date, Date) {
+		let result = try await fetchAll()
+		return (result.first?.date ?? Date(), result.last?.date ?? Date())
+	}
+	
+	public func fetchAll() async throws -> [Income] {
+		let descriptor = FetchDescriptor<Income>(sortBy: [.init(\.date)])
+		return try context.fetch(descriptor)
+	}
+	
+	public func fetch(from: Date, to: Date) async throws -> [Income] {
+		let predicate = #Predicate<Income> { income in
+			income.date >= from && income.date <= to
+		}
+		let descriptor = FetchDescriptor(predicate: predicate, sortBy: [.init(\.date)])
+		return try context.fetch(descriptor)
+	}
 }
