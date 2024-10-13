@@ -18,7 +18,7 @@ struct CreateIncomeIntent: AppIntent {
 	var amount: String
 	
 	@Parameter(title: "Источник выплаты")
-	var source: IncomeEntity?
+	var source: CardEntity?
 	
 	@Dependency
 	private var incomeService: IncomeService
@@ -42,7 +42,7 @@ struct CreateIncomeIntent: AppIntent {
 			incomeService.createIncome(amount: amount, source: source.card)
 		} else {
 			let variants = cardsService.getAllCards().map {
-				IncomeEntity(id: $0.id, card: $0)
+				CardEntity(id: $0.id, card: $0)
 		 }
 			let source = try await $source.requestDisambiguation(
 				among: variants,
@@ -52,29 +52,5 @@ struct CreateIncomeIntent: AppIntent {
 		}
 		
 		return .result(dialog: "Выплата кэшбэка в размере \(amount) рублей добавлена!")
-	}
-}
-
-struct IncomeEntity: AppEntity {
-	static var typeDisplayRepresentation: TypeDisplayRepresentation = "Income Entity"
-	
-	let id: UUID
-	let card: Card
-	
-	var displayRepresentation: DisplayRepresentation {
-		DisplayRepresentation(stringLiteral: card.name)
-	}
-	
-	static var defaultQuery = IncomeQuery()
-}
-
-struct IncomeQuery: EntityQuery {
-	@Dependency
-	private var cardsService: CardsService
-	
-	func entities(for identifiers: [UUID]) async throws -> [IncomeEntity] {
-		cardsService.getAllCards().map {
-			IncomeEntity(id: $0.id, card: $0)
-		}
 	}
 }
