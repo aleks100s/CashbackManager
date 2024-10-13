@@ -110,7 +110,7 @@ private extension IncomePeriodModel {
 				chartData[id]?.value += transaction.amount
 			}
 		}
-		self.chartData = Array(chartData.values).sorted(by: { $0.value < $1.value })
+		self.chartData = Array(chartData.values).sorted(by: { $0.value > $1.value })
 	}
 }
 
