@@ -12,11 +12,23 @@ import IncomeService
 @Observable
 final class IncomePeriodModel {
 	var transactions: [Income] = []
+	var total: Int = .zero
 	var startDate: Date = .now
 	var endDate: Date = .now
 	
+	var isNextButtonDisabled: Bool {
+		endDate > maxDate
+	}
+	
+	var isPreviousButtonDisabled: Bool {
+		startDate < minDate
+	}
+	
 	private let incomeService: IncomeService
 	private let addIncomeTapped: () -> Void
+	
+	private var minDate: Date = .now
+	private var maxDate: Date = .now
 	
 	init(incomeService: IncomeService, addIncomeTapped: @escaping () -> Void) {
 		self.incomeService = incomeService
@@ -41,8 +53,11 @@ final class IncomePeriodModel {
 	}
 	
 	@MainActor
-	func onAppear() async {
+	func onAppear() async throws {
 		await fetchCurrentMonthTransactions()
+		let (min, max) = try await incomeService.findMinMaxDates()
+		minDate = min
+		maxDate = max
 	}
 	
 	@MainActor
@@ -69,6 +84,7 @@ private extension IncomePeriodModel {
 	func fetchTransactions() async {
 		let result = try? await incomeService.fetch(from: startDate, to: endDate)
 		transactions = result ?? []
+		total = result?.map(\.amount).reduce(.zero, +) ?? .zero
 	}
 }
 

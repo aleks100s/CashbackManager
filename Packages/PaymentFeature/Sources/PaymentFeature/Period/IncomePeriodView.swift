@@ -25,12 +25,36 @@ struct IncomePeriodView: View {
 				}
 			}
 			.task {
-				await model.onAppear()
+				do {
+					try await model.onAppear()
+				} catch {
+					print(error)
+				}
 			}
 	}
 	
 	private var contentView: some View {
 		List {
+			Section("Сводка") {
+				HStack {
+					Text("\(Text(model.startDate, format: .dateTime.month(.wide))) \(Text(model.startDate, format: .dateTime.year()))")
+					
+					Spacer()
+					
+					Text("Месяц")
+						.foregroundStyle(.secondary)
+				}
+				
+				HStack {
+					Text(model.total, format: .currency(code: "RUB").precision(.fractionLength(.zero)))
+					
+					Spacer()
+					
+					Text("Сумма")
+						.foregroundStyle(.secondary)
+				}
+			}
+
 			Section {
 				HStack {
 					HStack {
@@ -38,11 +62,13 @@ struct IncomePeriodView: View {
 						
 						Text("предыдущий")
 					}
+					.foregroundStyle(model.isPreviousButtonDisabled ? .gray : .blue)
 					.onTapGesture {
 						Task {
 							await model.previousMonth()
 						}
 					}
+					.disabled(model.isPreviousButtonDisabled)
 					
 					Spacer()
 					
@@ -51,13 +77,14 @@ struct IncomePeriodView: View {
 						
 						Image(systemName: "chevron.right")
 					}
+					.foregroundStyle(model.isNextButtonDisabled ? .gray : .blue)
 					.onTapGesture {
 						Task {
 							await model.nextMonth()
 						}
 					}
+					.disabled(model.isNextButtonDisabled)
 				}
-				.foregroundStyle(.blue)
 			}
 			
 			Section {
