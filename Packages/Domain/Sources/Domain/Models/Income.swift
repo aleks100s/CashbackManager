@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-public final class Income: Sendable {
+public final class Income: @unchecked Sendable {
 	public var id: UUID
 	public var amount: Int
 	public var date: Date

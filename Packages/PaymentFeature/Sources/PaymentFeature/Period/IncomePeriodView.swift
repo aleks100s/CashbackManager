@@ -5,6 +5,8 @@
 //  Created by Alexander on 13.10.2024.
 //
 
+import Charts
+import Shared
 import SwiftUI
 
 struct IncomePeriodView: View {
@@ -52,6 +54,21 @@ struct IncomePeriodView: View {
 					
 					Text("Сумма")
 						.foregroundStyle(.secondary)
+				}
+				
+				GroupBox {
+					Chart(model.chartData) { data in
+						SectorMark(
+							angle: .value(data.label, data.value),
+							innerRadius: .ratio(0.6),
+							angularInset: 3
+						)
+						.cornerRadius(6)
+						.foregroundStyle(Color(hex: data.color))
+					}
+					.chartLegend(.visible)
+					.scaledToFill()
+					.padding()
 				}
 			}
 

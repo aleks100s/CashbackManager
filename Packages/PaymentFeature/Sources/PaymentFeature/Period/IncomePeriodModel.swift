@@ -12,12 +12,13 @@ import IncomeService
 @Observable
 final class IncomePeriodModel {
 	var transactions: [Income] = []
+	var chartData: [ChartModel] = []
 	var total: Int = .zero
 	var startDate: Date = .now
 	var endDate: Date = .now
 	
 	var isNextButtonDisabled: Bool {
-		endDate > maxDate
+		endDate > .now && startDate < .now
 	}
 	
 	var isPreviousButtonDisabled: Bool {
@@ -85,6 +86,23 @@ private extension IncomePeriodModel {
 		let result = try? await incomeService.fetch(from: startDate, to: endDate)
 		transactions = result ?? []
 		total = result?.map(\.amount).reduce(.zero, +) ?? .zero
+		var chartData = [UUID: ChartModel]()
+		let otherId = UUID()
+		for transaction in transactions {
+			let id = transaction.source?.id ?? otherId
+			if chartData[id] == nil {
+				let model = ChartModel(
+					id: id,
+					label: transaction.source?.name ?? "Прочее",
+					color: transaction.source?.color ?? "#E7E7E7",
+					value: transaction.amount
+				)
+				chartData[id] = model
+			} else {
+				chartData[id]?.value += transaction.amount
+			}
+		}
+		self.chartData = Array(chartData.values).sorted(by: { $0.value < $1.value })
 	}
 }
 
