@@ -16,6 +16,7 @@ final class IncomePeriodModel {
 	var total: Int = .zero
 	var startDate: Date = .now
 	var endDate: Date = .now
+	var isAllTimeModeOn = false
 	
 	var isNextButtonDisabled: Bool {
 		endDate > .now && startDate < .now
@@ -55,7 +56,8 @@ final class IncomePeriodModel {
 	
 	@MainActor
 	func onAppear() async throws {
-		await fetchCurrentMonthTransactions()
+		setupCurrentMonthBounds()
+		await fetchTransactions()
 		let (min, max) = try await incomeService.findMinMaxDates()
 		minDate = min
 		maxDate = max
@@ -72,15 +74,21 @@ final class IncomePeriodModel {
 		changeMonth(by: -1)
 		await fetchTransactions()
 	}
+	
+	@MainActor
+	func toggleAllTimeMode() async {
+		isAllTimeModeOn.toggle()
+		if isAllTimeModeOn {
+			startDate = minDate
+			endDate = maxDate
+		} else {
+			setupCurrentMonthBounds()
+		}
+		await fetchTransactions()
+	}
 }
 
 private extension IncomePeriodModel {
-	@MainActor
-	func fetchCurrentMonthTransactions() async {
-		setupCurrentMonthBounds()
-		await fetchTransactions()
-	}
-	
 	@MainActor
 	func fetchTransactions() async {
 		let result = try? await incomeService.fetch(from: startDate, to: endDate)

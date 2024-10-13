@@ -25,6 +25,14 @@ struct IncomePeriodView: View {
 						model.incomeTapped()
 					}
 				}
+				
+				ToolbarItem(placement: .topBarTrailing) {
+					Button(model.isAllTimeModeOn ? "По месяцам" : "Все время") {
+						Task {
+							await model.toggleAllTimeMode()
+						}
+					}
+				}
 			}
 			.task {
 				do {
@@ -37,15 +45,20 @@ struct IncomePeriodView: View {
 	
 	private var contentView: some View {
 		List {
-			Section("Сводка") {
+			Section {
 				HStack {
-					Text("\(Text(model.startDate, format: .dateTime.month(.wide))) \(Text(model.startDate, format: .dateTime.year()))")
+					if model.isAllTimeModeOn {
+						Text("Все время")
+					} else {
+						Text("\(Text(model.startDate, format: .dateTime.month(.wide))) \(Text(model.startDate, format: .dateTime.year()))")
+					}
 					
 					Spacer()
 					
-					Text("Месяц")
+					Text("Период")
 						.foregroundStyle(.secondary)
 				}
+
 				
 				HStack {
 					Text(model.total, format: .currency(code: "RUB").precision(.fractionLength(.zero)))
@@ -56,51 +69,55 @@ struct IncomePeriodView: View {
 						.foregroundStyle(.secondary)
 				}
 				
-				GroupBox {
-					Chart(model.chartData) { data in
-						SectorMark(
-							angle: .value(data.label, data.value),
-							innerRadius: .ratio(0.6),
-							angularInset: 3
-						)
-						.cornerRadius(6)
-						.foregroundStyle(Color(hex: data.color))
+				if !model.chartData.isEmpty {
+					GroupBox {
+						Chart(model.chartData) { data in
+							SectorMark(
+								angle: .value(data.label, data.value),
+								innerRadius: .ratio(0.6),
+								angularInset: 3
+							)
+							.cornerRadius(6)
+							.foregroundStyle(Color(hex: data.color))
+						}
+						.chartLegend(.visible)
+						.scaledToFill()
+						.padding()
 					}
-					.chartLegend(.visible)
-					.scaledToFill()
-					.padding()
 				}
 			}
 
-			Section {
-				HStack {
+			if !model.isAllTimeModeOn {
+				Section {
 					HStack {
-						Image(systemName: "chevron.left")
-						
-						Text("предыдущий")
-					}
-					.foregroundStyle(model.isPreviousButtonDisabled ? .gray : .blue)
-					.onTapGesture {
-						Task {
-							await model.previousMonth()
+						HStack {
+							Image(systemName: "chevron.left")
+							
+							Text("предыдущий")
 						}
-					}
-					.disabled(model.isPreviousButtonDisabled)
-					
-					Spacer()
-					
-					HStack {
-						Text("следующий")
-						
-						Image(systemName: "chevron.right")
-					}
-					.foregroundStyle(model.isNextButtonDisabled ? .gray : .blue)
-					.onTapGesture {
-						Task {
-							await model.nextMonth()
+						.foregroundStyle(model.isPreviousButtonDisabled ? .gray : .blue)
+						.onTapGesture {
+							Task {
+								await model.previousMonth()
+							}
 						}
+						.disabled(model.isPreviousButtonDisabled)
+						
+						Spacer()
+						
+						HStack {
+							Text("следующий")
+							
+							Image(systemName: "chevron.right")
+						}
+						.foregroundStyle(model.isNextButtonDisabled ? .gray : .blue)
+						.onTapGesture {
+							Task {
+								await model.nextMonth()
+							}
+						}
+						.disabled(model.isNextButtonDisabled)
 					}
-					.disabled(model.isNextButtonDisabled)
 				}
 			}
 			
