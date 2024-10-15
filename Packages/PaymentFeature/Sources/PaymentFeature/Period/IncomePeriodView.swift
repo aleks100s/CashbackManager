@@ -143,12 +143,16 @@ struct IncomePeriodView: View {
 							.contentShape(.rect)
 							.contextMenu {
 								Button("Удалить", role: .destructive) {
-									model.delete(income: income)
+									Task {
+										await model.delete(income: income)
+									}
 								}
 							}
 					}
 					.onDelete { indexSet in
-						model.delete(indexSet: indexSet)
+						Task {
+							await model.delete(indexSet: indexSet)
+						}
 					}
 				}
 			} header: {

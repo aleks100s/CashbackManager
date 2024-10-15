@@ -5,11 +5,17 @@
 //  Created by Alexander on 12.10.2024.
 //
 
+import Combine
 import Domain
 import Foundation
 import SwiftData
 
 public struct IncomeService: @unchecked Sendable {
+	public var onChange: AnyPublisher<Void, Never> {
+		onChangeSubject.eraseToAnyPublisher()
+	}
+	
+	private let onChangeSubject = PassthroughSubject<Void, Never>()
 	private let context: ModelContext
 	
 	public init(context: ModelContext) {
@@ -20,6 +26,7 @@ public struct IncomeService: @unchecked Sendable {
 		let income = Income(amount: amount, date: date, source: source)
 		context.insert(income)
 		try? context.save()
+		onChangeSubject.send(())
 	}
 	
 	public func delete(income: Income) {

@@ -5,6 +5,7 @@
 //  Created by Alexander on 13.10.2024.
 //
 
+import Combine
 import Domain
 import Foundation
 import IncomeService
@@ -32,9 +33,16 @@ final class IncomePeriodModel {
 	private var minDate: Date = .now
 	private var maxDate: Date = .now
 	
+	private var subscriptions = Set<AnyCancellable>()
+	
 	init(incomeService: IncomeService, addIncomeTapped: @escaping () -> Void) {
 		self.incomeService = incomeService
 		self.addIncomeTapped = addIncomeTapped
+		incomeService.onChange
+			.sink { [unowned self] in
+				onTransactionAdded()
+			}
+			.store(in: &subscriptions)
 	}
 	
 	@MainActor
@@ -43,15 +51,16 @@ final class IncomePeriodModel {
 	}
 	
 	@MainActor
-	func delete(indexSet: IndexSet) {
+	func delete(indexSet: IndexSet) async {
 		for index in indexSet {
-			delete(income: transactions[index])
+			await delete(income: transactions[index])
 		}
 	}
 	
 	@MainActor
-	func delete(income: Income) {
+	func delete(income: Income) async {
 		incomeService.delete(income: income)
+		await fetchTransactions()
 	}
 	
 	@MainActor
@@ -85,6 +94,12 @@ final class IncomePeriodModel {
 			setupCurrentMonthBounds()
 		}
 		await fetchTransactions()
+	}
+	
+	private func onTransactionAdded() {
+		Task { [weak self] in
+			await self?.fetchTransactions()
+		}
 	}
 }
 
