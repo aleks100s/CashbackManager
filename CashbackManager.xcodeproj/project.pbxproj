@@ -44,6 +44,7 @@
 		2755A3162CBA4BB1002F61EC /* CreateIncomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A3152CBA4BB1002F61EC /* CreateIncomeIntent.swift */; };
 		2755A31B2CBBA609002F61EC /* CardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A31A2CBBA609002F61EC /* CardEntity.swift */; };
 		2755A31F2CC939F5002F61EC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A31E2CC939F5002F61EC /* SettingsView.swift */; };
+		2755A3212CC94556002F61EC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A3202CC94556002F61EC /* NotificationManager.swift */; };
 		277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E52C73C0AA00C26CD8 /* CategoryService */; };
 		277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E72C73C0AF00C26CD8 /* PlaceService */; };
 		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
@@ -139,6 +140,7 @@
 		2755A3152CBA4BB1002F61EC /* CreateIncomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIncomeIntent.swift; sourceTree = "<group>"; };
 		2755A31A2CBBA609002F61EC /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
 		2755A31E2CC939F5002F61EC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2755A3202CC94556002F61EC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryIntent.swift; sourceTree = "<group>"; };
 		277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCashbackIntent.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				2755A31E2CC939F5002F61EC /* SettingsView.swift */,
+				2755A3202CC94556002F61EC /* NotificationManager.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */,
 				2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */,
 				2755A31B2CBBA609002F61EC /* CardEntity.swift in Sources */,
+				2755A3212CC94556002F61EC /* NotificationManager.swift in Sources */,
 				272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */,
 				272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,

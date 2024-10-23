@@ -16,7 +16,6 @@ import SearchService
 import Shared
 import SwiftData
 import SwiftUI
-import UserNotifications
 
 @main
 @MainActor
@@ -37,6 +36,9 @@ struct CashbackApplication: App {
 		
 	@AppStorage(Constants.StorageKey.notifications)
 	private var isMonthlyNotificationScheduled = false
+	
+	@AppStorage(Constants.StorageKey.notificationsAllowed)
+	private var isNotificationAllowed = true
 	
 	@State private var selectedTab = Tab.cashback
 	
@@ -139,35 +141,11 @@ struct CashbackApplication: App {
 	}
 	
 	private func scheduleMonthlyNotificationIfNeeded() {
-		guard !isMonthlyNotificationScheduled else {
+		guard !isMonthlyNotificationScheduled, isNotificationAllowed else {
 			return
 		}
 		
-		let center = UNUserNotificationCenter.current()
-
-		// Определение компонента времени для первого числа каждого месяца в 10:00 утра, например
-		var dateComponents = DateComponents()
-		dateComponents.day = 1
-		dateComponents.hour = 10
-
-		// Создание триггера с повторением каждый месяц
-		let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-
-		// Создание содержимого уведомления
-		let content = UNMutableNotificationContent()
-		content.title = "Пора добавить кэшбэк"
-		content.body = "Не забудьте выбрать кэшбэк в этом месяце"
-		content.sound = .default
-
-		// Создание уникального идентификатора для уведомления
-		let identifier = Constants.appIdentifier
-
-		// Создание запроса уведомления
-		let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-
-		// Добавление запроса
-		center.add(request) { _ in }
-		
+		NotificationManager.scheduleMonthlyNotification()
 		isMonthlyNotificationScheduled = true
 	}
 }

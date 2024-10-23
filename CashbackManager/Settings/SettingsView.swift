@@ -15,14 +15,27 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
+	@AppStorage(Constants.StorageKey.notificationsAllowed)
+	private var isNotificationAllowed = true
+	
 	@State private var isToastShown = false
 	
 	var body: some View {
 		List {
 			Section {
 				Toggle("Подсказки Siri", isOn: $areSiriTipsVisible)
+			} header: {
+				Text("Настройки голосовых команд")
 			} footer: {
 				Text("Подсказки голосовых команд можно показать или скрыть в любой момент")
+			}
+			
+			Section {
+				Toggle("Уведомления", isOn: $isNotificationAllowed)
+			} header: {
+				Text("Настройки уведомлений")
+			} footer: {
+				Text("Приложение напомнит вам выбрать и сохранить кэшбэк каждый месяц 1 числа.\nПроверьте, что вы разрешили уведомления в настройках системы.")
 			}
 
 			Section("О приложении") {
@@ -43,6 +56,13 @@ struct SettingsView: View {
 		}
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
+		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
+			if isAllowed {
+				NotificationManager.scheduleMonthlyNotification()
+			} else {
+				NotificationManager.unscheduleMonthlyNotification()
+			}
+		}
 	}
 	
 	private func copy(value: String?) {

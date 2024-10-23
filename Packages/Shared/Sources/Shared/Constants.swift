@@ -18,6 +18,7 @@ public enum Constants {
 		public static let siriTips = "areSiriTipsVisible"
 		public static let currentCardID = "CurrentCardID"
 		public static let firstLaunch = "IsFirstLaunch"
+		public static let notificationsAllowed = "isNotificationAllowed"
 	}
 	
 	public static let appIdentifier = "com.alextos.CashbackManager"
