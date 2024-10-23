@@ -5,6 +5,7 @@
 //  Created by Alexander on 23.10.2024.
 //
 
+import DesignSystem
 import Shared
 import SwiftUI
 
@@ -27,7 +28,7 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.AppFeature.places)
 	private var isPlacesFeatureAvailable = true
 	
-	@State private var isToastShown = false
+	@State private var valueToCopy: String? = nil
 	
 	var body: some View {
 		List {
@@ -59,9 +60,9 @@ struct SettingsView: View {
 
 
 			Section("О приложении") {
-				ItemView(title: "Версия приложения", value: appVersion, onTap: copy(value:))
+				ItemView(title: "Версия приложения", value: appVersion, onTap: copy)
 				
-				ItemView(title: "Версия сборки", value: buildVersion, onTap: copy(value:))
+				ItemView(title: "Версия сборки", value: buildVersion, onTap: copy)
 			}
 			
 			if let url = Constants.appStoreLink {
@@ -70,16 +71,7 @@ struct SettingsView: View {
 				}
 			}
 		}
-		.overlay(alignment: .bottom) {
-			if isToastShown {
-				Text("Версия скопирована!")
-					.padding()
-					.background(.regularMaterial)
-					.clipShape(.capsule)
-					.padding(.bottom)
-					.transition(.move(edge: .bottom).combined(with: .opacity))
-			}
-		}
+		.toast(value: $valueToCopy)
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
@@ -92,16 +84,7 @@ struct SettingsView: View {
 	}
 	
 	private func copy(value: String?) {
-		UIPasteboard.general.string = value
-		withAnimation {
-			isToastShown = true
-			
-			DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-				withAnimation {
-					self.isToastShown = false
-				}
-			}
-		}
+		valueToCopy = value
 	}
 }
 
