@@ -18,6 +18,15 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.notificationsAllowed)
 	private var isNotificationAllowed = true
 	
+	@AppStorage(Constants.StorageKey.AppFeature.cards)
+	private var isCardsFeatureAvailable = true
+	
+	@AppStorage(Constants.StorageKey.AppFeature.payments)
+	private var isPaymentsFeatureAvailable = true
+	
+	@AppStorage(Constants.StorageKey.AppFeature.places)
+	private var isPlacesFeatureAvailable = true
+	
 	@State private var isToastShown = false
 	
 	var body: some View {
@@ -37,6 +46,17 @@ struct SettingsView: View {
 			} footer: {
 				Text("Приложение напомнит вам выбрать и сохранить кэшбэк каждый месяц 1 числа.\nПроверьте, что вы разрешили уведомления в настройках системы.")
 			}
+			
+			Section {
+				Toggle("Карты", isOn: $isCardsFeatureAvailable)
+				Toggle("Выплаты", isOn: $isPaymentsFeatureAvailable)
+				Toggle("Места", isOn: $isPlacesFeatureAvailable)
+			} header: {
+				Text("Настройки разделов приложения")
+			} footer: {
+				Text("Отключение разделов позволит сфокусироваться только на необходимом Вам функционале. Разделы можно включить или отключить в любое время без потери данных.")
+			}
+
 
 			Section("О приложении") {
 				ItemView(title: "Версия приложения", value: appVersion, onTap: copy(value:))

@@ -40,6 +40,15 @@ struct CashbackApplication: App {
 	@AppStorage(Constants.StorageKey.notificationsAllowed)
 	private var isNotificationAllowed = true
 	
+	@AppStorage(Constants.StorageKey.AppFeature.cards)
+	private var isCardsFeatureAvailable = true
+	
+	@AppStorage(Constants.StorageKey.AppFeature.payments)
+	private var isPaymentsFeatureAvailable = true
+	
+	@AppStorage(Constants.StorageKey.AppFeature.places)
+	private var isPlacesFeatureAvailable = true
+	
 	@State private var selectedTab = Tab.cashback
 	
 	@Environment(\.openURL) private var openURL
@@ -60,36 +69,42 @@ struct CashbackApplication: App {
     var body: some Scene {
         WindowGroup {
 			TabView(selection: $selectedTab) {
-				CashbackFeatureAssembly.assemble(
-					container: container,
-					addCardIntent: CreateCardIntent(),
-					checkCategoryCardIntent: CheckCategoryCardsIntent(),
-					cardCashbackIntent: CheckCardCashbackIntent(),
-					addCategoryIntent: CreateCategoryIntent(),
-					addCashbackIntent: CreateCashbackIntent()
-				)
-				.tabItem {
-					Label("Карты", systemImage: Constants.SFSymbols.cashback)
+				if isCardsFeatureAvailable {
+					CashbackFeatureAssembly.assemble(
+						container: container,
+						addCardIntent: CreateCardIntent(),
+						checkCategoryCardIntent: CheckCategoryCardsIntent(),
+						cardCashbackIntent: CheckCardCashbackIntent(),
+						addCategoryIntent: CreateCategoryIntent(),
+						addCashbackIntent: CreateCashbackIntent()
+					)
+					.tabItem {
+						Label("Карты", systemImage: Constants.SFSymbols.cashback)
+					}
+					.tag(Tab.cashback)
 				}
-				.tag(Tab.cashback)
 				
-				IncomeFeatureAssembly.assemble(
-					createIncomeIntent: CreateIncomeIntent()
-				)
-				.tabItem {
-					Label("Выплаты", systemImage: Constants.SFSymbols.income)
+				if isPaymentsFeatureAvailable {
+					IncomeFeatureAssembly.assemble(
+						createIncomeIntent: CreateIncomeIntent()
+					)
+					.tabItem {
+						Label("Выплаты", systemImage: Constants.SFSymbols.income)
+					}
+					.tag(Tab.income)
 				}
-				.tag(Tab.income)
 				
-				PlaceFeatureAssembly.assemble(
-					addPlaceIntent: CreatePlaceIntent(),
-					checkPlaceIntent: CheckPlaceCategoryIntent(),
-					addCategoryIntent: CreateCategoryIntent()
-				)
-				.tabItem {
-					Label("Места", systemImage: Constants.SFSymbols.places)
+				if isPlacesFeatureAvailable {
+					PlaceFeatureAssembly.assemble(
+						addPlaceIntent: CreatePlaceIntent(),
+						checkPlaceIntent: CheckPlaceCategoryIntent(),
+						addCategoryIntent: CreateCategoryIntent()
+					)
+					.tabItem {
+						Label("Места", systemImage: Constants.SFSymbols.places)
+					}
+					.tag(Tab.place)
 				}
-				.tag(Tab.place)
 				
 				NavigationView {
 					SettingsView()

@@ -16,6 +16,12 @@ public enum Constants {
 	}
 	
 	public enum StorageKey {
+		public enum AppFeature {
+			public static let cards = "cards"
+			public static let payments = "payments"
+			public static let places = "places"
+		}
+		
 		public static let notifications = "isMonthlyNotificationScheduled"
 		public static let siriTips = "areSiriTipsVisible"
 		public static let currentCardID = "CurrentCardID"
