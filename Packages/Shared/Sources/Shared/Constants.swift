@@ -5,6 +5,8 @@
 //  Created by Alexander on 26.07.2024.
 //
 
+import Foundation
+
 public enum Constants {
 	public enum SFSymbols {
 		public static let cashback = "creditcard"
@@ -26,4 +28,5 @@ public enum Constants {
 	public static let cardWidgetKind = "CardWidget"
 	public static let urlSchemeCard = "cashback://cashback/card/"
 	public static let urlSchemePlace = "cashback://cashback/place/"
+	public static let appStoreLink = URL(string: "https://apps.apple.com/app/id6517354748")
 }

@@ -43,6 +43,12 @@ struct SettingsView: View {
 				
 				ItemView(title: "Версия сборки", value: buildVersion, onTap: copy(value:))
 			}
+			
+			if let url = Constants.appStoreLink {
+				ShareLink(item: url, subject: Text("Ссылка на App Store")) {
+					Text("Поделиться приложением")
+				}
+			}
 		}
 		.overlay(alignment: .bottom) {
 			if isToastShown {
@@ -93,6 +99,7 @@ private struct ItemView: View {
 			
 			Text(value ?? "")
 		}
+		.contentShape(.rect)
 		.onTapGesture {
 			onTap(value)
 		}
