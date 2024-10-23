@@ -10,6 +10,7 @@ import CommonInputSheet
 import DesignSystem
 import Domain
 import SearchService
+import Shared
 import SwiftData
 import SwiftUI
 
@@ -17,6 +18,9 @@ public struct CardsListView: View {
 	private let addCardIntent: any AppIntent
 	private let checkCategoryCardIntent: any AppIntent
 	private let onCardSelected: (Card) -> Void
+	
+	@AppStorage(Constants.StorageKey.siriTips)
+	private var areSiriTipsVisible = true
 	
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
@@ -78,7 +82,9 @@ public struct CardsListView: View {
 			}
 		} else {
 			List {
-				IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
+				if areSiriTipsVisible {
+					IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
+				}
 				
 				ForEach(filteredCards) { card in
 					Section(card.name) {

@@ -23,7 +23,7 @@ struct CardWidgetProvider: TimelineProvider {
 
 	@MainActor
 	func getTimeline(in context: Context, completion: @escaping (Timeline<CardWidgetEntry>) -> ()) {
-		guard let cardIdString = UserDefaults.appGroup?.value(forKey: Constants.currentCardID) as? String,
+		guard let cardIdString = UserDefaults.appGroup?.value(forKey: Constants.StorageKey.currentCardID) as? String,
 			let cardId = UUID(uuidString: cardIdString)
 		else { return }
 

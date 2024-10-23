@@ -7,6 +7,7 @@
 
 import AppIntents
 import DesignSystem
+import Shared
 import SwiftUI
 
 public struct CommonInputView: View {
@@ -15,6 +16,9 @@ public struct CommonInputView: View {
 	private let intent: (any AppIntent)?
 	private let hint: String?
 	private let onSaveButtonTapped: (String) -> Void
+	
+	@AppStorage(Constants.StorageKey.siriTips)
+	private var areSiriTipsVisible = true
 
 	@State private var text: String = ""
 	@FocusState private var isFocused
@@ -38,7 +42,7 @@ public struct CommonInputView: View {
 	
 	public var body: some View {
 		List {
-			if let intent, let hint {
+			if let intent, let hint, areSiriTipsVisible {
 				IntentTipView(intent: intent, text: hint)
 			}
 			

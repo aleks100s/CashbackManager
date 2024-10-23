@@ -21,9 +21,13 @@ public struct AddCashbackView: View {
 	
 	private let percentPresets = [0.01, 0.03, 0.05, 0.1]
 	
+	@AppStorage(Constants.StorageKey.siriTips)
+	private var areSiriTipsVisible = true
+	
 	@State private var percent = 0.05
 	@State private var selectedCategory: Domain.Category?
 	@State private var isCategorySelectorPresented = false
+	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
 	@Environment(\.displayScale) var displayScale
@@ -57,7 +61,9 @@ public struct AddCashbackView: View {
 	
 	private var contentView: some View {
 		List {
-			IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбэк")
+			if areSiriTipsVisible {
+				IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбэк")
+			}
 			
 			Section {
 				if let category = selectedCategory {

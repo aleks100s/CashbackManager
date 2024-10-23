@@ -9,11 +9,15 @@ import AppIntents
 import DesignSystem
 import Domain
 import IncomeService
+import Shared
 import SwiftData
 import SwiftUI
 
 struct AddIncomeView: View {
 	let createIncomeIntent: any AppIntent
+	
+	@AppStorage(Constants.StorageKey.siriTips)
+	private var areSiriTipsVisible = true
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.incomeService) private var incomeService
@@ -52,7 +56,9 @@ struct AddIncomeView: View {
 	
 	private var contentView: some View {
 		List {
-			IntentTipView(intent: createIncomeIntent, text: "Чтобы добавить выплату")
+			if areSiriTipsVisible {
+				IntentTipView(intent: createIncomeIntent, text: "Чтобы добавить выплату")
+			}
 			
 			Section {
 				Menu(source?.name ?? "Не выбрано") {

@@ -19,6 +19,9 @@ public struct PlacesListView: View {
 	private let onPlaceSelected: (Place) -> Void
 	private let onAddPlaceButtonTapped: () -> Void
 	
+	@AppStorage(Constants.StorageKey.siriTips)
+	private var areSiriTipsVisible = true
+	
 	@State private var searchText = ""
 	
 	@Query(sort: [SortDescriptor<Place>(\.name, order: .forward)])
@@ -66,7 +69,9 @@ public struct PlacesListView: View {
 			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
 		} else {
 			List {
-				IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
+				if areSiriTipsVisible {
+					IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
+				}
 				
 				ForEach(filteredPlaces) { place in
 					Button {

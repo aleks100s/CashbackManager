@@ -23,7 +23,11 @@ public struct CardDetailView: View {
 	private let cardCashbackIntent: any AppIntent
 	private let onAddCashbackTap: () -> Void
 	
-	@AppStorage("CurrentCardID", store: .appGroup) private var currentCardId: String?
+	@AppStorage(Constants.StorageKey.currentCardID, store: .appGroup)
+	private var currentCardId: String?
+	
+	@AppStorage(Constants.StorageKey.siriTips)
+	private var areSiriTipsVisible = true
 	
 	@State private var imageItem: PhotosPickerItem?
 	@State private var animateGradient = false
@@ -88,7 +92,7 @@ public struct CardDetailView: View {
 			}
 		} else {
 			List {
-				if !isEditing {
+				if !isEditing, areSiriTipsVisible {
 					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
 				}
 				

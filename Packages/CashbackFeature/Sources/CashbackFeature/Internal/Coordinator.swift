@@ -10,6 +10,7 @@ import AppIntents
 import CardDetailScene
 import CardsListScene
 import Domain
+import Shared
 import SwiftData
 import SwiftUI
 
@@ -23,7 +24,7 @@ struct Coordinator: View {
 	@State private var navigationStack: [Navigation] = []
 	@State private var cardToAddCashback: Card?
 	
-	@AppStorage("IsFirstLaunch") private var isFirstLaunch = true
+	@AppStorage(Constants.StorageKey.firstLaunch) private var isFirstLaunch = true
 
 	@Environment(\.modelContext) private var context
 	@Environment(\.widgetURLParser) private var urlParser

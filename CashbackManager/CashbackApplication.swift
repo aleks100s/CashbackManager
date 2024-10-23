@@ -25,6 +25,7 @@ struct CashbackApplication: App {
 		case cashback
 		case income
 		case place
+		case settings
 	}
 	
 	private let container = AppFactory.provideModelContainer()
@@ -34,7 +35,7 @@ struct CashbackApplication: App {
 	private let cardsService = AppFactory.provideCardsService()
 	private let incomeService = AppFactory.provideIncomeService()
 		
-	@AppStorage("isMonthlyNotificationScheduled")
+	@AppStorage(Constants.StorageKey.notifications)
 	private var isMonthlyNotificationScheduled = false
 	
 	@State private var selectedTab = Tab.cashback
@@ -87,6 +88,14 @@ struct CashbackApplication: App {
 					Label("Места", systemImage: Constants.SFSymbols.places)
 				}
 				.tag(Tab.place)
+				
+				NavigationView {
+					SettingsView()
+				}
+				.tabItem {
+					Label("Настройки", systemImage: Constants.SFSymbols.settings)
+				}
+				.tag(Tab.settings)
 			}
 			.task {
 				requestNotificationPermission()

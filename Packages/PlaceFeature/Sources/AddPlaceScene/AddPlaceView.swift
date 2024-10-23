@@ -11,11 +11,15 @@ import Domain
 import PlaceService
 import SearchService
 import SelectCategoryScene
+import Shared
 import SwiftUI
 
 public struct AddPlaceView: View {
 	private let addPlaceIntent: any AppIntent
 	private let addCategoryIntent: any AppIntent
+	
+	@AppStorage(Constants.StorageKey.siriTips)
+	private var areSiriTipsVisible = true
 	
 	@State private var placeName = ""
 	@State private var selectedCategory: Domain.Category?
@@ -62,7 +66,9 @@ public struct AddPlaceView: View {
 	
 	private var contentView: some View {
 		List {
-			IntentTipView(intent: addPlaceIntent, text: "Чтобы добавить место")
+			if areSiriTipsVisible {
+				IntentTipView(intent: addPlaceIntent, text: "Чтобы добавить место")
+			}
 			
 			Section {
 				TextField("Название", text: $placeName)

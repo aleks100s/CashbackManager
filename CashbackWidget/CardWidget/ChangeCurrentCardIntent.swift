@@ -43,7 +43,7 @@ struct ChangeCurrentCardIntent: AppIntent {
 		}
 		
 		if let nextCard {
-			UserDefaults.appGroup?.set(nextCard.id.uuidString, forKey: Constants.currentCardID)
+			UserDefaults.appGroup?.set(nextCard.id.uuidString, forKey: Constants.StorageKey.currentCardID)
 			WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 		}
 		return .result()
