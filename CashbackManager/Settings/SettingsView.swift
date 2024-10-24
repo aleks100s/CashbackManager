@@ -28,7 +28,7 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.AppFeature.places)
 	private var isPlacesFeatureAvailable = true
 	
-	@State private var valueToCopy: String? = nil
+	@State private var toast: Toast? = nil
 	
 	var body: some View {
 		List {
@@ -71,7 +71,7 @@ struct SettingsView: View {
 				}
 			}
 		}
-		.toast(value: $valueToCopy)
+		.toast(toast: $toast)
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
@@ -84,7 +84,7 @@ struct SettingsView: View {
 	}
 	
 	private func copy(value: String?) {
-		valueToCopy = value
+		toast = Toast(title: "Значение скопировано", value: value ?? "")
 	}
 }
 

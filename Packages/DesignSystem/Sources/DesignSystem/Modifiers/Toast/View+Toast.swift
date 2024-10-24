@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ToastModifier: ViewModifier {
-	@Binding var value: String?
+	@Binding var toast: Toast?
 
 	func body(content: Content) -> some View {
 		content.overlay(alignment: .bottom) {
-			if value != nil {
-				ToastView(title: "Значение скопировано")
+			if let toast {
+				ToastView(title: toast.title)
 					.padding(.bottom)
 					.transition(.move(edge: .bottom).combined(with: .opacity))
 			}
 		}
-		.animation(.spring, value: value)
-		.onChange(of: value) { oldValue, newValue in
+		.animation(.spring, value: toast)
+		.onChange(of: toast) { oldValue, newValue in
 			if newValue != nil {
 				trigger()
 			}
@@ -27,19 +27,17 @@ struct ToastModifier: ViewModifier {
 	}
 	
 	private func trigger() {
-		print("Toast appeared")
-		UIPasteboard.general.string = value
+		UIPasteboard.general.string = toast?.value
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 			withAnimation {
-				self.value = nil
-				print("Toast disappeared")
+				self.toast = nil
 			}
 		}
 	}
 }
 
 public extension View {
-	func toast(value: Binding<String?>) -> some View {
-		modifier(ToastModifier(value: value))
+	func toast(toast: Binding<Toast?>) -> some View {
+		modifier(ToastModifier(toast: toast))
 	}
 }
