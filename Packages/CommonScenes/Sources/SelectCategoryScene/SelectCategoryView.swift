@@ -113,14 +113,15 @@ public struct SelectCategoryView: View {
 	private var addCategoryButton: some View {
 		Button("Добавить свою категорию") {
 			isAddCategorySheetPresented = true
+			hapticFeedback(.medium)
 		}
-		.sensoryFeedback(.impact, trigger: isAddCategorySheetPresented)
 	}
 	
 	private func categoryButtonView(_ category: Domain.Category) -> some View {
 		Button {
 			category.priority += 1
 			onSelect(category)
+			hapticFeedback(.light)
 			dismiss()
 		} label: {
 			CategoryView(category: category)

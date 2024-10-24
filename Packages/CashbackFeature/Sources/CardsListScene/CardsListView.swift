@@ -116,8 +116,8 @@ public struct CardsListView: View {
 	private var addCardButton: some View {
 		Button("Добавить карту") {
 			isAddCardSheetPresented = true
+			hapticFeedback(.medium)
 		}
-		.sensoryFeedback(.impact, trigger: isAddCardSheetPresented)
 	}
 	
 	private func renameCardSheet(_ card: Card) -> some View {
@@ -153,10 +153,10 @@ public struct CardsListView: View {
 	private func renameCardButton(_ card: Card) -> some View {
 		Button {
 			cardToBeRenamed = card
+			hapticFeedback(.medium)
 		} label: {
 			Text("Переименовать карту")
 		}
-		.sensoryFeedback(.impact, trigger: cardToBeRenamed)
 	}
 	
 	private func deleteCardButton(_ card: Card) -> some View {

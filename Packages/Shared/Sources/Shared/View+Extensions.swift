@@ -42,3 +42,11 @@ public extension View {
 		self.modifier(OnFirstAppearModifier(action: action))
 	}
 }
+
+public extension View {
+	func hapticFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
+		let generator = UIImpactFeedbackGenerator(style: style)
+		generator.prepare()
+		generator.impactOccurred()
+	}
+}

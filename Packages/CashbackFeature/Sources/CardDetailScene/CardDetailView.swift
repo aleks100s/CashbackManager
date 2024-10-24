@@ -149,6 +149,7 @@ public struct CardDetailView: View {
 	private var editButton: some View {
 		Button(isEditing ? "Готово" : "Править") {
 			isEditing.toggle()
+			hapticFeedback(.light)
 		}
 		.disabled(cardName.isEmpty)
 	}
@@ -178,6 +179,7 @@ public struct CardDetailView: View {
 		card.cashback.removeAll(where: { $0.id == cashback.id })
 		context.delete(cashback)
 		searchService?.index(card: card)
+		toast = Toast(title: "Кэшбэк удален")
 	}
 }
 

@@ -19,7 +19,6 @@ struct ToastModifier: ViewModifier {
 			}
 		}
 		.animation(.spring, value: toast)
-		.sensoryFeedback(.impact, trigger: toast)
 		.onChange(of: toast) { oldValue, newValue in
 			if newValue != nil {
 				trigger()
@@ -28,11 +27,18 @@ struct ToastModifier: ViewModifier {
 	}
 	
 	private func trigger() {
+		hapticFeedback(.light)
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 			withAnimation {
 				self.toast = nil
 			}
 		}
+	}
+	
+	private func hapticFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
+		let generator = UIImpactFeedbackGenerator(style: style)
+		generator.prepare()
+		generator.impactOccurred()
 	}
 }
 

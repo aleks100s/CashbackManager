@@ -65,6 +65,7 @@ struct AddIncomeView: View {
 					ForEach(cards) { card in
 						Button(card.name) {
 							source = card
+							hapticFeedback(.light)
 						}
 					}
 				}
@@ -100,6 +101,7 @@ struct AddIncomeView: View {
 		Button("Добавить") {
 			createIncome()
 			dismiss()
+			hapticFeedback(.medium)
 		}
 		.frame(maxWidth: .infinity)
 		.padding()

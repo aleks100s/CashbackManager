@@ -84,8 +84,8 @@ public struct AddCashbackView: View {
 			Section {
 				PercentSelectorView(percentPresets: percentPresets, percent: percent) { percent in
 					self.percent = percent
+					hapticFeedback(.light)
 				}
-				.sensoryFeedback(.impact, trigger: percent)
 			}
 			
 		}
@@ -120,8 +120,8 @@ public struct AddCashbackView: View {
 	private var selectCategoryButton: some View {
 		Button("Выбрать категорию") {
 			isCategorySelectorPresented = true
+			hapticFeedback(.medium)
 		}
-		.sensoryFeedback(.impact, trigger: isCategorySelectorPresented)
 	}
 	
 	@MainActor

@@ -106,6 +106,7 @@ public struct AddPlaceView: View {
 	private var saveButton: some View {
 		Button("Сохранить") {
 			createPlace()
+			hapticFeedback(.light)
 			dismiss()
 		}
 		.padding()
