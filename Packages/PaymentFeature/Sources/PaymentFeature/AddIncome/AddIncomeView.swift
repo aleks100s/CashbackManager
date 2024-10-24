@@ -42,7 +42,6 @@ struct AddIncomeView: View {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Отмена") {
 						dismiss()
-						hapticFeedback(.medium)
 					}
 				}
 			}
@@ -99,10 +98,10 @@ struct AddIncomeView: View {
 	}
 	
 	private var saveButton: some View {
-		Button("Добавить") {
+		Button("Сохранить") {
 			createIncome()
 			dismiss()
-			hapticFeedback(.medium)
+			hapticFeedback(.light)
 		}
 		.frame(maxWidth: .infinity)
 		.padding()

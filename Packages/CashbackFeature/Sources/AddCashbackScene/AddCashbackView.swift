@@ -47,7 +47,6 @@ public struct AddCashbackView: View {
 			.toolbar {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Отмена") {
-						hapticFeedback(.medium)
 						dismiss()
 					}
 				}
@@ -110,8 +109,8 @@ public struct AddCashbackView: View {
 	private var saveButton: some View {
 		Button("Сохранить") {
 			createCashback()
-			hapticFeedback(.medium)
 			dismiss()
+			hapticFeedback(.light)
 		}
 		.frame(maxWidth: .infinity)
 		.padding()
@@ -122,7 +121,6 @@ public struct AddCashbackView: View {
 	private var selectCategoryButton: some View {
 		Button("Выбрать категорию") {
 			isCategorySelectorPresented = true
-			hapticFeedback(.medium)
 		}
 	}
 	

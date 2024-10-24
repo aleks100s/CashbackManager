@@ -25,7 +25,6 @@ struct IncomePeriodView: View {
 				ToolbarItem(placement: .bottomBar) {
 					Button("Добавить выплату") {
 						model.incomeTapped()
-						hapticFeedback(.medium)
 					}
 				}
 				

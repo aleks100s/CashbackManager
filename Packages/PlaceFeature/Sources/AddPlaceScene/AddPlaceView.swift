@@ -50,7 +50,6 @@ public struct AddPlaceView: View {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Отмена") {
 						dismiss()
-						hapticFeedback(.medium)
 					}
 				}
 			}
@@ -79,7 +78,6 @@ public struct AddPlaceView: View {
 			Section {
 				Button {
 					isCategorySelectorPresented = true
-					hapticFeedback(.medium)
 				} label: {
 					if let selectedCategory {
 						CategoryView(category: selectedCategory)
@@ -108,8 +106,8 @@ public struct AddPlaceView: View {
 	private var saveButton: some View {
 		Button("Сохранить") {
 			createPlace()
-			hapticFeedback(.light)
 			dismiss()
+			hapticFeedback(.light)
 		}
 		.padding()
 		.disabled(!isInputCorrect)

@@ -100,7 +100,6 @@ public struct PlacesListView: View {
 	private var addPlaceButton: some View {
 		Button("Добавить место") {
 			onAddPlaceButtonTapped()
-			hapticFeedback(.medium)
 		}
 	}
 	

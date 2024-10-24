@@ -116,7 +116,6 @@ public struct CardsListView: View {
 	private var addCardButton: some View {
 		Button("Добавить карту") {
 			isAddCardSheetPresented = true
-			hapticFeedback(.medium)
 		}
 	}
 	
@@ -153,7 +152,6 @@ public struct CardsListView: View {
 	private func renameCardButton(_ card: Card) -> some View {
 		Button {
 			cardToBeRenamed = card
-			hapticFeedback(.medium)
 		} label: {
 			Text("Переименовать карту")
 		}
@@ -182,7 +180,7 @@ public struct CardsListView: View {
 		searchService?.index(card: card)
 		isAddCardSheetPresented = false
 		onCardSelected(card)
-		hapticFeedback(.medium)
+		hapticFeedback(.light)
 	}
 	
 	private func delete(card: Card) {

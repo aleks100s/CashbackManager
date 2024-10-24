@@ -55,12 +55,14 @@ public struct SelectCategoryView: View {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Отмена") {
 						dismiss()
-						hapticFeedback(.medium)
 					}
 				}
 			}
 			.sheet(isPresented: $isAddCategorySheetPresented) {
 				addCategorySheet
+			}
+			.onAppear {
+				hapticFeedback(.light)
 			}
 	}
 	
@@ -114,7 +116,6 @@ public struct SelectCategoryView: View {
 	private var addCategoryButton: some View {
 		Button("Добавить свою категорию") {
 			isAddCategorySheetPresented = true
-			hapticFeedback(.medium)
 		}
 	}
 	
