@@ -6,6 +6,7 @@
 //
 
 import DesignSystem
+import NotificationService
 import Shared
 import SwiftUI
 
@@ -29,6 +30,9 @@ struct SettingsView: View {
 	private var isPlacesFeatureAvailable = true
 	
 	@State private var toast: Toast? = nil
+	
+	@Environment(\.notificationService)
+	private var notificationService
 	
 	var body: some View {
 		List {
@@ -76,9 +80,9 @@ struct SettingsView: View {
 		.navigationBarTitleDisplayMode(.inline)
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
 			if isAllowed {
-				NotificationManager.scheduleMonthlyNotification()
+				notificationService?.scheduleMonthlyNotification()
 			} else {
-				NotificationManager.unscheduleMonthlyNotification()
+				notificationService?.unscheduleMonthlyNotification()
 			}
 		}
 	}

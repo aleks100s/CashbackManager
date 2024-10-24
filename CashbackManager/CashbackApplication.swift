@@ -33,6 +33,7 @@ struct CashbackApplication: App {
 	private let placeService = AppFactory.providePlaceService()
 	private let cardsService = AppFactory.provideCardsService()
 	private let incomeService = AppFactory.provideIncomeService()
+	private let notificationService = AppFactory.provideNotificationService()
 		
 	@AppStorage(Constants.StorageKey.notifications)
 	private var isMonthlyNotificationScheduled = false
@@ -144,6 +145,7 @@ struct CashbackApplication: App {
 		.environment(\.placeService, placeService)
 		.environment(\.textDetectionService, AppFactory.provideTextDetectionService())
 		.environment(\.incomeService, incomeService)
+		.environment(\.notificationService, notificationService)
     }
 
 	private func requestNotificationPermission() {
@@ -160,7 +162,7 @@ struct CashbackApplication: App {
 			return
 		}
 		
-		NotificationManager.scheduleMonthlyNotification()
+		notificationService.scheduleMonthlyNotification()
 		isMonthlyNotificationScheduled = true
 	}
 }

@@ -1,15 +1,17 @@
 //
-//  NotificationManager.swift
-//  CashbackManager
+//  NotificationService.swift
+//  Services
 //
-//  Created by Alexander on 23.10.2024.
+//  Created by Alexander on 24.10.2024.
 //
 
 import Shared
 import UserNotifications
 
-enum NotificationManager {
-	static func scheduleMonthlyNotification() {
+public struct NotificationService {
+	public init() {}
+
+	public func scheduleMonthlyNotification() {
 		let center = UNUserNotificationCenter.current()
 
 		// Определение компонента времени для первого числа каждого месяца в 10:00 утра, например
@@ -36,7 +38,7 @@ enum NotificationManager {
 		center.add(request) { _ in }
 	}
 	
-	static func unscheduleMonthlyNotification() {
+	public func unscheduleMonthlyNotification() {
 		let center = UNUserNotificationCenter.current()
 		center.removeAllPendingNotificationRequests()
 	}

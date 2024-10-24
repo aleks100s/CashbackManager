@@ -44,7 +44,8 @@
 		2755A3162CBA4BB1002F61EC /* CreateIncomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A3152CBA4BB1002F61EC /* CreateIncomeIntent.swift */; };
 		2755A31B2CBBA609002F61EC /* CardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A31A2CBBA609002F61EC /* CardEntity.swift */; };
 		2755A31F2CC939F5002F61EC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A31E2CC939F5002F61EC /* SettingsView.swift */; };
-		2755A3212CC94556002F61EC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A3202CC94556002F61EC /* NotificationManager.swift */; };
+		2755A3252CC9EECC002F61EC /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3242CC9EECC002F61EC /* NotificationService */; };
+		2755A3272CC9F113002F61EC /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3262CC9F113002F61EC /* NotificationService */; };
 		277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E52C73C0AA00C26CD8 /* CategoryService */; };
 		277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E72C73C0AF00C26CD8 /* PlaceService */; };
 		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
@@ -140,7 +141,6 @@
 		2755A3152CBA4BB1002F61EC /* CreateIncomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIncomeIntent.swift; sourceTree = "<group>"; };
 		2755A31A2CBBA609002F61EC /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
 		2755A31E2CC939F5002F61EC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		2755A3202CC94556002F61EC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryIntent.swift; sourceTree = "<group>"; };
 		277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCashbackIntent.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +170,7 @@
 				274861FB2C53463E00788C1A /* CardsService in Frameworks */,
 				274862092C534AB200788C1A /* Shared in Frameworks */,
 				27D329D72C9C8A4D00964504 /* TextDetectionService in Frameworks */,
+				2755A3272CC9F113002F61EC /* NotificationService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +189,7 @@
 				27D329D52C9C894B00964504 /* TextDetectionService in Frameworks */,
 				27AB37292C73BBE700A00939 /* PlaceService in Frameworks */,
 				27368B802C426E8E00FC0475 /* (null) in Frameworks */,
+				2755A3252CC9EECC002F61EC /* NotificationService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +299,6 @@
 			isa = PBXGroup;
 			children = (
 				2755A31E2CC939F5002F61EC /* SettingsView.swift */,
-				2755A3202CC94556002F61EC /* NotificationManager.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -386,6 +387,7 @@
 				277130E92C73C0B200C26CD8 /* SearchService */,
 				27D329D62C9C8A4D00964504 /* TextDetectionService */,
 				2755A3112CBA4B73002F61EC /* IncomeService */,
+				2755A3262CC9F113002F61EC /* NotificationService */,
 			);
 			productName = CashbackWidgetExtension;
 			productReference = 27368BBB2C4BB11000FC0475 /* CashbackWidgetExtension.appex */;
@@ -417,6 +419,7 @@
 				27D329D42C9C894B00964504 /* TextDetectionService */,
 				2755A30F2CB9742A002F61EC /* PaymentFeature */,
 				2755A3132CBA4B7D002F61EC /* IncomeService */,
+				2755A3242CC9EECC002F61EC /* NotificationService */,
 			);
 			productName = CashbackManager;
 			productReference = 27A5D7CD2C394EC400B93512 /* CashbackManager.app */;
@@ -575,7 +578,6 @@
 				2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */,
 				2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */,
 				2755A31B2CBBA609002F61EC /* CardEntity.swift in Sources */,
-				2755A3212CC94556002F61EC /* NotificationManager.swift in Sources */,
 				272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */,
 				272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
@@ -1044,6 +1046,14 @@
 		2755A3132CBA4B7D002F61EC /* IncomeService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IncomeService;
+		};
+		2755A3242CC9EECC002F61EC /* NotificationService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NotificationService;
+		};
+		2755A3262CC9F113002F61EC /* NotificationService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NotificationService;
 		};
 		277130E52C73C0AA00C26CD8 /* CategoryService */ = {
 			isa = XCSwiftPackageProductDependency;
