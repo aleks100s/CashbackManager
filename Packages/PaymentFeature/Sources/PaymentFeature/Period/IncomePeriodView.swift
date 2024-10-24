@@ -6,11 +6,13 @@
 //
 
 import Charts
+import DesignSystem
 import Shared
 import SwiftUI
 
 struct IncomePeriodView: View {
 	@State private var model: IncomePeriodModel
+	@State private var toast: Toast?
 		
 	init(model: IncomePeriodModel) {
 		self.model = model
@@ -34,6 +36,7 @@ struct IncomePeriodView: View {
 					}
 				}
 			}
+			.toast(item: $toast)
 			.onFirstAppear {
 				Task {
 					do {
@@ -145,6 +148,7 @@ struct IncomePeriodView: View {
 								Button("Удалить", role: .destructive) {
 									Task {
 										await model.delete(income: income)
+										toast = Toast(title: "Транзакция удалена")
 									}
 								}
 							}

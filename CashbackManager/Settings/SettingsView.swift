@@ -38,6 +38,9 @@ struct SettingsView: View {
 		List {
 			Section {
 				Toggle("Подсказки Siri", isOn: $areSiriTipsVisible)
+					.onChange(of: areSiriTipsVisible) { _, newValue in
+						toast = Toast(title: newValue ? "Подсказки включены" : "Подсказки отключены")
+					}
 			} header: {
 				Text("Настройки голосовых команд")
 			} footer: {
@@ -46,6 +49,9 @@ struct SettingsView: View {
 			
 			Section {
 				Toggle("Уведомления", isOn: $isNotificationAllowed)
+					.onChange(of: isNotificationAllowed) { _, newValue in
+						toast = Toast(title: newValue ? "Уведомления включены" : "Уведомления отключены")
+					}
 			} header: {
 				Text("Настройки уведомлений")
 			} footer: {
@@ -54,8 +60,17 @@ struct SettingsView: View {
 			
 			Section {
 				Toggle("Карты", isOn: $isCardsFeatureAvailable)
+					.onChange(of: isCardsFeatureAvailable) { _, newValue in
+						toast = Toast(title: newValue ? "Раздел активен" : "Раздел скрыт")
+					}
 				Toggle("Выплаты", isOn: $isPaymentsFeatureAvailable)
+					.onChange(of: isPaymentsFeatureAvailable) { _, newValue in
+						toast = Toast(title: newValue ? "Раздел активен" : "Раздел скрыт")
+					}
 				Toggle("Места", isOn: $isPlacesFeatureAvailable)
+					.onChange(of: isPlacesFeatureAvailable) { _, newValue in
+						toast = Toast(title: newValue ? "Раздел активен" : "Раздел скрыт")
+					}
 			} header: {
 				Text("Настройки разделов приложения")
 			} footer: {
@@ -75,7 +90,7 @@ struct SettingsView: View {
 				}
 			}
 		}
-		.toast(toast: $toast)
+		.toast(item: $toast)
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
@@ -88,7 +103,8 @@ struct SettingsView: View {
 	}
 	
 	private func copy(value: String?) {
-		toast = Toast(title: "Значение скопировано", value: value ?? "")
+		toast = Toast(title: "Значение скопировано")
+		UIPasteboard.general.string = value
 	}
 }
 

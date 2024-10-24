@@ -19,6 +19,7 @@ struct ToastModifier: ViewModifier {
 			}
 		}
 		.animation(.spring, value: toast)
+		.sensoryFeedback(.impact, trigger: toast)
 		.onChange(of: toast) { oldValue, newValue in
 			if newValue != nil {
 				trigger()
@@ -27,7 +28,6 @@ struct ToastModifier: ViewModifier {
 	}
 	
 	private func trigger() {
-		UIPasteboard.general.string = toast?.value
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 			withAnimation {
 				self.toast = nil
@@ -37,7 +37,7 @@ struct ToastModifier: ViewModifier {
 }
 
 public extension View {
-	func toast(toast: Binding<Toast?>) -> some View {
-		modifier(ToastModifier(toast: toast))
+	func toast(item: Binding<Toast?>) -> some View {
+		modifier(ToastModifier(toast: item))
 	}
 }

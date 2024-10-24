@@ -23,6 +23,7 @@ public struct PlacesListView: View {
 	private var areSiriTipsVisible = true
 	
 	@State private var searchText = ""
+	@State private var toast: Toast?
 	
 	@Query(sort: [SortDescriptor<Place>(\.name, order: .forward)])
 	private var places: [Place]
@@ -61,6 +62,7 @@ public struct PlacesListView: View {
 					addPlaceButton
 				}
 			}
+			.toast(item: $toast)
 	}
 	
 	@ViewBuilder
@@ -117,5 +119,6 @@ public struct PlacesListView: View {
 	private func delete(place: Place) {
 		searchService?.deindex(place: place)
 		placeService?.delete(place: place)
+		toast = Toast(title: "Место удалено")
 	}
 }

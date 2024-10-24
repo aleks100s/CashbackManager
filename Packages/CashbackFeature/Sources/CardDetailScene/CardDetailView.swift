@@ -34,6 +34,7 @@ public struct CardDetailView: View {
 	@State private var isEditing = false
 	@State private var cardName: String
 	@State private var color: Color
+	@State private var toast: Toast?
 	
 	@Environment(\.modelContext) private var context
 	@Environment(\.cardsService) private var cardsService
@@ -76,8 +77,10 @@ public struct CardDetailView: View {
 					card.name = cardName
 					card.color = color.toHex()
 					cardsService?.update(card: card)
+					toast = Toast(title: "Карта обновлена")
 				}
 			}
+			.toast(item: $toast)
 	}
 	
 	@ViewBuilder
@@ -206,6 +209,7 @@ private extension CardDetailView {
 			card.cashback.append(cashback)
 		}
 		searchService?.index(card: card)
+		toast = Toast(title: "Кэшбэки считаны!")
 	}
 }
 

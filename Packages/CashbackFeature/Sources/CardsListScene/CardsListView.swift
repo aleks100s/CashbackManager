@@ -25,6 +25,8 @@ public struct CardsListView: View {
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
 	@State private var cardToBeRenamed: Card?
+	@State private var toast: Toast?
+	
 	@Query(
 		sort: [SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
@@ -70,6 +72,7 @@ public struct CardsListView: View {
 			.sheet(item: $cardToBeRenamed) { card in
 				renameCardSheet(card)
 			}
+			.toast(item: $toast)
 	}
 	
 	@ViewBuilder
@@ -169,6 +172,7 @@ public struct CardsListView: View {
 		context.insert(card)
 		searchService?.index(card: card)
 		cardToBeRenamed = nil
+		toast = Toast(title: "Карта переименована")
 	}
 		
 	@MainActor
@@ -183,5 +187,6 @@ public struct CardsListView: View {
 	private func delete(card: Card) {
 		searchService?.deindex(card: card)
 		context.delete(card)
+		toast = Toast(title: "Карта удалена")
 	}
 }

@@ -7,10 +7,8 @@
 
 public struct Toast: Equatable {
 	let title: String
-	let value: String
 	
-	public init(title: String, value: String) {
+	public init(title: String) {
 		self.title = title
-		self.value = value
 	}
 }
