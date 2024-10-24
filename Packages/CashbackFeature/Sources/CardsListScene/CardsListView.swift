@@ -182,6 +182,7 @@ public struct CardsListView: View {
 		searchService?.index(card: card)
 		isAddCardSheetPresented = false
 		onCardSelected(card)
+		hapticFeedback(.medium)
 	}
 	
 	private func delete(card: Card) {

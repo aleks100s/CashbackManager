@@ -143,6 +143,7 @@ public struct CardDetailView: View {
 	private var addCashbackButton: some View {
 		Button("Добавить кэшбэк вручную") {
 			onAddCashbackTap()
+			hapticFeedback(.medium)
 		}
 	}
 	

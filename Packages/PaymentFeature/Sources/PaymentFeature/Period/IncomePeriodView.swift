@@ -25,6 +25,7 @@ struct IncomePeriodView: View {
 				ToolbarItem(placement: .bottomBar) {
 					Button("Добавить выплату") {
 						model.incomeTapped()
+						hapticFeedback(.medium)
 					}
 				}
 				
@@ -147,8 +148,8 @@ struct IncomePeriodView: View {
 							.contextMenu {
 								Button("Удалить", role: .destructive) {
 									Task {
-										await model.delete(income: income)
 										toast = Toast(title: "Транзакция удалена")
+										await model.delete(income: income)
 									}
 								}
 							}

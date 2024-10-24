@@ -42,6 +42,7 @@ struct AddIncomeView: View {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Отмена") {
 						dismiss()
+						hapticFeedback(.medium)
 					}
 				}
 			}

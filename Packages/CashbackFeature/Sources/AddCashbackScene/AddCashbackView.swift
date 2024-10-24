@@ -47,6 +47,7 @@ public struct AddCashbackView: View {
 			.toolbar {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button("Отмена") {
+						hapticFeedback(.medium)
 						dismiss()
 					}
 				}
@@ -109,6 +110,7 @@ public struct AddCashbackView: View {
 	private var saveButton: some View {
 		Button("Сохранить") {
 			createCashback()
+			hapticFeedback(.medium)
 			dismiss()
 		}
 		.frame(maxWidth: .infinity)

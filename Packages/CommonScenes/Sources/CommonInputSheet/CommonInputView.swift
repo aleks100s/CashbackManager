@@ -70,6 +70,7 @@ public struct CommonInputView: View {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button("Отмена") {
 					dismiss()
+					hapticFeedback(.medium)
 				}
 			}
 		}
