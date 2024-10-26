@@ -58,6 +58,7 @@ let package = Package(
 		.target(
 			name: "UserDataService",
 			dependencies: [
+				"Shared",
 				"CardsService",
 				"CategoryService",
 				"IncomeService",

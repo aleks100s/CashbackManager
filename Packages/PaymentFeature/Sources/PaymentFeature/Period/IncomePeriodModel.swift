@@ -9,6 +9,7 @@ import Combine
 import Domain
 import Foundation
 import IncomeService
+import Shared
 
 @Observable
 final class IncomePeriodModel {
@@ -43,6 +44,13 @@ final class IncomePeriodModel {
 				onTransactionAdded()
 			}
 			.store(in: &subscriptions)
+		NotificationCenter.default.publisher(for: Constants.resetAppNavigationNotification)
+			.sink { [weak self] _ in
+				Task {
+					try await self?.onAppear()
+				}
+			}
+			.store(in: &subscriptions)
 	}
 	
 	@MainActor
@@ -67,9 +75,7 @@ final class IncomePeriodModel {
 	func onAppear() async throws {
 		setupCurrentMonthBounds()
 		await fetchTransactions()
-		let (min, max) = try await incomeService.findMinMaxDates()
-		minDate = min
-		maxDate = max
+		try await findBorders()
 	}
 	
 	@MainActor
@@ -98,8 +104,15 @@ final class IncomePeriodModel {
 	
 	private func onTransactionAdded() {
 		Task { [weak self] in
+			try await self?.findBorders()
 			await self?.fetchTransactions()
 		}
+	}
+	
+	private func findBorders() async throws {
+		let (min, max) = try await incomeService.findMinMaxDates()
+		minDate = min
+		maxDate = max
 	}
 }
 

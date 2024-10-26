@@ -47,6 +47,9 @@ struct Coordinator: View {
 				navigationStack = path
 			}
 		}
+		.onReceive(NotificationCenter.default.publisher(for: Constants.resetAppNavigationNotification)) { _ in
+			navigationStack = []
+		}
     }
 	
 	@MainActor @ViewBuilder

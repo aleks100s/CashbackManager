@@ -29,7 +29,7 @@ public enum Constants {
 		public static let notificationsAllowed = "isNotificationAllowed"
 	}
 	
-	public static let resetAppNavigationNotification = "resetAppNavigationNotification"
+	public static let resetAppNavigationNotification = Notification.Name(rawValue: "resetAppNavigationNotification")
 	public static let appIdentifier = "com.alextos.CashbackManager"
 	public static let appGroup = "group.com.alextos.cashback"
 	public static let cardWidgetKind = "CardWidget"

@@ -139,6 +139,7 @@ struct SettingsView: View {
 					try await userDataService?.importData(from: success)
 					await MainActor.run {
 						isBusy = false
+						toast = Toast(title: "Данные успешно импортированы")
 					}
 				}
 			case .failure(let failure):
@@ -164,6 +165,7 @@ struct SettingsView: View {
 				await MainActor.run {
 					exportUrl = url
 					isBusy = false
+					toast = Toast(title: "Данные готовы к экспорту")
 				}
 			} catch {
 				await MainActor.run {

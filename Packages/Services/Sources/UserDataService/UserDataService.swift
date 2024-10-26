@@ -11,6 +11,7 @@ import Foundation
 import IncomeService
 import PlaceService
 import SearchService
+import Shared
 
 public final class UserDataService {
 	private let categoryService: CategoryService
@@ -60,7 +61,6 @@ public final class UserDataService {
 		let data = try Data(contentsOf: url)
 		let jsonDecoder = JSONDecoder()
 		let userData = try jsonDecoder.decode(UserData.self, from: data)
-		// reset app
 		for transaction in try await incomeService.fetchAll() {
 			incomeService.delete(income: transaction)
 		}
@@ -84,6 +84,9 @@ public final class UserDataService {
 		}
 		for place in userData.places {
 			searchService.index(place: place)
+		}
+		await MainActor.run {
+			NotificationCenter.default.post(name: Constants.resetAppNavigationNotification, object: nil)
 		}
 	}
 }
