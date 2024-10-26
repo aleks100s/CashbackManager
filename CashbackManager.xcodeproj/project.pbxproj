@@ -48,6 +48,7 @@
 		2755A3272CC9F113002F61EC /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3262CC9F113002F61EC /* NotificationService */; };
 		2755A3292CCD193F002F61EC /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A3282CCD193F002F61EC /* UserDataService.swift */; };
 		2755A32B2CCD1E7E002F61EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A32A2CCD1E7E002F61EC /* ContentView.swift */; };
+		2755A32C2CCD580E002F61EC /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A3282CCD193F002F61EC /* UserDataService.swift */; };
 		277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E52C73C0AA00C26CD8 /* CategoryService */; };
 		277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E72C73C0AF00C26CD8 /* PlaceService */; };
 		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
@@ -557,6 +558,7 @@
 			files = (
 				27368BD62C4BB22500FC0475 /* CardWidgetEntry.swift in Sources */,
 				27368BDA2C4BB67200FC0475 /* ChangeCurrentCardIntent.swift in Sources */,
+				2755A32C2CCD580E002F61EC /* UserDataService.swift in Sources */,
 				27368BC22C4BB11100FC0475 /* CashbackWidgetBundle.swift in Sources */,
 				27368BD52C4BB20A00FC0475 /* CardWidgetProvider.swift in Sources */,
 				27EE77BB2C5C020900D12827 /* AppFactory.swift in Sources */,

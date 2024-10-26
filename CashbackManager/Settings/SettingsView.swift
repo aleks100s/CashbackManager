@@ -29,10 +29,15 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.AppFeature.places)
 	private var isPlacesFeatureAvailable = true
 	
-	@State private var toast: Toast? = nil
+	@State private var toast: Toast?
+	@State private var exportUrl: URL?
+	@State private var isBusy = false
 	
 	@Environment(\.notificationService)
 	private var notificationService
+	
+	@Environment(\.userDataService)
+	private var userDataService
 	
 	var body: some View {
 		List {
@@ -77,6 +82,19 @@ struct SettingsView: View {
 				Text("Отключение разделов позволит сфокусироваться только на необходимом Вам функционале. Разделы можно включить или отключить в любое время без потери данных.")
 			}
 
+			Section {
+				if let exportUrl {
+					ShareLink("Отправить файл", item: exportUrl)
+				} else {
+					Button("Подготовить данные для переноса") {
+						prepareExportData()
+					}
+				}
+			} header: {
+				Text("Перенос данных на другое устройство")
+			} footer: {
+				Text("Экспортируйте данные с одного устройства и откройте файл в приложении на новом девайсе")
+			}
 
 			Section("О приложении") {
 				ItemView(title: "Версия приложения", value: appVersion, onTap: copy)
@@ -98,6 +116,24 @@ struct SettingsView: View {
 				notificationService?.scheduleMonthlyNotification()
 			} else {
 				notificationService?.unscheduleMonthlyNotification()
+			}
+		}
+		.disabled(isBusy)
+		.overlay {
+			if isBusy {
+				Color.gray.opacity(0.2)
+				ProgressView()
+			}
+		}
+	}
+	
+	private func prepareExportData() {
+		isBusy = true
+		Task.detached {
+			let url = try await userDataService?.generateExportFile()
+			await MainActor.run {
+				exportUrl = url
+				isBusy = false
 			}
 		}
 	}

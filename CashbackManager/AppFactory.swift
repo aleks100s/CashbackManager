@@ -25,6 +25,7 @@ enum AppFactory {
 	private static let textDetectionService = TextDetectionService()
 	private static let incomeService = IncomeService(context: container.mainContext)
 	private static let notificationService = NotificationService()
+	private static let userDataService = UserDataService(categoryService: categoryService, cardService: cardsService, incomeService: incomeService, placeService: placeService)
 	
 	static func provideModelContainer() -> ModelContainer {
 		container
@@ -62,5 +63,10 @@ enum AppFactory {
 	@MainActor
 	static func provideNotificationService() -> NotificationService {
 		notificationService
+	}
+	
+	@MainActor
+	static func provideUserDataService() -> UserDataService {
+		userDataService
 	}
 }

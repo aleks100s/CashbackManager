@@ -16,6 +16,10 @@ public struct PlaceService: @unchecked Sendable {
 		self.context = context
 	}
 	
+	public func getAllPlaces() -> [Place] {
+		fetch(by: #Predicate<Place> { !$0.name.isEmpty })
+	}
+	
 	public func getPlace(by name: String) -> Place? {
 		let predicate = #Predicate<Place> { $0.name.localizedStandardContains(name) }
 		let descriptor = FetchDescriptor(predicate: predicate)
@@ -30,5 +34,10 @@ public struct PlaceService: @unchecked Sendable {
 	
 	public func delete(place: Place) {
 		context.delete(place)
+	}
+	
+	private func fetch(by predicate: Predicate<Place>) -> [Place] {
+		let descriptor = FetchDescriptor(predicate: predicate)
+		return (try? context.fetch(descriptor)) ?? []
 	}
 }
