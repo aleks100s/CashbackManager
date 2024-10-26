@@ -65,6 +65,12 @@ public struct IncomeService: @unchecked Sendable {
 		return try context.fetch(descriptor)
 	}
 	
+	public func insert(transactions: [Income]) {
+		for transaction in transactions {
+			context.insert(transaction)
+		}
+	}
+	
 	public func fetch(from: Date, to: Date) async throws -> [Income] {
 		let predicate = #Predicate<Income> { income in
 			income.date >= from && income.date <= to

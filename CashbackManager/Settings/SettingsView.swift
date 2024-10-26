@@ -32,6 +32,8 @@ struct SettingsView: View {
 	@State private var toast: Toast?
 	@State private var exportUrl: URL?
 	@State private var isBusy = false
+	@State private var isImporterPresented = false
+	@State private var isImportWarningPresented = false
 	
 	@Environment(\.notificationService)
 	private var notificationService
@@ -90,10 +92,14 @@ struct SettingsView: View {
 						prepareExportData()
 					}
 				}
+				
+				Button("Восстановить данные") {
+					isImportWarningPresented = true
+				}
 			} header: {
 				Text("Перенос данных на другое устройство")
 			} footer: {
-				Text("Экспортируйте данные с одного устройства и откройте файл в приложении на новом девайсе")
+				Text("Экспортируйте данные с одного устройства и откройте файл в приложении на новом девайсе. При импорте имеющиеся данные будут перезаписаны")
 			}
 
 			Section("О приложении") {
@@ -108,6 +114,13 @@ struct SettingsView: View {
 				}
 			}
 		}
+		.disabled(isBusy)
+		.overlay {
+			if isBusy {
+				Color.gray.opacity(0.2)
+				ProgressView()
+			}
+		}
 		.toast(item: $toast)
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
@@ -118,11 +131,27 @@ struct SettingsView: View {
 				notificationService?.unscheduleMonthlyNotification()
 			}
 		}
-		.disabled(isBusy)
-		.overlay {
-			if isBusy {
-				Color.gray.opacity(0.2)
-				ProgressView()
+		.fileImporter(isPresented: $isImporterPresented, allowedContentTypes: [.json]) { result in
+			switch result {
+			case .success(let success):
+				isBusy = true
+				Task.detached {
+					try await userDataService?.importData(from: success)
+					await MainActor.run {
+						isBusy = false
+					}
+				}
+			case .failure(let failure):
+				toast = Toast(title: failure.localizedDescription)
+			}
+		}
+		.alert("При импорте все старые данные будут удалены и вместо них будут записаны данные из файла. Вы уверены?", isPresented: $isImportWarningPresented) {
+			Button("Перезаписать данные", role: .destructive) {
+				isImporterPresented = true
+			}
+			
+			Button("Отмена", role: .cancel) {
+				isImportWarningPresented = false
 			}
 		}
 	}
@@ -130,10 +159,16 @@ struct SettingsView: View {
 	private func prepareExportData() {
 		isBusy = true
 		Task.detached {
-			let url = try await userDataService?.generateExportFile()
-			await MainActor.run {
-				exportUrl = url
-				isBusy = false
+			do {
+				let url = try await userDataService?.generateExportFile()
+				await MainActor.run {
+					exportUrl = url
+					isBusy = false
+				}
+			} catch {
+				await MainActor.run {
+					toast = Toast(title: error.localizedDescription)
+				}
 			}
 		}
 	}

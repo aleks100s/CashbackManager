@@ -36,6 +36,12 @@ public struct PlaceService: @unchecked Sendable {
 		context.delete(place)
 	}
 	
+	public func insert(places: [Place]) {
+		for place in places {
+			context.insert(place)
+		}
+	}
+	
 	private func fetch(by predicate: Predicate<Place>) -> [Place] {
 		let descriptor = FetchDescriptor(predicate: predicate)
 		return (try? context.fetch(descriptor)) ?? []

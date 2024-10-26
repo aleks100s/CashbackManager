@@ -61,7 +61,8 @@ let package = Package(
 				"CardsService",
 				"CategoryService",
 				"IncomeService",
-				"PlaceService"
+				"PlaceService",
+				"SearchService"
 			]
 		)
     ]

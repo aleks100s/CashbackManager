@@ -37,6 +37,12 @@ public struct CategoryService: @unchecked Sendable {
 		context.delete(category)
 	}
 	
+	public func insert(categories: [Domain.Category]) {
+		for category in categories {
+			context.insert(category)
+		}
+	}
+	
 	private func fetch(by predicate: Predicate<Domain.Category>) -> [Domain.Category] {
 		let descriptor = FetchDescriptor(predicate: predicate)
 		return (try? context.fetch(descriptor)) ?? []

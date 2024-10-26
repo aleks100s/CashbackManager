@@ -24,7 +24,6 @@ public struct CardsListView: View {
 	
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
-	@State private var cardToBeRenamed: Card?
 	@State private var toast: Toast?
 	
 	@Query(
@@ -68,9 +67,6 @@ public struct CardsListView: View {
 			}
 			.sheet(isPresented: $isAddCardSheetPresented) {
 				addCardSheet
-			}
-			.sheet(item: $cardToBeRenamed) { card in
-				renameCardSheet(card)
 			}
 			.toast(item: $toast)
 	}
@@ -119,18 +115,6 @@ public struct CardsListView: View {
 		}
 	}
 	
-	private func renameCardSheet(_ card: Card) -> some View {
-		NavigationView {
-			CommonInputView("Название карты", text: card.name) { cardName in
-				onCardNameChanged(cardName, card: card)
-			}
-			.navigationTitle("Переименовать карту")
-			.navigationBarTitleDisplayMode(.inline)
-		}
-		.presentationDetents([.medium])
-		.presentationBackground(.regularMaterial)
-	}
-	
 	private func cardView(_ card: Card) -> some View {
 		Button {
 			onCardSelected(card)
@@ -138,29 +122,11 @@ public struct CardsListView: View {
 			CardItemView(card: card)
 				.contextMenu {
 					Text(card.name)
-					
-					renameCardButton(card)
 				} preview: {
 					CashbackListView(cashback: card.cashback)
 				}
 		}
 		.buttonStyle(.plain)
-	}
-	
-	private func renameCardButton(_ card: Card) -> some View {
-		Button {
-			cardToBeRenamed = card
-		} label: {
-			Text("Переименовать карту")
-		}
-	}
-	
-	private func onCardNameChanged(_ cardName: String, card: Card) {
-		card.name = cardName
-		context.insert(card)
-		searchService?.index(card: card)
-		cardToBeRenamed = nil
-		toast = Toast(title: "Карта переименована")
 	}
 		
 	@MainActor

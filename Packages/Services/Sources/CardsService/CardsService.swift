@@ -70,6 +70,12 @@ public struct CardsService: @unchecked Sendable {
 		context.insert(card)
 	}
 	
+	public func insert(cards: [Card]) {
+		for card in cards {
+			context.insert(card)
+		}
+	}
+	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {
 		let descriptor = FetchDescriptor(predicate: predicate)
 		return (try? context.fetch(descriptor)) ?? []

@@ -26,7 +26,7 @@ enum AppFactory {
 	private static let textDetectionService = TextDetectionService()
 	private static let incomeService = IncomeService(context: container.mainContext)
 	private static let notificationService = NotificationService()
-	private static let userDataService = UserDataService(categoryService: categoryService, cardService: cardsService, incomeService: incomeService, placeService: placeService)
+	private static let userDataService = UserDataService(categoryService: categoryService, cardService: cardsService, incomeService: incomeService, placeService: placeService, searchService: searchService)
 	
 	static func provideModelContainer() -> ModelContainer {
 		container
