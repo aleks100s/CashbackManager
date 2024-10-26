@@ -14,6 +14,7 @@ import PlaceService
 import SearchService
 import SwiftData
 import TextDetectionService
+import UserDataService
 
 @MainActor
 enum AppFactory {

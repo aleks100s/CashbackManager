@@ -12,6 +12,7 @@ import SearchService
 import Shared
 import SwiftData
 import SwiftUI
+import UserDataService
 
 @main
 @MainActor

@@ -34,6 +34,10 @@ let package = Package(
 		.library(
 			name: "NotificationService",
 			targets: ["NotificationService"]
+		),
+		.library(
+			name: "UserDataService",
+			targets: ["UserDataService"]
 		)
     ],
 	dependencies: [
@@ -50,6 +54,15 @@ let package = Package(
 		.target(name: "CategoryService", dependencies: ["Domain"]),
 		.target(name: "TextDetectionService", dependencies: ["Domain"]),
 		.target(name: "IncomeService", dependencies: ["Domain"]),
-		.target(name: "NotificationService", dependencies: ["Shared"])
+		.target(name: "NotificationService", dependencies: ["Shared"]),
+		.target(
+			name: "UserDataService",
+			dependencies: [
+				"CardsService",
+				"CategoryService",
+				"IncomeService",
+				"PlaceService"
+			]
+		)
     ]
 )
