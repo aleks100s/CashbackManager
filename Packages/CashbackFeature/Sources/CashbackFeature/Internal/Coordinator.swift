@@ -24,8 +24,6 @@ struct Coordinator: View {
 	@State private var navigationStack: [Navigation] = []
 	@State private var cardToAddCashback: Card?
 	
-	@AppStorage(Constants.StorageKey.firstLaunch) private var isFirstLaunch = true
-
 	@Environment(\.modelContext) private var context
 	@Environment(\.widgetURLParser) private var urlParser
 	
@@ -49,14 +47,6 @@ struct Coordinator: View {
 				navigationStack = path
 			}
 		}
-		.onAppear {
-			if isFirstLaunch {
-				prepopulateDatabase()
-			} else {
-				actualizeDatabase()
-			}
-			isFirstLaunch = false
-		}
     }
 	
 	@MainActor @ViewBuilder
@@ -65,24 +55,6 @@ struct Coordinator: View {
 		case .cardDetail(let card):
 			CardDetailView(card: card, cardCashbackIntent: cardCashbackIntent) {
 				cardToAddCashback = card
-			}
-		}
-	}
-	
-	private func prepopulateDatabase() {
-		let categories = PredefinedCategory.allCases.map(\.asCategory)
-		for category in categories {
-			context.insert(category)
-		}
-	}
-	
-	private func actualizeDatabase() {
-		let predefinedCategories = PredefinedCategory.allCases.map(\.asCategory)
-		for predefined in predefinedCategories {
-			if let category = categories.first(where: { $0.name == predefined.name }) {
-				category.synonyms = predefined.synonyms
-			} else {
-				context.insert(predefined)
 			}
 		}
 	}

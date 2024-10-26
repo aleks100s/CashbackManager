@@ -30,6 +30,7 @@ struct IncomePeriodView: View {
 				
 				ToolbarItem(placement: .topBarTrailing) {
 					Button(model.isAllTimeModeOn ? "По месяцам" : "Все время") {
+						hapticFeedback(.light)
 						Task {
 							await model.toggleAllTimeMode()
 						}
