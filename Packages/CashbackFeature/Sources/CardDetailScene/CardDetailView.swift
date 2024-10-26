@@ -36,7 +36,8 @@ public struct CardDetailView: View {
 	@State private var cardName: String
 	@State private var color: Color
 	@State private var toast: Toast?
-	@State private var isWarningPresented = false
+	@State private var isDeleteCardWarningPresented = false
+	@State private var isDeleteTransactionsWarningPresented = false
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
@@ -83,13 +84,26 @@ public struct CardDetailView: View {
 				}
 			}
 			.toast(item: $toast)
-			.alert("Вы уверены? Вместе с картой будут удалены все транзакции", isPresented: $isWarningPresented) {
-				Button("Удалить", role: .destructive) {
+			.alert("Вы уверены?", isPresented: $isDeleteCardWarningPresented) {
+				Button("Удалить только карту", role: .destructive) {
 					delete(card: card)
 				}
 				
+				Button("Удалить карту вместе с транзакциями", role: .destructive) {
+					delete(card: card, shouldDeleteTransactions: true)
+				}
+				
 				Button("Отмена", role: .cancel) {
-					isWarningPresented = false
+					isDeleteCardWarningPresented = false
+				}
+			}
+			.alert("Вы уверены?", isPresented: $isDeleteTransactionsWarningPresented) {
+				Button("Удалить", role: .destructive) {
+					deleteTransactions(from: card)
+				}
+				
+				Button("Отмена", role: .cancel) {
+					isDeleteTransactionsWarningPresented = false
 				}
 			}
 	}
@@ -140,11 +154,15 @@ public struct CardDetailView: View {
 						}
 					}
 					
+					Button("Удалить все транзакции", role: .destructive) {
+						isDeleteTransactionsWarningPresented = true
+					}
+					
 					Button("Удалить карту", role: .destructive) {
-						isWarningPresented = true
+						isDeleteCardWarningPresented = true
 					}
 				} footer: {
-					Text("Удаление карты повлечет за собой удаление всех сохраненных за ней транзакций. Данные действия нельзя отменить")
+					Text("Данные действия нельзя отменить")
 				}
 			} else {
 				detectCashbackSectionButton
@@ -194,9 +212,17 @@ public struct CardDetailView: View {
 		toast = Toast(title: "Кэшбэк удален")
 	}
 	
-	private func delete(card: Card) {
-		searchService?.deindex(card: card)
+	private func deleteTransactions(from card: Card) {
 		incomeService?.deleteIncomes(card: card)
+	}
+	
+	private func delete(card: Card, shouldDeleteTransactions: Bool = false) {
+		searchService?.deindex(card: card)
+		if shouldDeleteTransactions {
+			deleteTransactions(from: card)
+		} else {
+			incomeService?.resetSourceForIncomes(card: card)
+		}
 		context.delete(card)
 		try? context.save()
 		dismiss()
