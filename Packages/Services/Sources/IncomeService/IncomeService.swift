@@ -32,6 +32,17 @@ public struct IncomeService: @unchecked Sendable {
 	public func delete(income: Income) {
 		context.delete(income)
 		try? context.save()
+		onChangeSubject.send(())
+	}
+	
+	public func deleteIncomes(card: Card) {
+		let id: UUID? = card.id
+		let transactions = fetch(by: #Predicate<Income> { $0.source?.id == id })
+		for transaction in transactions {
+			context.delete(transaction)
+		}
+		try? context.save()
+		onChangeSubject.send(())
 	}
 	
 	public func findMinMaxDates() async throws -> (Date, Date) {
@@ -50,5 +61,10 @@ public struct IncomeService: @unchecked Sendable {
 		}
 		let descriptor = FetchDescriptor(predicate: predicate, sortBy: [.init(\.date)])
 		return try context.fetch(descriptor)
+	}
+	
+	private func fetch(by predicate: Predicate<Income>) -> [Income] {
+		let descriptor = FetchDescriptor(predicate: predicate)
+		return (try? context.fetch(descriptor)) ?? []
 	}
 }

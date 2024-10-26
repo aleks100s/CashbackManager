@@ -292,5 +292,157 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DDB30FB9-2FDB-412E-AFEC-26F17BF6E6F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Packages/Domain/Sources/Domain/Models/Card.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "encode(to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F2B59BCB-54DA-4D79-A0A2-9601882F731D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Packages/Services/Sources/IncomeService/IncomeService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "deleteIncomes(card:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F2B59BCB-54DA-4D79-A0A2-9601882F731D - 453c71e72e488bf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IncomeService.IncomeService.deleteIncomes(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/IncomeService/IncomeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41">
+               </Location>
+               <Location
+                  uuid = "F2B59BCB-54DA-4D79-A0A2-9601882F731D - 453c71e72e48841d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IncomeService.IncomeService.deleteIncomes(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/IncomeService/IncomeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E6AE2F6-D03F-49C4-8DF6-45276F6AE9D8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Packages/Services/Sources/IncomeService/IncomeService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "deleteIncomes(card:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4E6AE2F6-D03F-49C4-8DF6-45276F6AE9D8 - 453c71e72e488bd3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IncomeService.IncomeService.deleteIncomes(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/IncomeService/IncomeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40">
+               </Location>
+               <Location
+                  uuid = "4E6AE2F6-D03F-49C4-8DF6-45276F6AE9D8 - 453c71e72e488bd3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IncomeService.IncomeService.deleteIncomes(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/IncomeService/IncomeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40">
+               </Location>
+               <Location
+                  uuid = "4E6AE2F6-D03F-49C4-8DF6-45276F6AE9D8 - 453c71e72e488bf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IncomeService.IncomeService.deleteIncomes(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/IncomeService/IncomeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41">
+               </Location>
+               <Location
+                  uuid = "4E6AE2F6-D03F-49C4-8DF6-45276F6AE9D8 - 453c71e72e488bf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IncomeService.IncomeService.deleteIncomes(card: Domain.Card) -&gt; ()"
+                  moduleName = "CashbackManager.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aleks100s/Documents/CashbackManager/Packages/Services/Sources/IncomeService/IncomeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B1864922-7635-430D-8A95-D2AB0CBEFCB4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Packages/CashbackFeature/Sources/CardDetailScene/CardDetailView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "delete(card:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

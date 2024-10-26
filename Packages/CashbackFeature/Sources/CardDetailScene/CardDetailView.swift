@@ -10,6 +10,7 @@ import CategoryService
 import CardsService
 import Domain
 import DesignSystem
+import IncomeService
 import PhotosUI
 import SearchService
 import Shared
@@ -35,12 +36,15 @@ public struct CardDetailView: View {
 	@State private var cardName: String
 	@State private var color: Color
 	@State private var toast: Toast?
+	@State private var isWarningPresented = false
 	
+	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var context
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.searchService) private var searchService
  	@Environment(\.categoryService) private var categoryService
 	@Environment(\.textDetectionService) private var textDetectionService
+	@Environment(\.incomeService) private var incomeService
 
 	public init(card: Card, cardCashbackIntent: any AppIntent, onAddCashbackTap: @escaping () -> Void) {
 		self.card = card
@@ -54,7 +58,7 @@ public struct CardDetailView: View {
 		contentView
 			.background(Color.cmScreenBackground)
 			.navigationTitle(cardName)
-			.navigationBarTitleDisplayMode(isEditing ? .inline : .large)
+			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				if !isEditing {
 					ToolbarItem(placement: .bottomBar) {
@@ -62,10 +66,8 @@ public struct CardDetailView: View {
 					}
 				}
 				
-				if !card.isEmpty {
-					ToolbarItem(placement: .topBarTrailing) {
-						editButton
-					}
+				ToolbarItem(placement: .topBarTrailing) {
+					editButton
 				}
 			}
 			.onAppear {
@@ -81,33 +83,38 @@ public struct CardDetailView: View {
 				}
 			}
 			.toast(item: $toast)
+			.alert("Вы уверены? Вместе с картой будут удалены все транзакции", isPresented: $isWarningPresented) {
+				Button("Удалить", role: .destructive) {
+					delete(card: card)
+				}
+				
+				Button("Отмена", role: .cancel) {
+					isWarningPresented = false
+				}
+			}
 	}
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if card.cashback.isEmpty {
-			List {
+		List {
+			if !isEditing, areSiriTipsVisible, !card.isEmpty {
+				IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
+			}
+			
+			if isEditing {
+				Section("Редактировать название и цвет") {
+					TextField("Название карты", text: $cardName)
+						.textFieldStyle(.plain)
+					
+					ColorPicker("Цвет карты", selection: $color)
+				}
+			}
+			
+			if card.isEmpty {
 				Section {
 					ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
 				}
-				
-				detectCashbackSectionButton
-			}
-		} else {
-			List {
-				if !isEditing, areSiriTipsVisible {
-					IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
-				}
-				
-				if isEditing {
-					Section("Редактировать название и цвет") {
-						TextField("Название карты", text: $cardName)
-							.textFieldStyle(.plain)
-						
-						ColorPicker("Цвет карты", selection: $color)
-					}
-				}
-				
+			} else {
 				Section("Кэшбэки") {
 					ForEach(card.sortedCashback) { cashback in
 						CashbackView(cashback: cashback)
@@ -121,21 +128,26 @@ public struct CardDetailView: View {
 						}
 					}
 				}
-				
-				if isEditing {
-					Section {
+			}
+			
+			if isEditing {
+				Section {
+					if !card.isEmpty {
 						Button("Удалить все кэшбэки с карты", role: .destructive) {
 							for cashback in card.cashback {
 								delete(cashback: cashback)
 							}
-							isEditing.toggle()
 						}
-					} footer: {
-						Text("Данное действие нельзя отменить")
 					}
-				} else {
-					detectCashbackSectionButton
+					
+					Button("Удалить карту", role: .destructive) {
+						isWarningPresented = true
+					}
+				} footer: {
+					Text("Удаление карты повлечет за собой удаление всех сохраненных за ней транзакций. Данные действия нельзя отменить")
 				}
+			} else {
+				detectCashbackSectionButton
 			}
 		}
 	}
@@ -180,6 +192,14 @@ public struct CardDetailView: View {
 		context.delete(cashback)
 		searchService?.index(card: card)
 		toast = Toast(title: "Кэшбэк удален")
+	}
+	
+	private func delete(card: Card) {
+		searchService?.deindex(card: card)
+		incomeService?.deleteIncomes(card: card)
+		context.delete(card)
+		try? context.save()
+		dismiss()
 	}
 }
 

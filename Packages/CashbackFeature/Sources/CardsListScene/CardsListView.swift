@@ -140,8 +140,6 @@ public struct CardsListView: View {
 					Text(card.name)
 					
 					renameCardButton(card)
-					
-					deleteCardButton(card)
 				} preview: {
 					CashbackListView(cashback: card.cashback)
 				}
@@ -154,14 +152,6 @@ public struct CardsListView: View {
 			cardToBeRenamed = card
 		} label: {
 			Text("Переименовать карту")
-		}
-	}
-	
-	private func deleteCardButton(_ card: Card) -> some View {
-		Button(role: .destructive) {
-			delete(card: card)
-		} label: {
-			Text("Удалить карту")
 		}
 	}
 	
@@ -181,11 +171,5 @@ public struct CardsListView: View {
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)
-	}
-	
-	private func delete(card: Card) {
-		searchService?.deindex(card: card)
-		context.delete(card)
-		toast = Toast(title: "Карта удалена")
 	}
 }

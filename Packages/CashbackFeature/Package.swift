@@ -49,6 +49,7 @@ let package = Package(
 				"Domain",
 				"DesignSystem",
 				.product(name: "CardsService", package: "Services"),
+				.product(name: "IncomeService", package: "Services"),
 				.product(name: "SearchService", package: "Services"),
 				.product(name: "TextDetectionService", package: "Services"),
 			]
