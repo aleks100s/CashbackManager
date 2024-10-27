@@ -40,6 +40,7 @@ public struct PlaceService: @unchecked Sendable {
 		for place in places {
 			context.insert(place)
 		}
+		try? context.save()
 	}
 	
 	private func fetch(by predicate: Predicate<Place>) -> [Place] {

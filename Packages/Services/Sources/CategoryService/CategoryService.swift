@@ -41,6 +41,7 @@ public struct CategoryService: @unchecked Sendable {
 		for category in categories {
 			context.insert(category)
 		}
+		try? context.save()
 	}
 	
 	private func fetch(by predicate: Predicate<Domain.Category>) -> [Domain.Category] {

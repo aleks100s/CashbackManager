@@ -74,6 +74,7 @@ public struct CardsService: @unchecked Sendable {
 		for card in cards {
 			context.insert(card)
 		}
+		try? context.save()
 	}
 	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {

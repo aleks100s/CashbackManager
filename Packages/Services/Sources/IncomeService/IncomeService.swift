@@ -69,6 +69,7 @@ public struct IncomeService: @unchecked Sendable {
 		for transaction in transactions {
 			context.insert(transaction)
 		}
+		try? context.save()
 	}
 	
 	public func fetch(from: Date, to: Date) async throws -> [Income] {
