@@ -59,7 +59,15 @@ public final class UserDataService {
 	}
 	
 	public func importData(from url: URL) async throws {
-		let data = try Data(contentsOf: url)
+		let fileManager = FileManager.default
+		guard let cachesDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
+			throw UserDataError.cachesDirectoryNotFound
+		}
+		
+		let destinationURL = cachesDirectory.appendingPathComponent(UUID().uuidString)
+		try fileManager.copyItem(at: url, to: destinationURL)
+		
+		let data = try Data(contentsOf: destinationURL)
 		let jsonDecoder = JSONDecoder()
 		let userData = try jsonDecoder.decode(UserDataDto.self, from: data)
 		for transaction in try await incomeService.fetchAll() {
