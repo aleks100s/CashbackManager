@@ -136,10 +136,17 @@ struct SettingsView: View {
 			case .success(let success):
 				isBusy = true
 				Task.detached {
-					try await userDataService?.importData(from: success)
-					await MainActor.run {
-						isBusy = false
-						toast = Toast(title: "Данные успешно импортированы")
+					do {
+						try await userDataService?.importData(from: success)
+						await MainActor.run {
+							isBusy = false
+							toast = Toast(title: "Данные успешно импортированы")
+						}
+					} catch {
+						await MainActor.run {
+							isBusy = false
+							toast = Toast(title: error.localizedDescription)
+						}
 					}
 				}
 			case .failure(let failure):
