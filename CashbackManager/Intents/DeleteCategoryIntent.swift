@@ -29,7 +29,7 @@ struct DeleteCategoryIntent: AppIntent {
 			return .result(dialog: "Не получилось найти категорию \(categoryName)")
 		}
 		
-		categoryService.delete(category: category)
+		categoryService.archive(category: category)
 		return .result(dialog: "Категория кэшбэка \"\(category.name)\" удалена!")
 	}
 }

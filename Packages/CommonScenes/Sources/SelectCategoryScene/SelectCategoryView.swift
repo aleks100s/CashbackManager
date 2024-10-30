@@ -19,10 +19,12 @@ public struct SelectCategoryView: View {
 	
 	@State private var searchText = ""
 	@State private var isAddCategorySheetPresented = false
-	@Query(sort: [
-		SortDescriptor<Domain.Category>(\.priority, order: .reverse),
-		SortDescriptor<Domain.Category>(\.name, order: .forward)
-	])
+	@Query(
+		filter: #Predicate<Domain.Category> { !$0.isArchived },
+		sort: [SortDescriptor<Domain.Category>(\.priority, order: .reverse),
+			SortDescriptor<Domain.Category>(\.name, order: .forward)],
+		transaction: Transaction(animation: .default)
+	)
 	private var categories: [Domain.Category]
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.categoryService) private var categoryService
@@ -132,6 +134,6 @@ public struct SelectCategoryView: View {
 	}
 	
 	func deleteCategory(index: Int) {
-		categoryService?.delete(category: categories[index])
+		categoryService?.archive(category: categories[index])
 	}
 }

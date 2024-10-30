@@ -34,6 +34,11 @@ public struct CategoryService: @unchecked Sendable {
 		return category
 	}
 	
+	public func archive(category: Domain.Category) {
+		category.isArchived = true
+		try? context.save()
+	}
+	
 	public func delete(category: Domain.Category) {
 		context.delete(category)
 		try? context.save()

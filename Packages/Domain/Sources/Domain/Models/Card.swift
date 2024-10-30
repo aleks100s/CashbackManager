@@ -16,6 +16,7 @@ public final class Card: @unchecked Sendable, Codable {
 	@Relationship(deleteRule: .cascade)
 	public var cashback: [Cashback]
 	public var color: String?
+	public var isArchived: Bool = false
 	
 	public var sortedCashback: [Cashback] {
 		cashback.sorted(by: { $0.category.name < $1.category.name })

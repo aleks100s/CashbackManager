@@ -15,6 +15,7 @@ public final class Category: Codable {
 	public var emoji: String
 	public var synonyms: String?
 	public var priority: Int
+	public var isArchived: Bool = false
 	
 	public init(id: UUID = UUID(), name: String, emoji: String, synonyms: String? = nil, priority: Int = 0) {
 		self.id = id
