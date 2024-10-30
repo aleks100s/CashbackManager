@@ -59,9 +59,10 @@ public struct TextDetectionService {
 				let lines = text.components(separatedBy: "\n")
 				let name = lines[0]
 					.replacingOccurrences(of: percentage, with: "")
+					.replacingOccurrences(of: "[^a-zA-Zа-яА-ЯёЁ\\s]", with: "", options: .regularExpression)
 					.trimmingCharacters(in: .whitespaces)
-				
-				let percent = (Double(text[percentRange].replacingOccurrences(of: "%", with: "")) ?? .zero) / 100
+
+				let percent = (Double(percentage.replacingOccurrences(of: "%", with: "").replacingOccurrences(of: ",", with: ".")) ?? .zero) / 100
 				detectedCashback.append((name, percent))
 			}
 		}

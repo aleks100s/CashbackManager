@@ -45,7 +45,7 @@ public final class Card: @unchecked Sendable, Codable {
 	public func has(category: Category?) -> Bool {
 		guard let category else { return false }
 		
-		return cashback.map(\.category).contains(category)
+		return cashback.map(\.category.id).contains(category.id)
 	}
 	
 	// Ключи для кодирования и декодирования
