@@ -161,6 +161,8 @@ public struct CardDetailView: View {
 					Button("Удалить карту", role: .destructive) {
 						isDeleteCardWarningPresented = true
 					}
+				} header: {
+					Text("Для отважных пользователей")
 				} footer: {
 					Text("Данные действия нельзя отменить")
 				}
