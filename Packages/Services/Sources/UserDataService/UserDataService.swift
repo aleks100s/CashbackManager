@@ -27,7 +27,7 @@ public final class UserDataService {
 		let cards: [Card] = try fetchAll(from: context)
 		let payments: [Income] = try fetchAll(from: context)
 		
-		let userData = UserData(categories: categories, cards: cards, places: places, payments: payments)
+		let userData = UserData()
 		return userData
 	}
 	
@@ -43,20 +43,20 @@ public final class UserDataService {
 		
 		try context.transaction {
 			try deleteAll(from: context)
-			for category in userData.categories {
-				context.insert(category)
-			}
-			for place in userData.places {
-				context.insert(place)
-				searchService.index(place: place)
-			}
-			for card in userData.cards {
-				context.insert(card)
-				searchService.index(card: card)
-			}
-			for income in userData.payments {
-				context.insert(income)
-			}
+//			for category in userData.categories {
+//				context.insert(category)
+//			}
+//			for place in userData.places {
+//				context.insert(place)
+//				searchService.index(place: place)
+//			}
+//			for card in userData.cards {
+//				context.insert(card)
+//				searchService.index(card: card)
+//			}
+//			for income in userData.payments {
+//				context.insert(income)
+//			}
 		}
 		
 		try context.save()
