@@ -69,9 +69,6 @@ public struct CardsListView: View {
 				addCardSheet
 			}
 			.toast(item: $toast)
-			.onAppear {
-				print("CardsListView appeared")
-			}
 	}
 	
 	@ViewBuilder

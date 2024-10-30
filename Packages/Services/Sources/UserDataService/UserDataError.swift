@@ -9,11 +9,14 @@ import Foundation
 
 enum UserDataError: LocalizedError {
 	case cachesDirectoryNotFound
+	case noPermission
 	
 	var localizedDescription: String? {
 		switch self {
 		case .cachesDirectoryNotFound:
 			"Не удалось открыть файл (директория кэша не найдена)"
+		case .noPermission:
+			"Нет прав на чтение/запись"
 		}
 	}
 }

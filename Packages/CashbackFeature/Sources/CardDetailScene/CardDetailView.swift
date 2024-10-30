@@ -187,7 +187,13 @@ public struct CardDetailView: View {
 	private var detectCashbackSectionButton: some View {
 		DetectCashbackSectionButton(imageItem: $imageItem, animateGradient: $animateGradient) {
 			Task {
-				await detectCashbackFromImage()
+				do {
+					try await detectCashbackFromImage()
+				} catch {
+					await MainActor.run {
+						toast = Toast(title: error.localizedDescription)
+					}
+				}
 			}
 		}
 	}
@@ -230,15 +236,13 @@ public struct CardDetailView: View {
 }
 
 private extension CardDetailView {
-	func detectCashbackFromImage() async {
+	func detectCashbackFromImage() async throws {
 		defer {
 			imageItem = nil
 		}
 		
-		guard let data = try? await imageItem?.loadTransferable(type: Data.self), let image = UIImage(data: data) else {
-			print("Failed to load image from gallery")
-			return
-		}
+		let data = try await imageItem?.loadTransferable(type: Data.self) ?? Data()
+		let image = UIImage(data: data) ?? UIImage()
 		
 		let result = await textDetectionService?.recogniseCashbackCategories(from: image) ?? []
 		guard !result.isEmpty else { return }
@@ -249,7 +253,7 @@ private extension CardDetailView {
 	@MainActor
 	func apply(result: [(String, Double)]) {
 		for item in result {
-			guard let category = categoryService?.getCategory(by: item.0), !card.has(category: category) else {
+			guard let category = categoryService?.getCategory(by: item.0), !card.has(category: category), item.1 > 0 else {
 				continue
 			}
 			

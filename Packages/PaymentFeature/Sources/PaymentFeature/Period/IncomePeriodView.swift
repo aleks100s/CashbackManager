@@ -39,17 +39,13 @@ struct IncomePeriodView: View {
 			}
 			.toast(item: $toast)
 			.onFirstAppear {
-				print("IncomePeriodView onFirstAppear")
 				Task {
 					do {
 						try await model.onAppear()
 					} catch {
-						print(error)
+						toast = Toast(title: error.localizedDescription)
 					}
 				}
-			}
-			.onAppear {
-				print("IncomePeriodView appeared")
 			}
 	}
 	

@@ -9,6 +9,7 @@ import DesignSystem
 import NotificationService
 import Shared
 import SwiftUI
+import UserDataService
 
 struct SettingsView: View {
 	private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -30,8 +31,9 @@ struct SettingsView: View {
 	private var isPlacesFeatureAvailable = true
 	
 	@State private var toast: Toast?
-	@State private var exportUrl: URL?
+	@State private var exportItem: UserData?
 	@State private var isBusy = false
+	@State private var isExporterPresented = false
 	@State private var isImporterPresented = false
 	@State private var isImportWarningPresented = false
 	
@@ -85,12 +87,8 @@ struct SettingsView: View {
 			}
 
 			Section {
-				if let exportUrl {
-					ShareLink("Отправить файл", item: exportUrl)
-				} else {
-					Button("Подготовить данные для переноса") {
-						prepareExportData()
-					}
+				Button("Экспортировать данные") {
+					exportUserData()
 				}
 				
 				Button("Восстановить данные") {
@@ -99,7 +97,7 @@ struct SettingsView: View {
 			} header: {
 				Text("Перенос данных на другое устройство")
 			} footer: {
-				Text("Экспортируйте данные с одного устройства и откройте файл в приложении на новом девайсе. При импорте имеющиеся данные будут перезаписаны")
+				Text("Здесь можно перенести все данные со старого устройства на новое. Экспортируйте файл с одного устройства и откройте его в приложении на новом девайсе.\n\(Text("При импорте имеющиеся данные будут перезаписаны!").foregroundStyle(.red))")
 			}
 
 			Section("О приложении") {
@@ -131,10 +129,28 @@ struct SettingsView: View {
 				notificationService?.unscheduleMonthlyNotification()
 			}
 		}
-		.fileImporter(isPresented: $isImporterPresented, allowedContentTypes: [.json]) { result in
+		.fileExporter(
+			isPresented: $isExporterPresented,
+			item: exportItem,
+			contentTypes: [.data],
+			defaultFilename: "CashbackData",
+			onCompletion: { result in
+				switch result {
+				case .success:
+					toast = Toast(title: "Данные успешно экспортированы")
+				case .failure(let failure):
+					toast = Toast(title: failure.localizedDescription)
+				}
+				exportItem = nil
+			},
+			onCancellation: {
+				exportItem = nil
+			}
+		)
+		.fileImporter(isPresented: $isImporterPresented, allowedContentTypes: [.data]) { result in
 			switch result {
-			case .success(let success):
-				importData(from: success)
+			case .success(let url):
+				importData(from: url)
 			case .failure(let failure):
 				toast = Toast(title: failure.localizedDescription)
 			}
@@ -156,15 +172,15 @@ struct SettingsView: View {
 		}
 	}
 	
-	private func prepareExportData() {
+	private func exportUserData() {
 		isBusy = true
 		Task.detached {
 			do {
-				let url = try await userDataService?.generateExportFile()
+				let data = try await userDataService?.generateExportFile()
 				await MainActor.run {
-					exportUrl = url
+					exportItem = data
 					isBusy = false
-					toast = Toast(title: "Данные готовы к экспорту")
+					isExporterPresented = true
 				}
 			} catch {
 				await MainActor.run {
@@ -176,58 +192,15 @@ struct SettingsView: View {
 	
 	private func importData(from url: URL) {
 		isBusy = true
-		var wasCardsFeatureToggled = false
-		var wasPaymentsFeatureToggled = false
-		var wasPlacesFeatureToggled = false
-		if isCardsFeatureAvailable {
-			isCardsFeatureAvailable = false
-			wasCardsFeatureToggled = true
-		}
-		if isPaymentsFeatureAvailable {
-			isPaymentsFeatureAvailable = false
-			wasPaymentsFeatureToggled = true
-		}
-		if isPlacesFeatureAvailable {
-			isPlacesFeatureAvailable = false
-			wasPlacesFeatureToggled = true
-		}
 		Task.detached {
 			do {
-				try await Task.sleep(nanoseconds: 300)
 				try await userDataService?.importData(from: url)
-				await MainActor.run {
-					if wasCardsFeatureToggled {
-						isCardsFeatureAvailable.toggle()
-					}
-					if wasPaymentsFeatureToggled {
-						isPaymentsFeatureAvailable.toggle()
-					}
-					if wasPlacesFeatureToggled {
-						isPlacesFeatureAvailable.toggle()
-					}
-				}
-				
-				try await Task.sleep(nanoseconds: 300)
 
 				await MainActor.run {
 					isBusy = false
 					toast = Toast(title: "Данные успешно импортированы")
 				}
-			} catch {
-				await MainActor.run {
-					if wasCardsFeatureToggled {
-						isCardsFeatureAvailable.toggle()
-					}
-					if wasPaymentsFeatureToggled {
-						isPaymentsFeatureAvailable.toggle()
-					}
-					if wasPlacesFeatureToggled {
-						isPlacesFeatureAvailable.toggle()
-					}
-				}
-				
-				try await Task.sleep(nanoseconds: 300)
-				
+			} catch {				
 				await MainActor.run {
 					isBusy = false
 					toast = Toast(title: error.localizedDescription)

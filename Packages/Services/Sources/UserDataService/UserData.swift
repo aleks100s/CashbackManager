@@ -5,9 +5,16 @@
 //  Created by Alexander on 27.10.2024.
 //
 
+import CoreTransferable
 import Domain
 
-final class UserData: Codable {
+public final class UserData: Codable, Transferable {
+	public static var transferRepresentation: some TransferRepresentation {
+		DataRepresentation(exportedContentType: .data) { transerable in
+			try JSONEncoder().encode(transerable)
+		}
+	}
+
 	let categories: [Domain.Category]
 	let cards: [Card]
 	let places: [Place]
@@ -29,7 +36,7 @@ final class UserData: Codable {
 	}
 	
 	// Инициализатор Decodable
-	required init(from decoder: Decoder) throws {
+	required public init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		categories = try container.decode([Domain.Category].self, forKey: .categories)
 		cards = try container.decode([Card].self, forKey: .cards)
@@ -38,7 +45,7 @@ final class UserData: Codable {
 	}
 	
 	// Метод Encodable
-	func encode(to encoder: Encoder) throws {
+	public func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 		try container.encode(categories, forKey: .categories)
 		try container.encode(cards, forKey: .cards)
