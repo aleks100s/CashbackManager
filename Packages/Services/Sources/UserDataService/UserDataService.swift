@@ -60,10 +60,6 @@ public final class UserDataService {
 		}
 		
 		try context.save()
-
-//		await MainActor.run {
-//			NotificationCenter.default.post(name: Constants.resetAppNavigationNotification, object: nil)
-//		}
 		url.stopAccessingSecurityScopedResource()
 	}
 	

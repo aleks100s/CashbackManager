@@ -59,6 +59,7 @@ public struct CardsService: @unchecked Sendable {
 		for cashback in card.cashback {
 			delete(cashback: cashback, card: card)
 		}
+		try? context.save()
 	}
 	
 	public func delete(cashback: Cashback, card: Card) {
@@ -68,12 +69,6 @@ public struct CardsService: @unchecked Sendable {
 	
 	public func update(card: Card) {
 		context.insert(card)
-	}
-	
-	public func insert(cards: [Card]) {
-		for card in cards {
-			context.insert(card)
-		}
 		try? context.save()
 	}
 	

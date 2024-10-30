@@ -30,17 +30,12 @@ public struct CategoryService: @unchecked Sendable {
 	public func createCategory(name: String) -> Domain.Category {
 		let category = Domain.Category(name: name, emoji: String(name.first ?? "?"))
 		context.insert(category)
+		try? context.save()
 		return category
 	}
 	
 	public func delete(category: Domain.Category) {
 		context.delete(category)
-	}
-	
-	public func insert(categories: [Domain.Category]) {
-		for category in categories {
-			context.insert(category)
-		}
 		try? context.save()
 	}
 	

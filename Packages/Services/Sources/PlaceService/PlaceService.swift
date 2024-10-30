@@ -29,17 +29,12 @@ public struct PlaceService: @unchecked Sendable {
 	public func createPlace(name: String, category: Domain.Category) -> Place {
 		let place = Place(name: name, category: category)
 		context.insert(place)
+		try? context.save()
 		return place
 	}
 	
 	public func delete(place: Place) {
 		context.delete(place)
-	}
-	
-	public func insert(places: [Place]) {
-		for place in places {
-			context.insert(place)
-		}
 		try? context.save()
 	}
 	
