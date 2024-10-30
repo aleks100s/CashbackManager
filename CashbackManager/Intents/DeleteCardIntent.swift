@@ -33,7 +33,7 @@ struct DeleteCardIntent: AppIntent {
 			return .result(dialog: "Не получилось найти карту \(cardName)")
 		}
 		
-		cardsService.delete(card: card)
+		cardsService.archive(card: card)
 		searchService.deindex(card: card)
 		return .result(dialog: "Карта \"\(card.name)\" удалена!")
 	}

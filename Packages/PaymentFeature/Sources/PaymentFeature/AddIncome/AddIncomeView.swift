@@ -22,7 +22,8 @@ struct AddIncomeView: View {
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.incomeService) private var incomeService
 	
-	@Query private var cards: [Card]
+	@Query(filter: #Predicate<Card> { !$0.isArchived })
+	private var cards: [Card]
 	
 	@State private var source: Card?
 	@State private var amount: String = "0"

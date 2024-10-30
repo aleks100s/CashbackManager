@@ -45,16 +45,6 @@ public struct IncomeService: @unchecked Sendable {
 		onChangeSubject.send(())
 	}
 	
-	public func resetSourceForIncomes(card: Card) {
-		let id: UUID? = card.id
-		let transactions = fetch(by: #Predicate<Income> { $0.source?.id == id })
-		for transaction in transactions {
-			transaction.source = nil
-		}
-		try? context.save()
-		onChangeSubject.send(())
-	}
-	
 	public func findMinMaxDates() async throws -> (Date, Date) {
 		let result = try await fetchAll()
 		return (result.first?.date ?? Date(), result.last?.date ?? Date())

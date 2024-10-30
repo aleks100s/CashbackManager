@@ -73,6 +73,7 @@ public struct CardDetailView: View {
 			}
 			.onAppear {
 				currentCardId = card.id.uuidString
+				refreshWidget()
 			}
 			.onChange(of: isEditing) { _, newValue in
 				if !newValue, !cardName.isEmpty {
@@ -85,11 +86,11 @@ public struct CardDetailView: View {
 			.toast(item: $toast)
 			.alert("Вы уверены?", isPresented: $isDeleteCardWarningPresented) {
 				Button("Удалить только карту", role: .destructive) {
-					delete(card: card)
+					archive(card: card)
 				}
 				
 				Button("Удалить карту вместе с транзакциями", role: .destructive) {
-					delete(card: card, shouldDeleteTransactions: true)
+					archive(card: card, shouldDeleteTransactions: true)
 				}
 				
 				Button("Отмена", role: .cancel) {
@@ -224,15 +225,14 @@ public struct CardDetailView: View {
 		incomeService?.deleteIncomes(card: card)
 	}
 	
-	private func delete(card: Card, shouldDeleteTransactions: Bool = false) {
+	private func archive(card: Card, shouldDeleteTransactions: Bool = false) {
 		searchService?.deindex(card: card)
 		if shouldDeleteTransactions {
 			deleteTransactions(from: card)
-		} else {
-			incomeService?.resetSourceForIncomes(card: card)
 		}
-		context.delete(card)
+		card.isArchived = true
 		try? context.save()
+		currentCardId = nil
 		refreshWidget()
 		dismiss()
 	}

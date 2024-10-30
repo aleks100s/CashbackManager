@@ -27,6 +27,7 @@ public struct CardsListView: View {
 	@State private var toast: Toast?
 	
 	@Query(
+		filter: #Predicate<Card> { !$0.isArchived },
 		sort: [SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
 	) private var cards: [Card]

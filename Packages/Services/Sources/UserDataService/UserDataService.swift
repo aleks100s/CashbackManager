@@ -78,6 +78,10 @@ public final class UserDataService {
 			searchService.deindex(card: card)
 			context.delete(card)
 		}
+		let cashback: [Cashback] = try fetchAll(from: context)
+		for cashback in cashback {
+			context.delete(cashback)
+		}
 		let places: [Place] = try fetchAll(from: context)
 		for place in places {
 			searchService.deindex(place: place)

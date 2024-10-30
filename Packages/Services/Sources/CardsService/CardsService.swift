@@ -43,7 +43,7 @@ public struct CardsService: @unchecked Sendable {
 	}
 	
 	public func getAllCards() -> [Card] {
-		fetch(by: #Predicate<Card> { !$0.cashback.isEmpty })
+		fetch(by: #Predicate<Card> { !$0.cashback.isEmpty && !$0.isArchived })
 	}
 	
 	public func getCards(category: Domain.Category) -> [Card] {
@@ -54,8 +54,8 @@ public struct CardsService: @unchecked Sendable {
 		})
 	}
 	
-	public func delete(card: Card) {
-		context.delete(card)
+	public func archive(card: Card) {
+		card.isArchived = true
 		for cashback in card.cashback {
 			delete(cashback: cashback, card: card)
 		}
