@@ -63,6 +63,9 @@ public struct PlacesListView: View {
 				}
 			}
 			.toast(item: $toast)
+			.onAppear {
+				print("PlacesListView appeared")
+			}
 	}
 	
 	@ViewBuilder

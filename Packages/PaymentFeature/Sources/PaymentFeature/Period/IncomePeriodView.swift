@@ -39,6 +39,7 @@ struct IncomePeriodView: View {
 			}
 			.toast(item: $toast)
 			.onFirstAppear {
+				print("IncomePeriodView onFirstAppear")
 				Task {
 					do {
 						try await model.onAppear()
@@ -46,6 +47,9 @@ struct IncomePeriodView: View {
 						print(error)
 					}
 				}
+			}
+			.onAppear {
+				print("IncomePeriodView appeared")
 			}
 	}
 	

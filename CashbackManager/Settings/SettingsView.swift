@@ -68,15 +68,15 @@ struct SettingsView: View {
 			Section {
 				Toggle("Карты", isOn: $isCardsFeatureAvailable)
 					.onChange(of: isCardsFeatureAvailable) { _, newValue in
-						toast = Toast(title: newValue ? "Раздел активен" : "Раздел скрыт")
+						notifySectionToggled(isActive: newValue)
 					}
 				Toggle("Выплаты", isOn: $isPaymentsFeatureAvailable)
 					.onChange(of: isPaymentsFeatureAvailable) { _, newValue in
-						toast = Toast(title: newValue ? "Раздел активен" : "Раздел скрыт")
+						notifySectionToggled(isActive: newValue)
 					}
 				Toggle("Места", isOn: $isPlacesFeatureAvailable)
 					.onChange(of: isPlacesFeatureAvailable) { _, newValue in
-						toast = Toast(title: newValue ? "Раздел активен" : "Раздел скрыт")
+						notifySectionToggled(isActive: newValue)
 					}
 			} header: {
 				Text("Настройки разделов приложения")
@@ -134,21 +134,7 @@ struct SettingsView: View {
 		.fileImporter(isPresented: $isImporterPresented, allowedContentTypes: [.json]) { result in
 			switch result {
 			case .success(let success):
-				isBusy = true
-				Task.detached {
-					do {
-						try await userDataService?.importData(from: success)
-						await MainActor.run {
-							isBusy = false
-							toast = Toast(title: "Данные успешно импортированы")
-						}
-					} catch {
-						await MainActor.run {
-							isBusy = false
-							toast = Toast(title: error.localizedDescription)
-						}
-					}
-				}
+				importData(from: success)
 			case .failure(let failure):
 				toast = Toast(title: failure.localizedDescription)
 			}
@@ -164,6 +150,12 @@ struct SettingsView: View {
 		}
 	}
 	
+	private func notifySectionToggled(isActive: Bool) {
+		if !isBusy {
+			toast = Toast(title: isActive ? "Раздел активен" : "Раздел скрыт")
+		}
+	}
+	
 	private func prepareExportData() {
 		isBusy = true
 		Task.detached {
@@ -176,6 +168,68 @@ struct SettingsView: View {
 				}
 			} catch {
 				await MainActor.run {
+					toast = Toast(title: error.localizedDescription)
+				}
+			}
+		}
+	}
+	
+	private func importData(from url: URL) {
+		isBusy = true
+		var wasCardsFeatureToggled = false
+		var wasPaymentsFeatureToggled = false
+		var wasPlacesFeatureToggled = false
+		if isCardsFeatureAvailable {
+			isCardsFeatureAvailable = false
+			wasCardsFeatureToggled = true
+		}
+		if isPaymentsFeatureAvailable {
+			isPaymentsFeatureAvailable = false
+			wasPaymentsFeatureToggled = true
+		}
+		if isPlacesFeatureAvailable {
+			isPlacesFeatureAvailable = false
+			wasPlacesFeatureToggled = true
+		}
+		Task.detached {
+			do {
+				try await Task.sleep(nanoseconds: 300)
+				try await userDataService?.importData(from: url)
+				await MainActor.run {
+					if wasCardsFeatureToggled {
+						isCardsFeatureAvailable.toggle()
+					}
+					if wasPaymentsFeatureToggled {
+						isPaymentsFeatureAvailable.toggle()
+					}
+					if wasPlacesFeatureToggled {
+						isPlacesFeatureAvailable.toggle()
+					}
+				}
+				
+				try await Task.sleep(nanoseconds: 300)
+
+				await MainActor.run {
+					isBusy = false
+					toast = Toast(title: "Данные успешно импортированы")
+				}
+			} catch {
+				await MainActor.run {
+					if wasCardsFeatureToggled {
+						isCardsFeatureAvailable.toggle()
+					}
+					if wasPaymentsFeatureToggled {
+						isPaymentsFeatureAvailable.toggle()
+					}
+					if wasPlacesFeatureToggled {
+						isPlacesFeatureAvailable.toggle()
+					}
+				}
+				
+				try await Task.sleep(nanoseconds: 300)
+				
+				await MainActor.run {
+					isBusy = false
 					toast = Toast(title: error.localizedDescription)
 				}
 			}

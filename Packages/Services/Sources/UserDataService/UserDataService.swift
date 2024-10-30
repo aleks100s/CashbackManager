@@ -52,22 +52,15 @@ public final class UserDataService {
 			create: false
 		)
 				
-		let fileURL = path.appendingPathComponent("exported.json")
+		let fileURL = path.appendingPathComponent("Cashback.json")
 		try data.write(to: fileURL)
 		
 		return fileURL
 	}
 	
 	public func importData(from url: URL) async throws {
-		let fileManager = FileManager.default
-		guard let cachesDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
-			throw UserDataError.cachesDirectoryNotFound
-		}
-		
-		let destinationURL = cachesDirectory.appendingPathComponent(UUID().uuidString)
-		try fileManager.copyItem(at: url, to: destinationURL)
-		
-		let data = try Data(contentsOf: destinationURL)
+		url.startAccessingSecurityScopedResource()
+		let data = try Data(contentsOf: url)
 		let jsonDecoder = JSONDecoder()
 		let userData = try jsonDecoder.decode(UserDataDto.self, from: data)
 		for transaction in try await incomeService.fetchAll() {
@@ -87,7 +80,7 @@ public final class UserDataService {
 		let categories = userData.categories
 			.map { Domain.Category(id: $0.id, name: $0.name, emoji: $0.emoji, synonyms: $0.synonyms, priority: $0.priority) }
 		categoryService.insert(categories: categories)
-		
+		print("categoryService.insert(categories: categories)")
 		
 		let places = userData.places
 			.compactMap { dto -> Place? in
@@ -138,9 +131,12 @@ public final class UserDataService {
 				)
 			}
 		incomeService.insert(transactions: payments)
+		print("incomeService.insert(transactions: payments)")
 		await MainActor.run {
+			print("resetAppNavigationNotification")
 			NotificationCenter.default.post(name: Constants.resetAppNavigationNotification, object: nil)
 		}
+		url.stopAccessingSecurityScopedResource()
 	}
 }
 
