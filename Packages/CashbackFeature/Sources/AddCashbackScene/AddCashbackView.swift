@@ -13,6 +13,7 @@ import SelectCategoryScene
 import Shared
 import SwiftData
 import SwiftUI
+import WidgetKit
 
 public struct AddCashbackView: View {
 	private let card: Card
@@ -130,7 +131,12 @@ public struct AddCashbackView: View {
 			let cashback = Cashback(category: selectedCategory, percent: percent)
 			card.cashback.append(cashback)
 			searchService?.index(card: card)
+			refreshWidget()
 		}
+	}
+	
+	private func refreshWidget() {
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 	}
 }
 

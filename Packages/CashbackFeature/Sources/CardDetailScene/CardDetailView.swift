@@ -73,7 +73,6 @@ public struct CardDetailView: View {
 			}
 			.onAppear {
 				currentCardId = card.id.uuidString
-				WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 			}
 			.onChange(of: isEditing) { _, newValue in
 				if !newValue, !cardName.isEmpty {
@@ -218,6 +217,7 @@ public struct CardDetailView: View {
 		context.delete(cashback)
 		searchService?.index(card: card)
 		toast = Toast(title: "Кэшбэк удален")
+		refreshWidget()
 	}
 	
 	private func deleteTransactions(from card: Card) {
@@ -233,7 +233,12 @@ public struct CardDetailView: View {
 		}
 		context.delete(card)
 		try? context.save()
+		refreshWidget()
 		dismiss()
+	}
+	
+	private func refreshWidget() {
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 	}
 }
 
@@ -264,6 +269,7 @@ private extension CardDetailView {
 		}
 		searchService?.index(card: card)
 		toast = Toast(title: "Кэшбэки считаны!")
+		refreshWidget()
 	}
 }
 
