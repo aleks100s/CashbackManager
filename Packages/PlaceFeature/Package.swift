@@ -17,6 +17,7 @@ let package = Package(
 		.package(name: "DesignSystem", path: "./DesignSystem"),
 		.package(name: "CommonScenes", path: "./CommonScenes"),
 		.package(name: "Services", path: "./Services"),
+		.package(name: "Shared", path: "./Shared"),
 	],
     targets: [
         .target(
@@ -40,6 +41,9 @@ let package = Package(
 			name: "PlaceDetailScene",
 			dependencies: [
 				"Domain",
+				"DesignSystem",
+				"Shared",
+				.product(name: "CardsService", package: "Services"),
 			]
 		),
 		.target(

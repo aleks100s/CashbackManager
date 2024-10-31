@@ -33,7 +33,7 @@ public extension PredefinedCategory {
 		case .taxi:
 			["Yandex Go", "Яндекс Go"]
 		case .carSharing:
-			[]
+			[""]
 		case .autoServices:
 			["Автозапчасти", "Автосервис"]
 		case .pharmacies:

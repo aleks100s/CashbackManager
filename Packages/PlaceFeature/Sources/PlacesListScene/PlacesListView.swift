@@ -77,7 +77,7 @@ public struct PlacesListView: View {
 				
 				ForEach(filteredPlaces) { place in
 					Button {
-						// onPlaceSelected(place)
+						onPlaceSelected(place)
 					} label: {
 						PlaceView(place: place)
 							.contentShape(.rect)

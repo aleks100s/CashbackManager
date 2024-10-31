@@ -53,6 +53,7 @@ struct CashbackApplication: App {
 				}
         }
 		.modelContainer(container)
+		.environment(\.cardsService, cardsService)
 		.environment(\.searchService, searchService)
 		.environment(\.categoryService, categoryService)
 		.environment(\.placeService, placeService)

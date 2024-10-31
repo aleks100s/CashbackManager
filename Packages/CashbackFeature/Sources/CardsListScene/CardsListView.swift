@@ -135,6 +135,7 @@ public struct CardsListView: View {
 		let card = Card(name: cardName, color: Color.randomColor().toHex())
 		context.insert(card)
 		searchService?.index(card: card)
+		try? context.save()
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)

@@ -119,7 +119,8 @@ struct ContentView: View {
 			PlaceFeatureAssembly.assemble(
 				addPlaceIntent: CreatePlaceIntent(),
 				checkPlaceIntent: CheckPlaceCategoryIntent(),
-				addCategoryIntent: CreateCategoryIntent()
+				addCategoryIntent: CreateCategoryIntent(),
+				checkPlaceCardIntent: CheckPlaceCardIntent()
 			)
 			.tabItem {
 				Label("Места", systemImage: Constants.SFSymbols.places)

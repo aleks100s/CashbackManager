@@ -12,8 +12,9 @@ public enum PlaceFeatureAssembly {
 	public static func assemble(
 		addPlaceIntent: any AppIntent,
 		checkPlaceIntent: any AppIntent,
-		addCategoryIntent: any AppIntent
+		addCategoryIntent: any AppIntent,
+		checkPlaceCardIntent: any AppIntent
 	) -> some View {
-		Coordinator(addPlaceIntent: addPlaceIntent, checkPlaceIntent: checkPlaceIntent, addCategoryIntent: addCategoryIntent)
+		Coordinator(addPlaceIntent: addPlaceIntent, checkPlaceIntent: checkPlaceIntent, addCategoryIntent: addCategoryIntent, checkPlaceCardIntent: checkPlaceCardIntent)
 	}
 }

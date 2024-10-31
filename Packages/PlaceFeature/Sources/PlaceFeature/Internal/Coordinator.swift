@@ -15,6 +15,7 @@ struct Coordinator: View {
 	let addPlaceIntent: any AppIntent
 	let checkPlaceIntent: any AppIntent
 	let addCategoryIntent: any AppIntent
+	let checkPlaceCardIntent: any AppIntent
 	
 	@State private var path = [Navigation]()
 	@State private var isAddPlaceSheetPresented = false
@@ -40,7 +41,7 @@ struct Coordinator: View {
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
 		case .placeDetail(let place):
-			PlaceDetailView(place: place)
+			PlaceDetailView(place: place, intent: checkPlaceCardIntent)
 		}
 	}
 }
