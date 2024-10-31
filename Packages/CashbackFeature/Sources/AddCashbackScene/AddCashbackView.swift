@@ -106,7 +106,6 @@ public struct AddCashbackView: View {
 		.presentationBackground(.regularMaterial)
 	}
 	
-	@MainActor
 	private var saveButton: some View {
 		Button("Сохранить") {
 			createCashback()
@@ -125,7 +124,6 @@ public struct AddCashbackView: View {
 		}
 	}
 	
-	@MainActor
 	private func createCashback() {
 		if let selectedCategory {
 			let cashback = Cashback(category: selectedCategory, percent: percent)

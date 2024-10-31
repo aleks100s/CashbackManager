@@ -36,37 +36,30 @@ enum AppFactory {
 		searchService
 	}
 	
-	@MainActor
 	static func provideCardsService() -> CardsService {
 		cardsService
 	}
 	
-	@MainActor 
 	static func provideCategoryService() -> CategoryService {
 		categoryService
 	}
 	
-	@MainActor
 	static func providePlaceService() -> PlaceService {
 		placeService
 	}
 	
-	@MainActor
 	static func provideTextDetectionService() -> TextDetectionService {
 		textDetectionService
 	}
 	
-	@MainActor
 	static func provideIncomeService() -> IncomeService {
 		incomeService
 	}
 	
-	@MainActor
 	static func provideNotificationService() -> NotificationService {
 		notificationService
 	}
 	
-	@MainActor
 	static func provideUserDataService() -> UserDataService {
 		userDataService
 	}

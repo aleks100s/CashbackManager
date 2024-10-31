@@ -52,7 +52,7 @@ struct Coordinator: View {
 		}
     }
 	
-	@MainActor @ViewBuilder
+	@ViewBuilder
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
 		case .cardDetail(let card):

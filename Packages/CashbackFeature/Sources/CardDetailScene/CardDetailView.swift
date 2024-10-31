@@ -188,7 +188,7 @@ public struct CardDetailView: View {
 	
 	private var detectCashbackSectionButton: some View {
 		DetectCashbackSectionButton(imageItem: $imageItem, animateGradient: $animateGradient) {
-			Task {
+			Task.detached {
 				do {
 					try await detectCashbackFromImage()
 				} catch {

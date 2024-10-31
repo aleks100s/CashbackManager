@@ -31,21 +31,13 @@ struct IncomePeriodView: View {
 				ToolbarItem(placement: .topBarTrailing) {
 					Button(model.isAllTimeModeOn ? "По месяцам" : "Все время") {
 						hapticFeedback(.light)
-						Task {
-							await model.toggleAllTimeMode()
-						}
+						model.toggleAllTimeMode()
 					}
 				}
 			}
 			.toast(item: $toast)
 			.onFirstAppear {
-				Task {
-					do {
-						try await model.onAppear()
-					} catch {
-						toast = Toast(title: error.localizedDescription)
-					}
-				}
+				model.onAppear()
 			}
 	}
 	
@@ -114,9 +106,7 @@ struct IncomePeriodView: View {
 						}
 						.foregroundStyle(model.isPreviousButtonDisabled ? .gray : .blue)
 						.onTapGesture {
-							Task {
-								await model.previousMonth()
-							}
+							model.previousMonth()
 						}
 						.disabled(model.isPreviousButtonDisabled)
 						
@@ -129,9 +119,7 @@ struct IncomePeriodView: View {
 						}
 						.foregroundStyle(model.isNextButtonDisabled ? .gray : .blue)
 						.onTapGesture {
-							Task {
-								await model.nextMonth()
-							}
+							model.nextMonth()
 						}
 						.disabled(model.isNextButtonDisabled)
 					}
@@ -147,17 +135,14 @@ struct IncomePeriodView: View {
 							.contentShape(.rect)
 							.contextMenu {
 								Button("Удалить", role: .destructive) {
-									Task {
-										toast = Toast(title: "Транзакция удалена")
-										await model.delete(income: income)
-									}
+									model.delete(income: income)
+									toast = Toast(title: "Транзакция удалена")
 								}
 							}
 					}
 					.onDelete { indexSet in
-						Task {
-							await model.delete(indexSet: indexSet)
-						}
+						model.delete(indexSet: indexSet)
+						toast = Toast(title: "Транзакция удалена")
 					}
 				}
 			} header: {

@@ -16,10 +16,6 @@ public struct CategoryService: @unchecked Sendable {
 		self.context = context
 	}
 	
-	public func getAllCategories() -> [Domain.Category] {
-		fetch(by: #Predicate<Domain.Category> { !$0.name.isEmpty })
-	}
-	
 	public func getCategory(by name: String) -> Domain.Category? {
 		fetch(by: #Predicate<Domain.Category> { category in category.name.localizedStandardContains(name) ||
 			category.synonyms?.localizedStandardContains(name) == true

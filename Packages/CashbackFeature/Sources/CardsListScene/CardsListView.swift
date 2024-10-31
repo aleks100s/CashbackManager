@@ -97,7 +97,6 @@ public struct CardsListView: View {
 		}
 	}
 	
-	@MainActor
 	private var addCardSheet: some View {
 		NavigationView {
 			CommonInputView("Название карты", intent: addCardIntent, hint: "В следующий раз, чтобы добавить карту") { cardName in
@@ -130,7 +129,6 @@ public struct CardsListView: View {
 		.buttonStyle(.plain)
 	}
 		
-	@MainActor
 	private func create(cardName: String) {
 		let card = Card(name: cardName, color: Color.randomColor().toHex())
 		context.insert(card)

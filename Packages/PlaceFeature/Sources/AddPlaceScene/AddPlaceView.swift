@@ -102,7 +102,6 @@ public struct AddPlaceView: View {
 		.presentationBackground(.regularMaterial)
 	}
 	
-	@MainActor
 	private var saveButton: some View {
 		Button("Сохранить") {
 			createPlace()
@@ -113,7 +112,6 @@ public struct AddPlaceView: View {
 		.disabled(!isInputCorrect)
 	}
 	
-	@MainActor
 	private func createPlace() {
 		guard let selectedCategory else { return }
 		

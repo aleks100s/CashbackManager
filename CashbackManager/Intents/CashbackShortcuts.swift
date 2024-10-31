@@ -96,7 +96,7 @@ struct CashbackShortcuts: AppShortcutsProvider {
 		AppShortcut(
 			intent: CheckPlaceCardIntent(),
 			phrases: [
-				"Оплата в заведении с \(.applicationName)ом?",
+				"Оплата в заведении с \(.applicationName)ом",
 				"Какой картой платить в заведении с \(.applicationName)ом?",
 				"Чем платить для \(.applicationName)а в заведении",
 				"Какой картой платить в месте с \(.applicationName)ом?",

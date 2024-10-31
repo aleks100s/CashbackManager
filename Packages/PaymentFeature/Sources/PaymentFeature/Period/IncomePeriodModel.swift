@@ -45,53 +45,44 @@ final class IncomePeriodModel {
 			}
 			.store(in: &subscriptions)
 		NotificationCenter.default.publisher(for: Constants.resetAppNavigationNotification)
-			.sink { [weak self] _ in
-				Task {
-					try await self?.onAppear()
-				}
+			.sink { [unowned self] _ in
+				onAppear()
 			}
 			.store(in: &subscriptions)
 	}
 	
-	@MainActor
 	func incomeTapped() {
 		addIncomeTapped()
 	}
 	
-	@MainActor
-	func delete(indexSet: IndexSet) async {
+	func delete(indexSet: IndexSet) {
 		for index in indexSet {
-			await delete(income: transactions[index])
+			delete(income: transactions[index])
 		}
 	}
 	
-	@MainActor
-	func delete(income: Income) async {
+	func delete(income: Income) {
 		incomeService.delete(income: income)
-		await fetchTransactions()
+		fetchTransactions()
 	}
 	
-	@MainActor
-	func onAppear() async throws {
+	func onAppear() {
 		setupCurrentMonthBounds()
-		await fetchTransactions()
-		try await findBorders()
+		fetchTransactions()
+		findBorders()
 	}
 	
-	@MainActor
-	func nextMonth() async {
+	func nextMonth() {
 		changeMonth(by: 1)
-		await fetchTransactions()
+		fetchTransactions()
 	}
 	
-	@MainActor
-	func previousMonth() async {
+	func previousMonth() {
 		changeMonth(by: -1)
-		await fetchTransactions()
+		fetchTransactions()
 	}
 	
-	@MainActor
-	func toggleAllTimeMode() async {
+	func toggleAllTimeMode() {
 		isAllTimeModeOn.toggle()
 		if isAllTimeModeOn {
 			startDate = minDate
@@ -99,29 +90,26 @@ final class IncomePeriodModel {
 		} else {
 			setupCurrentMonthBounds()
 		}
-		await fetchTransactions()
+		fetchTransactions()
 	}
 	
 	private func onTransactionAdded() {
-		Task { [weak self] in
-			try await self?.findBorders()
-			await self?.fetchTransactions()
-		}
+		findBorders()
+		fetchTransactions()
 	}
 	
-	private func findBorders() async throws {
-		let (min, max) = try await incomeService.findMinMaxDates()
+	private func findBorders() {
+		let (min, max) = incomeService.findMinMaxDates()
 		minDate = min
 		maxDate = max
 	}
 }
 
 private extension IncomePeriodModel {
-	@MainActor
-	func fetchTransactions() async {
-		let result = try? await incomeService.fetch(from: startDate, to: endDate)
-		transactions = result ?? []
-		total = result?.map(\.amount).reduce(.zero, +) ?? .zero
+	func fetchTransactions() {
+		let result = incomeService.fetch(from: startDate, to: endDate)
+		transactions = result
+		total = result.map(\.amount).reduce(.zero, +)
 		var chartData = [UUID: ChartModel]()
 		let otherId = UUID()
 		for transaction in transactions {
