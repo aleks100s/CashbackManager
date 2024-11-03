@@ -69,9 +69,18 @@ public struct CardsService: @unchecked Sendable {
 		searchService.deindex(card: card)
 	}
 	
+	public func add(cashback: Cashback, card: Card) {
+		card.cashback.append(cashback)
+		context.insert(cashback)
+		try? context.save()
+		searchService.index(card: card)
+	}
+	
 	public func delete(cashback: Cashback, card: Card) {
+		searchService.deindex(cashback: cashback)
 		card.cashback.removeAll { $0.id == cashback.id }
 		context.delete(cashback)
+		try? context.save()
 		searchService.index(card: card)
 	}
 	

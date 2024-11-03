@@ -7,7 +7,6 @@
 
 import AppIntents
 import PlaceService
-import SearchService
 
 struct DeletePlaceIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить место"

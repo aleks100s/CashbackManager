@@ -9,7 +9,6 @@ import AppIntents
 import DesignSystem
 import Domain
 import PlaceService
-import SearchService
 import SelectCategoryScene
 import Shared
 import SwiftUI

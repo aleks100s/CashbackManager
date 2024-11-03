@@ -8,7 +8,6 @@
 import AppIntents
 import CategoryService
 import PlaceService
-import SearchService
 import SwiftData
 
 struct CreatePlaceIntent: AppIntent {

@@ -7,7 +7,6 @@
 
 import AppIntents
 import CardsService
-import SearchService
 import SwiftData
 
 struct CreateCardIntent: AppIntent {

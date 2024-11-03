@@ -12,7 +12,6 @@ import Domain
 import DesignSystem
 import IncomeService
 import PhotosUI
-import SearchService
 import Shared
 import SwiftData
 import SwiftUI
@@ -42,7 +41,6 @@ public struct CardDetailView: View {
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var modelContext
 	@Environment(\.cardsService) private var cardsService
-	@Environment(\.searchService) private var searchService
  	@Environment(\.categoryService) private var categoryService
 	@Environment(\.textDetectionService) private var textDetectionService
 	@Environment(\.incomeService) private var incomeService
@@ -213,16 +211,14 @@ public struct CardDetailView: View {
 	}
 	
 	private func delete(cashback: Cashback) {
-		searchService?.deindex(cashback: cashback)
-		card.cashback.removeAll(where: { $0.id == cashback.id })
-		modelContext.delete(cashback)
-		searchService?.index(card: card)
+		cardsService?.delete(cashback: cashback, card: card)
 		toast = Toast(title: "Кэшбэк удален")
 		refreshWidget()
 	}
 	
 	private func deleteTransactions(from card: Card) {
 		incomeService?.deleteIncomes(card: card)
+		toast = Toast(title: "Транзакции успешно удалены")
 	}
 	
 	private func archive(card: Card, shouldDeleteTransactions: Bool = false) {
@@ -263,9 +259,8 @@ private extension CardDetailView {
 			}
 			
 			let cashback = Cashback(category: category, percent: item.1)
-			card.cashback.append(cashback)
+			cardsService?.add(cashback: cashback, card: card)
 		}
-		searchService?.index(card: card)
 		toast = Toast(title: "Кэшбэки считаны!")
 		refreshWidget()
 	}

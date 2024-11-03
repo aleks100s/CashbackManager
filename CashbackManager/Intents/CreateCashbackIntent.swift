@@ -9,7 +9,6 @@ import AppIntents
 import CardsService
 import CategoryService
 import Domain
-import SearchService
 
 struct CreateCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Новый кэшбэк"
@@ -30,9 +29,6 @@ struct CreateCashbackIntent: AppIntent {
 	@Dependency
 	private var categoryService: CategoryService
 	
-	@Dependency
-	private var searchService: SearchService
-	
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
@@ -50,8 +46,7 @@ struct CreateCashbackIntent: AppIntent {
 				return "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(categoryName)\""
 			}
 			
-			card.cashback.append(cashback)
-			searchService.index(card: card)
+			cardsService.add(cashback: cashback, card: card)
 			return "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!"
 		}.value
 		return .result(dialog: "\(result)")

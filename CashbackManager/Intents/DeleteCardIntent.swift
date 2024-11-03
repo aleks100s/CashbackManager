@@ -7,7 +7,6 @@
 
 import AppIntents
 import CardsService
-import SearchService
 
 struct DeleteCardIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить карту"

@@ -6,9 +6,9 @@
 //
 
 import AppIntents
+import CardsService
 import DesignSystem
 import Domain
-import SearchService
 import SelectCategoryScene
 import Shared
 import SwiftData
@@ -30,7 +30,7 @@ public struct AddCashbackView: View {
 	@State private var isCategorySelectorPresented = false
 	
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.searchService) var searchService
+	@Environment(\.cardsService) var cardsService
 	
 	public init(card: Card, addCategoryIntent: any AppIntent, addCashbackIntent: any AppIntent) {
 		self.card = card
@@ -125,8 +125,7 @@ public struct AddCashbackView: View {
 	private func createCashback() {
 		if let selectedCategory {
 			let cashback = Cashback(category: selectedCategory, percent: percent)
-			card.cashback.append(cashback)
-			searchService?.index(card: card)
+			cardsService?.add(cashback: cashback, card: card)
 			refreshWidget()
 		}
 	}
