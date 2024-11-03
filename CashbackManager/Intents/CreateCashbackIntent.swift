@@ -36,21 +36,24 @@ struct CreateCashbackIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let card = cardsService.getCard(name: cardName) else {
-			return .result(dialog: "Карта \"\(cardName)\" не найдена")
-		}
-		
-		guard let category = categoryService.getCategory(by: categoryName) else {
-			return .result(dialog: "Не получилось найти категорию \(categoryName)")
-		}
-		
-		let cashback = Cashback(category: category, percent: percent / 100)
-		guard !card.has(category: category) else {
-			return .result(dialog: "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(categoryName)\"")
-		}
-		
-		card.cashback.append(cashback)
-		searchService.index(card: card)
-		return .result(dialog: "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!")
+		let result = await Task { @MainActor in
+			guard let card = cardsService.getCard(name: cardName) else {
+				return "Карта \"\(cardName)\" не найдена"
+			}
+			
+			guard let category = categoryService.getCategory(by: categoryName) else {
+				return "Не получилось найти категорию \(categoryName)"
+			}
+			
+			let cashback = Cashback(category: category, percent: percent / 100)
+			guard !card.has(category: category) else {
+				return "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(categoryName)\""
+			}
+			
+			card.cashback.append(cashback)
+			searchService.index(card: card)
+			return "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

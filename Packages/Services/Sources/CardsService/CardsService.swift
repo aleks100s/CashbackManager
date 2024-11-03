@@ -11,6 +11,7 @@ import Shared
 import SwiftData
 import SwiftUI
 
+@MainActor
 public struct CardsService: @unchecked Sendable {
 	private let context: ModelContext
 	

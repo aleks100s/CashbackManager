@@ -27,7 +27,7 @@ struct CardQuery: EntityQuery {
 	private var cardsService: CardsService
 	
 	func entities(for identifiers: [UUID]) async throws -> [CardEntity] {
-		cardsService.getAllCards().map {
+		await cardsService.getAllCards().map {
 			CardEntity(id: $0.id, card: $0)
 		}
 	}

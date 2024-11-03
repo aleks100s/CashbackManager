@@ -9,6 +9,7 @@ import CardsService
 import Foundation
 import SwiftData
 
+@MainActor
 struct WidgetURLParser {
 	private let cardsService: CardsService
 	

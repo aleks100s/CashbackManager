@@ -29,12 +29,15 @@ struct DeleteCardIntent: AppIntent {
 	}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let card = cardsService.getCard(name: cardName) else {
-			return .result(dialog: "Не получилось найти карту \(cardName)")
-		}
-		
-		cardsService.archive(card: card)
-		searchService.deindex(card: card)
-		return .result(dialog: "Карта \"\(card.name)\" удалена!")
+		let result = await Task { @MainActor in
+			guard let card = cardsService.getCard(name: cardName) else {
+				return "Не получилось найти карту \(cardName)"
+			}
+			
+			cardsService.archive(card: card)
+			searchService.deindex(card: card)
+			return "Карта \"\(card.name)\" удалена!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

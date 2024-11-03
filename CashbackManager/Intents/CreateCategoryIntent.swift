@@ -26,8 +26,11 @@ struct CreateCategoryIntent: AppIntent {
 	}
 	
 	func perform() async throws -> some ProvidesDialog {
-		categoryService.createCategory(name: categoryName)
-		return .result(dialog: "Новая категория кэшбэка \"\(categoryName)\" добавлена!")
+		let result = await Task { @MainActor in
+			categoryService.createCategory(name: categoryName)
+			return "Новая категория кэшбэка \"\(categoryName)\" добавлена!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }
 

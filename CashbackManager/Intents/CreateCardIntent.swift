@@ -30,11 +30,14 @@ struct CreateCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		if cardName.isEmpty {
-			cardName = "Карта"
-		}
-		let card = cardsService.createCard(name: cardName)
-		searchService.index(card: card)
-		return .result(dialog: "Новая карта \"\(cardName)\" создана")
+		let result = await Task { @MainActor in
+			if cardName.isEmpty {
+				cardName = "Карта"
+			}
+			let card = cardsService.createCard(name: cardName)
+			searchService.index(card: card)
+			return "Новая карта \"\(cardName)\" создана"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

@@ -33,12 +33,15 @@ struct CreatePlaceIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let category = categoryService.getCategory(by: categoryName) else {
-			return .result(dialog: "Не получилось найти категорию \(categoryName) и добавить место")
-		}
-		
-		let place = placeService.createPlace(name: placeName, category: category)
-		searchService.index(place: place)
-		return .result(dialog: "Новое место \(placeName) добавлено!")
+		let result = await Task { @MainActor in
+			guard let category = categoryService.getCategory(by: categoryName) else {
+				return "Не получилось найти категорию \(categoryName) и добавить место"
+			}
+			
+			let place = placeService.createPlace(name: placeName, category: category)
+			searchService.index(place: place)
+			return "Новое место \(placeName) добавлено!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

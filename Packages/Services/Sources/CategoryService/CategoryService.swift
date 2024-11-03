@@ -9,6 +9,7 @@ import Domain
 import Foundation
 import SwiftData
 
+@MainActor
 public struct CategoryService: @unchecked Sendable {
 	private let context: ModelContext
 	

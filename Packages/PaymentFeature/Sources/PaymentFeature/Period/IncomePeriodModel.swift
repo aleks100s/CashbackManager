@@ -11,7 +11,7 @@ import Foundation
 import IncomeService
 import Shared
 
-@Observable
+@Observable @MainActor
 final class IncomePeriodModel {
 	var transactions: [Income] = []
 	var chartData: [ChartModel] = []

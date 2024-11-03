@@ -33,24 +33,27 @@ struct CreateIncomeIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let amount = Int(self.amount) ?? .zero
-		guard amount > 0 else {
-			return .result(dialog: "Размер выплаты не может быть отрицательным или равным 0")
-		}
-		
-		if let source {
-			incomeService.createIncome(amount: amount, source: source.card)
-		} else {
-			let variants = cardsService.getAllCards().map {
-				CardEntity(id: $0.id, card: $0)
-		 }
-			let source = try await $source.requestDisambiguation(
-				among: variants,
-				dialog: IntentDialog(stringLiteral: "Выберите источник выплаты")
-			)
-			incomeService.createIncome(amount: amount, source: source.card)
-		}
-		
-		return .result(dialog: "Выплата кэшбэка в размере \(amount) рублей добавлена!")
+		let result = try await Task { @MainActor in
+			let amount = Int(self.amount) ?? .zero
+			guard amount > 0 else {
+				return "Размер выплаты не может быть отрицательным или равным 0"
+			}
+			
+			if let source {
+				incomeService.createIncome(amount: amount, source: source.card)
+			} else {
+				let variants = cardsService.getAllCards().map {
+					CardEntity(id: $0.id, card: $0)
+			 }
+				let source = try await $source.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите источник выплаты")
+				)
+				incomeService.createIncome(amount: amount, source: source.card)
+			}
+			
+			return "Выплата кэшбэка в размере \(amount) рублей добавлена!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

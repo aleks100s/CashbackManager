@@ -35,15 +35,18 @@ struct CheckPlaceCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let place = placeService.getPlace(by: placeName) else {
-			return .result(dialog: "Не удалось найти заведение \(placeName)")
-		}
-		
-		let cards = cardsService.getCards(category: place.category)
-		if !cards.isEmpty {
-			return .result(dialog: "Для оплаты в \(placeName) используйте карты: \(cards.map(\.name).joined(separator: ", "))")
-		} else {
-			return .result(dialog: "Не удалось найти подходящие карты с категорией \(place.category.name)")
-		}
+		let result = await Task { @MainActor in
+			guard let place = placeService.getPlace(by: placeName) else {
+				return "Не удалось найти заведение \(placeName)"
+			}
+			
+			let cards = cardsService.getCards(category: place.category)
+			if !cards.isEmpty {
+				return "Для оплаты в \(placeName) используйте карты: \(cards.map(\.name).joined(separator: ", "))"
+			} else {
+				return "Не удалось найти подходящие карты с категорией \(place.category.name)"
+			}
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

@@ -26,26 +26,28 @@ struct ChangeCurrentCardIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some IntentResult {
-		let service = await AppFactory.provideCardsService()
-		let allCards = service.getAllCards()
-		var nextCard: Card?
-		if let id = UUID(uuidString: cardId) {
-			if let card = service.getCard(id: id) ?? allCards.first,
-			   !card.cashback.isEmpty,
-			   let index = allCards.firstIndex(of: card),
-			   index < allCards.endIndex - 1 {
-				nextCard = allCards[index + 1]
+		_ = await Task { @MainActor in
+			let service = AppFactory.provideCardsService()
+			let allCards = service.getAllCards()
+			var nextCard: Card?
+			if let id = UUID(uuidString: cardId) {
+				if let card = service.getCard(id: id) ?? allCards.first,
+				   !card.cashback.isEmpty,
+				   let index = allCards.firstIndex(of: card),
+				   index < allCards.endIndex - 1 {
+					nextCard = allCards[index + 1]
+				} else {
+					nextCard = allCards.first
+				}
 			} else {
 				nextCard = allCards.first
 			}
-		} else {
-			nextCard = allCards.first
-		}
-		
-		if let nextCard {
-			UserDefaults.appGroup?.set(nextCard.id.uuidString, forKey: Constants.StorageKey.currentCardID)
-			WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
-		}
+			
+			if let nextCard {
+				UserDefaults.appGroup?.set(nextCard.id.uuidString, forKey: Constants.StorageKey.currentCardID)
+				WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+			}
+		}.result
 		return .result()
 	}
 }

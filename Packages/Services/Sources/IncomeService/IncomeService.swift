@@ -10,6 +10,7 @@ import Domain
 import Foundation
 import SwiftData
 
+@MainActor
 public struct IncomeService: @unchecked Sendable {
 	public var onChange: AnyPublisher<Void, Never> {
 		onChangeSubject.eraseToAnyPublisher()

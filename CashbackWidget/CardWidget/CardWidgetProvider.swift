@@ -21,20 +21,21 @@ struct CardWidgetProvider: TimelineProvider {
 		completion(entry)
 	}
 
-	@MainActor
 	func getTimeline(in context: Context, completion: @escaping (Timeline<CardWidgetEntry>) -> ()) {
-		guard let cardIdString = UserDefaults.appGroup?.value(forKey: Constants.StorageKey.currentCardID) as? String,
-			let cardId = UUID(uuidString: cardIdString)
-		else { return }
+		Task { @MainActor in
+			guard let cardIdString = UserDefaults.appGroup?.value(forKey: Constants.StorageKey.currentCardID) as? String,
+				let cardId = UUID(uuidString: cardIdString)
+			else { return }
 
-		let service = AppFactory.provideCardsService()
-		let allCards = service.getAllCards()
-		guard let card = service.getCard(id: cardId) ?? allCards.first, !card.cashback.isEmpty else { return }
-		
-		let entries: [Entry] = [
-			.init(date: Date(), card: card, hasMoreCards: allCards.count > 1)
-		]
-		let timeline = Timeline(entries: entries, policy: .atEnd)
-		completion(timeline)
+			let service = AppFactory.provideCardsService()
+			let allCards = service.getAllCards()
+			guard let card = service.getCard(id: cardId) ?? allCards.first, !card.cashback.isEmpty else { return }
+			
+			let entries: [Entry] = [
+				.init(date: Date(), card: card, hasMoreCards: allCards.count > 1)
+			]
+			let timeline = Timeline(entries: entries, policy: .atEnd)
+			completion(timeline)
+		}
 	}
 }

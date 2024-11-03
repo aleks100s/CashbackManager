@@ -27,11 +27,14 @@ struct CheckPlaceCategoryIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let placeService = await AppFactory.providePlaceService()
-		if let place = placeService.getPlace(by: placeName) {
-			return .result(dialog: "\(placeName) относится к категории \(place.category.name)")
-		} else {
-			return .result(dialog: "Не удалось найти заведение \(placeName)")
-		}
+		let result = await Task { @MainActor in
+			let placeService = AppFactory.providePlaceService()
+			if let place = placeService.getPlace(by: placeName) {
+				return "\(placeName) относится к категории \(place.category.name)"
+			} else {
+				return "Не удалось найти заведение \(placeName)"
+			}
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

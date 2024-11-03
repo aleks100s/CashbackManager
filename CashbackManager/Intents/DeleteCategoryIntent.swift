@@ -25,11 +25,14 @@ struct DeleteCategoryIntent: AppIntent {
 	}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let category = categoryService.getCategory(by: categoryName) else {
-			return .result(dialog: "Не получилось найти категорию \(categoryName)")
-		}
-		
-		categoryService.archive(category: category)
-		return .result(dialog: "Категория кэшбэка \"\(category.name)\" удалена!")
+		let result = await Task { @MainActor in
+			guard let category = categoryService.getCategory(by: categoryName) else {
+				return "Не получилось найти категорию \(categoryName)"
+			}
+			
+			categoryService.archive(category: category)
+			return "Категория кэшбэка \"\(category.name)\" удалена!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

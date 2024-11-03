@@ -30,16 +30,18 @@ struct CheckCategoryCardsIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let category = categoryService.getCategory(by: categoryName) else {
-			return .result(dialog: "Категория \"\(categoryName)\" не найдена")
-		}
-
-		let cards = cardsService.getCards(category: category)
-		let result = if cards.isEmpty {
-			"Не удалось найти карту с категорией \(categoryName)"
-		} else {
-			"Для оплаты в категории \(categoryName) используйте карты: \(cards.map(\.name).joined(separator: ", "))"
-		}
+		let result = await Task { @MainActor in
+			guard let category = categoryService.getCategory(by: categoryName) else {
+				return "Категория \"\(categoryName)\" не найдена"
+			}
+			
+			let cards = cardsService.getCards(category: category)
+			return if cards.isEmpty {
+				"Не удалось найти карту с категорией \(categoryName)"
+			} else {
+				"Для оплаты в категории \(categoryName) используйте карты: \(cards.map(\.name).joined(separator: ", "))"
+			}
+		}.value
 		return .result(dialog: "\(result)")
 	}
 }

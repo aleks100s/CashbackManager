@@ -29,12 +29,15 @@ struct DeletePlaceIntent: AppIntent {
 	}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let place = placeService.getPlace(by: placeName) else {
-			return .result(dialog: "Не получилось найти место \(placeName)")
-		}
-		
-		placeService.delete(place: place)
-		searchService.deindex(place: place)
-		return .result(dialog: "Место \"\(place.name)\" удалено!")
+		let result = await Task { @MainActor in
+			guard let place = placeService.getPlace(by: placeName) else {
+				return "Не получилось найти место \(placeName)"
+			}
+			
+			placeService.delete(place: place)
+			searchService.deindex(place: place)
+			return "Место \"\(place.name)\" удалено!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }

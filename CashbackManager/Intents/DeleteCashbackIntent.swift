@@ -37,21 +37,24 @@ struct DeleteCashbackIntent: AppIntent {
 	}
 	
 	func perform() async throws -> some ProvidesDialog {
-		guard let card = cardsService.getCard(name: cardName) else {
-			return .result(dialog: "Не получилось найти карту \(cardName)")
-		}
-		
-		guard let category = categoryService.getCategory(by: categoryName) else {
-			return .result(dialog: "Не получилось найти категорию \(categoryName)")
-		}
-		
-		guard let cashback = card.cashback.first(where: { $0.category.id == category.id }) else {
-			return .result(dialog: "Не получилось найти кэшбэк с категорией \(category.name)")
-		}
-		
-		searchService.deindex(cashback: cashback)
-		cardsService.delete(cashback: cashback, card: card)
-		searchService.index(card: card)
-		return .result(dialog: "Кэшбэк \"\(category.name)\" удален с карты \(card.name)!")
+		let result = await Task { @MainActor in
+			guard let card = cardsService.getCard(name: cardName) else {
+				return "Не получилось найти карту \(cardName)"
+			}
+			
+			guard let category = categoryService.getCategory(by: categoryName) else {
+				return "Не получилось найти категорию \(categoryName)"
+			}
+			
+			guard let cashback = card.cashback.first(where: { $0.category.id == category.id }) else {
+				return "Не получилось найти кэшбэк с категорией \(category.name)"
+			}
+			
+			searchService.deindex(cashback: cashback)
+			cardsService.delete(cashback: cashback, card: card)
+			searchService.index(card: card)
+			return "Кэшбэк \"\(category.name)\" удален с карты \(card.name)!"
+		}.value
+		return .result(dialog: "\(result)")
 	}
 }
