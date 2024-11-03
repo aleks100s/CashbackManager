@@ -24,7 +24,6 @@ struct Coordinator: View {
 	@State private var navigationStack: [Navigation] = []
 	@State private var cardToAddCashback: Card?
 	
-	@Environment(\.modelContext) private var context
 	@Environment(\.widgetURLParser) private var urlParser
 	
 	@Query private var categories: [Domain.Category]

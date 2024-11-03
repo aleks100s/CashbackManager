@@ -30,7 +30,6 @@ public struct AddPlaceView: View {
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.searchService) private var searchService
 	@Environment(\.placeService) private var placeService
-	@Environment(\.displayScale) var displayScale
 	
 	private var isInputCorrect: Bool {
 		selectedCategory != nil && !placeName.isEmpty

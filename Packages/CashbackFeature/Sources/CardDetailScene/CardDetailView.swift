@@ -40,7 +40,7 @@ public struct CardDetailView: View {
 	@State private var isDeleteTransactionsWarningPresented = false
 	
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.modelContext) private var context
+	@Environment(\.modelContext) private var modelContext
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.searchService) private var searchService
  	@Environment(\.categoryService) private var categoryService
@@ -215,7 +215,7 @@ public struct CardDetailView: View {
 	private func delete(cashback: Cashback) {
 		searchService?.deindex(cashback: cashback)
 		card.cashback.removeAll(where: { $0.id == cashback.id })
-		context.delete(cashback)
+		modelContext.delete(cashback)
 		searchService?.index(card: card)
 		toast = Toast(title: "Кэшбэк удален")
 		refreshWidget()
@@ -231,7 +231,7 @@ public struct CardDetailView: View {
 			deleteTransactions(from: card)
 		}
 		card.isArchived = true
-		try? context.save()
+		try? modelContext.save()
 		currentCardId = nil
 		refreshWidget()
 		dismiss()

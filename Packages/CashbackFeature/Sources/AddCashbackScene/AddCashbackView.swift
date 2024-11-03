@@ -30,8 +30,6 @@ public struct AddCashbackView: View {
 	@State private var isCategorySelectorPresented = false
 	
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.modelContext) private var context
-	@Environment(\.displayScale) var displayScale
 	@Environment(\.searchService) var searchService
 	
 	public init(card: Card, addCategoryIntent: any AppIntent, addCashbackIntent: any AppIntent) {

@@ -31,7 +31,7 @@ public struct CardsListView: View {
 		sort: [SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
 	) private var cards: [Card]
-	@Environment(\.modelContext) private var context
+	@Environment(\.modelContext) private var modelContext
 	@Environment(\.searchService) var searchService
 	
 	private var filteredCards: [Card] {
@@ -131,9 +131,9 @@ public struct CardsListView: View {
 		
 	private func create(cardName: String) {
 		let card = Card(name: cardName, color: Color.randomColor().toHex())
-		context.insert(card)
+		modelContext.insert(card)
 		searchService?.index(card: card)
-		try? context.save()
+		try? modelContext.save()
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)
