@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import CardsService
 import CommonInputSheet
 import DesignSystem
 import Domain
@@ -31,8 +32,8 @@ public struct CardsListView: View {
 		sort: [SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
 	) private var cards: [Card]
-	@Environment(\.modelContext) private var modelContext
-	@Environment(\.searchService) var searchService
+	@Environment(\.searchService) private var searchService
+	@Environment(\.cardsService) private var cardsService
 	
 	private var filteredCards: [Card] {
 		cards.filter {
@@ -130,10 +131,9 @@ public struct CardsListView: View {
 	}
 		
 	private func create(cardName: String) {
-		let card = Card(name: cardName, color: Color.randomColor().toHex())
-		modelContext.insert(card)
+		guard let cardsService else { return }
+		let card = cardsService.createCard(name: cardName)
 		searchService?.index(card: card)
-		try? modelContext.save()
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)
