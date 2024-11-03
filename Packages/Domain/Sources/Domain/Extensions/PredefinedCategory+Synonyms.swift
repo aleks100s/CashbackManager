@@ -43,7 +43,7 @@ public extension PredefinedCategory {
 		case .cosmeticsAndParfume:
 			["Косметика и парфюмерия", "Магазины косметики"]
 		case .houseAndRenovation:
-			[]
+			["Товары для дома"]
 		case .art:
 			[]
 		case .books:
