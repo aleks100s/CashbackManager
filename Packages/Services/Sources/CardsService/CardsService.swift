@@ -11,6 +11,7 @@ import SearchService
 import Shared
 import SwiftData
 import SwiftUI
+import WidgetKit
 
 @MainActor
 public struct CardsService: @unchecked Sendable {
@@ -28,6 +29,7 @@ public struct CardsService: @unchecked Sendable {
 		context.insert(card)
 		try? context.save()
 		searchService.index(card: card)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 		return card
 	}
 	
@@ -74,6 +76,7 @@ public struct CardsService: @unchecked Sendable {
 		context.insert(cashback)
 		try? context.save()
 		searchService.index(card: card)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 	}
 	
 	public func delete(cashback: Cashback, card: Card) {
@@ -82,12 +85,14 @@ public struct CardsService: @unchecked Sendable {
 		context.delete(cashback)
 		try? context.save()
 		searchService.index(card: card)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 	}
 	
 	public func update(card: Card) {
 		context.insert(card)
 		try? context.save()
 		searchService.index(card: card)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 	}
 	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {

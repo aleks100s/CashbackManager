@@ -213,7 +213,6 @@ public struct CardDetailView: View {
 	private func delete(cashback: Cashback) {
 		cardsService?.delete(cashback: cashback, card: card)
 		toast = Toast(title: "Кэшбэк удален")
-		refreshWidget()
 	}
 	
 	private func deleteTransactions(from card: Card) {
@@ -227,7 +226,6 @@ public struct CardDetailView: View {
 		}
 		cardsService?.archive(card: card)
 		currentCardId = nil
-		refreshWidget()
 		dismiss()
 	}
 	
