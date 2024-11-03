@@ -15,6 +15,7 @@ import Shared
 import SwiftUI
 
 public struct AddPlaceView: View {
+	private let onPlaceAdded: (Place) -> Void
 	private let addPlaceIntent: any AppIntent
 	private let addCategoryIntent: any AppIntent
 	
@@ -34,9 +35,14 @@ public struct AddPlaceView: View {
 		selectedCategory != nil && !placeName.isEmpty
 	}
 	
-	public init(addPlaceIntent: any AppIntent, addCategoryIntent: any AppIntent) {
+	public init(
+		addPlaceIntent: any AppIntent,
+		addCategoryIntent: any AppIntent,
+		onPlaceAdded: @escaping (Place) -> Void
+	) {
 		self.addPlaceIntent = addPlaceIntent
 		self.addCategoryIntent = addCategoryIntent
+		self.onPlaceAdded = onPlaceAdded
 	}
 	
 	public var body: some View {
@@ -113,6 +119,8 @@ public struct AddPlaceView: View {
 	private func createPlace() {
 		guard let selectedCategory else { return }
 		
-		placeService?.createPlace(name: placeName, category: selectedCategory)
+		guard let place = placeService?.createPlace(name: placeName, category: selectedCategory) else { return }
+		
+		onPlaceAdded(place)
 	}
 }

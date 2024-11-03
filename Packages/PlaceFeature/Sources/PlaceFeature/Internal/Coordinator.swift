@@ -31,7 +31,9 @@ struct Coordinator: View {
 		}
 		.sheet(isPresented: $isAddPlaceSheetPresented) {
 			NavigationView {
-				AddPlaceView(addPlaceIntent: addPlaceIntent, addCategoryIntent: addCategoryIntent)
+				AddPlaceView(addPlaceIntent: addPlaceIntent, addCategoryIntent: addCategoryIntent) { place in
+					path.append(.placeDetail(place))
+				}
 			}
 			.presentationDetents([.medium, .large])
 		}
