@@ -45,12 +45,15 @@ let package = Package(
 		.package(name: "Domain", path: "./Domain")
 	],
     targets: [
-		.target(name: "CardsService", dependencies: ["Domain", "Shared"]),
+		.target(
+			name: "CardsService",
+			dependencies: ["Domain", "Shared", "SearchService"]
+		),
 		.target(
 			name: "SearchService",
 			dependencies: ["Domain", "Shared"]
 		),
-		.target(name: "PlaceService", dependencies: ["Domain"]),
+		.target(name: "PlaceService", dependencies: ["Domain", "SearchService"]),
 		.target(name: "CategoryService", dependencies: ["Domain"]),
 		.target(name: "TextDetectionService", dependencies: ["Domain"]),
 		.target(name: "IncomeService", dependencies: ["Domain"]),

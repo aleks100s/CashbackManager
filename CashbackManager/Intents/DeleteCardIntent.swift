@@ -19,9 +19,6 @@ struct DeleteCardIntent: AppIntent {
 	@Dependency
 	private var cardsService: CardsService
 	
-	@Dependency
-	private var searchService: SearchService
-	
 	init() {}
 	
 	init(cardName: String) {
@@ -35,7 +32,6 @@ struct DeleteCardIntent: AppIntent {
 			}
 			
 			cardsService.archive(card: card)
-			searchService.deindex(card: card)
 			return "Карта \"\(card.name)\" удалена!"
 		}.value
 		return .result(dialog: "\(result)")

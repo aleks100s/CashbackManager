@@ -54,6 +54,7 @@
 		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
 		277130EC2C73C52B00C26CD8 /* CreateCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */; };
 		277130EE2C73CA1400C26CD8 /* CreateCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */; };
+		2781B1242CD7CCA30081A927 /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2781B1232CD7CCA30081A927 /* CashbackFeature */; };
 		27A5D7EC2C394EC500B93512 /* CashbackManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7EB2C394EC500B93512 /* CashbackManagerUITests.swift */; };
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
@@ -170,6 +171,7 @@
 				277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */,
 				27368BBF2C4BB11100FC0475 /* SwiftUI.framework in Frameworks */,
 				27368BBD2C4BB11100FC0475 /* WidgetKit.framework in Frameworks */,
+				2781B1242CD7CCA30081A927 /* CashbackFeature in Frameworks */,
 				277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */,
 				274861FB2C53463E00788C1A /* CardsService in Frameworks */,
 				2755A32E2CCD5B23002F61EC /* UserDataService in Frameworks */,
@@ -396,6 +398,7 @@
 				2755A3112CBA4B73002F61EC /* IncomeService */,
 				2755A3262CC9F113002F61EC /* NotificationService */,
 				2755A32D2CCD5B23002F61EC /* UserDataService */,
+				2781B1232CD7CCA30081A927 /* CashbackFeature */,
 			);
 			productName = CashbackWidgetExtension;
 			productReference = 27368BBB2C4BB11000FC0475 /* CashbackWidgetExtension.appex */;
@@ -1084,6 +1087,10 @@
 		277130E92C73C0B200C26CD8 /* SearchService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SearchService;
+		};
+		2781B1232CD7CCA30081A927 /* CashbackFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CashbackFeature;
 		};
 		27AB37262C73BBE200A00939 /* CategoryService */ = {
 			isa = XCSwiftPackageProductDependency;

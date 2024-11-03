@@ -86,7 +86,6 @@ struct ContentView: View {
 	private var cashbackTab: some View {
 		if isCardsFeatureAvailable {
 			CashbackFeatureAssembly.assemble(
-				container: container,
 				addCardIntent: CreateCardIntent(),
 				checkCategoryCardIntent: CheckCategoryCardsIntent(),
 				cardCashbackIntent: CheckCardCashbackIntent(),

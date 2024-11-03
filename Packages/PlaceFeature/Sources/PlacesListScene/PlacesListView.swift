@@ -28,7 +28,6 @@ public struct PlacesListView: View {
 	@Query(sort: [SortDescriptor<Place>(\.name, order: .forward)])
 	private var places: [Place]
 	
-	@Environment(\.searchService) private var searchService
 	@Environment(\.placeService) private var placeService
 	
 	private var filteredPlaces: [Place] {
@@ -117,7 +116,6 @@ public struct PlacesListView: View {
 	}
 	
 	private func delete(place: Place) {
-		searchService?.deindex(place: place)
 		placeService?.delete(place: place)
 		toast = Toast(title: "Место удалено")
 	}

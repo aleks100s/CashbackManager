@@ -19,9 +19,6 @@ struct DeletePlaceIntent: AppIntent {
 	@Dependency
 	private var placeService: PlaceService
 	
-	@Dependency
-	private var searchService: SearchService
-	
 	init() {}
 	
 	init(placeName: String) {
@@ -35,7 +32,6 @@ struct DeletePlaceIntent: AppIntent {
 			}
 			
 			placeService.delete(place: place)
-			searchService.deindex(place: place)
 			return "Место \"\(place.name)\" удалено!"
 		}.value
 		return .result(dialog: "\(result)")

@@ -7,6 +7,7 @@
 
 import Domain
 import Foundation
+import SearchService
 import Shared
 import SwiftData
 import SwiftUI
@@ -14,15 +15,19 @@ import SwiftUI
 @MainActor
 public struct CardsService: @unchecked Sendable {
 	private let context: ModelContext
+	private let searchService: SearchService
 	
-	public init(context: ModelContext) {
+	public init(context: ModelContext, searchService: SearchService) {
 		self.context = context
+		self.searchService = searchService
 	}
 	
+	@discardableResult
 	public func createCard(name: String) -> Card {
 		let card = Card(name: name, color: Color.randomColor().toHex())
 		context.insert(card)
 		try? context.save()
+		searchService.index(card: card)
 		return card
 	}
 	
@@ -61,16 +66,19 @@ public struct CardsService: @unchecked Sendable {
 			delete(cashback: cashback, card: card)
 		}
 		try? context.save()
+		searchService.deindex(card: card)
 	}
 	
 	public func delete(cashback: Cashback, card: Card) {
 		card.cashback.removeAll { $0.id == cashback.id }
 		context.delete(cashback)
+		searchService.index(card: card)
 	}
 	
 	public func update(card: Card) {
 		context.insert(card)
 		try? context.save()
+		searchService.index(card: card)
 	}
 	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {

@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import CashbackFeature
 import Domain
 import IncomeService
 import SearchService
@@ -61,6 +62,7 @@ struct CashbackApplication: App {
 		.environment(\.incomeService, incomeService)
 		.environment(\.notificationService, notificationService)
 		.environment(\.userDataService, userDataService)
+		.environment(\.widgetURLParser, AppFactory.provideWidgetURLParser())
     }
 
 	private func requestNotificationPermission() {

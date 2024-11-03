@@ -226,12 +226,10 @@ public struct CardDetailView: View {
 	}
 	
 	private func archive(card: Card, shouldDeleteTransactions: Bool = false) {
-		searchService?.deindex(card: card)
 		if shouldDeleteTransactions {
 			deleteTransactions(from: card)
 		}
-		card.isArchived = true
-		try? modelContext.save()
+		cardsService?.archive(card: card)
 		currentCardId = nil
 		refreshWidget()
 		dismiss()

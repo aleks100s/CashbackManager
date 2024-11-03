@@ -25,9 +25,6 @@ struct CreatePlaceIntent: AppIntent {
 	private var placeService: PlaceService
 	
 	@Dependency
-	private var searchService: SearchService
-	
-	@Dependency
 	private var categoryService: CategoryService
 	
 	init() {}
@@ -38,8 +35,7 @@ struct CreatePlaceIntent: AppIntent {
 				return "Не получилось найти категорию \(categoryName) и добавить место"
 			}
 			
-			let place = placeService.createPlace(name: placeName, category: category)
-			searchService.index(place: place)
+			placeService.createPlace(name: placeName, category: category)
 			return "Новое место \(placeName) добавлено!"
 		}.value
 		return .result(dialog: "\(result)")

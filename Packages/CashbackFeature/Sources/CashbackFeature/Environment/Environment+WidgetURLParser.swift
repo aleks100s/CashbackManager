@@ -11,7 +11,7 @@ private struct WidgetURLParserKey: EnvironmentKey {
 	static let defaultValue: WidgetURLParser? = nil
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
 	var widgetURLParser: WidgetURLParser? {
 		get { self[WidgetURLParserKey.self] }
 		set { self[WidgetURLParserKey.self] = newValue }

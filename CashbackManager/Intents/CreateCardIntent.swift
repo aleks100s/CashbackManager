@@ -20,9 +20,6 @@ struct CreateCardIntent: AppIntent {
 	@Dependency
 	private var cardsService: CardsService
 	
-	@Dependency
-	private var searchService: SearchService
-	
 	init(cardName: String) {
 		self.cardName = cardName
 	}
@@ -34,8 +31,7 @@ struct CreateCardIntent: AppIntent {
 			if cardName.isEmpty {
 				cardName = "Карта"
 			}
-			let card = cardsService.createCard(name: cardName)
-			searchService.index(card: card)
+			cardsService.createCard(name: cardName)
 			return "Новая карта \"\(cardName)\" создана"
 		}.value
 		return .result(dialog: "\(result)")

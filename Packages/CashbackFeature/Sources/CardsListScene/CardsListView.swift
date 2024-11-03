@@ -32,7 +32,6 @@ public struct CardsListView: View {
 		sort: [SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
 	) private var cards: [Card]
-	@Environment(\.searchService) private var searchService
 	@Environment(\.cardsService) private var cardsService
 	
 	private var filteredCards: [Card] {
@@ -133,7 +132,6 @@ public struct CardsListView: View {
 	private func create(cardName: String) {
 		guard let cardsService else { return }
 		let card = cardsService.createCard(name: cardName)
-		searchService?.index(card: card)
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)

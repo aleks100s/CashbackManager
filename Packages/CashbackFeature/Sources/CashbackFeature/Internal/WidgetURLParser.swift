@@ -10,10 +10,10 @@ import Foundation
 import SwiftData
 
 @MainActor
-struct WidgetURLParser {
+public struct WidgetURLParser {
 	private let cardsService: CardsService
 	
-	init(cardsService: CardsService) {
+	public init(cardsService: CardsService) {
 		self.cardsService = cardsService
 	}
 	

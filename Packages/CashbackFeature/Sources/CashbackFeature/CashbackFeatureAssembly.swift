@@ -13,7 +13,6 @@ import SwiftUI
 @MainActor
 public enum CashbackFeatureAssembly {
 	public static func assemble(
-		container: ModelContainer,
 		addCardIntent: any AppIntent,
 		checkCategoryCardIntent: any AppIntent,
 		cardCashbackIntent: any AppIntent,
@@ -27,10 +26,5 @@ public enum CashbackFeatureAssembly {
 			addCategoryIntent: addCategoryIntent,
 			addCashbackIntent: addCashbackIntent
 		)
-		.environment(\.widgetURLParser, makeWidgetURLParser(with: container))
-	}
-	
-	private static func makeWidgetURLParser(with container: ModelContainer) -> WidgetURLParser {
-		WidgetURLParser(cardsService: CardsService(context: container.mainContext))
 	}
 }

@@ -28,7 +28,6 @@ public struct AddPlaceView: View {
 	@FocusState private var isFocused
 	
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.searchService) private var searchService
 	@Environment(\.placeService) private var placeService
 	
 	private var isInputCorrect: Bool {
@@ -114,8 +113,6 @@ public struct AddPlaceView: View {
 	private func createPlace() {
 		guard let selectedCategory else { return }
 		
-		guard let place = placeService?.createPlace(name: placeName, category: selectedCategory) else { return }
-		
-		searchService?.index(place: place)
+		placeService?.createPlace(name: placeName, category: selectedCategory)
 	}
 }
