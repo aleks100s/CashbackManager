@@ -55,6 +55,8 @@
 		277130EC2C73C52B00C26CD8 /* CreateCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */; };
 		277130EE2C73CA1400C26CD8 /* CreateCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */; };
 		2781B1242CD7CCA30081A927 /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2781B1232CD7CCA30081A927 /* CashbackFeature */; };
+		2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1252CD874300081A927 /* PlaceEntity.swift */; };
+		2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1272CD874CC0081A927 /* CategoryEntity.swift */; };
 		27A5D7EC2C394EC500B93512 /* CashbackManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7EB2C394EC500B93512 /* CashbackManagerUITests.swift */; };
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
@@ -148,6 +150,8 @@
 		2755A32A2CCD1E7E002F61EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryIntent.swift; sourceTree = "<group>"; };
 		277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCashbackIntent.swift; sourceTree = "<group>"; };
+		2781B1252CD874300081A927 /* PlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceEntity.swift; sourceTree = "<group>"; };
+		2781B1272CD874CC0081A927 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7DD2C394EC500B93512 /* CashbackManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7E72C394EC500B93512 /* CashbackManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,6 +302,8 @@
 		2755A3192CBBA5F8002F61EC /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				2781B1252CD874300081A927 /* PlaceEntity.swift */,
+				2781B1272CD874CC0081A927 /* CategoryEntity.swift */,
 				2755A31A2CBBA609002F61EC /* CardEntity.swift */,
 			);
 			path = Entities;
@@ -593,6 +599,8 @@
 				2755A31B2CBBA609002F61EC /* CardEntity.swift in Sources */,
 				272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */,
 				272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */,
+				2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */,
+				2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

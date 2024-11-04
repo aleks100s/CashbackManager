@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-public final class Category {
+public final class Category: @unchecked Sendable {
 	public var id: UUID
 	public var name: String
 	public var emoji: String

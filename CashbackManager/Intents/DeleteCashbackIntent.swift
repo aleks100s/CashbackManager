@@ -8,13 +8,14 @@
 import AppIntents
 import CardsService
 import CategoryService
+import Domain
 
 struct DeleteCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить кэшбэк"
-	static var description: IntentDescription? = "Удаляет кэшбэк по названию карты и категории"
+	static var description: IntentDescription? = "Удаляет кэшбэк с картыпо названию категории"
 		
-	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var cardName: String
+	@Parameter(title: "Карта")
+	private var cardEntity: CardEntity?
 	
 	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var categoryName: String
@@ -27,15 +28,20 @@ struct DeleteCashbackIntent: AppIntent {
 	
 	init() {}
 	
-	init(cardName: String, categoryName: String) {
-		self.cardName = cardName
-		self.categoryName = categoryName
-	}
-	
 	func perform() async throws -> some ProvidesDialog {
-		let result = await Task { @MainActor in
-			guard let card = cardsService.getCard(name: cardName) else {
-				return "Не получилось найти карту \(cardName)"
+		let result = try await Task { @MainActor in
+			let card: Card
+			if let cardEntity {
+				card = cardEntity.card
+			} else {
+				let variants = cardsService.getAllCards().map {
+					CardEntity(id: $0.id, card: $0)
+				}
+				let cardEntity = try await $cardEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите карту")
+				)
+				card = cardEntity.card
 			}
 			
 			guard let category = categoryService.getCategory(by: categoryName) else {

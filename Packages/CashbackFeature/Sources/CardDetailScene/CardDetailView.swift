@@ -39,7 +39,6 @@ public struct CardDetailView: View {
 	@State private var isDeleteTransactionsWarningPresented = false
 	
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.modelContext) private var modelContext
 	@Environment(\.cardsService) private var cardsService
  	@Environment(\.categoryService) private var categoryService
 	@Environment(\.textDetectionService) private var textDetectionService

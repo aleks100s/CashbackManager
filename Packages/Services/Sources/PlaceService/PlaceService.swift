@@ -11,7 +11,7 @@ import SearchService
 import SwiftData
 
 @MainActor
-public struct PlaceService: @unchecked Sendable {
+public struct PlaceService {
 	private let context: ModelContext
 	private let searchService: SearchService
 	

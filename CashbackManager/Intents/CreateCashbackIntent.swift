@@ -14,8 +14,8 @@ struct CreateCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Новый кэшбэк"
 	static var description: IntentDescription? = "Добавляет новый кэшбэк в указанной категории на карту"
 		
-	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var cardName: String
+	@Parameter(title: "Карта")
+	private var cardEntity: CardEntity?
 	
 	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var categoryName: String
@@ -32,9 +32,19 @@ struct CreateCashbackIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let result = await Task { @MainActor in
-			guard let card = cardsService.getCard(name: cardName) else {
-				return "Карта \"\(cardName)\" не найдена"
+		let result = try await Task { @MainActor in
+			let card: Card
+			if let cardEntity {
+				card = cardEntity.card
+			} else {
+				let variants = cardsService.getAllCards().map {
+					CardEntity(id: $0.id, card: $0)
+				}
+				let cardEntity = try await $cardEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите карту")
+				)
+				card = cardEntity.card
 			}
 			
 			guard let category = categoryService.getCategory(by: categoryName) else {
@@ -47,7 +57,7 @@ struct CreateCashbackIntent: AppIntent {
 			}
 			
 			cardsService.add(cashback: cashback, card: card)
-			return "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(cardName)!"
+			return "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(card.name)!"
 		}.value
 		return .result(dialog: "\(result)")
 	}

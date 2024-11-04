@@ -10,11 +10,15 @@ import Foundation
 import SwiftData
 
 @MainActor
-public struct CategoryService: @unchecked Sendable {
+public struct CategoryService {
 	private let context: ModelContext
 	
 	public init(context: ModelContext) {
 		self.context = context
+	}
+	
+	public func getAllCategories() -> [Domain.Category] {
+		fetch(by: #Predicate<Domain.Category> { $0.isArchived == false })
 	}
 	
 	public func getCategory(by name: String) -> Domain.Category? {

@@ -7,27 +7,35 @@
 
 import AppIntents
 import CardsService
+import Domain
 
 struct DeleteCardIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить карту"
-	static var description: IntentDescription? = "Удаляет карту по названию"
+	static var description: IntentDescription? = "Удаляет выбранную карту"
 		
-	@Parameter(title: "Название карты", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var cardName: String
+	@Parameter(title: "Карта")
+	private var cardEntity: CardEntity?
 	
 	@Dependency
 	private var cardsService: CardsService
 	
 	init() {}
 	
-	init(cardName: String) {
-		self.cardName = cardName
-	}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let result = await Task { @MainActor in
-			guard let card = cardsService.getCard(name: cardName) else {
-				return "Не получилось найти карту \(cardName)"
+		let result = try await Task { @MainActor in
+			let card: Card
+			if let cardEntity {
+				card = cardEntity.card
+			} else {
+				let variants = cardsService.getAllCards().map {
+					CardEntity(id: $0.id, card: $0)
+				}
+				let cardEntity = try await $cardEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите карту")
+				)
+				card = cardEntity.card
 			}
 			
 			cardsService.archive(card: card)
