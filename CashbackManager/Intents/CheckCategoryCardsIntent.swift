@@ -13,7 +13,7 @@ import SwiftData
 
 struct CheckCategoryCardsIntent: AppIntent {
 	static var title: LocalizedStringResource = "Карта в категории"
-	static var description: IntentDescription? = "Запрашивает название категории и выдает все карты с кэшбэком в этой категории"
+	static var description: IntentDescription? = "Запрашивает категорию и выдает все карты с кэшбэком в этой категории"
 
 	@Parameter(title: "Категория")
 	private var categoryEntity: CategoryEntity?

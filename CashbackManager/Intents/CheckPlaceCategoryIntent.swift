@@ -12,28 +12,33 @@ import SwiftData
 
 struct CheckPlaceCategoryIntent: AppIntent {
 	static var title: LocalizedStringResource = "Категория в заведении"
-	static var description: IntentDescription? = "Запрашивает название заведения и выдает его категорию кэшбэка"
+	static var description: IntentDescription? = "Запрашивает заведение и выдает его категорию кэшбэка"
 	
-	@Parameter(title: "Название заведения", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var placeName: String
+	@Parameter(title: "Место")
+	private var placeEntity: PlaceEntity?
 	
 	@Dependency
 	private var placeService: PlaceService
 	
-	init(placeName: String) {
-		self.placeName = placeName
-	}
-	
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let result = await Task { @MainActor in
+		let result = try await Task { @MainActor in
 			let placeService = AppFactory.providePlaceService()
-			if let place = placeService.getPlace(by: placeName) {
-				return "\(placeName) относится к категории \(place.category.name)"
+			let place: Place
+			if let placeEntity {
+				place = placeEntity.place
 			} else {
-				return "Не удалось найти заведение \(placeName)"
+				let variants = placeService.getAllPlaces().map {
+					PlaceEntity(id: $0.id, place: $0)
+				}
+				let placeEntity = try await $placeEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите место")
+				)
+				place = placeEntity.place
 			}
+			return "\(place.name) относится к категории \(place.category.name)"
 		}.value
 		return .result(dialog: "\(result)")
 	}

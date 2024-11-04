@@ -12,7 +12,7 @@ import SwiftData
 
 struct CheckCardCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Кэшбэк на карте"
-	static var description: IntentDescription? = "Запрашивает имя карты и выдает кэшбэки по ней"
+	static var description: IntentDescription? = "Запрашивает карту и выдает кэшбэки по ней"
 	
 	@Parameter(title: "Карта")
 	private var cardEntity: CardEntity?

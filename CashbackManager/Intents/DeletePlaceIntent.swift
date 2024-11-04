@@ -6,28 +6,35 @@
 //
 
 import AppIntents
+import Domain
 import PlaceService
 
 struct DeletePlaceIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить место"
-	static var description: IntentDescription? = "Удаляет место по названию"
+	static var description: IntentDescription? = "Удаляет место"
 		
-	@Parameter(title: "Название места", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var placeName: String
+	@Parameter(title: "Место")
+	private var placeEntity: PlaceEntity?
 	
 	@Dependency
 	private var placeService: PlaceService
 	
 	init() {}
 	
-	init(placeName: String) {
-		self.placeName = placeName
-	}
-	
 	func perform() async throws -> some ProvidesDialog {
-		let result = await Task { @MainActor in
-			guard let place = placeService.getPlace(by: placeName) else {
-				return "Не получилось найти место \(placeName)"
+		let result = try await Task { @MainActor in
+			let place: Place
+			if let placeEntity {
+				place = placeEntity.place
+			} else {
+				let variants = placeService.getAllPlaces().map {
+					PlaceEntity(id: $0.id, place: $0)
+				}
+				let placeEntity = try await $placeEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите место")
+				)
+				place = placeEntity.place
 			}
 			
 			placeService.delete(place: place)

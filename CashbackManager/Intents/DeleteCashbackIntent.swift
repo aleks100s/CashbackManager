@@ -12,7 +12,7 @@ import Domain
 
 struct DeleteCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить кэшбэк"
-	static var description: IntentDescription? = "Удаляет кэшбэк с картыпо названию категории"
+	static var description: IntentDescription? = "Удаляет кэшбэк с карты по категории"
 		
 	@Parameter(title: "Карта")
 	private var cardEntity: CardEntity?
