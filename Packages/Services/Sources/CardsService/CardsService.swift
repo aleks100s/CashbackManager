@@ -41,15 +41,6 @@ public struct CardsService: @unchecked Sendable {
 		fetch(by: #Predicate<Card> { $0.cashback.contains { $0.id == cashbackId } }).first
 	}
 	
-	public func getCard(name: String) -> Card? {
-		let initialResult = fetch(by: #Predicate<Card> { $0.name == name })
-		if initialResult.isEmpty {
-			return fetch(by: #Predicate<Card> { $0.name.localizedStandardContains(name) }).first
-		} else {
-			return initialResult.first
-		}
-	}
-	
 	public func getAllCards() -> [Card] {
 		fetch(by: #Predicate<Card> { !$0.cashback.isEmpty && !$0.isArchived })
 	}

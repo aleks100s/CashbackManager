@@ -7,6 +7,7 @@
 
 import AppIntents
 import CategoryService
+import Domain
 import PlaceService
 import SwiftData
 
@@ -17,8 +18,8 @@ struct CreatePlaceIntent: AppIntent {
 	@Parameter(title: "Название места", inputOptions: String.IntentInputOptions(keyboardType: .default))
 	var placeName: String
 	
-	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var categoryName: String
+	@Parameter(title: "Категория")
+	private var categoryEntity: CategoryEntity?
 	
 	@Dependency
 	private var placeService: PlaceService
@@ -29,9 +30,19 @@ struct CreatePlaceIntent: AppIntent {
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let result = await Task { @MainActor in
-			guard let category = categoryService.getCategory(by: categoryName) else {
-				return "Не получилось найти категорию \(categoryName) и добавить место"
+		let result = try await Task { @MainActor in
+			let category: Domain.Category
+			if let categoryEntity {
+				category = categoryEntity.category
+			} else {
+				let variants = categoryService.getAllCategories().map {
+					CategoryEntity(id: $0.id, category: $0)
+				}
+				let categoryEntity = try await $categoryEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите категорию")
+				)
+				category = categoryEntity.category
 			}
 			
 			placeService.createPlace(name: placeName, category: category)

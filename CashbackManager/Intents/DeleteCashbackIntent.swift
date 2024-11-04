@@ -17,8 +17,8 @@ struct DeleteCashbackIntent: AppIntent {
 	@Parameter(title: "Карта")
 	private var cardEntity: CardEntity?
 	
-	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var categoryName: String
+	@Parameter(title: "Категория")
+	private var categoryEntity: CategoryEntity?
 	
 	@Dependency
 	private var cardsService: CardsService
@@ -44,8 +44,18 @@ struct DeleteCashbackIntent: AppIntent {
 				card = cardEntity.card
 			}
 			
-			guard let category = categoryService.getCategory(by: categoryName) else {
-				return "Не получилось найти категорию \(categoryName)"
+			let category: Domain.Category
+			if let categoryEntity {
+				category = categoryEntity.category
+			} else {
+				let variants = categoryService.getAllCategories().map {
+					CategoryEntity(id: $0.id, category: $0)
+				}
+				let categoryEntity = try await $categoryEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите категорию")
+				)
+				category = categoryEntity.category
 			}
 			
 			guard let cashback = card.cashback.first(where: { $0.category.id == category.id }) else {

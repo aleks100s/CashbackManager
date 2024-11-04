@@ -8,14 +8,15 @@
 import AppIntents
 import CardsService
 import CategoryService
+import Domain
 import SwiftData
 
 struct CheckCategoryCardsIntent: AppIntent {
 	static var title: LocalizedStringResource = "Карта в категории"
 	static var description: IntentDescription? = "Запрашивает название категории и выдает все карты с кэшбэком в этой категории"
 
-	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var categoryName: String
+	@Parameter(title: "Категория")
+	private var categoryEntity: CategoryEntity?
 	
 	@Dependency
 	private var cardsService: CardsService
@@ -23,23 +24,29 @@ struct CheckCategoryCardsIntent: AppIntent {
 	@Dependency
 	private var categoryService: CategoryService
 	
-	init(categoryName: String) {
-		self.categoryName = categoryName
-	}
-	
 	init() {}
 	
 	func perform() async throws -> some ProvidesDialog {
-		let result = await Task { @MainActor in
-			guard let category = categoryService.getCategory(by: categoryName) else {
-				return "Категория \"\(categoryName)\" не найдена"
+		let result = try await Task { @MainActor in
+			let category: Domain.Category
+			if let categoryEntity {
+				category = categoryEntity.category
+			} else {
+				let variants = categoryService.getAllCategories().map {
+					CategoryEntity(id: $0.id, category: $0)
+				}
+				let categoryEntity = try await $categoryEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите категорию")
+				)
+				category = categoryEntity.category
 			}
 			
 			let cards = cardsService.getCards(category: category)
 			return if cards.isEmpty {
-				"Не удалось найти карту с категорией \(categoryName)"
+				"Не удалось найти карту с категорией \(category.name)"
 			} else {
-				"Для оплаты в категории \(categoryName) используйте карты: \(cards.map(\.name).joined(separator: ", "))"
+				"Для оплаты в категории \(category.name) используйте карты: \(cards.map(\.name).joined(separator: ", "))"
 			}
 		}.value
 		return .result(dialog: "\(result)")

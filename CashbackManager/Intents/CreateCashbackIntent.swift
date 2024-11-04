@@ -17,8 +17,8 @@ struct CreateCashbackIntent: AppIntent {
 	@Parameter(title: "Карта")
 	private var cardEntity: CardEntity?
 	
-	@Parameter(title: "Название категории", inputOptions: String.IntentInputOptions(keyboardType: .default))
-	var categoryName: String
+	@Parameter(title: "Категория")
+	private var categoryEntity: CategoryEntity?
 	
 	@Parameter(title: "Процент")
 	var percent: Double
@@ -47,17 +47,27 @@ struct CreateCashbackIntent: AppIntent {
 				card = cardEntity.card
 			}
 			
-			guard let category = categoryService.getCategory(by: categoryName) else {
-				return "Не получилось найти категорию \(categoryName)"
+			let category: Domain.Category
+			if let categoryEntity {
+				category = categoryEntity.category
+			} else {
+				let variants = categoryService.getAllCategories().map {
+					CategoryEntity(id: $0.id, category: $0)
+				}
+				let categoryEntity = try await $categoryEntity.requestDisambiguation(
+					among: variants,
+					dialog: IntentDialog(stringLiteral: "Выберите категорию")
+				)
+				category = categoryEntity.category
 			}
 			
 			let cashback = Cashback(category: category, percent: percent / 100)
 			guard !card.has(category: category) else {
-				return "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(categoryName)\""
+				return "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(category.name)\""
 			}
 			
 			cardsService.add(cashback: cashback, card: card)
-			return "Новая категория кэшбэка \"\(categoryName)\" \(String(format: "%.1f", percent)) добавлена на карту \(card.name)!"
+			return "Новая категория кэшбэка \"\(category.name)\" \(String(format: "%.1f", percent)) добавлена на карту \(card.name)!"
 		}.value
 		return .result(dialog: "\(result)")
 	}
