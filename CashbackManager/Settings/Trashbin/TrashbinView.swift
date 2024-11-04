@@ -45,6 +45,8 @@ struct TrashbinView: View {
 							toast = Toast(title: "Все карты восстановлены")
 						}
 					}
+				} else {
+					ContentUnavailableView("Нет удаленных карт", systemImage: "creditcard")
 				}
 				
 				if !categories.isEmpty {
@@ -65,6 +67,8 @@ struct TrashbinView: View {
 							toast = Toast(title: "Все категории восстановлены")
 						}
 					}
+				} else {
+					ContentUnavailableView("Нет удаленных категорий", systemImage: "checklist.unchecked")
 				}
 			}
 		}
