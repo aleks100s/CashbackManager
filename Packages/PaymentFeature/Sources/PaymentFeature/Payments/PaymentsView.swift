@@ -57,7 +57,7 @@ struct PaymentsView: View {
 				}
 			}
 			.toast(item: $toast)
-			.onAppear {
+			.onFirstAppear {
 				setupCurrentMonthBounds()
 				handleChange(transactions: allTransactions)
 			}
