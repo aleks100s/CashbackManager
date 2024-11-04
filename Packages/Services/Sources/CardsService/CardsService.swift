@@ -62,6 +62,14 @@ public struct CardsService: @unchecked Sendable {
 		searchService.deindex(card: card)
 	}
 	
+	public func unarchive(cards: [Card]) {
+		for card in cards {
+			card.isArchived = false
+			searchService.index(card: card)
+		}
+		try? context.save()
+	}
+	
 	public func add(cashback: Cashback, card: Card) {
 		card.cashback.append(cashback)
 		context.insert(cashback)

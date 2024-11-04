@@ -40,6 +40,13 @@ public struct CategoryService {
 		try? context.save()
 	}
 	
+	public func unarchive(categories: [Domain.Category]) {
+		for category in categories {
+			category.isArchived = false
+		}
+		try? context.save()
+	}
+	
 	private func fetch(by predicate: Predicate<Domain.Category>) -> [Domain.Category] {
 		let descriptor = FetchDescriptor(predicate: predicate)
 		return (try? context.fetch(descriptor)) ?? []
