@@ -21,7 +21,7 @@ public struct TextDetectionService {
 			let reuqestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
 			let request = VNRecognizeTextRequest { (req, error ) in
 				guard let observations = req.results as? [VNRecognizedTextObservation] else {
-					print("nothing found")
+					continuation.resume(returning: [])
 					return
 				}
 				
@@ -44,6 +44,7 @@ public struct TextDetectionService {
 					try reuqestHandler.perform([request])
 				} catch {
 					print("recognition handler error \(error.localizedDescription)")
+					continuation.resume(returning: [])
 				}
 			}
 		}
