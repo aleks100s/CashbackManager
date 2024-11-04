@@ -18,10 +18,9 @@ struct Coordinator: View {
 	var body: some View {
 		NavigationStack {
 			if let incomeService {
-				let model = IncomePeriodModel(incomeService: incomeService) {
+				PaymentsView {
 					isAddIncomePresented = true
 				}
-				IncomePeriodView(model: model)
 			}
 		}
 		.sheet(isPresented: $isAddIncomePresented) {

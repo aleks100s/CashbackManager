@@ -62,7 +62,7 @@ struct DeleteCashbackIntent: AppIntent {
 				return "Не получилось найти кэшбэк с категорией \(category.name)"
 			}
 			
-			cardsService.delete(cashback: cashback, card: card)
+			cardsService.delete(cashback: cashback, from: card)
 			return "Кэшбэк \"\(category.name)\" удален с карты \(card.name)!"
 		}.value
 		return .result(dialog: "\(result)")

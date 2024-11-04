@@ -210,12 +210,12 @@ public struct CardDetailView: View {
 	}
 	
 	private func delete(cashback: Cashback) {
-		cardsService?.delete(cashback: cashback, card: card)
+		cardsService?.delete(cashback: cashback, from: card)
 		toast = Toast(title: "Кэшбэк удален")
 	}
 	
 	private func deleteTransactions(from card: Card) {
-		incomeService?.deleteIncomes(card: card)
+		incomeService?.deleteIncomes(from: card)
 		toast = Toast(title: "Транзакции успешно удалены")
 	}
 	
@@ -256,7 +256,7 @@ private extension CardDetailView {
 			}
 			
 			let cashback = Cashback(category: category, percent: item.1)
-			cardsService?.add(cashback: cashback, card: card)
+			cardsService?.add(cashback: cashback, to: card)
 		}
 		toast = Toast(title: "Кэшбэки считаны!")
 		refreshWidget()

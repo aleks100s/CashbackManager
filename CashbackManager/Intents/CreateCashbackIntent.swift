@@ -66,7 +66,7 @@ struct CreateCashbackIntent: AppIntent {
 				return "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(category.name)\""
 			}
 			
-			cardsService.add(cashback: cashback, card: card)
+			cardsService.add(cashback: cashback, to: card)
 			return "Новая категория кэшбэка \"\(category.name)\" \(String(format: "%.1f", percent)) добавлена на карту \(card.name)!"
 		}.value
 		return .result(dialog: "\(result)")

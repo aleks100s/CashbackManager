@@ -56,7 +56,7 @@ public struct CardsService: @unchecked Sendable {
 	public func archive(card: Card) {
 		card.isArchived = true
 		for cashback in card.cashback {
-			delete(cashback: cashback, card: card)
+			delete(cashback: cashback, from: card)
 		}
 		try? context.save()
 		searchService.deindex(card: card)
@@ -70,7 +70,7 @@ public struct CardsService: @unchecked Sendable {
 		try? context.save()
 	}
 	
-	public func add(cashback: Cashback, card: Card) {
+	public func add(cashback: Cashback, to card: Card) {
 		card.cashback.append(cashback)
 		context.insert(cashback)
 		try? context.save()
@@ -78,7 +78,7 @@ public struct CardsService: @unchecked Sendable {
 		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 	}
 	
-	public func delete(cashback: Cashback, card: Card) {
+	public func delete(cashback: Cashback, from card: Card) {
 		searchService.deindex(cashback: cashback)
 		card.cashback.removeAll { $0.id == cashback.id }
 		context.delete(cashback)
