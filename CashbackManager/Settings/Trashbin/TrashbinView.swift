@@ -27,8 +27,8 @@ struct TrashbinView: View {
 			if cards.isEmpty && categories.isEmpty {
 				ContentUnavailableView("Корзина пуста", systemImage: "trashbin")
 			} else {
-				if !cards.isEmpty {
-					Section("Удаленные карты") {
+				Section("Удаленные карты") {
+					if !cards.isEmpty {
 						ForEach(cards) { card in
 							Text(card.name)
 								.swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -44,13 +44,14 @@ struct TrashbinView: View {
 							cardsService?.unarchive(cards: cards)
 							toast = Toast(title: "Все карты восстановлены")
 						}
+					} else {
+						ContentUnavailableView("Нет удаленных карт", systemImage: "creditcard")
 					}
-				} else {
-					ContentUnavailableView("Нет удаленных карт", systemImage: "creditcard")
 				}
 				
-				if !categories.isEmpty {
-					Section("Удаленные категории") {
+				Section("Удаленные категории") {
+					if !categories.isEmpty {
+						
 						ForEach(categories) { category in
 							Text(category.name)
 								.swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -66,9 +67,9 @@ struct TrashbinView: View {
 							categoryService?.unarchive(categories: categories)
 							toast = Toast(title: "Все категории восстановлены")
 						}
+					} else {
+						ContentUnavailableView("Нет удаленных категорий", systemImage: "checklist.unchecked")
 					}
-				} else {
-					ContentUnavailableView("Нет удаленных категорий", systemImage: "checklist.unchecked")
 				}
 			}
 		}
