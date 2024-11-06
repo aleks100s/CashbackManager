@@ -39,6 +39,12 @@ public struct PlaceService {
 		return place
 	}
 	
+	public func update(place: Place) {
+		context.insert(place)
+		try? context.save()
+		searchService.index(place: place)
+	}
+	
 	public func delete(place: Place) {
 		searchService.deindex(place: place)
 		context.delete(place)

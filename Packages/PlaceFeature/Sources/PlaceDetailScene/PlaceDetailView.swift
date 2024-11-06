@@ -9,6 +9,7 @@ import AppIntents
 import CardsService
 import DesignSystem
 import Domain
+import PlaceService
 import Shared
 import SwiftUI
 
@@ -19,20 +20,28 @@ public struct PlaceDetailView: View {
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
+	@State private var isEditing = false
+	@State private var toast: Toast?
 	@State private var cards: [PlaceCard] = []
+	@State private var placeName: String
 	
 	@Environment(\.cardsService) private var cardsService
+	@Environment(\.placeService) private var placeService
 	
 	public init(place: Place, intent: any AppIntent) {
 		self.place = place
 		self.intent = intent
+		placeName = place.name
 	}
 	
 	public var body: some View {
 		List {
-			Section("Данные о заведении") {
+			Section(isEditing ? "Редактировать данные заведения" : "Данные о заведении") {
 				HStack {
-					Text(place.name)
+					TextField("Название места", text: $placeName)
+						.textFieldStyle(.plain)
+						.disabled(!isEditing)
+					
 					Spacer()
 					Text("Название")
 						.foregroundStyle(.secondary)
@@ -46,21 +55,39 @@ public struct PlaceDetailView: View {
 				}
 			}
 			
-			if cards.isEmpty {
-				ContentUnavailableView("Не найдены подходящие карты", systemImage: "creditcard")
-			} else {
-				Section("Карты, которыми можно оплатить") {
-					ForEach(cards) { card in
-						CardView(card: card, category: place.category)
+			if !isEditing {
+				if cards.isEmpty {
+					ContentUnavailableView("Не найдены подходящие карты", systemImage: "creditcard")
+				} else {
+					Section("Карты, которыми можно оплатить") {
+						ForEach(cards) { card in
+							CardView(card: card, category: place.category)
+						}
 					}
-				}
-				
-				if areSiriTipsVisible {
-					IntentTipView(intent: intent, text: "Чтобы быстро проверить карту в заведении")
+					
+					if areSiriTipsVisible {
+						IntentTipView(intent: intent, text: "Чтобы быстро проверить карту в заведении")
+					}
 				}
 			}
 		}
-		.navigationTitle(place.name)
+		.navigationTitle(placeName)
+		.navigationBarTitleDisplayMode(.inline)
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing) {
+				Button(isEditing ? "Готово" : "Править") {
+					isEditing.toggle()
+				}
+			}
+		}
+		.onChange(of: isEditing) { _, _ in
+			if placeName != place.name {
+				place.name = placeName
+				placeService?.update(place: place)
+				toast = Toast(title: "Карта обновлена")
+			}
+		}
+		.toast(item: $toast)
 		.onAppear {
 			guard let cards = cardsService?.getCards(category: place.category) else { return }
 			
