@@ -81,7 +81,7 @@ public struct CardsListView: View {
 			}
 		} else {
 			List {
-				if areSiriTipsVisible {
+				if areSiriTipsVisible, !searchText.isEmpty {
 					IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
 				}
 				

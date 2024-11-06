@@ -69,7 +69,7 @@ public struct PlacesListView: View {
 			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
 		} else {
 			List {
-				if areSiriTipsVisible {
+				if areSiriTipsVisible, !searchText.isEmpty {
 					IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
 				}
 				
