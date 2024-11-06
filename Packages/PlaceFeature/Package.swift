@@ -44,7 +44,8 @@ let package = Package(
 				"DesignSystem",
 				"Shared",
 				.product(name: "CardsService", package: "Services"),
-				.product(name: "PlaceService", package: "Services")
+				.product(name: "PlaceService", package: "Services"),
+				.product(name: "SelectCategoryScene", package: "CommonScenes")
 			]
 		),
 		.target(

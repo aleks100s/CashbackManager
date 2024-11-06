@@ -43,7 +43,11 @@ struct Coordinator: View {
 	private func navigate(to destination: Navigation) -> some View {
 		switch destination {
 		case .placeDetail(let place):
-			PlaceDetailView(place: place, intent: checkPlaceCardIntent)
+			PlaceDetailView(
+				place: place,
+				checkPlaceCardIntent: checkPlaceCardIntent,
+				addCategoryIntent: addCategoryIntent
+			)
 		}
 	}
 }

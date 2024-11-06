@@ -10,12 +10,14 @@ import CardsService
 import DesignSystem
 import Domain
 import PlaceService
+import SelectCategoryScene
 import Shared
 import SwiftUI
 
 public struct PlaceDetailView: View {
 	private let place: Place
-	private let intent: any AppIntent
+	private let checkPlaceCardIntent: any AppIntent
+	private let addCategoryIntent: any AppIntent
 	
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
@@ -24,14 +26,18 @@ public struct PlaceDetailView: View {
 	@State private var toast: Toast?
 	@State private var cards: [PlaceCard] = []
 	@State private var placeName: String
+	@State private var selectedCategory: Domain.Category
+	@State private var isCategorySelectorPresented = false
 	
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.placeService) private var placeService
 	
-	public init(place: Place, intent: any AppIntent) {
+	public init(place: Place, checkPlaceCardIntent: any AppIntent, addCategoryIntent: any AppIntent) {
 		self.place = place
-		self.intent = intent
+		self.checkPlaceCardIntent = checkPlaceCardIntent
+		self.addCategoryIntent = addCategoryIntent
 		placeName = place.name
+		selectedCategory = place.category
 	}
 	
 	public var body: some View {
@@ -48,7 +54,13 @@ public struct PlaceDetailView: View {
 				}
 				
 				HStack {
-					Text(place.category.name)
+					if isEditing {
+						Button(place.category.name) {
+							isCategorySelectorPresented = true
+						}
+					} else {
+						Text(place.category.name)
+					}
 					Spacer()
 					Text("Категория")
 						.foregroundStyle(.secondary)
@@ -66,7 +78,7 @@ public struct PlaceDetailView: View {
 					}
 					
 					if areSiriTipsVisible {
-						IntentTipView(intent: intent, text: "Чтобы быстро проверить карту в заведении")
+						IntentTipView(intent: checkPlaceCardIntent, text: "Чтобы быстро проверить карту в заведении")
 					}
 				}
 			}
@@ -80,11 +92,15 @@ public struct PlaceDetailView: View {
 				}
 			}
 		}
+		.sheet(isPresented: $isCategorySelectorPresented) {
+			selectCategorySheet
+		}
 		.onChange(of: isEditing) { _, _ in
-			if placeName != place.name {
+			if placeName != place.name || place.category != selectedCategory {
 				place.name = placeName
+				place.category = selectedCategory
 				placeService?.update(place: place)
-				toast = Toast(title: "Карта обновлена")
+				toast = Toast(title: "Место обновлено")
 			}
 		}
 		.toast(item: $toast)
@@ -101,6 +117,19 @@ public struct PlaceDetailView: View {
 			}
 			.sorted { $0.percent > $1.percent }
 		}
+	}
+	
+	private var selectCategorySheet: some View {
+		NavigationView {
+			SelectCategoryView(addCategoryIntent: addCategoryIntent) { category in
+				selectedCategory = category
+				isCategorySelectorPresented = false
+			}
+		}
+		.navigationTitle("Выбор категории")
+		.navigationBarTitleDisplayMode(.inline)
+		.presentationDetents([.large])
+		.presentationBackground(.regularMaterial)
 	}
 }
 
