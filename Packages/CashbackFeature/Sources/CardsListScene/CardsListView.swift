@@ -118,7 +118,7 @@ public struct CardsListView: View {
 		Button {
 			onCardSelected(card)
 		} label: {
-			CardItemView(card: card)
+			CardItemView(card: card, searchQuery: searchText)
 				.contextMenu {
 					Text(card.name)
 				} preview: {

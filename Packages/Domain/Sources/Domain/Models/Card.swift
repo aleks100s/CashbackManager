@@ -49,6 +49,20 @@ public final class Card: @unchecked Sendable {
 		return cashback.map(\.category.id).contains(category.id)
 	}
 	
+	public func sortedCashback(for query: String) -> [Cashback] {
+		guard !query.isEmpty else { return sortedCashback }
+		
+		return sortedCashback.filter { $0.category.name.localizedStandardContains(query) || $0.category.synonyms?.localizedStandardContains(query) ?? false }
+	}
+	
+	public func cashbackDescription(for query: String) -> String {
+		guard !query.isEmpty else { return cashbackDescription }
+
+		return sortedCashback(for: query)
+			.map(\.description)
+			.joined(separator: ", ")
+	}
+	
 //	// Ключи для кодирования и декодирования
 //	private enum CodingKeys: String, CodingKey {
 //		case id

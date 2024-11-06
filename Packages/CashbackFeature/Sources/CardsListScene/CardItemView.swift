@@ -12,6 +12,7 @@ import SwiftUI
 
 struct CardItemView: View {
 	let card: Card
+	let searchQuery: String
 	
 	var body: some View {
 		Group {
@@ -20,7 +21,7 @@ struct CardItemView: View {
 			} else {
 				VStack(alignment: .leading) {
 					HStack {
-						CategoriesStackView(cashback: card.sortedCashback)
+						CategoriesStackView(cashback: card.sortedCashback(for: searchQuery))
 						
 						Spacer()
 												
@@ -28,7 +29,7 @@ struct CardItemView: View {
 							.foregroundStyle(Color(hex: card.color ?? ""))
 					}
 					
-					Text(card.cashbackDescription)
+					Text(card.cashbackDescription(for: searchQuery))
 				}
 			}
 		}
