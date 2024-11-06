@@ -55,11 +55,11 @@ public struct PlaceDetailView: View {
 				
 				HStack {
 					if isEditing {
-						Button(place.category.name) {
+						Button(selectedCategory.name) {
 							isCategorySelectorPresented = true
 						}
 					} else {
-						Text(place.category.name)
+						Text(selectedCategory.name)
 					}
 					Spacer()
 					Text("Категория")
