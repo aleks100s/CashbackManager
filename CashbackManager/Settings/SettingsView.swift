@@ -5,6 +5,7 @@
 //  Created by Alexander on 23.10.2024.
 //
 
+import SelectCategoryScene
 import DesignSystem
 import NotificationService
 import Shared
@@ -84,6 +85,12 @@ struct SettingsView: View {
 				Text("Настройки разделов приложения")
 			} footer: {
 				Text("Отключение разделов позволит сфокусироваться только на необходимом Вам функционале. Разделы можно включить или отключить в любое время без потери данных.")
+			}
+			
+			Section("Каталог категорий кэшбэка") {
+				NavigationLink("Все категории") {
+					SelectCategoryView(addCategoryIntent: CreateCategoryIntent(), isSelectionMode: false) { _ in }
+				}
 			}
 			
 			Section("Удаленные карты и категории") {

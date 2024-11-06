@@ -15,6 +15,7 @@ import SwiftUI
 
 public struct SelectCategoryView: View {
 	private let addCategoryIntent: any AppIntent
+	private let isSelectionMode: Bool
 	private let onSelect: (Domain.Category) -> Void
 	
 	@State private var searchText = ""
@@ -35,14 +36,19 @@ public struct SelectCategoryView: View {
 		}
 	}
 	
-	public init(addCategoryIntent: any AppIntent, onSelect: @escaping (Domain.Category) -> Void) {
+	public init(
+		addCategoryIntent: any AppIntent,
+		isSelectionMode: Bool = true,
+		onSelect: @escaping (Domain.Category) -> Void
+	) {
 		self.addCategoryIntent = addCategoryIntent
+		self.isSelectionMode = isSelectionMode
 		self.onSelect = onSelect
 	}
 	
 	public var body: some View {
 		contentView
-			.navigationTitle("Выбор категории кэшбэка")
+			.navigationTitle(isSelectionMode ? "Выбор категории кэшбэка" : "Все категории")
 			.navigationBarTitleDisplayMode(.inline)
 			.searchable(
 				text: $searchText,
@@ -51,46 +57,45 @@ public struct SelectCategoryView: View {
 			)
 			.toolbar {
 				ToolbarItem(placement: .bottomBar) {
-					addCategoryButton
+					if isSelectionMode {
+						addCategoryButton
+					}
 				}
 				
 				ToolbarItem(placement: .topBarTrailing) {
-					Button("Отмена") {
-						dismiss()
+					if isSelectionMode {
+						Button("Отмена") {
+							dismiss()
+						}
+					} else {
+						Button("Добавить") {
+							isAddCategorySheetPresented = true
+						}
 					}
 				}
 			}
 			.sheet(isPresented: $isAddCategorySheetPresented) {
 				addCategorySheet
 			}
-			.onAppear {
-				hapticFeedback(.light)
-			}
 	}
 	
 	private var contentView: some View {
 		Group {
 			if filteredCategories.isEmpty {
-				HStack {
-					Spacer()
+				VStack {
+					ContentUnavailableView("Категории не найдены", systemImage: "checklist.unchecked")
 					
-					VStack(alignment: .center, spacing: 32) {
-						Spacer()
-						
-						Text("Категории не найдены")
-						
-						addCategoryButton
-						
-						Spacer()
-					}
-					
-					Spacer()
+					addCategoryButton
+						.padding()
 				}
-				.background(Color.cmScreenBackground)
 			} else {
 				List {
 					ForEach(filteredCategories) { category in
-						categoryButtonView(category)
+						if isSelectionMode {
+							categoryButtonView(category)
+						} else {
+							CategoryView(category: category)
+						}
 					}
 					.onDelete { indexSet in
 						for index in indexSet {
@@ -108,7 +113,7 @@ public struct SelectCategoryView: View {
 				categoryService?.createCategory(name: categoryName)
 				isAddCategorySheetPresented = false
 			}
-			.navigationTitle("Создать категорию")
+			.navigationTitle("Добавить категорию")
 			.navigationBarTitleDisplayMode(.inline)
 		}
 		.presentationDetents([.medium])
