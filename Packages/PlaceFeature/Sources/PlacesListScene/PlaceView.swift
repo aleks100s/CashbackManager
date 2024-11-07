@@ -9,11 +9,13 @@ import DesignSystem
 import Domain
 import PlaceService
 import SwiftUI
+import ToastService
 
 public struct PlaceView: View {
 	private let place: Place
 	
 	@Environment(\.placeService) private var placeService
+	@Environment(\.toastService) private var toastService
 	
 	public init(place: Place) {
 		self.place = place
@@ -36,6 +38,7 @@ public struct PlaceView: View {
 				.onTapGesture {
 					place.isFavorite.toggle()
 					placeService?.update(place: place)
+					toastService?.show(Toast(title: place.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
 				}
 		}
 		.contentShape(.rect)

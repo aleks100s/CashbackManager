@@ -10,12 +10,14 @@ import DesignSystem
 import Domain
 import Shared
 import SwiftUI
+import ToastService
 
 struct CardItemView: View {
 	let card: Card
 	let searchQuery: String
 	
 	@Environment(\.cardsService) private var cardsService
+	@Environment(\.toastService) private var toastService
 	
 	var body: some View {
 		Group {
@@ -32,6 +34,7 @@ struct CardItemView: View {
 							.onTapGesture {
 								card.isFavorite.toggle()
 								cardsService?.update(card: card)
+								toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
 							}
 					}
 					
