@@ -86,8 +86,15 @@ public struct CardsListView: View {
 				}
 				
 				ForEach(filteredCards) { card in
-					Section(card.name) {
+					Section {
 						cardView(card)
+					} header: {
+						HStack {							
+							Image(systemName: Constants.SFSymbols.cashback)
+								.foregroundStyle(Color(hex: card.color ?? ""))
+
+							Text(card.name)
+						}
 					}
 				}
 			}

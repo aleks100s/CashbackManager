@@ -20,15 +20,8 @@ struct CardItemView: View {
 				Text(card.cashbackDescription)
 			} else {
 				VStack(alignment: .leading) {
-					HStack {
-						CategoriesStackView(cashback: card.sortedCashback(for: searchQuery))
-						
-						Spacer()
-												
-						Image(systemName: Constants.SFSymbols.cashback)
-							.foregroundStyle(Color(hex: card.color ?? ""))
-					}
-					
+					CategoriesStackView(cashback: card.sortedCashback(for: searchQuery))
+
 					Text(card.cashbackDescription(for: searchQuery))
 				}
 			}
