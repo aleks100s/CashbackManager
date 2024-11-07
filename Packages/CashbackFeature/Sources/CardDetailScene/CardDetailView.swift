@@ -115,40 +115,29 @@ public struct CardDetailView: View {
 	@ViewBuilder
 	private var contentView: some View {
 		List {
-			if !isEditing, areSiriTipsVisible, !card.isEmpty {
-				IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
-			}
-			
 			if isEditing {
-				Section("Редактировать название и цвет") {
+				Section("Редактировать данные карты") {
 					TextField("Название карты", text: $cardName)
 						.textFieldStyle(.plain)
-					
+
 					ColorPicker("Цвет карты", selection: $color)
-				}
-			}
-			
-			if card.isEmpty {
-				Section {
-					ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
-				}
-			} else {
-				Section("Кэшбэки") {
-					ForEach(card.sortedCashback) { cashback in
-						CashbackView(cashback: cashback)
-							.contextMenu {
-								deleteCashbackButton(cashback: cashback)
-							}
-					}
-					.onDelete { indexSet in
-						for index in indexSet {
-							deleteCashback(index: index)
+					
+					HStack {
+						Text(card.isFavorite ? "В избранном" : "Добавить в избранное")
+							.foregroundStyle(.secondary)
+
+						Spacer()
+						
+						Button {
+							card.isFavorite.toggle()
+							cardsService?.update(card: card)
+							toast = Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false)
+						} label: {
+							HeartView(isFavorite: card.isFavorite)
 						}
 					}
 				}
-			}
-			
-			if isEditing {
+				
 				Section {
 					if !card.isEmpty {
 						Button("Удалить все кэшбэки с карты", role: .destructive) {
@@ -171,6 +160,30 @@ public struct CardDetailView: View {
 					Text("Данные действия нельзя отменить")
 				}
 			} else {
+				if card.isEmpty {
+					Section {
+						ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+					}
+				} else {
+					if areSiriTipsVisible {
+						IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
+					}
+					
+					Section("Кэшбэки") {
+						ForEach(card.sortedCashback) { cashback in
+							CashbackView(cashback: cashback)
+								.contextMenu {
+									deleteCashbackButton(cashback: cashback)
+								}
+						}
+						.onDelete { indexSet in
+							for index in indexSet {
+								deleteCashback(index: index)
+							}
+						}
+					}
+				}
+				
 				detectCashbackSectionButton
 			}
 		}

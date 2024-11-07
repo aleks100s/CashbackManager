@@ -7,8 +7,10 @@
 
 public struct Toast: Equatable {
 	let title: String
+	let hasFeedback: Bool
 	
-	public init(title: String) {
+	public init(title: String, hasFeedback: Bool = true) {
 		self.title = title
+		self.hasFeedback = hasFeedback
 	}
 }

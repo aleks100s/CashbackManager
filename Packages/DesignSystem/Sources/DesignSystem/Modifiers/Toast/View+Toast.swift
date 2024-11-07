@@ -20,14 +20,16 @@ struct ToastModifier: ViewModifier {
 		}
 		.animation(.spring, value: toast)
 		.onChange(of: toast) { oldValue, newValue in
-			if newValue != nil {
-				trigger()
+			if let newValue {
+				trigger(withFeedback: newValue.hasFeedback)
 			}
 		}
 	}
 	
-	private func trigger() {
-		hapticFeedback(.light)
+	private func trigger(withFeedback: Bool) {
+		if withFeedback {
+			hapticFeedback(.light)
+		}
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 			withAnimation {
 				self.toast = nil

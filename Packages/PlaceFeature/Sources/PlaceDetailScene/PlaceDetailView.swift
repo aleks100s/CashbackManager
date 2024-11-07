@@ -74,23 +74,21 @@ public struct PlaceDetailView: View {
 					Text("Категория")
 						.foregroundStyle(.secondary)
 				}
-			}
-			
-			Section {
+				
 				HStack {
 					Text(place.isFavorite ? "В избранном" : "Добавить в избранное")
 						.foregroundStyle(.secondary)
-
+					
 					Spacer()
 					
 					Button {
 						place.isFavorite.toggle()
 						placeService?.update(place: place)
+						toast = Toast(title: place.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false)
 					} label: {
 						HeartView(isFavorite: place.isFavorite)
 					}
 				}
-				.padding(.vertical)
 			}
 			
 			if isEditing {
