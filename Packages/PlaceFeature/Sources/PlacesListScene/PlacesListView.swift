@@ -25,7 +25,8 @@ public struct PlacesListView: View {
 	@State private var toast: Toast?
 	
 	@Query(sort: [SortDescriptor<Place>(\.isFavorite, order: .reverse),
-		SortDescriptor<Place>(\.name, order: .forward)])
+		SortDescriptor<Place>(\.name, order: .forward)],
+		   animation: .default)
 	private var places: [Place]
 	
 	@Environment(\.placeService) private var placeService
