@@ -28,7 +28,8 @@ public struct CardsListView: View {
 	
 	@Query(
 		filter: #Predicate<Card> { !$0.isArchived },
-		sort: [SortDescriptor<Card>(\.name, order: .forward)],
+		sort: [SortDescriptor<Card>(\.isFavorite, order: .reverse),
+			SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
 	) private var cards: [Card]
 	@Environment(\.cardsService) private var cardsService
@@ -89,7 +90,7 @@ public struct CardsListView: View {
 					Section {
 						cardView(card)
 					} header: {
-						HStack {							
+						HStack {
 							Image(systemName: Constants.SFSymbols.cashback)
 								.foregroundStyle(Color(hex: card.color ?? ""))
 
