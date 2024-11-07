@@ -24,7 +24,8 @@ public struct PlacesListView: View {
 	@State private var searchText = ""
 	@State private var toast: Toast?
 	
-	@Query(sort: [SortDescriptor<Place>(\.name, order: .forward)])
+	@Query(sort: [SortDescriptor<Place>(\.isFavorite, order: .reverse),
+		SortDescriptor<Place>(\.name, order: .forward)])
 	private var places: [Place]
 	
 	@Environment(\.placeService) private var placeService

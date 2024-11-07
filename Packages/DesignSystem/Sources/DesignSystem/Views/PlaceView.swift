@@ -6,10 +6,13 @@
 //
 
 import Domain
+import PlaceService
 import SwiftUI
 
 public struct PlaceView: View {
 	private let place: Place
+	
+	@Environment(\.placeService) private var placeService
 	
 	public init(place: Place) {
 		self.place = place
@@ -27,6 +30,15 @@ public struct PlaceView: View {
 			}
 			
 			Spacer()
+			
+			Image(systemName: place.isFavorite ? "heart.fill" : "heart")
+				.font(.title2)
+				.foregroundStyle(place.isFavorite ? .red : .gray)
+				.animation(.default, value: place.isFavorite)
+				.onTapGesture {
+					place.isFavorite.toggle()
+					placeService?.update(place: place)
+				}
 		}
 		.contentShape(.rect)
 	}
