@@ -17,6 +17,7 @@ public final class Card: @unchecked Sendable {
 	public var cashback: [Cashback]
 	public var color: String?
 	public var isArchived: Bool = false
+	public var isFavorite: Bool = false
 	
 	public var sortedCashback: [Cashback] {
 		cashback.sorted(by: { $0.category.name < $1.category.name })
