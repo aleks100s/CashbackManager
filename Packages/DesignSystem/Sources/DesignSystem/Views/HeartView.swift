@@ -5,6 +5,7 @@
 //  Created by Alexander on 07.11.2024.
 //
 
+import Shared
 import SwiftUI
 
 public struct HeartView: View {
@@ -31,6 +32,16 @@ public struct HeartView: View {
 					CubicKeyframe(1.0, duration: 0.3)
 				}
 			})
+			.onChange(of: isFavorite) {
+				Task { @MainActor in
+					try await Task.sleep(for: .seconds(0.4))
+					hapticFeedback(.medium)
+					try await Task.sleep(for: .seconds(0.1))
+					hapticFeedback(.medium)
+					try await Task.sleep(for: .seconds(0.1))
+					hapticFeedback(.medium)
+				}
+			}
 	}
 }
 
