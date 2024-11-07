@@ -31,10 +31,7 @@ public struct PlaceView: View {
 			
 			Spacer()
 			
-			Image(systemName: place.isFavorite ? "heart.fill" : "heart")
-				.font(.title2)
-				.foregroundStyle(place.isFavorite ? .red : .gray)
-				.animation(.default, value: place.isFavorite)
+			HeartView(isFavorite: place.isFavorite)
 				.onTapGesture {
 					place.isFavorite.toggle()
 					placeService?.update(place: place)

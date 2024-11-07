@@ -27,11 +27,8 @@ struct CardItemView: View {
 						CategoriesStackView(cashback: card.sortedCashback(for: searchQuery))
 						
 						Spacer()
-												
-						Image(systemName: card.isFavorite ? "heart.fill" : "heart")
-							.font(.title2)
-							.foregroundStyle(card.isFavorite ? .red : .gray)
-							.animation(.default, value: card.isFavorite)
+						
+						HeartView(isFavorite: card.isFavorite)
 							.onTapGesture {
 								card.isFavorite.toggle()
 								cardsService?.update(card: card)
