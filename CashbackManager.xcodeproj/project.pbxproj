@@ -54,6 +54,8 @@
 		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
 		277130EC2C73C52B00C26CD8 /* CreateCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */; };
 		277130EE2C73CA1400C26CD8 /* CreateCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */; };
+		277D92BD2CDD17C2001661E1 /* ToastService in Frameworks */ = {isa = PBXBuildFile; productRef = 277D92BC2CDD17C2001661E1 /* ToastService */; };
+		277D92BF2CDD17D3001661E1 /* ToastService in Frameworks */ = {isa = PBXBuildFile; productRef = 277D92BE2CDD17D3001661E1 /* ToastService */; };
 		2781B1242CD7CCA30081A927 /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2781B1232CD7CCA30081A927 /* CashbackFeature */; };
 		2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1252CD874300081A927 /* PlaceEntity.swift */; };
 		2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1272CD874CC0081A927 /* CategoryEntity.swift */; };
@@ -171,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27368BE02C4BB85400FC0475 /* Domain in Frameworks */,
+				277D92BF2CDD17D3001661E1 /* ToastService in Frameworks */,
 				2755A3122CBA4B73002F61EC /* IncomeService in Frameworks */,
 				27368BEA2C4CDE9A00FC0475 /* DesignSystem in Frameworks */,
 				277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */,
@@ -193,6 +196,7 @@
 			files = (
 				272CA8D42C54C6E600A00E90 /* Domain in Frameworks */,
 				2755A3142CBA4B7D002F61EC /* IncomeService in Frameworks */,
+				277D92BD2CDD17C2001661E1 /* ToastService in Frameworks */,
 				2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */,
 				27AB372B2C73BE4B00A00939 /* CardsService in Frameworks */,
 				2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */,
@@ -416,6 +420,7 @@
 				2755A3262CC9F113002F61EC /* NotificationService */,
 				2755A32D2CCD5B23002F61EC /* UserDataService */,
 				2781B1232CD7CCA30081A927 /* CashbackFeature */,
+				277D92BE2CDD17D3001661E1 /* ToastService */,
 			);
 			productName = CashbackWidgetExtension;
 			productReference = 27368BBB2C4BB11000FC0475 /* CashbackWidgetExtension.appex */;
@@ -449,6 +454,7 @@
 				2755A3132CBA4B7D002F61EC /* IncomeService */,
 				2755A3242CC9EECC002F61EC /* NotificationService */,
 				2755A32F2CCD5B2A002F61EC /* UserDataService */,
+				277D92BC2CDD17C2001661E1 /* ToastService */,
 			);
 			productName = CashbackManager;
 			productReference = 27A5D7CD2C394EC400B93512 /* CashbackManager.app */;
@@ -1101,6 +1107,14 @@
 		277130E92C73C0B200C26CD8 /* SearchService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SearchService;
+		};
+		277D92BC2CDD17C2001661E1 /* ToastService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ToastService;
+		};
+		277D92BE2CDD17D3001661E1 /* ToastService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ToastService;
 		};
 		2781B1232CD7CCA30081A927 /* CashbackFeature */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,9 +7,11 @@
 
 import SelectCategoryScene
 import DesignSystem
+import Domain
 import NotificationService
 import Shared
 import SwiftUI
+import ToastService
 import UserDataService
 
 struct SettingsView: View {
@@ -31,7 +33,6 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.AppFeature.places)
 	private var isPlacesFeatureAvailable = true
 	
-	@State private var toast: Toast?
 	@State private var exportItem: UserData?
 	@State private var isBusy = false
 	@State private var isExporterPresented = false
@@ -44,12 +45,15 @@ struct SettingsView: View {
 	@Environment(\.userDataService)
 	private var userDataService
 	
+	@Environment(\.toastService)
+	private var toastService
+	
 	var body: some View {
 		List {
 			Section {
 				Toggle("Подсказки Siri", isOn: $areSiriTipsVisible)
 					.onChange(of: areSiriTipsVisible) { _, newValue in
-						toast = Toast(title: newValue ? "Подсказки включены" : "Подсказки отключены")
+						toastService?.show(Toast(title: newValue ? "Подсказки включены" : "Подсказки отключены"))
 					}
 			} header: {
 				Text("Настройка голосовых команд")
@@ -60,7 +64,7 @@ struct SettingsView: View {
 			Section {
 				Toggle("Уведомления", isOn: $isNotificationAllowed)
 					.onChange(of: isNotificationAllowed) { _, newValue in
-						toast = Toast(title: newValue ? "Уведомления включены" : "Уведомления отключены")
+						toastService?.show(Toast(title: newValue ? "Уведомления включены" : "Уведомления отключены"))
 					}
 			} header: {
 				Text("Настройка уведомлений")
@@ -132,7 +136,6 @@ struct SettingsView: View {
 				ProgressView()
 			}
 		}
-		.toast(item: $toast)
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
@@ -150,9 +153,9 @@ struct SettingsView: View {
 			onCompletion: { result in
 				switch result {
 				case .success:
-					toast = Toast(title: "Данные успешно экспортированы")
+					toastService?.show(Toast(title: "Данные успешно экспортированы"))
 				case .failure(let failure):
-					toast = Toast(title: failure.localizedDescription)
+					toastService?.show(Toast(title: failure.localizedDescription))
 				}
 				exportItem = nil
 			},
@@ -165,7 +168,7 @@ struct SettingsView: View {
 			case .success(let url):
 				importData(from: url)
 			case .failure(let failure):
-				toast = Toast(title: failure.localizedDescription)
+				toastService?.show(Toast(title: failure.localizedDescription))
 			}
 		}
 		.alert("При импорте все старые данные будут удалены и вместо них будут записаны данные из файла. Вы уверены?", isPresented: $isImportWarningPresented) {
@@ -181,7 +184,7 @@ struct SettingsView: View {
 	
 	private func notifySectionToggled(isActive: Bool) {
 		if !isBusy {
-			toast = Toast(title: isActive ? "Раздел активен" : "Раздел скрыт")
+			toastService?.show(Toast(title: isActive ? "Раздел активен" : "Раздел скрыт"))
 		}
 	}
 	
@@ -197,7 +200,7 @@ struct SettingsView: View {
 				}
 			} catch {
 				await MainActor.run {
-					toast = Toast(title: error.localizedDescription)
+					toastService?.show(Toast(title: error.localizedDescription))
 				}
 			}
 		}
@@ -211,19 +214,19 @@ struct SettingsView: View {
 
 				await MainActor.run {
 					isBusy = false
-					toast = Toast(title: "Данные успешно импортированы")
+					toastService?.show(Toast(title: "Данные успешно импортированы"))
 				}
 			} catch {				
 				await MainActor.run {
 					isBusy = false
-					toast = Toast(title: error.localizedDescription)
+					toastService?.show(Toast(title: error.localizedDescription))
 				}
 			}
 		}
 	}
 	
 	private func copy(value: String?) {
-		toast = Toast(title: "Значение скопировано")
+		toastService?.show(Toast(title: "Значение скопировано"))
 		UIPasteboard.general.string = value
 	}
 }

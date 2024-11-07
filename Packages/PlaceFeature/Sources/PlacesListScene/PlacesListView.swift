@@ -12,6 +12,7 @@ import PlaceService
 import Shared
 import SwiftData
 import SwiftUI
+import ToastService
 
 public struct PlacesListView: View {
 	private let checkPlaceIntent: any AppIntent
@@ -22,7 +23,6 @@ public struct PlacesListView: View {
 	private var areSiriTipsVisible = true
 	
 	@State private var searchText = ""
-	@State private var toast: Toast?
 	
 	@Query(sort: [SortDescriptor<Place>(\.isFavorite, order: .reverse),
 		SortDescriptor<Place>(\.name, order: .forward)],
@@ -30,6 +30,7 @@ public struct PlacesListView: View {
 	private var places: [Place]
 	
 	@Environment(\.placeService) private var placeService
+	@Environment(\.toastService) private var toastService
 	
 	private var filteredPlaces: [Place] {
 		places.filter {
@@ -62,7 +63,6 @@ public struct PlacesListView: View {
 					addPlaceButton
 				}
 			}
-			.toast(item: $toast)
 	}
 	
 	@ViewBuilder
@@ -118,6 +118,6 @@ public struct PlacesListView: View {
 	
 	private func delete(place: Place) {
 		placeService?.delete(place: place)
-		toast = Toast(title: "Место удалено")
+		toastService?.show(Toast(title: "Место удалено"))
 	}
 }

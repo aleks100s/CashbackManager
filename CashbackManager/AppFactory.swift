@@ -15,6 +15,7 @@ import PlaceService
 import SearchService
 import SwiftData
 import TextDetectionService
+import ToastService
 import UserDataService
 
 @MainActor
@@ -28,6 +29,7 @@ enum AppFactory {
 	private static let incomeService = IncomeService(context: container.mainContext)
 	private static let notificationService = NotificationService()
 	private static let userDataService = UserDataService(searchService: searchService)
+	private static let toastService = ToastService()
 	private static let widgetURLParser = WidgetURLParser(cardsService: CardsService(context: container.mainContext, searchService: searchService))
 	
 	static func provideModelContainer() -> ModelContainer {
@@ -68,5 +70,9 @@ enum AppFactory {
 	
 	static func provideWidgetURLParser() -> WidgetURLParser {
 		widgetURLParser
+	}
+	
+	static func provideToastService() -> ToastService {
+		toastService
 	}
 }

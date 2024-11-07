@@ -24,7 +24,6 @@ public struct CardsListView: View {
 	
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
-	@State private var toast: Toast?
 	
 	@Query(
 		filter: #Predicate<Card> { !$0.isArchived },
@@ -69,7 +68,6 @@ public struct CardsListView: View {
 			.sheet(isPresented: $isAddCardSheetPresented) {
 				addCardSheet
 			}
-			.toast(item: $toast)
 	}
 	
 	@ViewBuilder

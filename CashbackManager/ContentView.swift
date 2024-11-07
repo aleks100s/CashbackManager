@@ -6,13 +6,16 @@
 //
 
 import CashbackFeature
+import Combine
 import CoreSpotlight
+import DesignSystem
 import Domain
 import PaymentFeature
 import PlaceFeature
 import Shared
 import SwiftData
 import SwiftUI
+import ToastService
 
 struct ContentView: View {
 	private enum Tab: String {
@@ -39,8 +42,10 @@ struct ContentView: View {
 	@Query private var categories: [Domain.Category]
 
 	@State private var selectedTab = Tab.cashback
+	@State private var toast: Toast?
 	
 	@Environment(\.openURL) private var openURL
+	@Environment(\.toastService) private var toastService
 	
 	var body: some View {
 		TabView(selection: $selectedTab) {
@@ -51,6 +56,10 @@ struct ContentView: View {
 			placesTab
 			
 			settingsTab
+		}
+		.toast(item: $toast)
+		.onReceive(toastService?.toastPublisher ?? Just(nil).eraseToAnyPublisher()) { toast in
+			self.toast = toast
 		}
 		.onAppear {
 			if isFirstLaunch {

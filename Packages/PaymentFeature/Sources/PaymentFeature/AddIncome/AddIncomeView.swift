@@ -12,6 +12,7 @@ import IncomeService
 import Shared
 import SwiftData
 import SwiftUI
+import ToastService
 
 struct AddIncomeView: View {
 	let createIncomeIntent: any AppIntent
@@ -21,6 +22,7 @@ struct AddIncomeView: View {
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.incomeService) private var incomeService
+	@Environment(\.toastService) private var toastService
 	
 	@Query(filter: #Predicate<Card> { !$0.isArchived })
 	private var cards: [Card]
@@ -102,7 +104,7 @@ struct AddIncomeView: View {
 		Button("Сохранить") {
 			createIncome()
 			dismiss()
-			hapticFeedback(.light)
+			toastService?.show(Toast(title: "Выплата добавлена"))
 		}
 		.frame(maxWidth: .infinity)
 		.padding()

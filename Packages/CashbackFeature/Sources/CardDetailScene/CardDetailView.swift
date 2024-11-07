@@ -16,12 +16,12 @@ import Shared
 import SwiftData
 import SwiftUI
 import TextDetectionService
+import ToastService
 import WidgetKit
 
 public struct CardDetailView: View {
 	private let card: Card
 	private let cardCashbackIntent: any AppIntent
-	private let onDelete: () -> Void
 	private let onAddCashbackTap: () -> Void
 	
 	@AppStorage(Constants.StorageKey.currentCardID, store: .appGroup)
@@ -35,7 +35,6 @@ public struct CardDetailView: View {
 	@State private var isEditing = false
 	@State private var cardName: String
 	@State private var color: Color
-	@State private var toast: Toast?
 	@State private var isDeleteCardWarningPresented = false
 	@State private var isDeleteTransactionsWarningPresented = false
 	
@@ -44,16 +43,15 @@ public struct CardDetailView: View {
  	@Environment(\.categoryService) private var categoryService
 	@Environment(\.textDetectionService) private var textDetectionService
 	@Environment(\.incomeService) private var incomeService
+	@Environment(\.toastService) private var toastService
 
 	public init(
 		card: Card,
 		cardCashbackIntent: any AppIntent,
-		onDelete: @escaping () -> Void,
 		onAddCashbackTap: @escaping () -> Void
 	) {
 		self.card = card
 		self.cardCashbackIntent = cardCashbackIntent
-		self.onDelete = onDelete
 		self.onAddCashbackTap = onAddCashbackTap
 		cardName = card.name
 		color = Color(hex: card.color ?? "")
@@ -84,10 +82,9 @@ public struct CardDetailView: View {
 					card.name = cardName
 					card.color = color.toHex()
 					cardsService?.update(card: card)
-					toast = Toast(title: "Карта обновлена")
+					toastService?.show(Toast(title: "Карта обновлена"))
 				}
 			}
-			.toast(item: $toast)
 			.alert("Вы уверены?", isPresented: $isDeleteCardWarningPresented) {
 				Button("Удалить только карту", role: .destructive) {
 					archive(card: card)
@@ -131,7 +128,7 @@ public struct CardDetailView: View {
 						Button {
 							card.isFavorite.toggle()
 							cardsService?.update(card: card)
-							toast = Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false)
+							toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
 						} label: {
 							HeartView(isFavorite: card.isFavorite)
 						}
@@ -210,7 +207,7 @@ public struct CardDetailView: View {
 					try await detectCashbackFromImage()
 				} catch {
 					await MainActor.run {
-						toast = Toast(title: error.localizedDescription)
+						toastService?.show(Toast(title: error.localizedDescription))
 					}
 				}
 			}
@@ -231,12 +228,12 @@ public struct CardDetailView: View {
 	
 	private func delete(cashback: Cashback) {
 		cardsService?.delete(cashback: cashback, from: card)
-		toast = Toast(title: "Кэшбэк удален")
+		toastService?.show(Toast(title: "Кэшбэк удален"))
 	}
 	
 	private func deleteTransactions(from card: Card) {
 		incomeService?.deleteIncomes(from: card)
-		toast = Toast(title: "Транзакции успешно удалены")
+		toastService?.show(Toast(title: "Транзакции успешно удалены"))
 	}
 	
 	private func archive(card: Card, shouldDeleteTransactions: Bool = false) {
@@ -245,7 +242,7 @@ public struct CardDetailView: View {
 		}
 		cardsService?.archive(card: card)
 		currentCardId = nil
-		onDelete()
+		toastService?.show(Toast(title: "Карта удалена"))
 		dismiss()
 	}
 	
@@ -279,7 +276,7 @@ private extension CardDetailView {
 			let cashback = Cashback(category: category, percent: item.1)
 			cardsService?.add(cashback: cashback, to: card)
 		}
-		toast = Toast(title: "Кэшбэки считаны!")
+		toastService?.show(Toast(title: "Кэшбэки считаны!"))
 		refreshWidget()
 	}
 }

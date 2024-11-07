@@ -38,7 +38,11 @@ let package = Package(
 		.library(
 			name: "UserDataService",
 			targets: ["UserDataService"]
-		)
+		),
+		.library(
+			name: "ToastService",
+			targets: ["ToastService"]
+		),
     ],
 	dependencies: [
 		.package(name: "Shared", path: "./Shared"),
@@ -62,6 +66,12 @@ let package = Package(
 			name: "UserDataService",
 			dependencies: [
 				"SearchService"
+			]
+		),
+		.target(
+			name: "ToastService",
+			dependencies: [
+				"Domain"
 			]
 		)
     ]

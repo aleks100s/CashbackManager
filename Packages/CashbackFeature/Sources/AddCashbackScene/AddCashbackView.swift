@@ -13,6 +13,7 @@ import SelectCategoryScene
 import Shared
 import SwiftData
 import SwiftUI
+import ToastService
 
 public struct AddCashbackView: View {
 	private let card: Card
@@ -29,7 +30,8 @@ public struct AddCashbackView: View {
 	@State private var isCategorySelectorPresented = false
 	
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.cardsService) var cardsService
+	@Environment(\.cardsService) private var cardsService
+	@Environment(\.toastService) private var toastService
 	
 	public init(card: Card, addCategoryIntent: any AppIntent, addCashbackIntent: any AppIntent) {
 		self.card = card
@@ -107,7 +109,7 @@ public struct AddCashbackView: View {
 		Button("Сохранить") {
 			createCashback()
 			dismiss()
-			hapticFeedback(.light)
+			toastService?.show(Toast(title: "Кэшбэк добавлен"))
 		}
 		.frame(maxWidth: .infinity)
 		.padding()

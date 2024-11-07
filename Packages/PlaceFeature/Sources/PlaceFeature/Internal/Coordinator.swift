@@ -20,8 +20,7 @@ struct Coordinator: View {
 	
 	@State private var path = [Navigation]()
 	@State private var isAddPlaceSheetPresented = false
-	@State private var toast: Toast?
-	
+		
 	var body: some View {
 		NavigationStack(path: $path) {
 			PlacesListView(checkPlaceIntent: checkPlaceIntent) { place in
@@ -31,7 +30,6 @@ struct Coordinator: View {
 			}
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
 		}
-		.toast(item: $toast)
 		.sheet(isPresented: $isAddPlaceSheetPresented) {
 			NavigationView {
 				AddPlaceView(addPlaceIntent: addPlaceIntent, addCategoryIntent: addCategoryIntent) { place in
@@ -50,9 +48,7 @@ struct Coordinator: View {
 				place: place,
 				checkPlaceCardIntent: checkPlaceCardIntent,
 				addCategoryIntent: addCategoryIntent
-			) {
-				toast = Toast(title: "Место удалено")
-			}
+			)
 		}
 	}
 }

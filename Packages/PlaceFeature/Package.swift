@@ -34,7 +34,8 @@ let package = Package(
 				"Domain",
 				"DesignSystem",
 				.product(name: "SearchService", package: "Services"),
-				.product(name: "PlaceService", package: "Services")
+				.product(name: "PlaceService", package: "Services"),
+				.product(name: "ToastService", package: "Services")
 			]
 		),
 		.target(
@@ -45,6 +46,7 @@ let package = Package(
 				"Shared",
 				.product(name: "CardsService", package: "Services"),
 				.product(name: "PlaceService", package: "Services"),
+				.product(name: "ToastService", package: "Services"),
 				.product(name: "SelectCategoryScene", package: "CommonScenes")
 			]
 		),
@@ -55,7 +57,8 @@ let package = Package(
 				"DesignSystem",
 				.product(name: "SelectCategoryScene", package: "CommonScenes"),
 				.product(name: "SearchService", package: "Services"),
-				.product(name: "PlaceService", package: "Services")
+				.product(name: "PlaceService", package: "Services"),
+				.product(name: "ToastService", package: "Services")
 			]
 		)
     ]

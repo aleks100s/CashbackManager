@@ -11,6 +11,7 @@ import Domain
 import IncomeService
 import SwiftData
 import SwiftUI
+import ToastService
 
 struct PaymentsView: View {
 	let onAddIncomeTapped: () -> Void
@@ -18,7 +19,6 @@ struct PaymentsView: View {
 	@Query(sort: [SortDescriptor<Income>(\.date, order: .forward)])
 	private var allTransactions: [Income]
 
-	@State private var toast: Toast?
 	@State private var isAllTimeModeOn = false
 	@State private var chartData = [ChartModel]()
 	@State private var firstDate = Date()
@@ -30,6 +30,7 @@ struct PaymentsView: View {
 	@State private var periodEndDate = Date()
 	
 	@Environment(\.incomeService) private var incomeService
+	@Environment(\.toastService) private var toastService
 	
 	private var isPreviousButtonDisabled: Bool {
 		periodStartDate <= firstDate
@@ -56,7 +57,6 @@ struct PaymentsView: View {
 					}
 				}
 			}
-			.toast(item: $toast)
 			.onFirstAppear {
 				setupCurrentMonthBounds()
 				handleChange(transactions: allTransactions)
@@ -181,7 +181,7 @@ struct PaymentsView: View {
 	
 	private func delete(transaction: Income) {
 		incomeService?.delete(income: transaction)
-		toast = Toast(title: "Транзакция удалена")
+		toastService?.show(Toast(title: "Транзакция удалена"))
 	}
 	
 	private func deleteMany(transactions: [Income]) {

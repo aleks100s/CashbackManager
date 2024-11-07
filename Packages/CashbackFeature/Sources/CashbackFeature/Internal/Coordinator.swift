@@ -24,7 +24,6 @@ struct Coordinator: View {
 	
 	@State private var navigationStack: [Navigation] = []
 	@State private var cardToAddCashback: Card?
-	@State private var toast: Toast?
 	
 	@Environment(\.widgetURLParser) private var urlParser
 	
@@ -37,7 +36,6 @@ struct Coordinator: View {
 			}
 			.navigationDestination(for: Navigation.self, destination: navigate(to:))
 		}
-		.toast(item: $toast)
 		.sheet(item: $cardToAddCashback) { card in
 			NavigationView {
 				AddCashbackView(card: card, addCategoryIntent: addCategoryIntent, addCashbackIntent: addCashbackIntent)
@@ -59,8 +57,6 @@ struct Coordinator: View {
 		switch destination {
 		case .cardDetail(let card):
 			CardDetailView(card: card, cardCashbackIntent: cardCashbackIntent) {
-				toast = Toast(title: "Карта удалена")
-			} onAddCashbackTap: {
 				cardToAddCashback = card
 			}
 		}

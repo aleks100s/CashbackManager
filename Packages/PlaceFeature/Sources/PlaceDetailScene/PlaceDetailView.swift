@@ -13,18 +13,17 @@ import PlaceService
 import SelectCategoryScene
 import Shared
 import SwiftUI
+import ToastService
 
 public struct PlaceDetailView: View {
 	private let place: Place
 	private let checkPlaceCardIntent: any AppIntent
 	private let addCategoryIntent: any AppIntent
-	private let onDelete: () -> Void
 	
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
 	@State private var isEditing = false
-	@State private var toast: Toast?
 	@State private var cards: [PlaceCard] = []
 	@State private var placeName: String
 	@State private var selectedCategory: Domain.Category
@@ -33,18 +32,17 @@ public struct PlaceDetailView: View {
 	
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.placeService) private var placeService
+	@Environment(\.toastService) private var toastService
 	@Environment(\.dismiss) private var dismiss
 	
 	public init(
 		place: Place,
 		checkPlaceCardIntent: any AppIntent,
-		addCategoryIntent: any AppIntent,
-		onDelete: @escaping () -> Void
+		addCategoryIntent: any AppIntent
 	) {
 		self.place = place
 		self.checkPlaceCardIntent = checkPlaceCardIntent
 		self.addCategoryIntent = addCategoryIntent
-		self.onDelete = onDelete
 		placeName = place.name
 		selectedCategory = place.category
 	}
@@ -84,7 +82,7 @@ public struct PlaceDetailView: View {
 					Button {
 						place.isFavorite.toggle()
 						placeService?.update(place: place)
-						toast = Toast(title: place.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false)
+						toastService?.show(Toast(title: place.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
 					} label: {
 						HeartView(isFavorite: place.isFavorite)
 					}
@@ -123,6 +121,7 @@ public struct PlaceDetailView: View {
 			ToolbarItem(placement: .topBarTrailing) {
 				Button(isEditing ? "Готово" : "Править") {
 					isEditing.toggle()
+					hapticFeedback(.light)
 				}
 			}
 		}
@@ -143,10 +142,9 @@ public struct PlaceDetailView: View {
 				place.name = placeName
 				place.category = selectedCategory
 				placeService?.update(place: place)
-				toast = Toast(title: "Место обновлено")
+				toastService?.show(Toast(title: "Место обновлено"))
 			}
 		}
-		.toast(item: $toast)
 		.onAppear {
 			guard let cards = cardsService?.getCards(category: place.category) else { return }
 			
@@ -177,7 +175,7 @@ public struct PlaceDetailView: View {
 	
 	private func delete(place: Place) {
 		placeService?.delete(place: place)
-		onDelete()
+		toastService?.show(Toast(title: "Место удалено"))
 		dismiss()
 	}
 }

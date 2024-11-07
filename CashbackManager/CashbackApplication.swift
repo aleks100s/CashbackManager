@@ -26,6 +26,7 @@ struct CashbackApplication: App {
 	private let incomeService = AppFactory.provideIncomeService()
 	private let notificationService = AppFactory.provideNotificationService()
 	private let userDataService = AppFactory.provideUserDataService()
+	private let toastService = AppFactory.provideToastService()
 	
 	@AppStorage(Constants.StorageKey.notifications)
 	private var isMonthlyNotificationScheduled = false
@@ -62,6 +63,7 @@ struct CashbackApplication: App {
 		.environment(\.incomeService, incomeService)
 		.environment(\.notificationService, notificationService)
 		.environment(\.userDataService, userDataService)
+		.environment(\.toastService, toastService)
 		.environment(\.widgetURLParser, AppFactory.provideWidgetURLParser())
     }
 

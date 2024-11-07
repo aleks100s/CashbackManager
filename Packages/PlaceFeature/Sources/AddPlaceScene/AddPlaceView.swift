@@ -12,6 +12,7 @@ import PlaceService
 import SelectCategoryScene
 import Shared
 import SwiftUI
+import ToastService
 
 public struct AddPlaceView: View {
 	private let onPlaceAdded: (Place) -> Void
@@ -29,6 +30,7 @@ public struct AddPlaceView: View {
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.placeService) private var placeService
+	@Environment(\.toastService) private var toastService
 	
 	private var isInputCorrect: Bool {
 		selectedCategory != nil && !placeName.isEmpty
@@ -109,7 +111,7 @@ public struct AddPlaceView: View {
 		Button("Сохранить") {
 			createPlace()
 			dismiss()
-			hapticFeedback(.light)
+			toastService?.show(Toast(title: "Место добавлено"))
 		}
 		.padding()
 		.disabled(!isInputCorrect)
