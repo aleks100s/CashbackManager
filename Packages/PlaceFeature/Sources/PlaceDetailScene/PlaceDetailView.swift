@@ -18,6 +18,7 @@ public struct PlaceDetailView: View {
 	private let place: Place
 	private let checkPlaceCardIntent: any AppIntent
 	private let addCategoryIntent: any AppIntent
+	private let onDelete: () -> Void
 	
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
@@ -28,14 +29,22 @@ public struct PlaceDetailView: View {
 	@State private var placeName: String
 	@State private var selectedCategory: Domain.Category
 	@State private var isCategorySelectorPresented = false
+	@State private var isDeletePlaceConfirmationPresented = false
 	
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.placeService) private var placeService
+	@Environment(\.dismiss) private var dismiss
 	
-	public init(place: Place, checkPlaceCardIntent: any AppIntent, addCategoryIntent: any AppIntent) {
+	public init(
+		place: Place,
+		checkPlaceCardIntent: any AppIntent,
+		addCategoryIntent: any AppIntent,
+		onDelete: @escaping () -> Void
+	) {
 		self.place = place
 		self.checkPlaceCardIntent = checkPlaceCardIntent
 		self.addCategoryIntent = addCategoryIntent
+		self.onDelete = onDelete
 		placeName = place.name
 		selectedCategory = place.category
 	}
@@ -67,7 +76,34 @@ public struct PlaceDetailView: View {
 				}
 			}
 			
-			if !isEditing {
+			Section {
+				HStack {
+					Text(place.isFavorite ? "В избранном" : "Добавить в избранное")
+						.foregroundStyle(.secondary)
+
+					Spacer()
+					
+					Button {
+						place.isFavorite.toggle()
+						placeService?.update(place: place)
+					} label: {
+						HeartView(isFavorite: place.isFavorite)
+					}
+				}
+				.padding(.vertical)
+			}
+			
+			if isEditing {
+				Section {
+					Button("Удалить место", role: .destructive) {
+						isDeletePlaceConfirmationPresented = true
+					}
+				} header: {
+					Text("Для отважных пользователей")
+				} footer: {
+					Text("Данное действие нельзя отменить")
+				}
+			} else {
 				if cards.isEmpty {
 					ContentUnavailableView("Не найдены подходящие карты", systemImage: "creditcard")
 				} else {
@@ -94,6 +130,15 @@ public struct PlaceDetailView: View {
 		}
 		.sheet(isPresented: $isCategorySelectorPresented) {
 			selectCategorySheet
+		}
+		.alert("Вы уверены?", isPresented: $isDeletePlaceConfirmationPresented) {
+			Button("Удалить", role: .destructive) {
+				delete(place: place)
+			}
+			
+			Button("Отмена", role: .cancel) {
+				isDeletePlaceConfirmationPresented = false
+			}
 		}
 		.onChange(of: isEditing) { _, _ in
 			if placeName != place.name || place.category != selectedCategory {
@@ -130,6 +175,12 @@ public struct PlaceDetailView: View {
 		.navigationBarTitleDisplayMode(.inline)
 		.presentationDetents([.large])
 		.presentationBackground(.regularMaterial)
+	}
+	
+	private func delete(place: Place) {
+		placeService?.delete(place: place)
+		onDelete()
+		dismiss()
 	}
 }
 

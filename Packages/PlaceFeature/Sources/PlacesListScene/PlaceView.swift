@@ -34,7 +34,6 @@ public struct PlaceView: View {
 			
 			HeartView(isFavorite: place.isFavorite)
 				.onTapGesture {
-					hapticFeedback(.light)
 					place.isFavorite.toggle()
 					placeService?.update(place: place)
 				}

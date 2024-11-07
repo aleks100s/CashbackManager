@@ -30,7 +30,6 @@ struct CardItemView: View {
 						
 						HeartView(isFavorite: card.isFavorite)
 							.onTapGesture {
-								hapticFeedback(.light)
 								card.isFavorite.toggle()
 								cardsService?.update(card: card)
 							}

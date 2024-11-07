@@ -21,6 +21,7 @@ import WidgetKit
 public struct CardDetailView: View {
 	private let card: Card
 	private let cardCashbackIntent: any AppIntent
+	private let onDelete: () -> Void
 	private let onAddCashbackTap: () -> Void
 	
 	@AppStorage(Constants.StorageKey.currentCardID, store: .appGroup)
@@ -44,9 +45,15 @@ public struct CardDetailView: View {
 	@Environment(\.textDetectionService) private var textDetectionService
 	@Environment(\.incomeService) private var incomeService
 
-	public init(card: Card, cardCashbackIntent: any AppIntent, onAddCashbackTap: @escaping () -> Void) {
+	public init(
+		card: Card,
+		cardCashbackIntent: any AppIntent,
+		onDelete: @escaping () -> Void,
+		onAddCashbackTap: @escaping () -> Void
+	) {
 		self.card = card
 		self.cardCashbackIntent = cardCashbackIntent
+		self.onDelete = onDelete
 		self.onAddCashbackTap = onAddCashbackTap
 		cardName = card.name
 		color = Color(hex: card.color ?? "")
@@ -225,6 +232,7 @@ public struct CardDetailView: View {
 		}
 		cardsService?.archive(card: card)
 		currentCardId = nil
+		onDelete()
 		dismiss()
 	}
 	
