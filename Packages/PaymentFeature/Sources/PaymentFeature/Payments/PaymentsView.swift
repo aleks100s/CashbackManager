@@ -240,6 +240,7 @@ private struct MonthChangerView: View {
 				}
 				.foregroundStyle(isPreviousButtonDisabled ? .gray : .blue)
 				.onTapGesture {
+					hapticFeedback(.light)
 					onPreviousMonthTap()
 				}
 				.disabled(isPreviousButtonDisabled)
@@ -253,6 +254,7 @@ private struct MonthChangerView: View {
 				}
 				.foregroundStyle(isNextButtonDisabled ? .gray : .blue)
 				.onTapGesture {
+					hapticFeedback(.light)
 					onNextMonthTap()
 				}
 				.disabled(isNextButtonDisabled)
