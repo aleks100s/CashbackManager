@@ -163,5 +163,9 @@ struct ContentView: View {
 				container.mainContext.insert(predefined)
 			}
 		}
+		if let fitnessCategory = categories.first(where: { $0.name == "Фитнесс" }) {
+			fitnessCategory.name = "Фитнес"
+			container.mainContext.insert(fitnessCategory)
+		}
 	}
 }

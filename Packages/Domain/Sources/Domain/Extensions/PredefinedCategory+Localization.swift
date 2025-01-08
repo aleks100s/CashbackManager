@@ -59,7 +59,7 @@ public extension PredefinedCategory {
 		case .medicineServices:
 			"Медицинские услуги"
 		case .fitness:
-			"Фитнесс"
+			"Фитнес"
 		case .clinicsAndEsthetics:
 			"Клиники и эстетическая медицина"
 		case .dentist:
