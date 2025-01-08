@@ -116,6 +116,20 @@ public struct CardDetailView: View {
 				Section("Редактировать данные карты") {
 					TextField("Название карты", text: $cardName)
 						.textFieldStyle(.plain)
+					
+					HStack {
+						Text("Выплата кэшбэка")
+						Spacer()
+						Menu(card.currency) {
+							ForEach(Currency.allCases) { currency in
+								Button(currency.rawValue) {
+									card.currency = currency.rawValue
+									card.currencySymbol = currency.symbol
+									hapticFeedback(.light)
+								}
+							}
+						}
+					}
 
 					ColorPicker("Цвет карты", selection: $color)
 					
@@ -166,7 +180,7 @@ public struct CardDetailView: View {
 						IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
 					}
 					
-					Section("Кэшбэки") {
+					Section {
 						ForEach(card.sortedCashback) { cashback in
 							CashbackView(cashback: cashback)
 								.contextMenu {
@@ -178,6 +192,10 @@ public struct CardDetailView: View {
 								deleteCashback(index: index)
 							}
 						}
+					} header: {
+						Text("Кэшбэки")
+					} footer: {
+						Text("Форма выплаты кэшбэка: \(card.currency)")
 					}
 				}
 				

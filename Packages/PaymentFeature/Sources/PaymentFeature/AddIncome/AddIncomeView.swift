@@ -95,7 +95,7 @@ struct AddIncomeView: View {
 						formatAmount()
 					}
 			} header: {
-				Text("Сумма выплаты в рублях")
+				Text("Сумма выплаты в рублях/милях/баллах")
 			}
 		}
 	}

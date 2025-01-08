@@ -93,6 +93,10 @@ public struct CardsListView: View {
 								.foregroundStyle(Color(hex: card.color ?? ""))
 
 							Text(card.name)
+							
+							Spacer()
+							
+							Text(card.currency)
 						}
 					}
 				}

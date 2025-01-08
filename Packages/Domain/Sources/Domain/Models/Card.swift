@@ -18,6 +18,8 @@ public final class Card: @unchecked Sendable {
 	public var color: String?
 	public var isArchived: Bool = false
 	public var isFavorite: Bool = false
+	public var currency = String("Рубли")
+	public var currencySymbol = String("₽")
 	
 	public var sortedCashback: [Cashback] {
 		cashback.sorted(by: { $0.category.name < $1.category.name })

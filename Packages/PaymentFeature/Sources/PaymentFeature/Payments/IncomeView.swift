@@ -22,7 +22,7 @@ struct IncomeView: View {
 				
 				Spacer()
 				
-				Text(income.amount, format: .currency(code: "RUB").precision(.fractionLength(.zero)))
+				Text(String(format: "%d \(income.source?.currencySymbol ?? "")", income.amount))
 			}
 			
 			Text(income.date, format: .dateTime)

@@ -14,7 +14,7 @@ struct CreateIncomeIntent: AppIntent {
 	static var title: LocalizedStringResource = "Выплата кэшбэка"
 	static var description: IntentDescription? = "Запрашивает размер выплаты и сохраняет ее в приложении"
 	
-	@Parameter(title: "Размер выплаты в рублях", inputOptions: String.IntentInputOptions(keyboardType: .numberPad))
+	@Parameter(title: "Размер выплаты в рублях/милях/баллах", inputOptions: String.IntentInputOptions(keyboardType: .numberPad))
 	var amount: String
 	
 	@Parameter(title: "Источник выплаты")
@@ -52,7 +52,7 @@ struct CreateIncomeIntent: AppIntent {
 				incomeService.createIncome(amount: amount, source: source.card)
 			}
 			
-			return "Выплата кэшбэка в размере \(amount) рублей добавлена!"
+			return "Выплата кэшбэка в размере \(amount) добавлен!"
 		}.value
 		return .result(dialog: "\(result)")
 	}

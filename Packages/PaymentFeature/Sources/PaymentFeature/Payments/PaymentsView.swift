@@ -26,6 +26,8 @@ struct PaymentsView: View {
 	
 	@State private var periodTransactions: [Income] = []
 	@State private var periodTotal = 0
+	@State private var milesTotal = 0
+	@State private var pointsTotal = 0
 	@State private var periodStartDate = Date()
 	@State private var periodEndDate = Date()
 	
@@ -84,14 +86,31 @@ struct PaymentsView: View {
 					Text("Период")
 						.foregroundStyle(.secondary)
 				}
-
 				
 				HStack {
 					Text(periodTotal, format: .currency(code: "RUB").precision(.fractionLength(.zero)))
 					
 					Spacer()
 					
-					Text("Сумма")
+					Text(Currency.rubles.rawValue)
+						.foregroundStyle(.secondary)
+				}
+				
+				HStack {
+					Text(String(format: "%d \(Currency.miles.symbol)", milesTotal))
+					
+					Spacer()
+					
+					Text(Currency.miles.rawValue)
+						.foregroundStyle(.secondary)
+				}
+				
+				HStack {
+					Text(String(format: "%d \(Currency.points.symbol)", pointsTotal))
+					
+					Spacer()
+					
+					Text(Currency.points.rawValue)
 						.foregroundStyle(.secondary)
 				}
 				
@@ -129,7 +148,18 @@ struct PaymentsView: View {
 	
 	private func updatePeriod(transactions: [Income]) {
 		periodTransactions = isAllTimeModeOn ? transactions : transactions.filter { $0.date >= periodStartDate && $0.date <= periodEndDate }
-		periodTotal = periodTransactions.map(\.amount).reduce(.zero, +)
+		periodTotal = periodTransactions
+			.filter { $0.source?.currency == Currency.rubles.rawValue }
+			.map(\.amount)
+			.reduce(.zero, +)
+		milesTotal = periodTransactions
+			.filter { $0.source?.currency == Currency.miles.rawValue }
+			.map(\.amount)
+			.reduce(.zero, +)
+		pointsTotal = periodTransactions
+			.filter { $0.source?.currency == Currency.points.rawValue }
+			.map(\.amount)
+			.reduce(.zero, +)
 		
 		var chartData = [UUID: ChartModel]()
 		let otherId = UUID()
@@ -205,11 +235,11 @@ private struct ChartView: View {
 			.cornerRadius(6)
 			.foregroundStyle(Color(hex: data.color))
 			.annotation(position: .overlay) {
-				Text("\(data.label)\n\(Text(data.value, format: .currency(code: "RUB").precision(.fractionLength(.zero))))")
+				Text("\(data.label)\n\(data.value)")
 					.font(.caption)
 					.multilineTextAlignment(.center)
 					.background {
-						Text("\(data.label)\n\(Text(data.value, format: .currency(code: "RUB").precision(.fractionLength(.zero))))")
+						Text("\(data.label)\n\(data.value)")
 							.font(.caption)
 							.multilineTextAlignment(.center)
 							.foregroundStyle(.background)
