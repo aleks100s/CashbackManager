@@ -128,12 +128,16 @@ public struct CardsListView: View {
 		Button {
 			onCardSelected(card)
 		} label: {
-			CardItemView(card: card, searchQuery: searchText)
-				.contextMenu {
-					Text(card.name)
-				} preview: {
-					CashbackListView(cashback: card.cashback)
-				}
+			if card.isEmpty {
+				CardItemView(card: card, searchQuery: searchText)
+			} else {
+				CardItemView(card: card, searchQuery: searchText)
+					.contextMenu {
+						Text(card.name)
+					} preview: {
+						CashbackListView(cashback: card.cashback)
+					}
+			}
 		}
 		.buttonStyle(.plain)
 	}
