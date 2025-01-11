@@ -13,6 +13,7 @@ import PlaceService
 import SelectCategoryScene
 import Shared
 import SwiftUI
+import TipKit
 import ToastService
 
 public struct PlaceDetailView: View {
@@ -123,6 +124,7 @@ public struct PlaceDetailView: View {
 					isEditing.toggle()
 					hapticFeedback(.light)
 				}
+				.popoverTip(HowToDeletePlaceTip(), arrowEdge: .top)
 			}
 		}
 		.sheet(isPresented: $isCategorySelectorPresented) {

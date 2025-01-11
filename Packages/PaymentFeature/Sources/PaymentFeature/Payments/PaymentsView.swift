@@ -11,6 +11,7 @@ import Domain
 import IncomeService
 import SwiftData
 import SwiftUI
+import TipKit
 import ToastService
 
 struct PaymentsView: View {
@@ -57,6 +58,7 @@ struct PaymentsView: View {
 						hapticFeedback(.light)
 						isAllTimeModeOn.toggle()
 					}
+					.popoverTip(HowToSwitchPaymentsPeriodTip(), arrowEdge: .top)
 				}
 			}
 			.onFirstAppear {

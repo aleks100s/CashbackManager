@@ -13,6 +13,7 @@ import SearchService
 import Shared
 import SwiftData
 import SwiftUI
+import TipKit
 import UserDataService
 
 @main
@@ -52,6 +53,10 @@ struct CashbackApplication: App {
 			ContentView(container: container)
 				.task {
 					requestNotificationPermission()
+					try? Tips.configure([
+						.displayFrequency(.hourly),
+						.datastoreLocation(.applicationDefault)
+					])
 				}
         }
 		.modelContainer(container)

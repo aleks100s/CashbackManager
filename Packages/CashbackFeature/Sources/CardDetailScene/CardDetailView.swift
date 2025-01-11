@@ -16,6 +16,7 @@ import Shared
 import SwiftData
 import SwiftUI
 import TextDetectionService
+import TipKit
 import ToastService
 import WidgetKit
 
@@ -71,6 +72,7 @@ public struct CardDetailView: View {
 				
 				ToolbarItem(placement: .topBarTrailing) {
 					editButton
+						.popoverTip(HowToEditCardTip(), arrowEdge: .top)
 				}
 			}
 			.onAppear {
@@ -192,6 +194,8 @@ public struct CardDetailView: View {
 								deleteCashback(index: index)
 							}
 						}
+						
+						TipView(HowToDeleteCashbackTip())
 					} header: {
 						Text("Кэшбэки")
 					} footer: {
