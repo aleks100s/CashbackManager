@@ -38,6 +38,7 @@ struct SettingsView: View {
 	@State private var isExporterPresented = false
 	@State private var isImporterPresented = false
 	@State private var isImportWarningPresented = false
+	@State private var isOnboardingPresented = false
 	
 	@Environment(\.notificationService)
 	private var notificationService
@@ -70,6 +71,10 @@ struct SettingsView: View {
 				Text("Настройка уведомлений")
 			} footer: {
 				Text("Приложение напомнит вам выбрать и сохранить кэшбэк каждый месяц 1 числа.\nПроверьте, что вы разрешили уведомления в настройках системы.")
+			}
+			
+			Button("Показать обучение") {
+				isOnboardingPresented = true
 			}
 			
 			Section {
@@ -183,6 +188,9 @@ struct SettingsView: View {
 			Button("Отмена", role: .cancel) {
 				isImportWarningPresented = false
 			}
+		}
+		.sheet(isPresented: $isOnboardingPresented) {
+			OnboardingView()
 		}
 	}
 	

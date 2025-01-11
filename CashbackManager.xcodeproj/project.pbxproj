@@ -17,6 +17,8 @@
 		2714FEB82C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB72C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift */; };
 		2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB92C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift */; };
 		27208E732C54C4970097794D /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 27208E722C54C4970097794D /* CashbackFeature */; };
+		272133592D3264A500A904D8 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272133582D3264A500A904D8 /* OnboardingView.swift */; };
+		2721335B2D3264C900A904D8 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721335A2D3264C900A904D8 /* OnboardingPage.swift */; };
 		2723208E2C7F8367005B658A /* DeleteCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723208D2C7F8367005B658A /* DeleteCategoryIntent.swift */; };
 		272320902C7F85E0005B658A /* DeletePlaceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723208F2C7F85E0005B658A /* DeletePlaceIntent.swift */; };
 		272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272320912C7F867C005B658A /* DeleteCardIntent.swift */; };
@@ -120,6 +122,8 @@
 		2714FEB52C58B44F0014CFE0 /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		2714FEB72C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPlaceCategoryIntent.swift; sourceTree = "<group>"; };
 		2714FEB92C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPlaceCardIntent.swift; sourceTree = "<group>"; };
+		272133582D3264A500A904D8 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		2721335A2D3264C900A904D8 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		2723208D2C7F8367005B658A /* DeleteCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryIntent.swift; sourceTree = "<group>"; };
 		2723208F2C7F85E0005B658A /* DeletePlaceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePlaceIntent.swift; sourceTree = "<group>"; };
 		272320912C7F867C005B658A /* DeleteCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCardIntent.swift; sourceTree = "<group>"; };
@@ -250,6 +254,15 @@
 			path = Intents;
 			sourceTree = "<group>";
 		};
+		272133552D32646700A904D8 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				272133582D3264A500A904D8 /* OnboardingView.swift */,
+				2721335A2D3264C900A904D8 /* OnboardingPage.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		27368B632C395E5800FC0475 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +375,7 @@
 		27A5D7CF2C394EC400B93512 /* CashbackManager */ = {
 			isa = PBXGroup;
 			children = (
+				272133552D32646700A904D8 /* Onboarding */,
 				2755A31D2CC939E7002F61EC /* Settings */,
 				2714FEAB2C58A0DD0014CFE0 /* Intents */,
 				2755A32A2CCD1E7E002F61EC /* ContentView.swift */,
@@ -618,8 +632,10 @@
 				272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */,
 				272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */,
 				2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */,
+				272133592D3264A500A904D8 /* OnboardingView.swift in Sources */,
 				2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
+				2721335B2D3264C900A904D8 /* OnboardingPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

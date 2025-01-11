@@ -54,7 +54,7 @@ struct CashbackApplication: App {
 				.task {
 					requestNotificationPermission()
 					try? Tips.configure([
-						.displayFrequency(.hourly),
+						.displayFrequency(.daily),
 						.datastoreLocation(.applicationDefault)
 					])
 				}

@@ -43,6 +43,7 @@ struct ContentView: View {
 
 	@State private var selectedTab = Tab.cashback
 	@State private var toast: Toast?
+	@State private var isOnboardingPresented = false
 	
 	@Environment(\.openURL) private var openURL
 	@Environment(\.toastService) private var toastService
@@ -57,6 +58,9 @@ struct ContentView: View {
 			
 			settingsTab
 		}
+		.sheet(isPresented: $isOnboardingPresented) {
+			OnboardingView()
+		}
 		.toast(item: $toast)
 		.onReceive(toastService?.toastPublisher ?? Just(nil).eraseToAnyPublisher()) { toast in
 			self.toast = toast
@@ -64,6 +68,7 @@ struct ContentView: View {
 		.onAppear {
 			if isFirstLaunch {
 				prepopulateDatabase()
+				isOnboardingPresented = true
 			} else {
 				actualizeDatabase()
 			}
