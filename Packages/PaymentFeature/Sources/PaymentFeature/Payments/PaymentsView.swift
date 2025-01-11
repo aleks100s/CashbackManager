@@ -142,7 +142,7 @@ struct PaymentsView: View {
 	
 	private func handleChange(transactions: [Income]) {
 		firstDate = transactions.first?.date ?? Date()
-		lastDate = transactions.last?.date ?? Date()
+		lastDate = Date()
 		updatePeriod(transactions: transactions)
 	}
 	
