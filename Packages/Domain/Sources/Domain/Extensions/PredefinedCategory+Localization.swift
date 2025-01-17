@@ -98,6 +98,8 @@ public extension PredefinedCategory {
 			"Бургер Кинг"
 		case .gasStation:
 			"Заправки"
+		case .communalServices:
+			"Коммунальные услуги"
 		}
 	}
 }

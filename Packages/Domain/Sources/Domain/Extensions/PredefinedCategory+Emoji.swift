@@ -98,6 +98,8 @@ public extension PredefinedCategory {
 			"🍔"
 		case .gasStation:
 			"⛽"
+		case .communalServices:
+			"🚰"
 		}
 	}
 }

@@ -51,4 +51,5 @@ public enum PredefinedCategory: CaseIterable {
 	case sbp
 	case burgerKing
 	case gasStation
+	case communalServices
 }
