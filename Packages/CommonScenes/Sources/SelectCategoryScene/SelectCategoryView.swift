@@ -108,15 +108,10 @@ public struct SelectCategoryView: View {
 	}
 	
 	private var addCategorySheet: some View {
-		NavigationView {
-			CommonInputView("Название категории", text: searchText, intent: addCategoryIntent, hint: "Чтобы быстро добавить категорию") { categoryName in
-				categoryService?.createCategory(name: categoryName)
-				isAddCategorySheetPresented = false
-			}
-			.navigationTitle("Добавить категорию")
-			.navigationBarTitleDisplayMode(.inline)
+		CreateCategoryView(addCategoryIntent: addCategoryIntent, text: searchText) { categoryName, emoji in
+			categoryService?.createCategory(name: categoryName, emoji: emoji)
+			isAddCategorySheetPresented = false
 		}
-		.presentationDetents([.medium])
 		.presentationBackground(Color.cmScreenBackground)
 	}
 	
