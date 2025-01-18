@@ -27,13 +27,17 @@ public struct IncomeService: @unchecked Sendable {
 		let income = Income(amount: amount, date: date, source: source)
 		context.insert(income)
 		try? context.save()
+	}
+	
+	public func updateIncome(_ income: Income) {
+		context.insert(income)
+		try? context.save()
 		onChangeSubject.send(())
 	}
 	
 	public func delete(income: Income) {
 		context.delete(income)
 		try? context.save()
-		onChangeSubject.send(())
 	}
 	
 	public func deleteIncomes(from card: Card) {
@@ -43,7 +47,6 @@ public struct IncomeService: @unchecked Sendable {
 			context.delete(transaction)
 		}
 		try? context.save()
-		onChangeSubject.send(())
 	}
 	
 	public func fetchAll() -> [Income] {

@@ -6,6 +6,7 @@
 //
 
 import Charts
+import Combine
 import DesignSystem
 import Domain
 import IncomeService
@@ -16,6 +17,7 @@ import ToastService
 
 struct PaymentsView: View {
 	let onAddIncomeTapped: () -> Void
+	let onEditIncomeTapped: (Income) -> Void
 
 	@Query(sort: [SortDescriptor<Income>(\.date, order: .forward)])
 	private var allTransactions: [Income]
@@ -70,6 +72,9 @@ struct PaymentsView: View {
 			}
 			.onChange(of: isAllTimeModeOn) {
 				updatePeriod(transactions: allTransactions)
+			}
+			.onReceive(incomeService?.onChange ?? Just(()).eraseToAnyPublisher()) { _ in
+				handleChange(transactions: allTransactions)
 			}
 	}
 	
@@ -138,6 +143,8 @@ struct PaymentsView: View {
 				delete(transaction: income)
 			} deleteMany: { incomes in
 				deleteMany(transactions: incomes)
+			} edit: { income in
+				onEditIncomeTapped(income)
 			}
 		}
 	}
@@ -301,6 +308,7 @@ private struct TransactionsPeriodView: View {
 	let endDate: Date
 	let delete: (Income) -> Void
 	let deleteMany: ([Income]) -> Void
+	let edit: (Income) -> Void
 	
 	var body: some View {
 		Section {
@@ -311,9 +319,15 @@ private struct TransactionsPeriodView: View {
 					IncomeView(income: income)
 						.contentShape(.rect)
 						.contextMenu {
+							Button("Изменить") {
+								edit(income)
+							}
 							Button("Удалить", role: .destructive) {
 								delete(income)
 							}
+						}
+						.onTapGesture {
+							edit(income)
 						}
 				}
 				.onDelete { indexSet in

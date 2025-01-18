@@ -17,6 +17,8 @@ import ToastService
 struct AddIncomeView: View {
 	let createIncomeIntent: any AppIntent
 	
+	var income: Income?
+	
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
@@ -39,12 +41,14 @@ struct AddIncomeView: View {
 	
 	var body: some View {
 		contentView
-			.navigationTitle("Добавить выплату")
+			.navigationTitle(income == nil ? "Добавить выплату" : "Редактировать выплату")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				ToolbarItem(placement: .topBarTrailing) {
-					Button("Отмена") {
-						dismiss()
+				if income == nil {
+					ToolbarItem(placement: .topBarTrailing) {
+						Button("Отмена") {
+							dismiss()
+						}
 					}
 				}
 			}
@@ -52,6 +56,9 @@ struct AddIncomeView: View {
 				saveButton
 			}
 			.onAppear {
+				source = income?.source
+				amount = String(income?.amount ?? .zero)
+				date = income?.date ?? .now
 				isFocused = true
 			}
 			.scrollDismissesKeyboard(.automatic)
@@ -59,7 +66,7 @@ struct AddIncomeView: View {
 	
 	private var contentView: some View {
 		List {
-			if areSiriTipsVisible {
+			if areSiriTipsVisible, income == nil {
 				IntentTipView(intent: createIncomeIntent, text: "Чтобы добавить выплату")
 			}
 			
@@ -102,9 +109,17 @@ struct AddIncomeView: View {
 	
 	private var saveButton: some View {
 		Button("Сохранить") {
-			createIncome()
+			if let income {
+				income.source = source
+				income.amount = Int(amount) ?? .zero
+				income.date = date
+				incomeService?.updateIncome(income)
+				toastService?.show(Toast(title: "Выплата изменена"))
+			} else {
+				createIncome()
+				toastService?.show(Toast(title: "Выплата добавлена"))
+			}
 			dismiss()
-			toastService?.show(Toast(title: "Выплата добавлена"))
 		}
 		.frame(maxWidth: .infinity)
 		.padding()
