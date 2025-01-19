@@ -54,6 +54,16 @@ public struct IncomeService: @unchecked Sendable {
 		return (try? context.fetch(descriptor)) ?? []
 	}
 	
+	public func fetchIncomes(for card: Card) -> [Income] {
+		let id: UUID? = card.id
+		var descriptor = FetchDescriptor<Income>(
+			predicate: #Predicate<Income> { $0.source?.id == id },
+			sortBy: [.init(\.date)]
+		)
+		descriptor.fetchLimit = 10
+		return (try? context.fetch(descriptor)) ?? []
+	}
+	
 	private func fetch(by predicate: Predicate<Income>) -> [Income] {
 		let descriptor = FetchDescriptor(predicate: predicate)
 		return (try? context.fetch(descriptor)) ?? []

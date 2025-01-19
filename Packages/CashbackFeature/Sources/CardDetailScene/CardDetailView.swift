@@ -8,6 +8,7 @@
 import AppIntents
 import CategoryService
 import CardsService
+import Charts
 import Domain
 import DesignSystem
 import IncomeService
@@ -24,6 +25,11 @@ public struct CardDetailView: View {
 	private let card: Card
 	private let cardCashbackIntent: any AppIntent
 	private let onAddCashbackTap: () -> Void
+	private let formatter = {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .short
+		return formatter
+	}()
 	
 	@AppStorage(Constants.StorageKey.currentCardID, store: .appGroup)
 	private var currentCardId: String?
@@ -38,6 +44,7 @@ public struct CardDetailView: View {
 	@State private var color: Color
 	@State private var isDeleteCardWarningPresented = false
 	@State private var isDeleteTransactionsWarningPresented = false
+	@State private var chartData = [ChartModel]()
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.cardsService) private var cardsService
@@ -78,6 +85,7 @@ public struct CardDetailView: View {
 			.onAppear {
 				currentCardId = card.id.uuidString
 				refreshWidget()
+				setupChart()
 			}
 			.onChange(of: isEditing) { _, newValue in
 				if !newValue, !cardName.isEmpty {
@@ -204,6 +212,18 @@ public struct CardDetailView: View {
 				}
 				
 				detectCashbackSectionButton
+				
+				Section("Последние 10 выплат") {
+					Chart(chartData) { data in
+						PointMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
+							.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+						LineMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
+							.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+					}
+					.chartLegend(.visible)
+					.scaledToFit()
+					.padding()
+				}
 			}
 		}
 	}
@@ -271,6 +291,20 @@ public struct CardDetailView: View {
 	private func refreshWidget() {
 		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
 		WidgetCenter.shared.reloadTimelines(ofKind: Constants.favouriteCardsWidgetKind)
+	}
+	
+	private func setupChart() {
+		guard let transactions = incomeService?.fetchIncomes(for: card) else { return }
+		
+		chartData = transactions.compactMap { transaction -> ChartModel? in
+			guard let source = transaction.source else { return nil }
+			
+			return ChartModel(
+				id: source.id,
+				date: transaction.date,
+				amount: transaction.amount
+			)
+		}
 	}
 }
 
