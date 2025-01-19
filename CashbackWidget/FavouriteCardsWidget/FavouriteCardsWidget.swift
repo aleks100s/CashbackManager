@@ -19,7 +19,7 @@ struct FavouriteCardsWidget: Widget {
 			FavouriteCardsEntryView(entry: entry)
 		}
 		.configurationDisplayName("Три любимые карты")
-		.description("Показывает три выбранные карты")
+		.description("Показывает кэшбэк у трех выбранных карт")
 		.supportedFamilies([.systemLarge])
 	}
 }

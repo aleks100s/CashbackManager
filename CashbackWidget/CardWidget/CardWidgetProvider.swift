@@ -17,8 +17,10 @@ struct CardWidgetProvider: TimelineProvider {
 	}
 
 	func getSnapshot(in context: Context, completion: @escaping (CardWidgetEntry) -> ()) {
-		let entry = Entry(date: Date(), card: nil, hasMoreCards: true)
-		completion(entry)
+		Task { @MainActor in
+			let entry = Entry(date: Date(), card: AppFactory.provideCardsService().getAllCards().first, hasMoreCards: true)
+			completion(entry)
+		}
 	}
 
 	func getTimeline(in context: Context, completion: @escaping (Timeline<CardWidgetEntry>) -> ()) {
