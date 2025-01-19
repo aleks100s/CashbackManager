@@ -33,6 +33,7 @@ public enum Constants {
 	public static let appIdentifier = "com.alextos.CashbackManager"
 	public static let appGroup = "group.com.alextos.cashback"
 	public static let cardWidgetKind = "CardWidget"
+	public static let favouriteCardsWidgetKind = "FavouriteCardsWidget"
 	public static let urlSchemeCard = "cashback://cashback/card/"
 	public static let urlSchemePlace = "cashback://cashback/place/"
 	public static let appStoreLink = URL(string: "https://apps.apple.com/app/id6517354748")

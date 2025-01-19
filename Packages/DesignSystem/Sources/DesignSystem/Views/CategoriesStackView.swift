@@ -10,6 +10,18 @@ import SwiftUI
 
 public struct CategoriesStackView: View {
 	private let cashback: [Cashback]
+	
+	@Environment(\.viewClass)
+	private var viewClass
+	
+	private var trailingPadding: CGFloat {
+		switch viewClass {
+		case .default, .widget:
+			-12
+		case .favouriteWidget:
+			-9
+		}
+	}
 		
 	public init(cashback: [Cashback]) {
 		self.cashback = cashback
@@ -19,7 +31,7 @@ public struct CategoriesStackView: View {
 		HStack(alignment: .center, spacing: .zero) {
 			ForEach(cashback, id: \.category.name) { cashback in
 				CategoryMarkerView(category: cashback.category)
-					.padding(.trailing, -12)
+					.padding(.trailing, trailingPadding)
 			}
 		}
 	}

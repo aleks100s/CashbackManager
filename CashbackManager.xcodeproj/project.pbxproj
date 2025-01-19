@@ -62,6 +62,11 @@
 		2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1252CD874300081A927 /* PlaceEntity.swift */; };
 		2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1272CD874CC0081A927 /* CategoryEntity.swift */; };
 		2781B12B2CD884F20081A927 /* TrashbinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B12A2CD884F20081A927 /* TrashbinView.swift */; };
+		27A465AD2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465AC2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift */; };
+		27A465B02D3D2193000B6B35 /* FavouriteCardsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465AF2D3D2193000B6B35 /* FavouriteCardsEntry.swift */; };
+		27A465B32D3D2210000B6B35 /* FavouriteCardsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */; };
+		27A465B72D3D2389000B6B35 /* FavouriteCardsEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B52D3D2389000B6B35 /* FavouriteCardsEntryView.swift */; };
+		27A465BA2D3D253A000B6B35 /* FavouriteCardsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */; };
 		27A5D7EC2C394EC500B93512 /* CashbackManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7EB2C394EC500B93512 /* CashbackManagerUITests.swift */; };
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
@@ -160,6 +165,11 @@
 		2781B1252CD874300081A927 /* PlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceEntity.swift; sourceTree = "<group>"; };
 		2781B1272CD874CC0081A927 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		2781B12A2CD884F20081A927 /* TrashbinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashbinView.swift; sourceTree = "<group>"; };
+		27A465AC2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsConfigurationIntent.swift; sourceTree = "<group>"; };
+		27A465AF2D3D2193000B6B35 /* FavouriteCardsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsEntry.swift; sourceTree = "<group>"; };
+		27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsProvider.swift; sourceTree = "<group>"; };
+		27A465B52D3D2389000B6B35 /* FavouriteCardsEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsEntryView.swift; sourceTree = "<group>"; };
+		27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsWidget.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7DD2C394EC500B93512 /* CashbackManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7E72C394EC500B93512 /* CashbackManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,6 +308,7 @@
 		27368BC02C4BB11100FC0475 /* CashbackWidget */ = {
 			isa = PBXGroup;
 			children = (
+				27A465AB2D3D0F69000B6B35 /* FavouriteCardsWidget */,
 				27368BE72C4CD01200FC0475 /* CardWidget */,
 				27368BC12C4BB11100FC0475 /* CashbackWidgetBundle.swift */,
 				27368BC52C4BB11200FC0475 /* Assets.xcassets */,
@@ -343,6 +354,18 @@
 				2781B12A2CD884F20081A927 /* TrashbinView.swift */,
 			);
 			path = Trashbin;
+			sourceTree = "<group>";
+		};
+		27A465AB2D3D0F69000B6B35 /* FavouriteCardsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				27A465AC2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift */,
+				27A465AF2D3D2193000B6B35 /* FavouriteCardsEntry.swift */,
+				27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */,
+				27A465B52D3D2389000B6B35 /* FavouriteCardsEntryView.swift */,
+				27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */,
+			);
+			path = FavouriteCardsWidget;
 			sourceTree = "<group>";
 		};
 		27A5D7C42C394EC400B93512 = {
@@ -599,12 +622,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				27368BD62C4BB22500FC0475 /* CardWidgetEntry.swift in Sources */,
+				27A465B72D3D2389000B6B35 /* FavouriteCardsEntryView.swift in Sources */,
 				27368BDA2C4BB67200FC0475 /* ChangeCurrentCardIntent.swift in Sources */,
 				27368BC22C4BB11100FC0475 /* CashbackWidgetBundle.swift in Sources */,
 				27368BD52C4BB20A00FC0475 /* CardWidgetProvider.swift in Sources */,
 				27EE77BB2C5C020900D12827 /* AppFactory.swift in Sources */,
+				27A465B32D3D2210000B6B35 /* FavouriteCardsProvider.swift in Sources */,
 				27368BC42C4BB11100FC0475 /* CardWidget.swift in Sources */,
+				27A465B02D3D2193000B6B35 /* FavouriteCardsEntry.swift in Sources */,
+				27A465AD2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift in Sources */,
 				27368BD72C4BB22700FC0475 /* CashbackWidgetEntryView.swift in Sources */,
+				27A465BA2D3D253A000B6B35 /* FavouriteCardsWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

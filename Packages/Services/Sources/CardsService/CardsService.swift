@@ -76,6 +76,7 @@ public struct CardsService: @unchecked Sendable {
 		try? context.save()
 		searchService.index(card: card)
 		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.favouriteCardsWidgetKind)
 	}
 	
 	public func delete(cashback: Cashback, from card: Card) {
@@ -85,6 +86,7 @@ public struct CardsService: @unchecked Sendable {
 		try? context.save()
 		searchService.index(card: card)
 		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.favouriteCardsWidgetKind)
 	}
 	
 	public func update(card: Card) {
@@ -92,6 +94,7 @@ public struct CardsService: @unchecked Sendable {
 		try? context.save()
 		searchService.index(card: card)
 		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.favouriteCardsWidgetKind)
 	}
 	
 	private func fetch(by predicate: Predicate<Card>) -> [Card] {

@@ -32,6 +32,8 @@ public struct CardView<AddonView: View>: View {
 			.body
 		case .widget:
 			.callout
+		case .favouriteWidget:
+			.footnote
 		}
 	}
 	
@@ -45,6 +47,7 @@ public struct CardView<AddonView: View>: View {
 			HStack(alignment: .center, spacing: .zero) {
 				Text(card.name)
 					.foregroundStyle(.secondary)
+					.font(descriptionFont)
 				
 				Spacer()
 				
@@ -57,9 +60,7 @@ public struct CardView<AddonView: View>: View {
 			
 			Text(card.cashbackDescription)
 				.font(descriptionFont)
-				.if(viewClass == .widget) {
-					$0.lineLimit(2, reservesSpace: true)
-				}
+				.lineLimit(viewClass.lineLimit, reservesSpace: true)
 		}
 		.frame(maxWidth: .infinity, alignment: .leading)
 		.if(viewClass == .default) { view in
@@ -78,8 +79,17 @@ private extension ViewClass {
 		switch self {
 		case .default:
 			16
-		case .widget:
+		case .widget, .favouriteWidget:
 			8
+		}
+	}
+	
+	var lineLimit: Int {
+		switch self {
+		case .default:
+			0
+		case .widget, .favouriteWidget:
+			2
 		}
 	}
 }

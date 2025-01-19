@@ -270,6 +270,7 @@ public struct CardDetailView: View {
 	
 	private func refreshWidget() {
 		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.favouriteCardsWidgetKind)
 	}
 }
 
