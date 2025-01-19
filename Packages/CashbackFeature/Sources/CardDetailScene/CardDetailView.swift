@@ -213,16 +213,18 @@ public struct CardDetailView: View {
 				
 				detectCashbackSectionButton
 				
-				Section("Последние 10 выплат") {
-					Chart(chartData) { data in
-						PointMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
-							.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
-						LineMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
-							.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+				if !chartData.isEmpty {
+					Section("Последние 10 выплат") {
+						Chart(chartData) { data in
+							PointMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
+								.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+							LineMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
+								.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+						}
+						.chartLegend(.visible)
+						.scaledToFit()
+						.padding()
 					}
-					.chartLegend(.visible)
-					.scaledToFit()
-					.padding()
 				}
 			}
 		}

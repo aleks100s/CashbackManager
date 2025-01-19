@@ -48,6 +48,7 @@ public struct CardView<AddonView: View>: View {
 				Text(card.name)
 					.foregroundStyle(.secondary)
 					.font(descriptionFont)
+					.bold(viewClass == .favouriteWidget)
 				
 				Spacer()
 				
