@@ -25,7 +25,6 @@
 		272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272320932C7F86EA005B658A /* DeleteCashbackIntent.swift */; };
 		272CA8D42C54C6E600A00E90 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 272CA8D32C54C6E600A00E90 /* Domain */; };
 		27368B6B2C395E5800FC0475 /* BanksStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368B622C395E5800FC0475 /* BanksStoreTests.swift */; };
-		27368B802C426E8E00FC0475 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		27368BBD2C4BB11100FC0475 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27368BBC2C4BB11000FC0475 /* WidgetKit.framework */; };
 		27368BBF2C4BB11100FC0475 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27368BBE2C4BB11100FC0475 /* SwiftUI.framework */; };
 		27368BC22C4BB11100FC0475 /* CashbackWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368BC12C4BB11100FC0475 /* CashbackWidgetBundle.swift */; };
@@ -67,6 +66,10 @@
 		27A465B32D3D2210000B6B35 /* FavouriteCardsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */; };
 		27A465B72D3D2389000B6B35 /* FavouriteCardsEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B52D3D2389000B6B35 /* FavouriteCardsEntryView.swift */; };
 		27A465BA2D3D253A000B6B35 /* FavouriteCardsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */; };
+		27A465C02D44B460000B6B35 /* YandexMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 27A465BF2D44B460000B6B35 /* YandexMobileAds */; };
+		27A465C22D44B460000B6B35 /* YandexMobileAdsInstream in Frameworks */ = {isa = PBXBuildFile; productRef = 27A465C12D44B460000B6B35 /* YandexMobileAdsInstream */; };
+		27A465C42D44B590000B6B35 /* MobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 27A465C32D44B590000B6B35 /* MobileAdsBundle.bundle */; };
+		27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465C52D44B7B7000B6B35 /* AppDelegate.swift */; };
 		27A5D7EC2C394EC500B93512 /* CashbackManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7EB2C394EC500B93512 /* CashbackManagerUITests.swift */; };
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
@@ -170,6 +173,8 @@
 		27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsProvider.swift; sourceTree = "<group>"; };
 		27A465B52D3D2389000B6B35 /* FavouriteCardsEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsEntryView.swift; sourceTree = "<group>"; };
 		27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsWidget.swift; sourceTree = "<group>"; };
+		27A465C32D44B590000B6B35 /* MobileAdsBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileAdsBundle.bundle; sourceTree = "<group>"; };
+		27A465C52D44B7B7000B6B35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7DD2C394EC500B93512 /* CashbackManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7E72C394EC500B93512 /* CashbackManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +216,7 @@
 				272CA8D42C54C6E600A00E90 /* Domain in Frameworks */,
 				2755A3142CBA4B7D002F61EC /* IncomeService in Frameworks */,
 				277D92BD2CDD17C2001661E1 /* ToastService in Frameworks */,
+				27A465C22D44B460000B6B35 /* YandexMobileAdsInstream in Frameworks */,
 				2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */,
 				27AB372B2C73BE4B00A00939 /* CardsService in Frameworks */,
 				2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */,
@@ -218,9 +224,9 @@
 				27AB37272C73BBE200A00939 /* CategoryService in Frameworks */,
 				2755A3102CB9742A002F61EC /* PaymentFeature in Frameworks */,
 				27D329D52C9C894B00964504 /* TextDetectionService in Frameworks */,
+				27A465C02D44B460000B6B35 /* YandexMobileAds in Frameworks */,
 				2755A3302CCD5B2A002F61EC /* UserDataService in Frameworks */,
 				27AB37292C73BBE700A00939 /* PlaceService in Frameworks */,
-				27368B802C426E8E00FC0475 /* (null) in Frameworks */,
 				2755A3252CC9EECC002F61EC /* NotificationService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,9 +409,11 @@
 				2714FEAB2C58A0DD0014CFE0 /* Intents */,
 				2755A32A2CCD1E7E002F61EC /* ContentView.swift */,
 				27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */,
+				27A465C52D44B7B7000B6B35 /* AppDelegate.swift */,
 				2714FEB52C58B44F0014CFE0 /* AppFactory.swift */,
 				27EE77BC2C5D437600D12827 /* Info.plist */,
 				27368BE32C4CC62600FC0475 /* CashbackManager.entitlements */,
+				27A465C32D44B590000B6B35 /* MobileAdsBundle.bundle */,
 				27A5D84A2C394EFF00B93512 /* Assets.xcassets */,
 			);
 			path = CashbackManager;
@@ -492,6 +500,8 @@
 				2755A3242CC9EECC002F61EC /* NotificationService */,
 				2755A32F2CCD5B2A002F61EC /* UserDataService */,
 				277D92BC2CDD17C2001661E1 /* ToastService */,
+				27A465BF2D44B460000B6B35 /* YandexMobileAds */,
+				27A465C12D44B460000B6B35 /* YandexMobileAdsInstream */,
 			);
 			productName = CashbackManager;
 			productReference = 27A5D7CD2C394EC400B93512 /* CashbackManager.app */;
@@ -571,6 +581,9 @@
 				ru,
 			);
 			mainGroup = 27A5D7C42C394EC400B93512;
+			packageReferences = (
+				27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */,
+			);
 			productRefGroup = 27A5D7CE2C394EC400B93512 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -596,6 +609,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A465C42D44B590000B6B35 /* MobileAdsBundle.bundle in Resources */,
 				27A5D88A2C394EFF00B93512 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,6 +667,7 @@
 				2714FEB82C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift in Sources */,
 				2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */,
 				27AB37252C73B3CE00A00939 /* CreatePlaceIntent.swift in Sources */,
+				27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */,
 				2723208E2C7F8367005B658A /* DeleteCategoryIntent.swift in Sources */,
 				2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */,
 				2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */,
@@ -913,6 +928,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.19.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -949,6 +965,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.19.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1079,6 +1096,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/yandex-ads-sdk-ios";
+			requirement = {
+				kind = exactVersion;
+				version = 7.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		2714FEA72C54CA3A0014CFE0 /* PlaceFeature */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1163,6 +1191,16 @@
 		2781B1232CD7CCA30081A927 /* CashbackFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CashbackFeature;
+		};
+		27A465BF2D44B460000B6B35 /* YandexMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */;
+			productName = YandexMobileAds;
+		};
+		27A465C12D44B460000B6B35 /* YandexMobileAdsInstream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */;
+			productName = YandexMobileAdsInstream;
 		};
 		27AB37262C73BBE200A00939 /* CategoryService */ = {
 			isa = XCSwiftPackageProductDependency;
