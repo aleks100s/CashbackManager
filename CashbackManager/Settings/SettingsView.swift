@@ -52,6 +52,20 @@ struct SettingsView: View {
 	var body: some View {
 		List {
 			Section {
+				Button("Экспортировать данные") {
+					exportUserData()
+				}
+				
+				Button("Восстановить данные") {
+					isImportWarningPresented = true
+				}
+			} header: {
+				Text("Перенос данных на другое устройство")
+			} footer: {
+				Text("Экспортируйте файл с одного устройства и откройте его в приложении на новом девайсе.\n\(Text("При импорте имеющиеся данные будут перезаписаны!").foregroundStyle(.red))")
+			}
+
+			Section {
 				Toggle("Подсказки Siri", isOn: $areSiriTipsVisible)
 					.onChange(of: areSiriTipsVisible) { _, newValue in
 						toastService?.show(Toast(title: newValue ? "Подсказки включены" : "Подсказки отключены"))
@@ -111,20 +125,6 @@ struct SettingsView: View {
 					TrashbinView()
 				}
 			}
-
-//			Section {
-//				Button("Экспортировать данные") {
-//					exportUserData()
-//				}
-//				
-//				Button("Восстановить данные") {
-//					isImportWarningPresented = true
-//				}
-//			} header: {
-//				Text("Перенос данных на другое устройство")
-//			} footer: {
-//				Text("Здесь можно перенести все данные со старого устройства на новое. Экспортируйте файл с одного устройства и откройте его в приложении на новом девайсе.\n\(Text("При импорте имеющиеся данные будут перезаписаны!").foregroundStyle(.red))")
-//			}
 
 			Section("О приложении") {
 				ItemView(title: "Версия приложения", value: appVersion, onTap: copy)

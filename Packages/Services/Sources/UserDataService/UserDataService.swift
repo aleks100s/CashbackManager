@@ -27,7 +27,7 @@ public final class UserDataService {
 		let cards: [Card] = try fetchAll(from: context)
 		let payments: [Income] = try fetchAll(from: context)
 		
-		let userData = UserData()
+		let userData = UserData(categories: categories, cards: cards, places: places, payments: payments)
 		return userData
 	}
 	
@@ -43,20 +43,31 @@ public final class UserDataService {
 		
 		try context.transaction {
 			try deleteAll(from: context)
-//			for category in userData.categories {
-//				context.insert(category)
-//			}
-//			for place in userData.places {
-//				context.insert(place)
-//				searchService.index(place: place)
-//			}
-//			for card in userData.cards {
-//				context.insert(card)
-//				searchService.index(card: card)
-//			}
-//			for income in userData.payments {
-//				context.insert(income)
-//			}
+			for category in userData.categories {
+				context.insert(category)
+			}
+			for place in userData.places {
+				guard let category = userData.categories.first(where: { $0.id == place.category.id }) else { continue }
+
+				place.category = category
+				context.insert(place)
+				searchService.index(place: place)
+			}
+			for card in userData.cards {
+				for cashback in card.cashback {
+					guard let category = userData.categories.first(where: { $0.id == cashback.category.id }) else { continue }
+					
+					cashback.category = category
+				}
+				context.insert(card)
+				searchService.index(card: card)
+			}
+			for income in userData.payments {
+				guard let card = userData.cards.first(where: { $0.id == income.source?.id }) else { continue }
+				
+				income.source = card
+				context.insert(income)
+			}
 		}
 		
 		try context.save()
