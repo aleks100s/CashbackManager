@@ -158,7 +158,7 @@ struct SettingsView: View {
 			isPresented: $isExporterPresented,
 			item: exportItem,
 			contentTypes: [.data],
-			defaultFilename: "CashbackData",
+			defaultFilename: "Кэшбэк",
 			onCompletion: { result in
 				switch result {
 				case .success:
