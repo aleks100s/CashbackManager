@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-public final class Cashback: Codable {
+public final class Cashback {
 	public var id: UUID
 	public var category: Domain.Category
 	public var percent: Double
@@ -26,28 +26,5 @@ public final class Cashback: Codable {
 		self.id = id
 		self.category = category
 		self.percent = percent
-	}
-	
-	// Ключи для кодирования и декодирования
-	private enum CodingKeys: String, CodingKey {
-		case id
-		case category
-		case percent
-	}
-	
-	// Инициализатор Decodable
-	public required init(from decoder: Decoder) throws {
-		let container = try decoder.container(keyedBy: CodingKeys.self)
-		id = try container.decode(UUID.self, forKey: .id)
-		category = try container.decode(Category.self, forKey: .category)
-		percent = try container.decode(Double.self, forKey: .percent)
-	}
-	
-	// Метод Encodable
-	public func encode(to encoder: Encoder) throws {
-		var container = encoder.container(keyedBy: CodingKeys.self)
-		try container.encode(id, forKey: .id)
-		try container.encode(category, forKey: .category)
-		try container.encode(percent, forKey: .percent)
 	}
 }

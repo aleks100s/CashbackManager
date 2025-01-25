@@ -15,12 +15,12 @@ public final class UserData: Codable, Transferable {
 		}
 	}
 	
-	let categories: [Domain.Category]
+	let categories: [Category]
 	let cards: [Card]
 	let places: [Place]
 	let payments: [Income]
 	
-	init(categories: [Domain.Category], cards: [Card], places: [Place], payments: [Income]) {
+	init(categories: [Category], cards: [Card], places: [Place], payments: [Income]) {
 		self.categories = categories
 		self.cards = cards
 		self.places = places
@@ -38,7 +38,7 @@ public final class UserData: Codable, Transferable {
 	// Инициализатор Decodable
 	required public init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
-		categories = try container.decode([Domain.Category].self, forKey: .categories)
+		categories = try container.decode([Category].self, forKey: .categories)
 		cards = try container.decode([Card].self, forKey: .cards)
 		places = try container.decode([Place].self, forKey: .places)
 		payments = try container.decode([Income].self, forKey: .payments)
@@ -51,5 +51,47 @@ public final class UserData: Codable, Transferable {
 		try container.encode(cards, forKey: .cards)
 		try container.encode(places, forKey: .places)
 		try container.encode(payments, forKey: .payments)
+	}
+}
+
+extension UserData {
+	struct Category: Codable {
+		var id: UUID
+		var name: String
+		var emoji: String
+		var synonyms: String?
+		var priority: Int
+		var isArchived: Bool
+	}
+	
+	struct Cashback: Codable {
+		var id: UUID
+		var category: Category
+		var percent: Double
+	}
+	
+	struct Card: Codable {
+		var id: UUID
+		var name: String
+		var cashback: [Cashback]
+		var color: String?
+		var isArchived: Bool
+		var isFavorite: Bool
+		var currency: String
+		var currencySymbol: String
+	}
+	
+	struct Income: Codable {
+		var id: UUID
+		var amount: Int
+		var date: Date
+		var source: Card?
+	}
+	
+	struct Place: Codable {
+		var id: UUID
+		var name: String
+		var category: Category
+		var isFavorite: Bool
 	}
 }

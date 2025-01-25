@@ -23,11 +23,59 @@ public final class UserDataService {
 		let context = try getContext()
 
 		let categories: [Domain.Category] = try fetchAll(from: context)
+		let categoriesDTO: [UserData.Category] = categories.map { entity in
+			UserData.Category(
+				id: entity.id,
+				name: entity.name,
+				emoji: entity.emoji,
+				synonyms: entity.synonyms,
+				priority: entity.priority,
+				isArchived: entity.isArchived
+			)
+		}
 		let places: [Place] = try fetchAll(from: context)
+		let placesDTO: [UserData.Place] = places.map { place in
+			UserData.Place(
+				id: place.id,
+				name: place.name,
+				category: categoriesDTO.first(where: { $0.id == place.category.id })!,
+				isFavorite: place.isFavorite
+			)
+		}
 		let cards: [Card] = try fetchAll(from: context)
+		let cardsDTO: [UserData.Card] = cards.map { card in
+			UserData.Card(
+				id: card.id,
+				name: card.name,
+				cashback: card.cashback.map { cashback in
+					UserData.Cashback(
+						id: cashback.id,
+						category: categoriesDTO.first(where: { $0.id == cashback.category.id })!,
+						percent: cashback.percent
+					)
+				},
+				color: card.color,
+				isArchived: card.isArchived,
+				isFavorite: card.isFavorite,
+				currency: card.currency,
+				currencySymbol: card.currencySymbol)
+		}
 		let payments: [Income] = try fetchAll(from: context)
+		let paymentsDTO: [UserData.Income] = payments.map { payment in
+			UserData.Income(
+				id: payment.id,
+				amount: payment.amount,
+				date: payment.date,
+				source: cardsDTO.first(where: { $0.id == payment.source?.id })
+			)
+		}
 		
-		let userData = UserData(categories: categories, cards: cards, places: places, payments: payments)
+		let userData = UserData(
+			categories: categoriesDTO,
+			cards: cardsDTO,
+			places: placesDTO,
+			payments: paymentsDTO
+		)
 		return userData
 	}
 	
@@ -43,29 +91,62 @@ public final class UserDataService {
 		
 		try context.transaction {
 			try deleteAll(from: context)
-			for category in userData.categories {
+			let categories = userData.categories.map { category in
+				Domain.Category(
+					id: category.id,
+					name: category.name,
+					emoji: category.emoji,
+					synonyms: category.synonyms,
+					priority: category.priority,
+					isArchived: category.isArchived
+				)
+			}
+			for category in categories {
 				context.insert(category)
 			}
-			for place in userData.places {
-				guard let category = userData.categories.first(where: { $0.id == place.category.id }) else { continue }
-
-				place.category = category
+			let places = userData.places.map { place in
+				Domain.Place(
+					id: place.id,
+					name: place.name,
+					category: categories.first(where: { $0.id == place.category.id })!,
+					isFavorite: place.isFavorite
+				)
+			}
+			for place in places {
 				context.insert(place)
 				searchService.index(place: place)
 			}
-			for card in userData.cards {
-				for cashback in card.cashback {
-					guard let category = userData.categories.first(where: { $0.id == cashback.category.id }) else { continue }
-					
-					cashback.category = category
-				}
+			let cards = userData.cards.map { card in
+				Domain.Card(
+					id: card.id,
+					name: card.name,
+					cashback: card.cashback.map { cashback in
+						Domain.Cashback(
+							id: cashback.id,
+							category: categories.first(where: { $0.id == cashback.category.id })!,
+							percent: cashback.percent
+						)
+					},
+					color: card.color,
+					isArchived: card.isArchived,
+					isFavorite: card.isFavorite,
+					currency: card.currency,
+					currencySymbol: card.currencySymbol
+				)
+			}
+			for card in cards {
 				context.insert(card)
 				searchService.index(card: card)
 			}
-			for income in userData.payments {
-				guard let card = userData.cards.first(where: { $0.id == income.source?.id }) else { continue }
-				
-				income.source = card
+			let payments = userData.payments.map { payment in
+				Domain.Income(
+					id: payment.id,
+					amount: payment.amount,
+					date: payment.date,
+					source: cards.first(where: { $0.id == payment.source?.id })!
+				)
+			}
+			for income in payments {
 				context.insert(income)
 			}
 		}
