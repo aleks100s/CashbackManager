@@ -70,6 +70,8 @@
 		27A465C22D44B460000B6B35 /* YandexMobileAdsInstream in Frameworks */ = {isa = PBXBuildFile; productRef = 27A465C12D44B460000B6B35 /* YandexMobileAdsInstream */; };
 		27A465C42D44B590000B6B35 /* MobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 27A465C32D44B590000B6B35 /* MobileAdsBundle.bundle */; };
 		27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465C52D44B7B7000B6B35 /* AppDelegate.swift */; };
+		27A465C92D44E2B8000B6B35 /* AdBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465C82D44E2B8000B6B35 /* AdBannerViewController.swift */; };
+		27A465CB2D44E50A000B6B35 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465CA2D44E50A000B6B35 /* AdBannerView.swift */; };
 		27A5D7EC2C394EC500B93512 /* CashbackManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7EB2C394EC500B93512 /* CashbackManagerUITests.swift */; };
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
@@ -175,6 +177,8 @@
 		27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsWidget.swift; sourceTree = "<group>"; };
 		27A465C32D44B590000B6B35 /* MobileAdsBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileAdsBundle.bundle; sourceTree = "<group>"; };
 		27A465C52D44B7B7000B6B35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		27A465C82D44E2B8000B6B35 /* AdBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerViewController.swift; sourceTree = "<group>"; };
+		27A465CA2D44E50A000B6B35 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7DD2C394EC500B93512 /* CashbackManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7E72C394EC500B93512 /* CashbackManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +378,15 @@
 			path = FavouriteCardsWidget;
 			sourceTree = "<group>";
 		};
+		27A465C72D44E285000B6B35 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				27A465C82D44E2B8000B6B35 /* AdBannerViewController.swift */,
+				27A465CA2D44E50A000B6B35 /* AdBannerView.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		27A5D7C42C394EC400B93512 = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +417,7 @@
 		27A5D7CF2C394EC400B93512 /* CashbackManager */ = {
 			isa = PBXGroup;
 			children = (
+				27A465C72D44E285000B6B35 /* Ads */,
 				272133552D32646700A904D8 /* Onboarding */,
 				2755A31D2CC939E7002F61EC /* Settings */,
 				2714FEAB2C58A0DD0014CFE0 /* Intents */,
@@ -660,6 +674,7 @@
 				2755A31F2CC939F5002F61EC /* SettingsView.swift in Sources */,
 				272320902C7F85E0005B658A /* DeletePlaceIntent.swift in Sources */,
 				2755A32B2CCD1E7E002F61EC /* ContentView.swift in Sources */,
+				27A465CB2D44E50A000B6B35 /* AdBannerView.swift in Sources */,
 				2755A3162CBA4BB1002F61EC /* CreateIncomeIntent.swift in Sources */,
 				2714FEB32C58B41A0014CFE0 /* CheckCategoryCardsIntent.swift in Sources */,
 				27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */,
@@ -677,6 +692,7 @@
 				2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */,
 				272133592D3264A500A904D8 /* OnboardingView.swift in Sources */,
 				2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */,
+				27A465C92D44E2B8000B6B35 /* AdBannerViewController.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
 				2721335B2D3264C900A904D8 /* OnboardingPage.swift in Sources */,
 			);
