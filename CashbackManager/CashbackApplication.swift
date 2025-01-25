@@ -18,7 +18,7 @@ import UserDataService
 
 @main
 @MainActor
-struct CashbackApplication: App {	
+struct CashbackApplication: App {
 	private let container = AppFactory.provideModelContainer()
 	private let searchService = AppFactory.provideSearchService()
 	private let categoryService = AppFactory.provideCategoryService()
@@ -34,6 +34,9 @@ struct CashbackApplication: App {
 	
 	@AppStorage(Constants.StorageKey.notificationsAllowed)
 	private var isNotificationAllowed = true
+	
+	@UIApplicationDelegateAdaptor(AppDelegate.self)
+	private var appDelegate
 	
 	init() {
 		let searchService = self.searchService
