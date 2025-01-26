@@ -9,14 +9,25 @@ import UIKit
 import YandexMobileAds
 
 final class AdBannerViewController: UIViewController {
+	private let bannerId: String
+
 	private lazy var adView: AdView = {
 		let width = view.safeAreaLayoutGuide.layoutFrame.width
 		let adSize = BannerAdSize.stickySize(withContainerWidth: width)
-		let adView = AdView(adUnitID: "demo-banner-yandex", adSize: adSize)
+		let adView = AdView(adUnitID: bannerId, adSize: adSize)
 		adView.translatesAutoresizingMaskIntoConstraints = false
 		adView.delegate = self
 		return adView
 	}()
+	
+	init(bannerId: String) {
+		self.bannerId = bannerId
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,11 +45,8 @@ final class AdBannerViewController: UIViewController {
 
 extension AdBannerViewController: AdViewDelegate {
 	func adViewDidLoad(_ adView: AdView) {
-		print("adViewDidLoad")
 		showAd()
 	}
 	
-	func adViewDidFailLoading(_ adView: AdView, error: any Error) {
-		print("adViewDidFailLoading")
-	}
+	func adViewDidFailLoading(_ adView: AdView, error: any Error) {}
 }

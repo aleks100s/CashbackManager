@@ -103,6 +103,7 @@ public struct CardsListView: View {
 			}
 			.listSectionSpacing(8)
 			.scrollDismissesKeyboard(.interactively)
+			.scrollIndicators(.hidden)
 		}
 	}
 	

@@ -138,6 +138,7 @@ struct SettingsView: View {
 				}
 			}
 		}
+		.scrollIndicators(.hidden)
 		.disabled(isBusy)
 		.overlay {
 			if isBusy {
@@ -147,6 +148,11 @@ struct SettingsView: View {
 		}
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
+		.safeAreaInset(edge: .bottom) {
+			AdBannerView(bannerId: bannerId)
+				.fixedSize()
+				.padding(.top, 100)
+		}
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
 			if isAllowed {
 				notificationService?.scheduleMonthlyNotification()
@@ -263,3 +269,9 @@ private struct ItemView: View {
 		}
 	}
 }
+
+#if DEBUG
+private let bannerId = "demo-banner-yandex"
+#else
+private let bannerId = "R-M-12709149-5"
+#endif

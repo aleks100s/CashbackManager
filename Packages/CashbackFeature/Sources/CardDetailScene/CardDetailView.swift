@@ -71,16 +71,15 @@ public struct CardDetailView: View {
 			.navigationTitle(cardName)
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				if !isEditing {
-					ToolbarItem(placement: .bottomBar) {
-						addCashbackButton
-					}
-				}
-				
 				ToolbarItem(placement: .topBarTrailing) {
 					editButton
 						.popoverTip(HowToEditCardTip(), arrowEdge: .top)
 				}
+			}
+			.safeAreaInset(edge: .bottom) {
+				AdBannerView(bannerId: bannerId)
+					.fixedSize()
+					.padding(.top, 100)
 			}
 			.onAppear {
 				currentCardId = card.id.uuidString
@@ -121,112 +120,117 @@ public struct CardDetailView: View {
 	
 	@ViewBuilder
 	private var contentView: some View {
-		List {
-			if isEditing {
-				Section("Редактировать данные карты") {
-					TextField("Название карты", text: $cardName)
-						.textFieldStyle(.plain)
-					
-					HStack {
-						Text("Выплата кэшбэка")
-						Spacer()
-						Menu(card.currency) {
-							ForEach(Currency.allCases) { currency in
-								Button(currency.rawValue) {
-									card.currency = currency.rawValue
-									card.currencySymbol = currency.symbol
-									hapticFeedback(.light)
+		VStack(spacing: .zero) {
+			List {
+				if isEditing {
+					Section("Редактировать данные карты") {
+						TextField("Название карты", text: $cardName)
+							.textFieldStyle(.plain)
+						
+						HStack {
+							Text("Выплата кэшбэка")
+							Spacer()
+							Menu(card.currency) {
+								ForEach(Currency.allCases) { currency in
+									Button(currency.rawValue) {
+										card.currency = currency.rawValue
+										card.currencySymbol = currency.symbol
+										hapticFeedback(.light)
+									}
 								}
 							}
 						}
-					}
-
-					ColorPicker("Цвет карты", selection: $color)
-					
-					HStack {
-						Text(card.isFavorite ? "В избранном" : "Добавить в избранное")
-							.foregroundStyle(.secondary)
-
-						Spacer()
 						
-						Button {
-							card.isFavorite.toggle()
-							cardsService?.update(card: card)
-							toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
-						} label: {
-							HeartView(isFavorite: card.isFavorite)
-						}
-					}
-				}
-				
-				Section {
-					if !card.isEmpty {
-						Button("Удалить все кэшбэки с карты", role: .destructive) {
-							for cashback in card.cashback {
-								delete(cashback: cashback)
+						ColorPicker("Цвет карты", selection: $color)
+						
+						HStack {
+							Text(card.isFavorite ? "В избранном" : "Добавить в избранное")
+								.foregroundStyle(.secondary)
+							
+							Spacer()
+							
+							Button {
+								card.isFavorite.toggle()
+								cardsService?.update(card: card)
+								toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
+							} label: {
+								HeartView(isFavorite: card.isFavorite)
 							}
 						}
 					}
 					
-					Button("Удалить все транзакции", role: .destructive) {
-						isDeleteTransactionsWarningPresented = true
-					}
-					
-					Button("Удалить карту", role: .destructive) {
-						isDeleteCardWarningPresented = true
-					}
-				} header: {
-					Text("Для отважных пользователей")
-				} footer: {
-					Text("Данные действия нельзя отменить")
-				}
-			} else {
-				if card.isEmpty {
 					Section {
-						ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+						if !card.isEmpty {
+							Button("Удалить все кэшбэки с карты", role: .destructive) {
+								for cashback in card.cashback {
+									delete(cashback: cashback)
+								}
+							}
+						}
+						
+						Button("Удалить все транзакции", role: .destructive) {
+							isDeleteTransactionsWarningPresented = true
+						}
+						
+						Button("Удалить карту", role: .destructive) {
+							isDeleteCardWarningPresented = true
+						}
+					} header: {
+						Text("Для отважных пользователей")
+					} footer: {
+						Text("Данные действия нельзя отменить")
 					}
 				} else {
-					if areSiriTipsVisible {
-						IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
-					}
-					
-					Section {
-						ForEach(card.sortedCashback) { cashback in
-							CashbackView(cashback: cashback)
-								.contextMenu {
-									deleteCashbackButton(cashback: cashback)
-								}
+					if card.isEmpty {
+						Section {
+							ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
 						}
-						.onDelete { indexSet in
-							for index in indexSet {
-								deleteCashback(index: index)
-							}
+					} else {
+						if areSiriTipsVisible {
+							IntentTipView(intent: cardCashbackIntent, text: "Чтобы быстро проверить кэшбэки на карте")
 						}
 						
-						TipView(HowToDeleteCashbackTip())
-					} header: {
-						Text("Кэшбэки")
-					} footer: {
-						Text("Форма выплаты кэшбэка: \(card.currency)")
-					}
-				}
-				
-				detectCashbackSectionButton
-				
-				if !chartData.isEmpty {
-					Section("Последние 10 выплат") {
-						Chart(chartData) { data in
-							PointMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
-								.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
-							LineMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
-								.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+						Section {
+							ForEach(card.sortedCashback) { cashback in
+								CashbackView(cashback: cashback)
+									.contextMenu {
+										deleteCashbackButton(cashback: cashback)
+									}
+							}
+							.onDelete { indexSet in
+								for index in indexSet {
+									deleteCashback(index: index)
+								}
+							}
+							
+							TipView(HowToDeleteCashbackTip())
+						} header: {
+							Text("Кэшбэки")
+						} footer: {
+							Text("Форма выплаты кэшбэка: \(card.currency)")
 						}
-						.chartLegend(.visible)
-						.scaledToFit()
-						.padding()
+					}
+					
+					addCashbackButton
+					
+					detectCashbackSectionButton
+					
+					if !chartData.isEmpty {
+						Section("Последние 10 выплат") {
+							Chart(chartData) { data in
+								PointMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
+									.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+								LineMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
+									.foregroundStyle(Color(hex: card.color ?? "#D7D7D7"))
+							}
+							.chartLegend(.visible)
+							.scaledToFit()
+							.padding()
+						}
 					}
 				}
 			}
+			.scrollIndicators(.hidden)
 		}
 	}
 	
@@ -376,3 +380,9 @@ private struct DetectCashbackSectionButton: View {
 		}
 	}
 }
+
+#if DEBUG
+private let bannerId = "demo-banner-yandex"
+#else
+private let bannerId = "R-M-12709149-2"
+#endif

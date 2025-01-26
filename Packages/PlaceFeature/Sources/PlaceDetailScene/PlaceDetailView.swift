@@ -127,6 +127,11 @@ public struct PlaceDetailView: View {
 				.popoverTip(HowToDeletePlaceTip(), arrowEdge: .top)
 			}
 		}
+		.safeAreaInset(edge: .bottom) {
+			AdBannerView(bannerId: bannerId)
+				.fixedSize()
+				.padding(.top, 100)
+		}
 		.sheet(isPresented: $isCategorySelectorPresented) {
 			selectCategorySheet
 		}
@@ -206,3 +211,9 @@ private struct CardView: View {
 		}
 	}
 }
+
+#if DEBUG
+private let bannerId = "demo-banner-yandex"
+#else
+private let bannerId = "R-M-12709149-3"
+#endif

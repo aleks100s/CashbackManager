@@ -44,16 +44,20 @@ struct AddIncomeView: View {
 			.navigationTitle(income == nil ? "Добавить выплату" : "Редактировать выплату")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				if income == nil {
-					ToolbarItem(placement: .topBarTrailing) {
+				ToolbarItem(placement: .topBarTrailing) {
+					if income == nil {
 						Button("Отмена") {
 							dismiss()
 						}
+					} else {
+						saveButton
 					}
 				}
 			}
 			.safeAreaInset(edge: .bottom) {
-				saveButton
+				AdBannerView(bannerId: bannerId)
+					.fixedSize()
+					.padding(.top, 100)
 			}
 			.onAppear {
 				source = income?.source
@@ -139,3 +143,9 @@ struct AddIncomeView: View {
 		amount = amount.filter { "0123456789".contains($0) }
 	}
 }
+
+#if DEBUG
+private let bannerId = "demo-banner-yandex"
+#else
+private let bannerId = "R-M-12709149-4"
+#endif

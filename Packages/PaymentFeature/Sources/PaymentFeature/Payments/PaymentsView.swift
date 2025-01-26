@@ -147,6 +147,7 @@ struct PaymentsView: View {
 				onEditIncomeTapped(income)
 			}
 		}
+		.scrollIndicators(.hidden)
 	}
 	
 	private func handleChange(transactions: [Income]) {

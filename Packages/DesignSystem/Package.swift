@@ -12,8 +12,11 @@ let package = Package(
             targets: ["DesignSystem"]
 		),
     ],
-	dependencies: [.package(name: "Domain", path: "./Domain")],
+	dependencies: [
+		.package(name: "Domain", path: "./Domain"),
+		.package(url: "https://github.com/yandexmobile/yandex-ads-sdk-ios.git", exact: .init(7, 9, 0))
+	],
     targets: [
-        .target(name: "DesignSystem", dependencies: ["Domain"])
+		.target(name: "DesignSystem", dependencies: ["Domain", .product(name: "YandexMobileAds", package: "yandex-ads-sdk-ios")])
     ]
 )

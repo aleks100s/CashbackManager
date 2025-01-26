@@ -94,6 +94,7 @@ public struct PlacesListView: View {
 				}
 			}
 			.listSectionSpacing(16)
+			.scrollIndicators(.hidden)
 		}
 	}
 	
