@@ -22,6 +22,9 @@ struct AddIncomeView: View {
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
+	@AppStorage(Constants.StorageKey.isAdVisible)
+	private var isAdVisible: Bool = false
+	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.incomeService) private var incomeService
 	@Environment(\.toastService) private var toastService
@@ -55,9 +58,11 @@ struct AddIncomeView: View {
 				}
 			}
 			.safeAreaInset(edge: .bottom) {
-				AdBannerView(bannerId: bannerId)
-					.fixedSize()
-					.padding(.top, 100)
+				if isAdVisible {
+					AdBannerView(bannerId: bannerId)
+						.fixedSize()
+						.padding(.top, 100)
+				}
 			}
 			.onAppear {
 				source = income?.source

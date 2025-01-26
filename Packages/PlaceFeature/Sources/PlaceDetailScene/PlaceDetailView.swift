@@ -24,6 +24,9 @@ public struct PlaceDetailView: View {
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
+	@AppStorage(Constants.StorageKey.isAdVisible)
+	private var isAdVisible: Bool = false
+	
 	@State private var isEditing = false
 	@State private var cards: [PlaceCard] = []
 	@State private var placeName: String
@@ -128,9 +131,11 @@ public struct PlaceDetailView: View {
 			}
 		}
 		.safeAreaInset(edge: .bottom) {
-			AdBannerView(bannerId: bannerId)
-				.fixedSize()
-				.padding(.top, 100)
+			if isAdVisible {
+				AdBannerView(bannerId: bannerId)
+					.fixedSize()
+					.padding(.top, 100)
+			}
 		}
 		.sheet(isPresented: $isCategorySelectorPresented) {
 			selectCategorySheet

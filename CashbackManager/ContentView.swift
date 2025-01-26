@@ -39,6 +39,9 @@ struct ContentView: View {
 	@AppStorage(Constants.StorageKey.firstLaunch)
 	private var isFirstLaunch = true
 	
+	@AppStorage(Constants.StorageKey.isAdVisible)
+	private var isAdVisible: Bool = false
+	
 	@Query private var categories: [Domain.Category]
 
 	@State private var selectedTab = Tab.cashback
@@ -67,6 +70,7 @@ struct ContentView: View {
 		}
 		.onAppear {
 			if isFirstLaunch {
+				isAdVisible = true
 				prepopulateDatabase()
 				isOnboardingPresented = true
 			} else {

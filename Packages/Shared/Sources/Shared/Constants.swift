@@ -27,6 +27,7 @@ public enum Constants {
 		public static let currentCardID = "CurrentCardID"
 		public static let firstLaunch = "IsFirstLaunch"
 		public static let notificationsAllowed = "isNotificationAllowed"
+		public static let isAdVisible = "isAdVisible"
 	}
 	
 	public static let resetAppNavigationNotification = Notification.Name(rawValue: "resetAppNavigationNotification")

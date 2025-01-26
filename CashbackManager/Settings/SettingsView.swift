@@ -33,6 +33,9 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.AppFeature.places)
 	private var isPlacesFeatureAvailable = true
 	
+	@AppStorage(Constants.StorageKey.isAdVisible)
+	private var isAdVisible: Bool = false
+	
 	@State private var exportItem: UserData?
 	@State private var isBusy = false
 	@State private var isExporterPresented = false
@@ -149,9 +152,11 @@ struct SettingsView: View {
 		.navigationTitle("Настройки приложения")
 		.navigationBarTitleDisplayMode(.inline)
 		.safeAreaInset(edge: .bottom) {
-			AdBannerView(bannerId: bannerId)
-				.fixedSize()
-				.padding(.top, 100)
+			if isAdVisible {
+				AdBannerView(bannerId: bannerId)
+					.fixedSize()
+					.padding(.top, 100)
+			}
 		}
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in
 			if isAllowed {

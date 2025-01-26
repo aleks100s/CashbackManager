@@ -37,6 +37,9 @@ public struct CardDetailView: View {
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
+	@AppStorage(Constants.StorageKey.isAdVisible)
+	private var isAdVisible: Bool = false
+	
 	@State private var imageItem: PhotosPickerItem?
 	@State private var animateGradient = false
 	@State private var isEditing = false
@@ -77,9 +80,11 @@ public struct CardDetailView: View {
 				}
 			}
 			.safeAreaInset(edge: .bottom) {
-				AdBannerView(bannerId: bannerId)
-					.fixedSize()
-					.padding(.top, 100)
+				if isAdVisible {
+					AdBannerView(bannerId: bannerId)
+						.fixedSize()
+						.padding(.top, 100)
+				}
 			}
 			.onAppear {
 				currentCardId = card.id.uuidString
