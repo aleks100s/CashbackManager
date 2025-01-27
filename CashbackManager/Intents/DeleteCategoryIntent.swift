@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import CategoryService
-import Domain
 
 struct DeleteCategoryIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить категорию"
@@ -23,7 +21,7 @@ struct DeleteCategoryIntent: AppIntent {
 	
 	func perform() async throws -> some ProvidesDialog {
 		let result = try await Task { @MainActor in
-			let category: Domain.Category
+			let category: Category
 			if let categoryEntity {
 				category = categoryEntity.category
 			} else {

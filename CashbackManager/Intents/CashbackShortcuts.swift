@@ -6,7 +6,6 @@
 //
 
 import AppIntents
-import Shared
 
 struct CashbackShortcuts: AppShortcutsProvider {
 	static var appShortcuts: [AppShortcut] {

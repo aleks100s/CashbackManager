@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import DesignSystem
-import Shared
 import SwiftUI
 import WidgetKit
 

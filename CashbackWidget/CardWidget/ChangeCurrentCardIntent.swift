@@ -6,9 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import Domain
-import Shared
 import SwiftData
 import WidgetKit
 

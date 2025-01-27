@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2714FEA72C54CA3A0014CFE0 /* PlaceFeature */; };
-		2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 2714FEA92C57C3580014CFE0 /* SearchService */; };
 		2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEAC2C58A0F80014CFE0 /* CashbackShortcuts.swift */; };
 		2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEAE2C58A1E40014CFE0 /* CreateCardIntent.swift */; };
 		2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB02C58B1150014CFE0 /* CheckCardCashbackIntent.swift */; };
@@ -16,14 +14,12 @@
 		2714FEB62C58B44F0014CFE0 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB52C58B44F0014CFE0 /* AppFactory.swift */; };
 		2714FEB82C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB72C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift */; };
 		2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB92C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift */; };
-		27208E732C54C4970097794D /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 27208E722C54C4970097794D /* CashbackFeature */; };
 		272133592D3264A500A904D8 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272133582D3264A500A904D8 /* OnboardingView.swift */; };
 		2721335B2D3264C900A904D8 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721335A2D3264C900A904D8 /* OnboardingPage.swift */; };
 		2723208E2C7F8367005B658A /* DeleteCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723208D2C7F8367005B658A /* DeleteCategoryIntent.swift */; };
 		272320902C7F85E0005B658A /* DeletePlaceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723208F2C7F85E0005B658A /* DeletePlaceIntent.swift */; };
 		272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272320912C7F867C005B658A /* DeleteCardIntent.swift */; };
 		272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272320932C7F86EA005B658A /* DeleteCashbackIntent.swift */; };
-		272CA8D42C54C6E600A00E90 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 272CA8D32C54C6E600A00E90 /* Domain */; };
 		27368B6B2C395E5800FC0475 /* BanksStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368B622C395E5800FC0475 /* BanksStoreTests.swift */; };
 		27368BBD2C4BB11100FC0475 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27368BBC2C4BB11000FC0475 /* WidgetKit.framework */; };
 		27368BBF2C4BB11100FC0475 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27368BBE2C4BB11100FC0475 /* SwiftUI.framework */; };
@@ -35,29 +31,12 @@
 		27368BD62C4BB22500FC0475 /* CardWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368BD12C4BB1D000FC0475 /* CardWidgetEntry.swift */; };
 		27368BD72C4BB22700FC0475 /* CashbackWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368BD32C4BB1E300FC0475 /* CashbackWidgetEntryView.swift */; };
 		27368BDA2C4BB67200FC0475 /* ChangeCurrentCardIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27368BD82C4BB54300FC0475 /* ChangeCurrentCardIntent.swift */; };
-		27368BE02C4BB85400FC0475 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 27368BDF2C4BB85400FC0475 /* Domain */; };
-		27368BEA2C4CDE9A00FC0475 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 27368BE92C4CDE9A00FC0475 /* DesignSystem */; };
-		274861FB2C53463E00788C1A /* CardsService in Frameworks */ = {isa = PBXBuildFile; productRef = 274861FA2C53463E00788C1A /* CardsService */; };
-		274862092C534AB200788C1A /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 274862082C534AB200788C1A /* Shared */; };
-		2755A3102CB9742A002F61EC /* PaymentFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A30F2CB9742A002F61EC /* PaymentFeature */; };
-		2755A3122CBA4B73002F61EC /* IncomeService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3112CBA4B73002F61EC /* IncomeService */; };
-		2755A3142CBA4B7D002F61EC /* IncomeService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3132CBA4B7D002F61EC /* IncomeService */; };
 		2755A3162CBA4BB1002F61EC /* CreateIncomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A3152CBA4BB1002F61EC /* CreateIncomeIntent.swift */; };
 		2755A31B2CBBA609002F61EC /* CardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A31A2CBBA609002F61EC /* CardEntity.swift */; };
 		2755A31F2CC939F5002F61EC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A31E2CC939F5002F61EC /* SettingsView.swift */; };
-		2755A3252CC9EECC002F61EC /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3242CC9EECC002F61EC /* NotificationService */; };
-		2755A3272CC9F113002F61EC /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A3262CC9F113002F61EC /* NotificationService */; };
 		2755A32B2CCD1E7E002F61EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755A32A2CCD1E7E002F61EC /* ContentView.swift */; };
-		2755A32E2CCD5B23002F61EC /* UserDataService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A32D2CCD5B23002F61EC /* UserDataService */; };
-		2755A3302CCD5B2A002F61EC /* UserDataService in Frameworks */ = {isa = PBXBuildFile; productRef = 2755A32F2CCD5B2A002F61EC /* UserDataService */; };
-		277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E52C73C0AA00C26CD8 /* CategoryService */; };
-		277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E72C73C0AF00C26CD8 /* PlaceService */; };
-		277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */ = {isa = PBXBuildFile; productRef = 277130E92C73C0B200C26CD8 /* SearchService */; };
 		277130EC2C73C52B00C26CD8 /* CreateCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */; };
 		277130EE2C73CA1400C26CD8 /* CreateCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */; };
-		277D92BD2CDD17C2001661E1 /* ToastService in Frameworks */ = {isa = PBXBuildFile; productRef = 277D92BC2CDD17C2001661E1 /* ToastService */; };
-		277D92BF2CDD17D3001661E1 /* ToastService in Frameworks */ = {isa = PBXBuildFile; productRef = 277D92BE2CDD17D3001661E1 /* ToastService */; };
-		2781B1242CD7CCA30081A927 /* CashbackFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2781B1232CD7CCA30081A927 /* CashbackFeature */; };
 		2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1252CD874300081A927 /* PlaceEntity.swift */; };
 		2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1272CD874CC0081A927 /* CategoryEntity.swift */; };
 		2781B12B2CD884F20081A927 /* TrashbinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B12A2CD884F20081A927 /* TrashbinView.swift */; };
@@ -66,20 +45,132 @@
 		27A465B32D3D2210000B6B35 /* FavouriteCardsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */; };
 		27A465B72D3D2389000B6B35 /* FavouriteCardsEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B52D3D2389000B6B35 /* FavouriteCardsEntryView.swift */; };
 		27A465BA2D3D253A000B6B35 /* FavouriteCardsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */; };
-		27A465C02D44B460000B6B35 /* YandexMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 27A465BF2D44B460000B6B35 /* YandexMobileAds */; };
-		27A465C22D44B460000B6B35 /* YandexMobileAdsInstream in Frameworks */ = {isa = PBXBuildFile; productRef = 27A465C12D44B460000B6B35 /* YandexMobileAdsInstream */; };
 		27A465C42D44B590000B6B35 /* MobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 27A465C32D44B590000B6B35 /* MobileAdsBundle.bundle */; };
 		27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465C52D44B7B7000B6B35 /* AppDelegate.swift */; };
+		27A465D52D47E606000B6B35 /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465CF2D47E606000B6B35 /* IncomeView.swift */; };
+		27A465D62D47E606000B6B35 /* PaymentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465D02D47E606000B6B35 /* PaymentsView.swift */; };
+		27A465D72D47E606000B6B35 /* IncomeFeatureAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465D32D47E606000B6B35 /* IncomeFeatureAssembly.swift */; };
+		27A465D82D47E606000B6B35 /* AddIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465CC2D47E606000B6B35 /* AddIncomeView.swift */; };
+		27A465D92D47E606000B6B35 /* ChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465CE2D47E606000B6B35 /* ChartModel.swift */; };
+		27A465DA2D47E606000B6B35 /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465D22D47E606000B6B35 /* PaymentCoordinator.swift */; };
+		27A465EA2D47E665000B6B35 /* PlaceFeatureAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465E52D47E665000B6B35 /* PlaceFeatureAssembly.swift */; };
+		27A465EB2D47E665000B6B35 /* PlacesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465E72D47E665000B6B35 /* PlacesListView.swift */; };
+		27A465EC2D47E665000B6B35 /* PlaceNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465E32D47E665000B6B35 /* PlaceNavigation.swift */; };
+		27A465ED2D47E665000B6B35 /* PlaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465E02D47E665000B6B35 /* PlaceDetailView.swift */; };
+		27A465EE2D47E665000B6B35 /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465E82D47E665000B6B35 /* PlaceView.swift */; };
+		27A465EF2D47E665000B6B35 /* AddPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465DE2D47E665000B6B35 /* AddPlaceView.swift */; };
+		27A465F02D47E665000B6B35 /* PlaceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465E22D47E665000B6B35 /* PlaceCoordinator.swift */; };
+		27A466002D47E745000B6B35 /* AddCashbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465F22D47E745000B6B35 /* AddCashbackView.swift */; };
+		27A466012D47E745000B6B35 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465F42D47E745000B6B35 /* CardDetailView.swift */; };
+		27A466022D47E745000B6B35 /* CashbackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FE2D47E745000B6B35 /* CashbackNavigation.swift */; };
+		27A466032D47E745000B6B35 /* WidgetURLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FF2D47E745000B6B35 /* WidgetURLParser.swift */; };
+		27A466042D47E745000B6B35 /* CardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465F72D47E745000B6B35 /* CardItemView.swift */; };
+		27A466052D47E745000B6B35 /* CashbackFeatureAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FB2D47E745000B6B35 /* CashbackFeatureAssembly.swift */; };
+		27A466062D47E745000B6B35 /* CardsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465F82D47E745000B6B35 /* CardsListView.swift */; };
+		27A466072D47E745000B6B35 /* CardChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465F52D47E745000B6B35 /* CardChartModel.swift */; };
+		27A466082D47E745000B6B35 /* Environment+WidgetURLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FD2D47E745000B6B35 /* Environment+WidgetURLParser.swift */; };
+		27A466092D47E745000B6B35 /* CashbackCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FC2D47E745000B6B35 /* CashbackCoordinator.swift */; };
+		27A4660A2D47E902000B6B35 /* WidgetURLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FF2D47E745000B6B35 /* WidgetURLParser.swift */; };
+		27A4660B2D47E90E000B6B35 /* CashbackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FE2D47E745000B6B35 /* CashbackNavigation.swift */; };
+		27A466122D47E99F000B6B35 /* CreateCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4660F2D47E99F000B6B35 /* CreateCategoryView.swift */; };
+		27A466132D47E99F000B6B35 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466102D47E99F000B6B35 /* SelectCategoryView.swift */; };
+		27A466142D47E99F000B6B35 /* CommonInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4660D2D47E99F000B6B35 /* CommonInputView.swift */; };
+		27A4663D2D47EA23000B6B35 /* Environment+IncomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4661F2D47EA23000B6B35 /* Environment+IncomeService.swift */; };
+		27A4663E2D47EA23000B6B35 /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466352D47EA23000B6B35 /* ToastService.swift */; };
+		27A4663F2D47EA23000B6B35 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4662D2D47EA23000B6B35 /* SearchService.swift */; };
+		27A466402D47EA23000B6B35 /* Environment+CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4661B2D47EA23000B6B35 /* Environment+CategoryService.swift */; };
+		27A466412D47EA23000B6B35 /* IncomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466212D47EA23000B6B35 /* IncomeService.swift */; };
+		27A466422D47EA23000B6B35 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466252D47EA23000B6B35 /* NotificationService.swift */; };
+		27A466432D47EA23000B6B35 /* Environment+ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466332D47EA23000B6B35 /* Environment+ToastService.swift */; };
+		27A466442D47EA23000B6B35 /* PlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466292D47EA23000B6B35 /* PlaceService.swift */; };
+		27A466452D47EA23000B6B35 /* TextDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466312D47EA23000B6B35 /* TextDetectionService.swift */; };
+		27A466462D47EA23000B6B35 /* Environment+SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4662B2D47EA23000B6B35 /* Environment+SearchService.swift */; };
+		27A466472D47EA23000B6B35 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466392D47EA23000B6B35 /* UserData.swift */; };
+		27A466482D47EA23000B6B35 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4663B2D47EA23000B6B35 /* UserDataService.swift */; };
+		27A466492D47EA23000B6B35 /* UserDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4663A2D47EA23000B6B35 /* UserDataError.swift */; };
+		27A4664A2D47EA23000B6B35 /* Environment+NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466232D47EA23000B6B35 /* Environment+NotificationService.swift */; };
+		27A4664B2D47EA23000B6B35 /* Environment+CardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466172D47EA23000B6B35 /* Environment+CardsService.swift */; };
+		27A4664C2D47EA23000B6B35 /* Environment+PlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466272D47EA23000B6B35 /* Environment+PlaceService.swift */; };
+		27A4664D2D47EA23000B6B35 /* CardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466192D47EA23000B6B35 /* CardsService.swift */; };
+		27A4664E2D47EA23000B6B35 /* Environment+TextDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4662F2D47EA23000B6B35 /* Environment+TextDetectionService.swift */; };
+		27A4664F2D47EA23000B6B35 /* Environment+UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466372D47EA23000B6B35 /* Environment+UserDataService.swift */; };
+		27A466502D47EA23000B6B35 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4661D2D47EA23000B6B35 /* CategoryService.swift */; };
+		27A466662D47EA7A000B6B35 /* PredefinedCategory+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466542D47EA7A000B6B35 /* PredefinedCategory+Emoji.swift */; };
+		27A466672D47EA7A000B6B35 /* HowToSwitchPaymentsPeriodTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466632D47EA7A000B6B35 /* HowToSwitchPaymentsPeriodTip.swift */; };
+		27A466682D47EA7A000B6B35 /* HowToEditCardTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466622D47EA7A000B6B35 /* HowToEditCardTip.swift */; };
+		27A466692D47EA7A000B6B35 /* HowToDeleteCashbackTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466602D47EA7A000B6B35 /* HowToDeleteCashbackTip.swift */; };
+		27A4666A2D47EA7A000B6B35 /* HowToDeletePlaceTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466612D47EA7A000B6B35 /* HowToDeletePlaceTip.swift */; };
+		27A4666B2D47EA7A000B6B35 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665D2D47EA7A000B6B35 /* Place.swift */; };
+		27A4666C2D47EA7A000B6B35 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665C2D47EA7A000B6B35 /* Income.swift */; };
+		27A4666D2D47EA7A000B6B35 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466582D47EA7A000B6B35 /* Card.swift */; };
+		27A4666E2D47EA7A000B6B35 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466652D47EA7A000B6B35 /* Toast.swift */; };
+		27A4666F2D47EA7A000B6B35 /* PredefinedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665E2D47EA7A000B6B35 /* PredefinedCategory.swift */; };
+		27A466702D47EA7A000B6B35 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665A2D47EA7A000B6B35 /* Category.swift */; };
+		27A466712D47EA7A000B6B35 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665B2D47EA7A000B6B35 /* Currency.swift */; };
+		27A466722D47EA7A000B6B35 /* PredefinedCategory+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466552D47EA7A000B6B35 /* PredefinedCategory+Localization.swift */; };
+		27A466732D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466562D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift */; };
+		27A466742D47EA7A000B6B35 /* PredefinedCategory+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466532D47EA7A000B6B35 /* PredefinedCategory+Category.swift */; };
+		27A466752D47EA7A000B6B35 /* Cashback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466592D47EA7A000B6B35 /* Cashback.swift */; };
+		27A466932D47EA96000B6B35 /* CashbackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466892D47EA96000B6B35 /* CashbackListView.swift */; };
+		27A466942D47EA96000B6B35 /* IntentTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668F2D47EA96000B6B35 /* IntentTipView.swift */; };
+		27A466962D47EA96000B6B35 /* ColoredCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466862D47EA96000B6B35 /* ColoredCircle.swift */; };
+		27A466972D47EA96000B6B35 /* CashbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668A2D47EA96000B6B35 /* CashbackView.swift */; };
+		27A466992D47EA96000B6B35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466882D47EA96000B6B35 /* CardView.swift */; };
+		27A4669A2D47EA96000B6B35 /* View+ViewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466812D47EA96000B6B35 /* View+ViewClass.swift */; };
+		27A4669B2D47EA96000B6B35 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4667B2D47EA96000B6B35 /* Colors.swift */; };
+		27A4669C2D47EA96000B6B35 /* PlaceMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466902D47EA96000B6B35 /* PlaceMarkerView.swift */; };
+		27A4669D2D47EA96000B6B35 /* View+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4667F2D47EA96000B6B35 /* View+Toast.swift */; };
+		27A4669E2D47EA96000B6B35 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466912D47EA96000B6B35 /* ToastView.swift */; };
+		27A4669F2D47EA96000B6B35 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668D2D47EA96000B6B35 /* CategoryView.swift */; };
+		27A466A02D47EA96000B6B35 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668E2D47EA96000B6B35 /* HeartView.swift */; };
+		27A466A22D47EA96000B6B35 /* ViewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466822D47EA96000B6B35 /* ViewClass.swift */; };
+		27A466A32D47EA96000B6B35 /* CategoriesStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668B2D47EA96000B6B35 /* CategoriesStackView.swift */; };
+		27A466A42D47EA96000B6B35 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4667D2D47EA96000B6B35 /* View+If.swift */; };
+		27A466A52D47EA96000B6B35 /* ViewClassKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466832D47EA96000B6B35 /* ViewClassKey.swift */; };
+		27A466A62D47EA96000B6B35 /* CategoryMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668C2D47EA96000B6B35 /* CategoryMarkerView.swift */; };
+		27A466AD2D47EAA9000B6B35 /* Bool+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466A82D47EAA9000B6B35 /* Bool+Comparable.swift */; };
+		27A466AE2D47EAA9000B6B35 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466A92D47EAA9000B6B35 /* Color+Extensions.swift */; };
+		27A466AF2D47EAA9000B6B35 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466AC2D47EAA9000B6B35 /* View+Extensions.swift */; };
+		27A466B02D47EAA9000B6B35 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466AB2D47EAA9000B6B35 /* UserDefaults+AppGroup.swift */; };
+		27A466B12D47EAA9000B6B35 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466AA2D47EAA9000B6B35 /* Constants.swift */; };
+		27A466B42D47EADD000B6B35 /* YandexMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 27A466B32D47EADD000B6B35 /* YandexMobileAds */; };
+		27A466B62D47EADD000B6B35 /* YandexMobileAdsInstream in Frameworks */ = {isa = PBXBuildFile; productRef = 27A466B52D47EADD000B6B35 /* YandexMobileAdsInstream */; };
+		27A466B72D47EC20000B6B35 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466582D47EA7A000B6B35 /* Card.swift */; };
+		27A466B82D47EC25000B6B35 /* Cashback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466592D47EA7A000B6B35 /* Cashback.swift */; };
+		27A466B92D47EC3E000B6B35 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665A2D47EA7A000B6B35 /* Category.swift */; };
+		27A466BA2D47EC43000B6B35 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665D2D47EA7A000B6B35 /* Place.swift */; };
+		27A466BB2D47EC49000B6B35 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665C2D47EA7A000B6B35 /* Income.swift */; };
+		27A466BC2D47EC55000B6B35 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4662D2D47EA23000B6B35 /* SearchService.swift */; };
+		27A466BD2D47EC5D000B6B35 /* CardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466192D47EA23000B6B35 /* CardsService.swift */; };
+		27A466BE2D47EC65000B6B35 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4661D2D47EA23000B6B35 /* CategoryService.swift */; };
+		27A466BF2D47EC6E000B6B35 /* PlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466292D47EA23000B6B35 /* PlaceService.swift */; };
+		27A466C02D47EC77000B6B35 /* TextDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466312D47EA23000B6B35 /* TextDetectionService.swift */; };
+		27A466C12D47EC7E000B6B35 /* IncomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466212D47EA23000B6B35 /* IncomeService.swift */; };
+		27A466C22D47EC87000B6B35 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466252D47EA23000B6B35 /* NotificationService.swift */; };
+		27A466C32D47EC90000B6B35 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4663B2D47EA23000B6B35 /* UserDataService.swift */; };
+		27A466C42D47EC98000B6B35 /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466352D47EA23000B6B35 /* ToastService.swift */; };
+		27A466C52D47ECE2000B6B35 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466652D47EA7A000B6B35 /* Toast.swift */; };
+		27A466C62D47ECEA000B6B35 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466392D47EA23000B6B35 /* UserData.swift */; };
+		27A466C72D47ED06000B6B35 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466AA2D47EAA9000B6B35 /* Constants.swift */; };
+		27A466C82D47ED4B000B6B35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466882D47EA96000B6B35 /* CardView.swift */; };
+		27A466C92D47ED56000B6B35 /* ViewClassKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466832D47EA96000B6B35 /* ViewClassKey.swift */; };
+		27A466CA2D47ED67000B6B35 /* ViewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466822D47EA96000B6B35 /* ViewClass.swift */; };
+		27A466CB2D47ED8A000B6B35 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4667B2D47EA96000B6B35 /* Colors.swift */; };
+		27A466CC2D47EDA3000B6B35 /* UserDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4663A2D47EA23000B6B35 /* UserDataError.swift */; };
+		27A466CD2D47EDB1000B6B35 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466AB2D47EAA9000B6B35 /* UserDefaults+AppGroup.swift */; };
+		27A466CE2D47EDC3000B6B35 /* CategoriesStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668B2D47EA96000B6B35 /* CategoriesStackView.swift */; };
+		27A466CF2D47EDE9000B6B35 /* View+ViewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466812D47EA96000B6B35 /* View+ViewClass.swift */; };
+		27A466D02D47EDFE000B6B35 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4667D2D47EA96000B6B35 /* View+If.swift */; };
+		27A466D12D47EE0E000B6B35 /* CategoryMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668C2D47EA96000B6B35 /* CategoryMarkerView.swift */; };
+		27A466D22D47EE1E000B6B35 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466A92D47EAA9000B6B35 /* Color+Extensions.swift */; };
+		27A466D32D47EE36000B6B35 /* ColoredCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466862D47EA96000B6B35 /* ColoredCircle.swift */; };
+		27A466D62D47EEEC000B6B35 /* AdBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466D52D47EEEC000B6B35 /* AdBannerViewController.swift */; };
+		27A466DA2D47EF00000B6B35 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466D82D47EF00000B6B35 /* AdBannerView.swift */; };
 		27A5D7EC2C394EC500B93512 /* CashbackManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7EB2C394EC500B93512 /* CashbackManagerUITests.swift */; };
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
 		27A5D88A2C394EFF00B93512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A5D84A2C394EFF00B93512 /* Assets.xcassets */; };
 		27AB37252C73B3CE00A00939 /* CreatePlaceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AB37242C73B3CE00A00939 /* CreatePlaceIntent.swift */; };
-		27AB37272C73BBE200A00939 /* CategoryService in Frameworks */ = {isa = PBXBuildFile; productRef = 27AB37262C73BBE200A00939 /* CategoryService */; };
-		27AB37292C73BBE700A00939 /* PlaceService in Frameworks */ = {isa = PBXBuildFile; productRef = 27AB37282C73BBE700A00939 /* PlaceService */; };
-		27AB372B2C73BE4B00A00939 /* CardsService in Frameworks */ = {isa = PBXBuildFile; productRef = 27AB372A2C73BE4B00A00939 /* CardsService */; };
-		27D329D52C9C894B00964504 /* TextDetectionService in Frameworks */ = {isa = PBXBuildFile; productRef = 27D329D42C9C894B00964504 /* TextDetectionService */; };
-		27D329D72C9C8A4D00964504 /* TextDetectionService in Frameworks */ = {isa = PBXBuildFile; productRef = 27D329D62C9C8A4D00964504 /* TextDetectionService */; };
 		27EE77BB2C5C020900D12827 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB52C58B44F0014CFE0 /* AppFactory.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,7 +213,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2714FEA62C54C93F0014CFE0 /* PlaceFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlaceFeature; sourceTree = "<group>"; };
 		2714FEAC2C58A0F80014CFE0 /* CashbackShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackShortcuts.swift; sourceTree = "<group>"; };
 		2714FEAE2C58A1E40014CFE0 /* CreateCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardIntent.swift; sourceTree = "<group>"; };
 		2714FEB02C58B1150014CFE0 /* CheckCardCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCardCashbackIntent.swift; sourceTree = "<group>"; };
@@ -136,11 +226,8 @@
 		2723208F2C7F85E0005B658A /* DeletePlaceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePlaceIntent.swift; sourceTree = "<group>"; };
 		272320912C7F867C005B658A /* DeleteCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCardIntent.swift; sourceTree = "<group>"; };
 		272320932C7F86EA005B658A /* DeleteCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCashbackIntent.swift; sourceTree = "<group>"; };
-		272CA8D52C54C85800A00E90 /* CommonScenes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CommonScenes; sourceTree = "<group>"; };
 		27368B622C395E5800FC0475 /* BanksStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanksStoreTests.swift; sourceTree = "<group>"; };
 		27368B6F2C395E8300FC0475 /* CashbackManager.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CashbackManager.xctestplan; sourceTree = "<group>"; };
-		27368B8E2C4278BB00FC0475 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
-		27368B8F2C4278BB00FC0475 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		27368BBB2C4BB11000FC0475 /* CashbackWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CashbackWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		27368BBC2C4BB11000FC0475 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		27368BBE2C4BB11100FC0475 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -154,11 +241,7 @@
 		27368BD82C4BB54300FC0475 /* ChangeCurrentCardIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentCardIntent.swift; sourceTree = "<group>"; };
 		27368BE32C4CC62600FC0475 /* CashbackManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CashbackManager.entitlements; sourceTree = "<group>"; };
 		27368BE42C4CC65100FC0475 /* CashbackWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CashbackWidgetExtension.entitlements; sourceTree = "<group>"; };
-		27368BE82C4CDE8E00FC0475 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		27368BF22C4CEE4800FC0475 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		274862072C534A6A00788C1A /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
-		2748620C2C54BFC200788C1A /* CashbackFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CashbackFeature; sourceTree = "<group>"; };
-		2755A30E2CB97402002F61EC /* PaymentFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PaymentFeature; sourceTree = "<group>"; };
 		2755A3152CBA4BB1002F61EC /* CreateIncomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIncomeIntent.swift; sourceTree = "<group>"; };
 		2755A31A2CBBA609002F61EC /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
 		2755A31E2CC939F5002F61EC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -175,6 +258,92 @@
 		27A465B82D3D253A000B6B35 /* FavouriteCardsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsWidget.swift; sourceTree = "<group>"; };
 		27A465C32D44B590000B6B35 /* MobileAdsBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileAdsBundle.bundle; sourceTree = "<group>"; };
 		27A465C52D44B7B7000B6B35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		27A465CC2D47E606000B6B35 /* AddIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeView.swift; sourceTree = "<group>"; };
+		27A465CE2D47E606000B6B35 /* ChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartModel.swift; sourceTree = "<group>"; };
+		27A465CF2D47E606000B6B35 /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
+		27A465D02D47E606000B6B35 /* PaymentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsView.swift; sourceTree = "<group>"; };
+		27A465D22D47E606000B6B35 /* PaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCoordinator.swift; sourceTree = "<group>"; };
+		27A465D32D47E606000B6B35 /* IncomeFeatureAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeFeatureAssembly.swift; sourceTree = "<group>"; };
+		27A465DE2D47E665000B6B35 /* AddPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceView.swift; sourceTree = "<group>"; };
+		27A465E02D47E665000B6B35 /* PlaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailView.swift; sourceTree = "<group>"; };
+		27A465E22D47E665000B6B35 /* PlaceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCoordinator.swift; sourceTree = "<group>"; };
+		27A465E32D47E665000B6B35 /* PlaceNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceNavigation.swift; sourceTree = "<group>"; };
+		27A465E52D47E665000B6B35 /* PlaceFeatureAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFeatureAssembly.swift; sourceTree = "<group>"; };
+		27A465E72D47E665000B6B35 /* PlacesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListView.swift; sourceTree = "<group>"; };
+		27A465E82D47E665000B6B35 /* PlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
+		27A465F22D47E745000B6B35 /* AddCashbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCashbackView.swift; sourceTree = "<group>"; };
+		27A465F42D47E745000B6B35 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
+		27A465F52D47E745000B6B35 /* CardChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChartModel.swift; sourceTree = "<group>"; };
+		27A465F72D47E745000B6B35 /* CardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemView.swift; sourceTree = "<group>"; };
+		27A465F82D47E745000B6B35 /* CardsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsListView.swift; sourceTree = "<group>"; };
+		27A465FB2D47E745000B6B35 /* CashbackFeatureAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackFeatureAssembly.swift; sourceTree = "<group>"; };
+		27A465FC2D47E745000B6B35 /* CashbackCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackCoordinator.swift; sourceTree = "<group>"; };
+		27A465FD2D47E745000B6B35 /* Environment+WidgetURLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+WidgetURLParser.swift"; sourceTree = "<group>"; };
+		27A465FE2D47E745000B6B35 /* CashbackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackNavigation.swift; sourceTree = "<group>"; };
+		27A465FF2D47E745000B6B35 /* WidgetURLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetURLParser.swift; sourceTree = "<group>"; };
+		27A4660D2D47E99F000B6B35 /* CommonInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonInputView.swift; sourceTree = "<group>"; };
+		27A4660F2D47E99F000B6B35 /* CreateCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryView.swift; sourceTree = "<group>"; };
+		27A466102D47E99F000B6B35 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
+		27A466172D47EA23000B6B35 /* Environment+CardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+CardsService.swift"; sourceTree = "<group>"; };
+		27A466192D47EA23000B6B35 /* CardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsService.swift; sourceTree = "<group>"; };
+		27A4661B2D47EA23000B6B35 /* Environment+CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+CategoryService.swift"; sourceTree = "<group>"; };
+		27A4661D2D47EA23000B6B35 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
+		27A4661F2D47EA23000B6B35 /* Environment+IncomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+IncomeService.swift"; sourceTree = "<group>"; };
+		27A466212D47EA23000B6B35 /* IncomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeService.swift; sourceTree = "<group>"; };
+		27A466232D47EA23000B6B35 /* Environment+NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+NotificationService.swift"; sourceTree = "<group>"; };
+		27A466252D47EA23000B6B35 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		27A466272D47EA23000B6B35 /* Environment+PlaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+PlaceService.swift"; sourceTree = "<group>"; };
+		27A466292D47EA23000B6B35 /* PlaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceService.swift; sourceTree = "<group>"; };
+		27A4662B2D47EA23000B6B35 /* Environment+SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+SearchService.swift"; sourceTree = "<group>"; };
+		27A4662D2D47EA23000B6B35 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		27A4662F2D47EA23000B6B35 /* Environment+TextDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+TextDetectionService.swift"; sourceTree = "<group>"; };
+		27A466312D47EA23000B6B35 /* TextDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDetectionService.swift; sourceTree = "<group>"; };
+		27A466332D47EA23000B6B35 /* Environment+ToastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+ToastService.swift"; sourceTree = "<group>"; };
+		27A466352D47EA23000B6B35 /* ToastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastService.swift; sourceTree = "<group>"; };
+		27A466372D47EA23000B6B35 /* Environment+UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+UserDataService.swift"; sourceTree = "<group>"; };
+		27A466392D47EA23000B6B35 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		27A4663A2D47EA23000B6B35 /* UserDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataError.swift; sourceTree = "<group>"; };
+		27A4663B2D47EA23000B6B35 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
+		27A466532D47EA7A000B6B35 /* PredefinedCategory+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PredefinedCategory+Category.swift"; sourceTree = "<group>"; };
+		27A466542D47EA7A000B6B35 /* PredefinedCategory+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PredefinedCategory+Emoji.swift"; sourceTree = "<group>"; };
+		27A466552D47EA7A000B6B35 /* PredefinedCategory+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PredefinedCategory+Localization.swift"; sourceTree = "<group>"; };
+		27A466562D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PredefinedCategory+Synonyms.swift"; sourceTree = "<group>"; };
+		27A466582D47EA7A000B6B35 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		27A466592D47EA7A000B6B35 /* Cashback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cashback.swift; sourceTree = "<group>"; };
+		27A4665A2D47EA7A000B6B35 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		27A4665B2D47EA7A000B6B35 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		27A4665C2D47EA7A000B6B35 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
+		27A4665D2D47EA7A000B6B35 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		27A4665E2D47EA7A000B6B35 /* PredefinedCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedCategory.swift; sourceTree = "<group>"; };
+		27A466602D47EA7A000B6B35 /* HowToDeleteCashbackTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDeleteCashbackTip.swift; sourceTree = "<group>"; };
+		27A466612D47EA7A000B6B35 /* HowToDeletePlaceTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToDeletePlaceTip.swift; sourceTree = "<group>"; };
+		27A466622D47EA7A000B6B35 /* HowToEditCardTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToEditCardTip.swift; sourceTree = "<group>"; };
+		27A466632D47EA7A000B6B35 /* HowToSwitchPaymentsPeriodTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToSwitchPaymentsPeriodTip.swift; sourceTree = "<group>"; };
+		27A466652D47EA7A000B6B35 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		27A4667B2D47EA96000B6B35 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		27A4667D2D47EA96000B6B35 /* View+If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
+		27A4667F2D47EA96000B6B35 /* View+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Toast.swift"; sourceTree = "<group>"; };
+		27A466812D47EA96000B6B35 /* View+ViewClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ViewClass.swift"; sourceTree = "<group>"; };
+		27A466822D47EA96000B6B35 /* ViewClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClass.swift; sourceTree = "<group>"; };
+		27A466832D47EA96000B6B35 /* ViewClassKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassKey.swift; sourceTree = "<group>"; };
+		27A466862D47EA96000B6B35 /* ColoredCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredCircle.swift; sourceTree = "<group>"; };
+		27A466882D47EA96000B6B35 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		27A466892D47EA96000B6B35 /* CashbackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackListView.swift; sourceTree = "<group>"; };
+		27A4668A2D47EA96000B6B35 /* CashbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackView.swift; sourceTree = "<group>"; };
+		27A4668B2D47EA96000B6B35 /* CategoriesStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesStackView.swift; sourceTree = "<group>"; };
+		27A4668C2D47EA96000B6B35 /* CategoryMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMarkerView.swift; sourceTree = "<group>"; };
+		27A4668D2D47EA96000B6B35 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		27A4668E2D47EA96000B6B35 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
+		27A4668F2D47EA96000B6B35 /* IntentTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentTipView.swift; sourceTree = "<group>"; };
+		27A466902D47EA96000B6B35 /* PlaceMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarkerView.swift; sourceTree = "<group>"; };
+		27A466912D47EA96000B6B35 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		27A466A82D47EAA9000B6B35 /* Bool+Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Comparable.swift"; sourceTree = "<group>"; };
+		27A466A92D47EAA9000B6B35 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		27A466AA2D47EAA9000B6B35 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		27A466AB2D47EAA9000B6B35 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
+		27A466AC2D47EAA9000B6B35 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		27A466D52D47EEEC000B6B35 /* AdBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerViewController.swift; sourceTree = "<group>"; };
+		27A466D82D47EF00000B6B35 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7DD2C394EC500B93512 /* CashbackManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7E72C394EC500B93512 /* CashbackManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,21 +360,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27368BE02C4BB85400FC0475 /* Domain in Frameworks */,
-				277D92BF2CDD17D3001661E1 /* ToastService in Frameworks */,
-				2755A3122CBA4B73002F61EC /* IncomeService in Frameworks */,
-				27368BEA2C4CDE9A00FC0475 /* DesignSystem in Frameworks */,
-				277130EA2C73C0B200C26CD8 /* SearchService in Frameworks */,
-				277130E82C73C0AF00C26CD8 /* PlaceService in Frameworks */,
 				27368BBF2C4BB11100FC0475 /* SwiftUI.framework in Frameworks */,
 				27368BBD2C4BB11100FC0475 /* WidgetKit.framework in Frameworks */,
-				2781B1242CD7CCA30081A927 /* CashbackFeature in Frameworks */,
-				277130E62C73C0AA00C26CD8 /* CategoryService in Frameworks */,
-				274861FB2C53463E00788C1A /* CardsService in Frameworks */,
-				2755A32E2CCD5B23002F61EC /* UserDataService in Frameworks */,
-				274862092C534AB200788C1A /* Shared in Frameworks */,
-				27D329D72C9C8A4D00964504 /* TextDetectionService in Frameworks */,
-				2755A3272CC9F113002F61EC /* NotificationService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,21 +369,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				272CA8D42C54C6E600A00E90 /* Domain in Frameworks */,
-				2755A3142CBA4B7D002F61EC /* IncomeService in Frameworks */,
-				277D92BD2CDD17C2001661E1 /* ToastService in Frameworks */,
-				27A465C22D44B460000B6B35 /* YandexMobileAdsInstream in Frameworks */,
-				2714FEAA2C57C3580014CFE0 /* SearchService in Frameworks */,
-				27AB372B2C73BE4B00A00939 /* CardsService in Frameworks */,
-				2714FEA82C54CA3A0014CFE0 /* PlaceFeature in Frameworks */,
-				27208E732C54C4970097794D /* CashbackFeature in Frameworks */,
-				27AB37272C73BBE200A00939 /* CategoryService in Frameworks */,
-				2755A3102CB9742A002F61EC /* PaymentFeature in Frameworks */,
-				27D329D52C9C894B00964504 /* TextDetectionService in Frameworks */,
-				27A465C02D44B460000B6B35 /* YandexMobileAds in Frameworks */,
-				2755A3302CCD5B2A002F61EC /* UserDataService in Frameworks */,
-				27AB37292C73BBE700A00939 /* PlaceService in Frameworks */,
-				2755A3252CC9EECC002F61EC /* NotificationService in Frameworks */,
+				27A466B62D47EADD000B6B35 /* YandexMobileAdsInstream in Frameworks */,
+				27A466B42D47EADD000B6B35 /* YandexMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,21 +430,6 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		27368B7C2C426DA300FC0475 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				2755A30E2CB97402002F61EC /* PaymentFeature */,
-				2714FEA62C54C93F0014CFE0 /* PlaceFeature */,
-				2748620C2C54BFC200788C1A /* CashbackFeature */,
-				274862072C534A6A00788C1A /* Shared */,
-				272CA8D52C54C85800A00E90 /* CommonScenes */,
-				27368BE82C4CDE8E00FC0475 /* DesignSystem */,
-				27368B8F2C4278BB00FC0475 /* Domain */,
-				27368B8E2C4278BB00FC0475 /* Services */,
-			);
-			path = Packages;
-			sourceTree = "<group>";
-		};
 		27368B7E2C426E8E00FC0475 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,13 +473,14 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		2755A31D2CC939E7002F61EC /* Settings */ = {
+		2755A31D2CC939E7002F61EC /* SettingsFeature */ = {
 			isa = PBXGroup;
 			children = (
+				272133552D32646700A904D8 /* Onboarding */,
 				2781B1292CD884E80081A927 /* Trashbin */,
 				2755A31E2CC939F5002F61EC /* SettingsView.swift */,
 			);
-			path = Settings;
+			path = SettingsFeature;
 			sourceTree = "<group>";
 		};
 		2781B1292CD884E80081A927 /* Trashbin */ = {
@@ -374,6 +503,480 @@
 			path = FavouriteCardsWidget;
 			sourceTree = "<group>";
 		};
+		27A465CD2D47E606000B6B35 /* AddIncome */ = {
+			isa = PBXGroup;
+			children = (
+				27A465CC2D47E606000B6B35 /* AddIncomeView.swift */,
+			);
+			path = AddIncome;
+			sourceTree = "<group>";
+		};
+		27A465D12D47E606000B6B35 /* Payments */ = {
+			isa = PBXGroup;
+			children = (
+				27A465CE2D47E606000B6B35 /* ChartModel.swift */,
+				27A465CF2D47E606000B6B35 /* IncomeView.swift */,
+				27A465D02D47E606000B6B35 /* PaymentsView.swift */,
+			);
+			path = Payments;
+			sourceTree = "<group>";
+		};
+		27A465D42D47E606000B6B35 /* PaymentFeature */ = {
+			isa = PBXGroup;
+			children = (
+				27A465CD2D47E606000B6B35 /* AddIncome */,
+				27A465D12D47E606000B6B35 /* Payments */,
+				27A465D22D47E606000B6B35 /* PaymentCoordinator.swift */,
+				27A465D32D47E606000B6B35 /* IncomeFeatureAssembly.swift */,
+			);
+			path = PaymentFeature;
+			sourceTree = "<group>";
+		};
+		27A465DD2D47E65A000B6B35 /* PlaceFeature */ = {
+			isa = PBXGroup;
+			children = (
+				27A465DF2D47E665000B6B35 /* AddPlaceScene */,
+				27A465E12D47E665000B6B35 /* PlaceDetailScene */,
+				27A465E92D47E665000B6B35 /* PlacesListScene */,
+				27A465E22D47E665000B6B35 /* PlaceCoordinator.swift */,
+				27A465E32D47E665000B6B35 /* PlaceNavigation.swift */,
+				27A465E52D47E665000B6B35 /* PlaceFeatureAssembly.swift */,
+			);
+			path = PlaceFeature;
+			sourceTree = "<group>";
+		};
+		27A465DF2D47E665000B6B35 /* AddPlaceScene */ = {
+			isa = PBXGroup;
+			children = (
+				27A465DE2D47E665000B6B35 /* AddPlaceView.swift */,
+			);
+			path = AddPlaceScene;
+			sourceTree = "<group>";
+		};
+		27A465E12D47E665000B6B35 /* PlaceDetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				27A465E02D47E665000B6B35 /* PlaceDetailView.swift */,
+			);
+			path = PlaceDetailScene;
+			sourceTree = "<group>";
+		};
+		27A465E92D47E665000B6B35 /* PlacesListScene */ = {
+			isa = PBXGroup;
+			children = (
+				27A465E72D47E665000B6B35 /* PlacesListView.swift */,
+				27A465E82D47E665000B6B35 /* PlaceView.swift */,
+			);
+			path = PlacesListScene;
+			sourceTree = "<group>";
+		};
+		27A465F12D47E738000B6B35 /* CashbackFeature */ = {
+			isa = PBXGroup;
+			children = (
+				27A465F32D47E745000B6B35 /* AddCashbackScene */,
+				27A465F62D47E745000B6B35 /* CardDetailScene */,
+				27A465F92D47E745000B6B35 /* CardsListScene */,
+				27A465FA2D47E745000B6B35 /* CashbackFeature */,
+				27A465FB2D47E745000B6B35 /* CashbackFeatureAssembly.swift */,
+				27A465FC2D47E745000B6B35 /* CashbackCoordinator.swift */,
+				27A465FD2D47E745000B6B35 /* Environment+WidgetURLParser.swift */,
+				27A465FE2D47E745000B6B35 /* CashbackNavigation.swift */,
+				27A465FF2D47E745000B6B35 /* WidgetURLParser.swift */,
+			);
+			path = CashbackFeature;
+			sourceTree = "<group>";
+		};
+		27A465F32D47E745000B6B35 /* AddCashbackScene */ = {
+			isa = PBXGroup;
+			children = (
+				27A465F22D47E745000B6B35 /* AddCashbackView.swift */,
+			);
+			path = AddCashbackScene;
+			sourceTree = "<group>";
+		};
+		27A465F62D47E745000B6B35 /* CardDetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				27A465F42D47E745000B6B35 /* CardDetailView.swift */,
+				27A465F52D47E745000B6B35 /* CardChartModel.swift */,
+			);
+			path = CardDetailScene;
+			sourceTree = "<group>";
+		};
+		27A465F92D47E745000B6B35 /* CardsListScene */ = {
+			isa = PBXGroup;
+			children = (
+				27A465F72D47E745000B6B35 /* CardItemView.swift */,
+				27A465F82D47E745000B6B35 /* CardsListView.swift */,
+			);
+			path = CardsListScene;
+			sourceTree = "<group>";
+		};
+		27A465FA2D47E745000B6B35 /* CashbackFeature */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CashbackFeature;
+			sourceTree = "<group>";
+		};
+		27A4660C2D47E999000B6B35 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				27A4660E2D47E99F000B6B35 /* CommonInputSheet */,
+				27A466112D47E99F000B6B35 /* SelectCategoryScene */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		27A4660E2D47E99F000B6B35 /* CommonInputSheet */ = {
+			isa = PBXGroup;
+			children = (
+				27A4660D2D47E99F000B6B35 /* CommonInputView.swift */,
+			);
+			path = CommonInputSheet;
+			sourceTree = "<group>";
+		};
+		27A466112D47E99F000B6B35 /* SelectCategoryScene */ = {
+			isa = PBXGroup;
+			children = (
+				27A4660F2D47E99F000B6B35 /* CreateCategoryView.swift */,
+				27A466102D47E99F000B6B35 /* SelectCategoryView.swift */,
+			);
+			path = SelectCategoryScene;
+			sourceTree = "<group>";
+		};
+		27A466152D47E9DB000B6B35 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				27A4660C2D47E999000B6B35 /* Common */,
+				27A465F12D47E738000B6B35 /* CashbackFeature */,
+				27A465DD2D47E65A000B6B35 /* PlaceFeature */,
+				27A465D42D47E606000B6B35 /* PaymentFeature */,
+				2755A31D2CC939E7002F61EC /* SettingsFeature */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		27A466162D47E9F4000B6B35 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				27A4661A2D47EA23000B6B35 /* CardsService */,
+				27A4661E2D47EA23000B6B35 /* CategoryService */,
+				27A466222D47EA23000B6B35 /* IncomeService */,
+				27A466262D47EA23000B6B35 /* NotificationService */,
+				27A4662A2D47EA23000B6B35 /* PlaceService */,
+				27A4662E2D47EA23000B6B35 /* SearchService */,
+				27A466322D47EA23000B6B35 /* TextDetectionService */,
+				27A466362D47EA23000B6B35 /* ToastService */,
+				27A4663C2D47EA23000B6B35 /* UserDataService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		27A466182D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A466172D47EA23000B6B35 /* Environment+CardsService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A4661A2D47EA23000B6B35 /* CardsService */ = {
+			isa = PBXGroup;
+			children = (
+				27A466182D47EA23000B6B35 /* Environment */,
+				27A466192D47EA23000B6B35 /* CardsService.swift */,
+			);
+			path = CardsService;
+			sourceTree = "<group>";
+		};
+		27A4661C2D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A4661B2D47EA23000B6B35 /* Environment+CategoryService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A4661E2D47EA23000B6B35 /* CategoryService */ = {
+			isa = PBXGroup;
+			children = (
+				27A4661C2D47EA23000B6B35 /* Environment */,
+				27A4661D2D47EA23000B6B35 /* CategoryService.swift */,
+			);
+			path = CategoryService;
+			sourceTree = "<group>";
+		};
+		27A466202D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A4661F2D47EA23000B6B35 /* Environment+IncomeService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A466222D47EA23000B6B35 /* IncomeService */ = {
+			isa = PBXGroup;
+			children = (
+				27A466202D47EA23000B6B35 /* Environment */,
+				27A466212D47EA23000B6B35 /* IncomeService.swift */,
+			);
+			path = IncomeService;
+			sourceTree = "<group>";
+		};
+		27A466242D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A466232D47EA23000B6B35 /* Environment+NotificationService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A466262D47EA23000B6B35 /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				27A466242D47EA23000B6B35 /* Environment */,
+				27A466252D47EA23000B6B35 /* NotificationService.swift */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		27A466282D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A466272D47EA23000B6B35 /* Environment+PlaceService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A4662A2D47EA23000B6B35 /* PlaceService */ = {
+			isa = PBXGroup;
+			children = (
+				27A466282D47EA23000B6B35 /* Environment */,
+				27A466292D47EA23000B6B35 /* PlaceService.swift */,
+			);
+			path = PlaceService;
+			sourceTree = "<group>";
+		};
+		27A4662C2D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A4662B2D47EA23000B6B35 /* Environment+SearchService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A4662E2D47EA23000B6B35 /* SearchService */ = {
+			isa = PBXGroup;
+			children = (
+				27A4662C2D47EA23000B6B35 /* Environment */,
+				27A4662D2D47EA23000B6B35 /* SearchService.swift */,
+			);
+			path = SearchService;
+			sourceTree = "<group>";
+		};
+		27A466302D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A4662F2D47EA23000B6B35 /* Environment+TextDetectionService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A466322D47EA23000B6B35 /* TextDetectionService */ = {
+			isa = PBXGroup;
+			children = (
+				27A466302D47EA23000B6B35 /* Environment */,
+				27A466312D47EA23000B6B35 /* TextDetectionService.swift */,
+			);
+			path = TextDetectionService;
+			sourceTree = "<group>";
+		};
+		27A466342D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A466332D47EA23000B6B35 /* Environment+ToastService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A466362D47EA23000B6B35 /* ToastService */ = {
+			isa = PBXGroup;
+			children = (
+				27A466342D47EA23000B6B35 /* Environment */,
+				27A466352D47EA23000B6B35 /* ToastService.swift */,
+			);
+			path = ToastService;
+			sourceTree = "<group>";
+		};
+		27A466382D47EA23000B6B35 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				27A466372D47EA23000B6B35 /* Environment+UserDataService.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		27A4663C2D47EA23000B6B35 /* UserDataService */ = {
+			isa = PBXGroup;
+			children = (
+				27A466382D47EA23000B6B35 /* Environment */,
+				27A466392D47EA23000B6B35 /* UserData.swift */,
+				27A4663A2D47EA23000B6B35 /* UserDataError.swift */,
+				27A4663B2D47EA23000B6B35 /* UserDataService.swift */,
+			);
+			path = UserDataService;
+			sourceTree = "<group>";
+		};
+		27A466522D47EA6E000B6B35 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				27A466572D47EA7A000B6B35 /* Extensions */,
+				27A4665F2D47EA7A000B6B35 /* Models */,
+				27A466642D47EA7A000B6B35 /* Tips */,
+				27A466652D47EA7A000B6B35 /* Toast.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		27A466572D47EA7A000B6B35 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				27A466532D47EA7A000B6B35 /* PredefinedCategory+Category.swift */,
+				27A466542D47EA7A000B6B35 /* PredefinedCategory+Emoji.swift */,
+				27A466552D47EA7A000B6B35 /* PredefinedCategory+Localization.swift */,
+				27A466562D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		27A4665F2D47EA7A000B6B35 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				27A466582D47EA7A000B6B35 /* Card.swift */,
+				27A466592D47EA7A000B6B35 /* Cashback.swift */,
+				27A4665A2D47EA7A000B6B35 /* Category.swift */,
+				27A4665B2D47EA7A000B6B35 /* Currency.swift */,
+				27A4665C2D47EA7A000B6B35 /* Income.swift */,
+				27A4665D2D47EA7A000B6B35 /* Place.swift */,
+				27A4665E2D47EA7A000B6B35 /* PredefinedCategory.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		27A466642D47EA7A000B6B35 /* Tips */ = {
+			isa = PBXGroup;
+			children = (
+				27A466602D47EA7A000B6B35 /* HowToDeleteCashbackTip.swift */,
+				27A466612D47EA7A000B6B35 /* HowToDeletePlaceTip.swift */,
+				27A466622D47EA7A000B6B35 /* HowToEditCardTip.swift */,
+				27A466632D47EA7A000B6B35 /* HowToSwitchPaymentsPeriodTip.swift */,
+			);
+			path = Tips;
+			sourceTree = "<group>";
+		};
+		27A466762D47EA84000B6B35 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				27A466D42D47EEE1000B6B35 /* Ads */,
+				27A4667C2D47EA96000B6B35 /* Colors */,
+				27A466852D47EA96000B6B35 /* Modifiers */,
+				27A466922D47EA96000B6B35 /* Views */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		27A4667C2D47EA96000B6B35 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				27A4667B2D47EA96000B6B35 /* Colors.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		27A4667E2D47EA96000B6B35 /* If */ = {
+			isa = PBXGroup;
+			children = (
+				27A4667D2D47EA96000B6B35 /* View+If.swift */,
+			);
+			path = If;
+			sourceTree = "<group>";
+		};
+		27A466802D47EA96000B6B35 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				27A4667F2D47EA96000B6B35 /* View+Toast.swift */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		27A466842D47EA96000B6B35 /* ViewClass */ = {
+			isa = PBXGroup;
+			children = (
+				27A466812D47EA96000B6B35 /* View+ViewClass.swift */,
+				27A466822D47EA96000B6B35 /* ViewClass.swift */,
+				27A466832D47EA96000B6B35 /* ViewClassKey.swift */,
+			);
+			path = ViewClass;
+			sourceTree = "<group>";
+		};
+		27A466852D47EA96000B6B35 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				27A4667E2D47EA96000B6B35 /* If */,
+				27A466802D47EA96000B6B35 /* Toast */,
+				27A466842D47EA96000B6B35 /* ViewClass */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		27A466872D47EA96000B6B35 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				27A466862D47EA96000B6B35 /* ColoredCircle.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		27A466922D47EA96000B6B35 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				27A466872D47EA96000B6B35 /* Internal */,
+				27A466882D47EA96000B6B35 /* CardView.swift */,
+				27A466892D47EA96000B6B35 /* CashbackListView.swift */,
+				27A4668A2D47EA96000B6B35 /* CashbackView.swift */,
+				27A4668B2D47EA96000B6B35 /* CategoriesStackView.swift */,
+				27A4668C2D47EA96000B6B35 /* CategoryMarkerView.swift */,
+				27A4668D2D47EA96000B6B35 /* CategoryView.swift */,
+				27A4668E2D47EA96000B6B35 /* HeartView.swift */,
+				27A4668F2D47EA96000B6B35 /* IntentTipView.swift */,
+				27A466902D47EA96000B6B35 /* PlaceMarkerView.swift */,
+				27A466912D47EA96000B6B35 /* ToastView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		27A466A72D47EA9F000B6B35 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				27A466A82D47EAA9000B6B35 /* Bool+Comparable.swift */,
+				27A466A92D47EAA9000B6B35 /* Color+Extensions.swift */,
+				27A466AA2D47EAA9000B6B35 /* Constants.swift */,
+				27A466AB2D47EAA9000B6B35 /* UserDefaults+AppGroup.swift */,
+				27A466AC2D47EAA9000B6B35 /* View+Extensions.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		27A466D42D47EEE1000B6B35 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				27A466D52D47EEEC000B6B35 /* AdBannerViewController.swift */,
+				27A466D82D47EF00000B6B35 /* AdBannerView.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		27A5D7C42C394EC400B93512 = {
 			isa = PBXGroup;
 			children = (
@@ -381,7 +984,6 @@
 				27368B6F2C395E8300FC0475 /* CashbackManager.xctestplan */,
 				27368BE42C4CC65100FC0475 /* CashbackWidgetExtension.entitlements */,
 				27A5D7CF2C394EC400B93512 /* CashbackManager */,
-				27368B7C2C426DA300FC0475 /* Packages */,
 				27A5D7E02C394EC500B93512 /* CashbackManagerTests */,
 				27A5D7EA2C394EC500B93512 /* CashbackManagerUITests */,
 				27368BC02C4BB11100FC0475 /* CashbackWidget */,
@@ -404,8 +1006,11 @@
 		27A5D7CF2C394EC400B93512 /* CashbackManager */ = {
 			isa = PBXGroup;
 			children = (
-				272133552D32646700A904D8 /* Onboarding */,
-				2755A31D2CC939E7002F61EC /* Settings */,
+				27A466A72D47EA9F000B6B35 /* Shared */,
+				27A466762D47EA84000B6B35 /* DesignSystem */,
+				27A466522D47EA6E000B6B35 /* Domain */,
+				27A466162D47E9F4000B6B35 /* Services */,
+				27A466152D47E9DB000B6B35 /* Features */,
 				2714FEAB2C58A0DD0014CFE0 /* Intents */,
 				2755A32A2CCD1E7E002F61EC /* ContentView.swift */,
 				27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */,
@@ -453,19 +1058,6 @@
 			);
 			name = CashbackWidgetExtension;
 			packageProductDependencies = (
-				27368BDF2C4BB85400FC0475 /* Domain */,
-				27368BE92C4CDE9A00FC0475 /* DesignSystem */,
-				274861FA2C53463E00788C1A /* CardsService */,
-				274862082C534AB200788C1A /* Shared */,
-				277130E52C73C0AA00C26CD8 /* CategoryService */,
-				277130E72C73C0AF00C26CD8 /* PlaceService */,
-				277130E92C73C0B200C26CD8 /* SearchService */,
-				27D329D62C9C8A4D00964504 /* TextDetectionService */,
-				2755A3112CBA4B73002F61EC /* IncomeService */,
-				2755A3262CC9F113002F61EC /* NotificationService */,
-				2755A32D2CCD5B23002F61EC /* UserDataService */,
-				2781B1232CD7CCA30081A927 /* CashbackFeature */,
-				277D92BE2CDD17D3001661E1 /* ToastService */,
 			);
 			productName = CashbackWidgetExtension;
 			productReference = 27368BBB2C4BB11000FC0475 /* CashbackWidgetExtension.appex */;
@@ -487,21 +1079,8 @@
 			);
 			name = CashbackManager;
 			packageProductDependencies = (
-				27208E722C54C4970097794D /* CashbackFeature */,
-				272CA8D32C54C6E600A00E90 /* Domain */,
-				2714FEA72C54CA3A0014CFE0 /* PlaceFeature */,
-				2714FEA92C57C3580014CFE0 /* SearchService */,
-				27AB37262C73BBE200A00939 /* CategoryService */,
-				27AB37282C73BBE700A00939 /* PlaceService */,
-				27AB372A2C73BE4B00A00939 /* CardsService */,
-				27D329D42C9C894B00964504 /* TextDetectionService */,
-				2755A30F2CB9742A002F61EC /* PaymentFeature */,
-				2755A3132CBA4B7D002F61EC /* IncomeService */,
-				2755A3242CC9EECC002F61EC /* NotificationService */,
-				2755A32F2CCD5B2A002F61EC /* UserDataService */,
-				277D92BC2CDD17C2001661E1 /* ToastService */,
-				27A465BF2D44B460000B6B35 /* YandexMobileAds */,
-				27A465C12D44B460000B6B35 /* YandexMobileAdsInstream */,
+				27A466B32D47EADD000B6B35 /* YandexMobileAds */,
+				27A466B52D47EADD000B6B35 /* YandexMobileAdsInstream */,
 			);
 			productName = CashbackManager;
 			productReference = 27A5D7CD2C394EC400B93512 /* CashbackManager.app */;
@@ -582,7 +1161,7 @@
 			);
 			mainGroup = 27A5D7C42C394EC400B93512;
 			packageReferences = (
-				27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */,
+				27A466B22D47EADD000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */,
 			);
 			productRefGroup = 27A5D7CE2C394EC400B93512 /* Products */;
 			projectDirPath = "";
@@ -635,17 +1214,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A466D12D47EE0E000B6B35 /* CategoryMarkerView.swift in Sources */,
 				27368BD62C4BB22500FC0475 /* CardWidgetEntry.swift in Sources */,
+				27A466C42D47EC98000B6B35 /* ToastService.swift in Sources */,
 				27A465B72D3D2389000B6B35 /* FavouriteCardsEntryView.swift in Sources */,
+				27A466C22D47EC87000B6B35 /* NotificationService.swift in Sources */,
+				27A466C02D47EC77000B6B35 /* TextDetectionService.swift in Sources */,
 				27368BDA2C4BB67200FC0475 /* ChangeCurrentCardIntent.swift in Sources */,
+				27A466BE2D47EC65000B6B35 /* CategoryService.swift in Sources */,
+				27A466C12D47EC7E000B6B35 /* IncomeService.swift in Sources */,
 				27368BC22C4BB11100FC0475 /* CashbackWidgetBundle.swift in Sources */,
+				27A466C72D47ED06000B6B35 /* Constants.swift in Sources */,
+				27A466D22D47EE1E000B6B35 /* Color+Extensions.swift in Sources */,
+				27A4660A2D47E902000B6B35 /* WidgetURLParser.swift in Sources */,
 				27368BD52C4BB20A00FC0475 /* CardWidgetProvider.swift in Sources */,
 				27EE77BB2C5C020900D12827 /* AppFactory.swift in Sources */,
+				27A466D32D47EE36000B6B35 /* ColoredCircle.swift in Sources */,
+				27A466B72D47EC20000B6B35 /* Card.swift in Sources */,
+				27A466C32D47EC90000B6B35 /* UserDataService.swift in Sources */,
+				27A466BD2D47EC5D000B6B35 /* CardsService.swift in Sources */,
+				27A466CF2D47EDE9000B6B35 /* View+ViewClass.swift in Sources */,
+				27A4660B2D47E90E000B6B35 /* CashbackNavigation.swift in Sources */,
+				27A466CC2D47EDA3000B6B35 /* UserDataError.swift in Sources */,
+				27A466BF2D47EC6E000B6B35 /* PlaceService.swift in Sources */,
+				27A466B82D47EC25000B6B35 /* Cashback.swift in Sources */,
+				27A466CA2D47ED67000B6B35 /* ViewClass.swift in Sources */,
+				27A466C62D47ECEA000B6B35 /* UserData.swift in Sources */,
 				27A465B32D3D2210000B6B35 /* FavouriteCardsProvider.swift in Sources */,
+				27A466CE2D47EDC3000B6B35 /* CategoriesStackView.swift in Sources */,
+				27A466BB2D47EC49000B6B35 /* Income.swift in Sources */,
+				27A466B92D47EC3E000B6B35 /* Category.swift in Sources */,
 				27368BC42C4BB11100FC0475 /* CardWidget.swift in Sources */,
+				27A466C92D47ED56000B6B35 /* ViewClassKey.swift in Sources */,
+				27A466C52D47ECE2000B6B35 /* Toast.swift in Sources */,
 				27A465B02D3D2193000B6B35 /* FavouriteCardsEntry.swift in Sources */,
 				27A465AD2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift in Sources */,
+				27A466BA2D47EC43000B6B35 /* Place.swift in Sources */,
+				27A466BC2D47EC55000B6B35 /* SearchService.swift in Sources */,
+				27A466CB2D47ED8A000B6B35 /* Colors.swift in Sources */,
 				27368BD72C4BB22700FC0475 /* CashbackWidgetEntryView.swift in Sources */,
+				27A466CD2D47EDB1000B6B35 /* UserDefaults+AppGroup.swift in Sources */,
+				27A466D02D47EDFE000B6B35 /* View+If.swift in Sources */,
+				27A466C82D47ED4B000B6B35 /* CardView.swift in Sources */,
 				27A465BA2D3D253A000B6B35 /* FavouriteCardsWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,16 +1275,102 @@
 				27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */,
 				2781B12B2CD884F20081A927 /* TrashbinView.swift in Sources */,
 				2714FEB82C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift in Sources */,
+				27A466D62D47EEEC000B6B35 /* AdBannerViewController.swift in Sources */,
+				27A466122D47E99F000B6B35 /* CreateCategoryView.swift in Sources */,
+				27A466132D47E99F000B6B35 /* SelectCategoryView.swift in Sources */,
+				27A466142D47E99F000B6B35 /* CommonInputView.swift in Sources */,
 				2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */,
 				27AB37252C73B3CE00A00939 /* CreatePlaceIntent.swift in Sources */,
 				27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */,
+				27A465D52D47E606000B6B35 /* IncomeView.swift in Sources */,
+				27A465D62D47E606000B6B35 /* PaymentsView.swift in Sources */,
+				27A465D72D47E606000B6B35 /* IncomeFeatureAssembly.swift in Sources */,
+				27A465D82D47E606000B6B35 /* AddIncomeView.swift in Sources */,
+				27A465EA2D47E665000B6B35 /* PlaceFeatureAssembly.swift in Sources */,
+				27A465EB2D47E665000B6B35 /* PlacesListView.swift in Sources */,
+				27A465EC2D47E665000B6B35 /* PlaceNavigation.swift in Sources */,
+				27A465ED2D47E665000B6B35 /* PlaceDetailView.swift in Sources */,
+				27A465EE2D47E665000B6B35 /* PlaceView.swift in Sources */,
+				27A465EF2D47E665000B6B35 /* AddPlaceView.swift in Sources */,
+				27A465F02D47E665000B6B35 /* PlaceCoordinator.swift in Sources */,
+				27A465D92D47E606000B6B35 /* ChartModel.swift in Sources */,
+				27A465DA2D47E606000B6B35 /* PaymentCoordinator.swift in Sources */,
 				2723208E2C7F8367005B658A /* DeleteCategoryIntent.swift in Sources */,
 				2714FEAF2C58A1E40014CFE0 /* CreateCardIntent.swift in Sources */,
 				2714FEB12C58B1150014CFE0 /* CheckCardCashbackIntent.swift in Sources */,
 				2755A31B2CBBA609002F61EC /* CardEntity.swift in Sources */,
 				272320922C7F867C005B658A /* DeleteCardIntent.swift in Sources */,
+				27A4663D2D47EA23000B6B35 /* Environment+IncomeService.swift in Sources */,
+				27A4663E2D47EA23000B6B35 /* ToastService.swift in Sources */,
+				27A4663F2D47EA23000B6B35 /* SearchService.swift in Sources */,
+				27A466402D47EA23000B6B35 /* Environment+CategoryService.swift in Sources */,
+				27A466412D47EA23000B6B35 /* IncomeService.swift in Sources */,
+				27A466422D47EA23000B6B35 /* NotificationService.swift in Sources */,
+				27A466432D47EA23000B6B35 /* Environment+ToastService.swift in Sources */,
+				27A466442D47EA23000B6B35 /* PlaceService.swift in Sources */,
+				27A466452D47EA23000B6B35 /* TextDetectionService.swift in Sources */,
+				27A466462D47EA23000B6B35 /* Environment+SearchService.swift in Sources */,
+				27A466472D47EA23000B6B35 /* UserData.swift in Sources */,
+				27A466482D47EA23000B6B35 /* UserDataService.swift in Sources */,
+				27A466492D47EA23000B6B35 /* UserDataError.swift in Sources */,
+				27A4664A2D47EA23000B6B35 /* Environment+NotificationService.swift in Sources */,
+				27A4664B2D47EA23000B6B35 /* Environment+CardsService.swift in Sources */,
+				27A4664C2D47EA23000B6B35 /* Environment+PlaceService.swift in Sources */,
+				27A4664D2D47EA23000B6B35 /* CardsService.swift in Sources */,
+				27A4664E2D47EA23000B6B35 /* Environment+TextDetectionService.swift in Sources */,
+				27A4664F2D47EA23000B6B35 /* Environment+UserDataService.swift in Sources */,
+				27A466502D47EA23000B6B35 /* CategoryService.swift in Sources */,
 				272320942C7F86EA005B658A /* DeleteCashbackIntent.swift in Sources */,
 				2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */,
+				27A466002D47E745000B6B35 /* AddCashbackView.swift in Sources */,
+				27A466012D47E745000B6B35 /* CardDetailView.swift in Sources */,
+				27A466022D47E745000B6B35 /* CashbackNavigation.swift in Sources */,
+				27A466032D47E745000B6B35 /* WidgetURLParser.swift in Sources */,
+				27A466042D47E745000B6B35 /* CardItemView.swift in Sources */,
+				27A466662D47EA7A000B6B35 /* PredefinedCategory+Emoji.swift in Sources */,
+				27A466672D47EA7A000B6B35 /* HowToSwitchPaymentsPeriodTip.swift in Sources */,
+				27A466682D47EA7A000B6B35 /* HowToEditCardTip.swift in Sources */,
+				27A466692D47EA7A000B6B35 /* HowToDeleteCashbackTip.swift in Sources */,
+				27A4666A2D47EA7A000B6B35 /* HowToDeletePlaceTip.swift in Sources */,
+				27A4666B2D47EA7A000B6B35 /* Place.swift in Sources */,
+				27A4666C2D47EA7A000B6B35 /* Income.swift in Sources */,
+				27A4666D2D47EA7A000B6B35 /* Card.swift in Sources */,
+				27A4666E2D47EA7A000B6B35 /* Toast.swift in Sources */,
+				27A4666F2D47EA7A000B6B35 /* PredefinedCategory.swift in Sources */,
+				27A466702D47EA7A000B6B35 /* Category.swift in Sources */,
+				27A466712D47EA7A000B6B35 /* Currency.swift in Sources */,
+				27A466722D47EA7A000B6B35 /* PredefinedCategory+Localization.swift in Sources */,
+				27A466732D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift in Sources */,
+				27A466742D47EA7A000B6B35 /* PredefinedCategory+Category.swift in Sources */,
+				27A466752D47EA7A000B6B35 /* Cashback.swift in Sources */,
+				27A466052D47E745000B6B35 /* CashbackFeatureAssembly.swift in Sources */,
+				27A466062D47E745000B6B35 /* CardsListView.swift in Sources */,
+				27A466072D47E745000B6B35 /* CardChartModel.swift in Sources */,
+				27A466082D47E745000B6B35 /* Environment+WidgetURLParser.swift in Sources */,
+				27A466932D47EA96000B6B35 /* CashbackListView.swift in Sources */,
+				27A466942D47EA96000B6B35 /* IntentTipView.swift in Sources */,
+				27A466962D47EA96000B6B35 /* ColoredCircle.swift in Sources */,
+				27A466972D47EA96000B6B35 /* CashbackView.swift in Sources */,
+				27A466992D47EA96000B6B35 /* CardView.swift in Sources */,
+				27A4669A2D47EA96000B6B35 /* View+ViewClass.swift in Sources */,
+				27A4669B2D47EA96000B6B35 /* Colors.swift in Sources */,
+				27A4669C2D47EA96000B6B35 /* PlaceMarkerView.swift in Sources */,
+				27A4669D2D47EA96000B6B35 /* View+Toast.swift in Sources */,
+				27A4669E2D47EA96000B6B35 /* ToastView.swift in Sources */,
+				27A466DA2D47EF00000B6B35 /* AdBannerView.swift in Sources */,
+				27A4669F2D47EA96000B6B35 /* CategoryView.swift in Sources */,
+				27A466AD2D47EAA9000B6B35 /* Bool+Comparable.swift in Sources */,
+				27A466AE2D47EAA9000B6B35 /* Color+Extensions.swift in Sources */,
+				27A466AF2D47EAA9000B6B35 /* View+Extensions.swift in Sources */,
+				27A466B02D47EAA9000B6B35 /* UserDefaults+AppGroup.swift in Sources */,
+				27A466B12D47EAA9000B6B35 /* Constants.swift in Sources */,
+				27A466A02D47EA96000B6B35 /* HeartView.swift in Sources */,
+				27A466A22D47EA96000B6B35 /* ViewClass.swift in Sources */,
+				27A466A32D47EA96000B6B35 /* CategoriesStackView.swift in Sources */,
+				27A466A42D47EA96000B6B35 /* View+If.swift in Sources */,
+				27A466A52D47EA96000B6B35 /* ViewClassKey.swift in Sources */,
+				27A466A62D47EA96000B6B35 /* CategoryMarkerView.swift in Sources */,
+				27A466092D47E745000B6B35 /* CashbackCoordinator.swift in Sources */,
 				272133592D3264A500A904D8 /* OnboardingView.swift in Sources */,
 				2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
@@ -1097,7 +1793,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */ = {
+		27A466B22D47EADD000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yandexmobile/yandex-ads-sdk-ios";
 			requirement = {
@@ -1108,119 +1804,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2714FEA72C54CA3A0014CFE0 /* PlaceFeature */ = {
+		27A466B32D47EADD000B6B35 /* YandexMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PlaceFeature;
-		};
-		2714FEA92C57C3580014CFE0 /* SearchService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SearchService;
-		};
-		27208E722C54C4970097794D /* CashbackFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CashbackFeature;
-		};
-		272CA8D32C54C6E600A00E90 /* Domain */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Domain;
-		};
-		27368BDF2C4BB85400FC0475 /* Domain */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Domain;
-		};
-		27368BE92C4CDE9A00FC0475 /* DesignSystem */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DesignSystem;
-		};
-		274861FA2C53463E00788C1A /* CardsService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CardsService;
-		};
-		274862082C534AB200788C1A /* Shared */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Shared;
-		};
-		2755A30F2CB9742A002F61EC /* PaymentFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PaymentFeature;
-		};
-		2755A3112CBA4B73002F61EC /* IncomeService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IncomeService;
-		};
-		2755A3132CBA4B7D002F61EC /* IncomeService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IncomeService;
-		};
-		2755A3242CC9EECC002F61EC /* NotificationService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NotificationService;
-		};
-		2755A3262CC9F113002F61EC /* NotificationService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NotificationService;
-		};
-		2755A32D2CCD5B23002F61EC /* UserDataService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UserDataService;
-		};
-		2755A32F2CCD5B2A002F61EC /* UserDataService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UserDataService;
-		};
-		277130E52C73C0AA00C26CD8 /* CategoryService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CategoryService;
-		};
-		277130E72C73C0AF00C26CD8 /* PlaceService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PlaceService;
-		};
-		277130E92C73C0B200C26CD8 /* SearchService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SearchService;
-		};
-		277D92BC2CDD17C2001661E1 /* ToastService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ToastService;
-		};
-		277D92BE2CDD17D3001661E1 /* ToastService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ToastService;
-		};
-		2781B1232CD7CCA30081A927 /* CashbackFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CashbackFeature;
-		};
-		27A465BF2D44B460000B6B35 /* YandexMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */;
+			package = 27A466B22D47EADD000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */;
 			productName = YandexMobileAds;
 		};
-		27A465C12D44B460000B6B35 /* YandexMobileAdsInstream */ = {
+		27A466B52D47EADD000B6B35 /* YandexMobileAdsInstream */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 27A465BE2D44B460000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */;
+			package = 27A466B22D47EADD000B6B35 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */;
 			productName = YandexMobileAdsInstream;
-		};
-		27AB37262C73BBE200A00939 /* CategoryService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CategoryService;
-		};
-		27AB37282C73BBE700A00939 /* PlaceService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PlaceService;
-		};
-		27AB372A2C73BE4B00A00939 /* CardsService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CardsService;
-		};
-		27D329D42C9C894B00964504 /* TextDetectionService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = TextDetectionService;
-		};
-		27D329D62C9C8A4D00964504 /* TextDetectionService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = TextDetectionService;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

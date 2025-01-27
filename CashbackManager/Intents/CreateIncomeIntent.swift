@@ -6,9 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import Domain
-import IncomeService
 
 struct CreateIncomeIntent: AppIntent {
 	static var title: LocalizedStringResource = "Выплата кэшбэка"

@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import Domain
-import PlaceService
 import SwiftData
 
 struct CheckPlaceCategoryIntent: AppIntent {

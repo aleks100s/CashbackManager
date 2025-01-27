@@ -6,9 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import CategoryService
-import Domain
 
 struct CreateCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Новый кэшбэк"
@@ -47,7 +44,7 @@ struct CreateCashbackIntent: AppIntent {
 				card = cardEntity.card
 			}
 			
-			let category: Domain.Category
+			let category: Category
 			if let categoryEntity {
 				category = categoryEntity.category
 			} else {

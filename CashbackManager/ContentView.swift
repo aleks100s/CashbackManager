@@ -5,17 +5,10 @@
 //  Created by Alexander on 26.10.2024.
 //
 
-import CashbackFeature
 import Combine
 import CoreSpotlight
-import DesignSystem
-import Domain
-import PaymentFeature
-import PlaceFeature
-import Shared
 import SwiftData
 import SwiftUI
-import ToastService
 
 struct ContentView: View {
 	private enum Tab: String {
@@ -42,7 +35,7 @@ struct ContentView: View {
 	@AppStorage(Constants.StorageKey.isAdVisible)
 	private var isAdVisible: Bool = false
 	
-	@Query private var categories: [Domain.Category]
+	@Query private var categories: [Category]
 
 	@State private var selectedTab = Tab.cashback
 	@State private var toast: Toast?

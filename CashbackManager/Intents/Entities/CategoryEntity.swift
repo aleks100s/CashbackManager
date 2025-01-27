@@ -6,14 +6,12 @@
 //
 
 import AppIntents
-import CategoryService
-import Domain
 
 struct CategoryEntity: AppEntity {
 	static var typeDisplayRepresentation: TypeDisplayRepresentation = "Category Entity"
 	
 	let id: UUID
-	let category: Domain.Category
+	let category: Category
 	
 	var displayRepresentation: DisplayRepresentation {
 		DisplayRepresentation(stringLiteral: category.name)

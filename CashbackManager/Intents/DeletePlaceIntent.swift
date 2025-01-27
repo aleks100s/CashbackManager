@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import Domain
-import PlaceService
 
 struct DeletePlaceIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить место"

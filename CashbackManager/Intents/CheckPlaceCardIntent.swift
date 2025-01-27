@@ -6,10 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import CategoryService
-import Domain
-import PlaceService
 import SwiftData
 
 struct CheckPlaceCardIntent: AppIntent {

@@ -1,4 +1,5 @@
 {
+  "originHash" : "8b0a1fa720d9cf9339f639f3b6a55752f83e7b5e3396ce326e002e034808348a",
   "pins" : [
     {
       "identity" : "appmetrica-sdk-ios",
@@ -73,5 +74,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

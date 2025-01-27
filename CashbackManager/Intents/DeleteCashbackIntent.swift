@@ -6,9 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import CategoryService
-import Domain
 
 struct DeleteCashbackIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить кэшбэк"
@@ -44,7 +41,7 @@ struct DeleteCashbackIntent: AppIntent {
 				card = cardEntity.card
 			}
 			
-			let category: Domain.Category
+			let category: Category
 			if let categoryEntity {
 				category = categoryEntity.category
 			} else {

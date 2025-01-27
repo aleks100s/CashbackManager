@@ -6,15 +6,9 @@
 //
 
 import AppIntents
-import CashbackFeature
-import Domain
-import IncomeService
-import SearchService
-import Shared
 import SwiftData
 import SwiftUI
 import TipKit
-import UserDataService
 
 @main
 @MainActor
