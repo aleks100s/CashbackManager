@@ -5,22 +5,11 @@
 //  Created by Alexander on 30.07.2024.
 //
 
-import CardsService
-import CashbackFeature
-import CategoryService
-import Domain
-import IncomeService
-import NotificationService
-import PlaceService
-import SearchService
 import SwiftData
-import TextDetectionService
-import ToastService
-import UserDataService
 
 @MainActor
 enum AppFactory {
-	private static let container = try! ModelContainer(for: Card.self, Cashback.self, Domain.Category.self, Place.self, Income.self)
+	private static let container = try! ModelContainer(for: Card.self, Cashback.self, Category.self, Place.self, Income.self)
 	private static let searchService = SearchService()
 	private static let cardsService = CardsService(context: container.mainContext, searchService: searchService)
 	private static let categoryService = CategoryService(context: container.mainContext)

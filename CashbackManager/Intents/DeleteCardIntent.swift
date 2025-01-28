@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import Domain
 
 struct DeleteCardIntent: AppIntent {
 	static var title: LocalizedStringResource = "Удалить карту"

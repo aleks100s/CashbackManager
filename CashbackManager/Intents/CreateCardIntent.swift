@@ -6,7 +6,6 @@
 //
 
 import AppIntents
-import CardsService
 import SwiftData
 
 struct CreateCardIntent: AppIntent {

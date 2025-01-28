@@ -6,9 +6,6 @@
 //
 
 import AppIntents
-import CategoryService
-import Domain
-import PlaceService
 import SwiftData
 
 struct CreatePlaceIntent: AppIntent {
@@ -31,7 +28,7 @@ struct CreatePlaceIntent: AppIntent {
 	
 	func perform() async throws -> some ProvidesDialog {
 		let result = try await Task { @MainActor in
-			let category: Domain.Category
+			let category: Category
 			if let categoryEntity {
 				category = categoryEntity.category
 			} else {

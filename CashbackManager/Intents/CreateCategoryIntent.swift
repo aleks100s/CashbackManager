@@ -6,7 +6,6 @@
 //
 
 import AppIntents
-import CategoryService
 import SwiftData
 
 struct CreateCategoryIntent: AppIntent {

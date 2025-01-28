@@ -1,37 +1,53 @@
 //
 //  CategoryService.swift
-//  CashbackManager
 //
-//  Created by Alexander on 30.06.2024.
+//
+//  Created by Alexander on 20.08.2024.
 //
 
-import Domain
+import Foundation
+import SwiftData
 
-final class CategoryService: ICategoryService {
-	private let persistanceManager: IPersistanceManager
+@MainActor
+struct CategoryService {
+	private let context: ModelContext
 	
-	private var categories: [Domain.Category] = [] {
-		didSet {
-			persistCategories()
+	init(context: ModelContext) {
+		self.context = context
+	}
+	
+	func getAllCategories() -> [Category] {
+		fetch(by: #Predicate<Category> { $0.isArchived == false })
+	}
+	
+	func getCategory(by name: String) -> Category? {
+		fetch(by: #Predicate<Category> { category in category.name.localizedStandardContains(name) ||
+			category.synonyms?.localizedStandardContains(name) == true
+		}).first
+	}
+	
+	@discardableResult
+	func createCategory(name: String, emoji: String? = nil) -> Category {
+		let category = Category(name: name, emoji: emoji ??  String(name.first ?? "?"))
+		context.insert(category)
+		try? context.save()
+		return category
+	}
+	
+	func archive(category: Category) {
+		category.isArchived = true
+		try? context.save()
+	}
+	
+	func unarchive(categories: [Category]) {
+		for category in categories {
+			category.isArchived = false
 		}
+		try? context.save()
 	}
 	
-	init(persistanceManager: IPersistanceManager) {
-		self.persistanceManager = persistanceManager
-		self.categories = persistanceManager.readModels(for: .categories) as? [Domain.Category] ?? []
-	}
-	
-	func getCategories() -> [Domain.Category] {
-		let predefinedCategories = PredefinedCategory.allCases.map(\.asCategory)
-		let userCategories: [Domain.Category] = categories
-		return predefinedCategories + userCategories
-	}
-	
-	func save(category: Domain.Category) {
-		categories.append(category)
-	}
-	
-	private func persistCategories() {
-		persistanceManager.save(models: categories, for: .categories)
+	private func fetch(by predicate: Predicate<Category>) -> [Category] {
+		let descriptor = FetchDescriptor(predicate: predicate)
+		return (try? context.fetch(descriptor)) ?? []
 	}
 }

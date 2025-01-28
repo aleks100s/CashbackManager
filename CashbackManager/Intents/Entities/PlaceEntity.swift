@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import Domain
-import PlaceService
 
 struct PlaceEntity: AppEntity {
 	static var typeDisplayRepresentation: TypeDisplayRepresentation = "Place Entity"

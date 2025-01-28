@@ -90,6 +90,16 @@ extension PredefinedCategory {
 			"👠"
 		case .sbp:
 			"🤳🏻"
+		case .digitalGoods:
+			"👾"
+		case .yandex:
+			"Я"
+		case .burgerKing:
+			"🍔"
+		case .gasStation:
+			"⛽"
+		case .communalServices:
+			"🚰"
 		}
 	}
 }

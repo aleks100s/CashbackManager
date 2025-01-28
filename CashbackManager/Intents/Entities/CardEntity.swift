@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import Domain
 
 struct CardEntity: AppEntity {
 	static var typeDisplayRepresentation: TypeDisplayRepresentation = "Card Entity"

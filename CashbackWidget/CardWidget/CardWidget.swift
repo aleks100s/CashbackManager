@@ -6,7 +6,6 @@
 //
 
 import WidgetKit
-import Shared
 import SwiftUI
 
 struct CardWidget: Widget {

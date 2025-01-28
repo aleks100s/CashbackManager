@@ -6,8 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import Domain
 
 struct FavouriteCardsConfigurationIntent: WidgetConfigurationIntent {
 	static var title: LocalizedStringResource = "Любимые карты"
@@ -32,10 +30,10 @@ struct FavouriteCardsConfigurationIntent: WidgetConfigurationIntent {
 }
 
 extension Card: AppEntity {
-	public struct CardQuery: EntityQuery {
-		public init() {}
+	struct CardQuery: EntityQuery {
+		init() {}
 		
-		public func entities(for identifiers: [Card.ID]) async throws -> [Card] {
+		func entities(for identifiers: [Card.ID]) async throws -> [Card] {
 			let cardsService = await AppFactory.provideCardsService()
 			var cards = [Card]()
 			for identifier in identifiers {
@@ -46,19 +44,19 @@ extension Card: AppEntity {
 			return cards
 		}
 		
-		public func suggestedEntities() async throws -> [Card] {
+		func suggestedEntities() async throws -> [Card] {
 			await AppFactory.provideCardsService().getAllCards()
 		}
 		
-		public func defaultResult() async -> Card? {
+		func defaultResult() async -> Card? {
 			try? await suggestedEntities().first
 		}
 	}
 	
-	public static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Карта")
-	public static var defaultQuery = CardQuery()
+	static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Карта")
+	static var defaultQuery = CardQuery()
 	
-	public var displayRepresentation: DisplayRepresentation {
+	var displayRepresentation: DisplayRepresentation {
 		DisplayRepresentation(title: "\(name)")
 	}
 }

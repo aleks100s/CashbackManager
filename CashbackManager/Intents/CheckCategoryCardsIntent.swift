@@ -6,9 +6,6 @@
 //
 
 import AppIntents
-import CardsService
-import CategoryService
-import Domain
 import SwiftData
 
 struct CheckCategoryCardsIntent: AppIntent {
@@ -28,7 +25,7 @@ struct CheckCategoryCardsIntent: AppIntent {
 	
 	func perform() async throws -> some ProvidesDialog {
 		let result = try await Task { @MainActor in
-			let category: Domain.Category
+			let category: Category
 			if let categoryEntity {
 				category = categoryEntity.category
 			} else {

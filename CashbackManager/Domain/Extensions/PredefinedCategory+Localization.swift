@@ -55,11 +55,11 @@ extension PredefinedCategory {
 		case .entertainment:
 			"Развлечения"
 		case .exhibitionsAndMuseums:
-			"Выставки и музей"
+			"Выставки и музеи"
 		case .medicineServices:
 			"Медицинские услуги"
 		case .fitness:
-			"Фитнесс"
+			"Фитнес"
 		case .clinicsAndEsthetics:
 			"Клиники и эстетическая медицина"
 		case .dentist:
@@ -90,6 +90,16 @@ extension PredefinedCategory {
 			"Одежда и обувь"
 		case .sbp:
 			"QR-код СБП"
+		case .digitalGoods:
+			"Цифровые товары"
+		case .yandex:
+			"Сервисы Яндекса"
+		case .burgerKing:
+			"Бургер Кинг"
+		case .gasStation:
+			"Заправки"
+		case .communalServices:
+			"Коммунальные услуги"
 		}
 	}
 }
