@@ -55,8 +55,7 @@ struct AddIncomeView: View {
 			.safeAreaInset(edge: .bottom) {
 				if isAdVisible {
 					AdBannerView(bannerId: bannerId)
-						.fixedSize()
-						.padding(.top, 100)
+						.frame(height: 100)
 				}
 			}
 			.onAppear {

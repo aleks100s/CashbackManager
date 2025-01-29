@@ -147,8 +147,7 @@ struct SettingsView: View {
 		.safeAreaInset(edge: .bottom) {
 			if isAdVisible {
 				AdBannerView(bannerId: bannerId)
-					.fixedSize()
-					.padding(.top, 100)
+					.frame(height: 100)
 			}
 		}
 		.onChange(of: isNotificationAllowed, initial: false) { _, isAllowed in

@@ -71,13 +71,6 @@ struct CardDetailView: View {
 						.popoverTip(HowToEditCardTip(), arrowEdge: .top)
 				}
 			}
-			.safeAreaInset(edge: .bottom) {
-				if isAdVisible {
-					AdBannerView(bannerId: bannerId)
-						.fixedSize()
-						.padding(.top, 100)
-				}
-			}
 			.onAppear {
 				currentCardId = card.id.uuidString
 				refreshWidget()
@@ -228,6 +221,11 @@ struct CardDetailView: View {
 				}
 			}
 			.scrollIndicators(.hidden)
+			
+			if isAdVisible {
+				AdBannerView(bannerId: bannerId)
+					.frame(height: 100)
+			}
 		}
 	}
 	
