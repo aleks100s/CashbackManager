@@ -6,8 +6,13 @@
 //
 
 import AppIntents
+import DesignSystem
+import Domain
+import IncomeService
+import Shared
 import SwiftData
 import SwiftUI
+import ToastService
 
 struct AddIncomeView: View {
 	let createIncomeIntent: any AppIntent
@@ -16,9 +21,6 @@ struct AddIncomeView: View {
 	
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
-	
-	@AppStorage(Constants.StorageKey.isAdVisible)
-	private var isAdVisible: Bool = false
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.incomeService) private var incomeService
@@ -57,58 +59,50 @@ struct AddIncomeView: View {
 				source = income?.source
 				amount = String(income?.amount ?? .zero)
 				date = income?.date ?? .now
-				if income == nil {
-					isFocused = true
-				}
+				isFocused = true
 			}
 			.scrollDismissesKeyboard(.automatic)
 	}
 	
 	private var contentView: some View {
-		VStack(spacing: .zero) {
-			List {
-				if areSiriTipsVisible, income == nil {
-					IntentTipView(intent: createIncomeIntent, text: "Чтобы добавить выплату")
-				}
-				
-				Section {
-					Menu(source?.name ?? "Не выбрано") {
-						ForEach(cards) { card in
-							Button(card.name) {
-								source = card
-								hapticFeedback(.light)
-							}
-						}
-					}
-				} header: {
-					Text("Откуда получена выплата кэшбэка")
-				} footer: {
-					Text("Не обязательно")
-				}
-				
-				Section {
-					DatePicker("Дата выплаты", selection: $date, in: ...Date(), displayedComponents: [.date])
-						.datePickerStyle(.compact)
-				} header: {
-					Text("Дата выплаты")
-				} footer: {
-					Text("Не обязательно")
-				}
-				
-				Section {
-					TextField("Размер выплаты", text: $amount)
-						.keyboardType(.numberPad)
-						.focused($isFocused)
-						.onChange(of: amount) {
-							formatAmount()
-						}
-				} header: {
-					Text("Сумма выплаты в рублях/милях/баллах")
-				}
+		List {
+			if areSiriTipsVisible, income == nil {
+				IntentTipView(intent: createIncomeIntent, text: "Чтобы добавить выплату")
 			}
 			
-			if isAdVisible, income != nil {
-				AdBannerView(bannerId: bannerId)
+			Section {
+				Menu(source?.name ?? "Не выбрано") {
+					ForEach(cards) { card in
+						Button(card.name) {
+							source = card
+							hapticFeedback(.light)
+						}
+					}
+				}
+			} header: {
+				Text("Откуда получена выплата кэшбэка")
+			} footer: {
+				Text("Не обязательно")
+			}
+			
+			Section {
+				DatePicker("Дата выплаты", selection: $date, in: ...Date(), displayedComponents: [.date])
+					.datePickerStyle(.compact)
+			} header: {
+				Text("Дата выплаты")
+			} footer: {
+				Text("Не обязательно")
+			}
+			
+			Section {
+				TextField("Размер выплаты", text: $amount)
+					.keyboardType(.numberPad)
+					.focused($isFocused)
+					.onChange(of: amount) {
+						formatAmount()
+					}
+			} header: {
+				Text("Сумма выплаты в рублях/милях/баллах")
 			}
 		}
 	}
@@ -145,9 +139,3 @@ struct AddIncomeView: View {
 		amount = amount.filter { "0123456789".contains($0) }
 	}
 }
-
-#if DEBUG
-private let bannerId = "demo-banner-yandex"
-#else
-private let bannerId = "R-M-12709149-4"
-#endif

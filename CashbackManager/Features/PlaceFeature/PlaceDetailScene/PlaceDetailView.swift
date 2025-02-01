@@ -126,7 +126,6 @@ struct PlaceDetailView: View {
 		.safeAreaInset(edge: .bottom) {
 			if isAdVisible {
 				AdBannerView(bannerId: bannerId)
-					.frame(height: 100)
 			}
 		}
 		.sheet(isPresented: $isCategorySelectorPresented) {

@@ -224,7 +224,6 @@ struct CardDetailView: View {
 			
 			if isAdVisible {
 				AdBannerView(bannerId: bannerId)
-					.frame(height: 100)
 			}
 		}
 	}

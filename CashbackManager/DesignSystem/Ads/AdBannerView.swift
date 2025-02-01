@@ -7,7 +7,16 @@
 
 import SwiftUI
 
-struct AdBannerView: UIViewControllerRepresentable {
+struct AdBannerView: View {
+	let bannerId: String
+
+	var body: some View {
+		_AdBannerView(bannerId: bannerId)
+			.frame(height: 100)
+	}
+}
+
+private struct _AdBannerView: UIViewControllerRepresentable {
 	private let viewController: AdBannerViewController
 	
 	init(bannerId: String) {
