@@ -100,6 +100,8 @@ extension PredefinedCategory {
 			"⛽"
 		case .communalServices:
 			"🚰"
+		case .accessories:
+			"💍"
 		}
 	}
 }

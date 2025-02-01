@@ -100,6 +100,8 @@ extension PredefinedCategory {
 			"Заправки"
 		case .communalServices:
 			"Коммунальные услуги"
+		case .accessories:
+			"Аксессуары"
 		}
 	}
 }

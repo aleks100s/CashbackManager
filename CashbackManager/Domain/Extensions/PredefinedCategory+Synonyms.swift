@@ -19,7 +19,7 @@ extension PredefinedCategory {
 		case .carRent:
 			["Прокат авто", "Автопрокат"]
 		case .railRoadTickets:
-			["Железные дороги", "Железнодорожные билеты"]
+			["Железные дороги", "Железнодорожные билеты", "Жд билеты"]
 		case .tourAgencies:
 			["Туризм"]
 		case .cruises:
@@ -29,11 +29,11 @@ extension PredefinedCategory {
 		case .dutyFreeShops:
 			["Duty Free"]
 		case .transport:
-			[""]
+			[]
 		case .taxi:
-			["Yandex Go", "Яндекс Go"]
+			["Yandex Go", "Яндекс Go", "Такси и каршеринг"]
 		case .carSharing:
-			[""]
+			["Такси и каршеринг"]
 		case .autoServices:
 			["Автозапчасти", "Автосервис"]
 		case .pharmacies:
@@ -45,7 +45,7 @@ extension PredefinedCategory {
 		case .houseAndRenovation:
 			["Товары для дома"]
 		case .art:
-			[]
+			["Культура и искусство"]
 		case .books:
 			["Книжные магазины", "Книжные лавки", "Канцтовары", "Книги и канцтовары"]
 		case .zooGoods:
@@ -100,6 +100,8 @@ extension PredefinedCategory {
 			["Топливо", "Автозаправки", "АЗС", "Бензин"]
 		case .communalServices:
 			["ЖКУ"]
+		case .accessories:
+			[]
 		}
 	}
 }
