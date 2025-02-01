@@ -57,7 +57,7 @@ struct IncomeService: @unchecked Sendable {
 		let id: UUID? = card.id
 		var descriptor = FetchDescriptor<Income>(
 			predicate: #Predicate<Income> { $0.source?.id == id },
-			sortBy: [.init(\.date)]
+			sortBy: [.init(\.date, order: .reverse)]
 		)
 		descriptor.fetchLimit = 10
 		return (try? context.fetch(descriptor)) ?? []

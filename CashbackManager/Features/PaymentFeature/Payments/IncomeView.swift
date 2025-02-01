@@ -23,7 +23,7 @@ struct IncomeView: View {
 				Text(String(format: "%d \(income.source?.currencySymbol ?? "")", income.amount))
 			}
 			
-			Text(income.date, format: .dateTime)
+			Text(income.date, format: .dateTime.month(.wide).day().year())
 				.font(.callout)
 				.foregroundStyle(.secondary)
 		}
