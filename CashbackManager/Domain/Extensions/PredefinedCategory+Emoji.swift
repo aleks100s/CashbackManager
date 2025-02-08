@@ -93,7 +93,7 @@ extension PredefinedCategory {
 		case .digitalGoods:
 			"👾"
 		case .yandex:
-			"Я"
+			"🟠"
 		case .burgerKing:
 			"🍔"
 		case .gasStation:
@@ -102,6 +102,8 @@ extension PredefinedCategory {
 			"🚰"
 		case .accessories:
 			"💍"
+		case .sber:
+			"🟢"
 		}
 	}
 }

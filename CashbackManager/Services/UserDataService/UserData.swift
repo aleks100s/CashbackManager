@@ -61,6 +61,8 @@ extension UserData {
 		var synonyms: String?
 		var priority: Int
 		var isArchived: Bool
+		var info: String?
+		var isNative: Bool?
 	}
 	
 	struct Cashback: Codable {

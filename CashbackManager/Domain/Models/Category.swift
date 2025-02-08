@@ -17,6 +17,7 @@ final class Category: @unchecked Sendable {
 	var priority: Int
 	var isArchived: Bool = false
 	var info: String?
+	var isNative: Bool = false
 	
 	init(
 		id: UUID = UUID(),
@@ -25,7 +26,8 @@ final class Category: @unchecked Sendable {
 		synonyms: String? = nil,
 		priority: Int = 0,
 		isArchived: Bool = false,
-		info: String? = nil
+		info: String? = nil,
+		isNative: Bool
 	) {
 		self.id = id
 		self.name = name
@@ -34,5 +36,6 @@ final class Category: @unchecked Sendable {
 		self.priority = priority
 		self.isArchived = isArchived
 		self.info = info
+		self.isNative = isNative
 	}
 }

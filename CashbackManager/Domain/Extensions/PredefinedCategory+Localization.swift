@@ -102,6 +102,8 @@ extension PredefinedCategory {
 			"Коммунальные услуги"
 		case .accessories:
 			"Аксессуары"
+		case .sber:
+			"Сервисы Сбера"
 		}
 	}
 }

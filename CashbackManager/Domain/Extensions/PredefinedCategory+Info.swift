@@ -79,7 +79,7 @@ extension PredefinedCategory {
 		case .fastfood:
 			nil
 		case .yandex:
-			nil
+			"Сервисы Яндекса, кроме Yandex Go"
 		case .communicationAndTelecom:
 			"Телефония, денежные переводы, обработка данных, поиск информации, ремонт компьютеров"
 		case .photoAndVideo:
@@ -102,6 +102,8 @@ extension PredefinedCategory {
 			nil
 		case .accessories:
 			nil
+		case .sber:
+			"Покупки в сервисах «Самокат», «Купер», «Звук», «Okko»"
 		}
 	}
 }

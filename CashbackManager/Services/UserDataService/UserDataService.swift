@@ -95,7 +95,9 @@ final class UserDataService {
 					emoji: category.emoji,
 					synonyms: category.synonyms,
 					priority: category.priority,
-					isArchived: category.isArchived
+					isArchived: category.isArchived,
+					info: category.info,
+					isNative: category.isNative ?? false
 				)
 			}
 			for category in categories {

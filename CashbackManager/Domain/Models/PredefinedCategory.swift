@@ -53,4 +53,5 @@ enum PredefinedCategory: CaseIterable {
 	case gasStation
 	case communalServices
 	case accessories
+	case sber
 }

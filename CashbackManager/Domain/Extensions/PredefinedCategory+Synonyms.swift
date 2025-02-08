@@ -102,6 +102,8 @@ extension PredefinedCategory {
 			["ЖКУ"]
 		case .accessories:
 			[]
+		case .sber:
+			["Сбербанк", "Самокат", "Okko", "Звук", "Купер"]
 		}
 	}
 }

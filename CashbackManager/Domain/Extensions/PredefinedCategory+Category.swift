@@ -7,6 +7,6 @@
 
 extension PredefinedCategory {
 	var asCategory: Category {
-		Category(name: name, emoji: emoji, synonyms: synonyms.joined(separator: ","), info: info)
+		Category(name: name, emoji: emoji, synonyms: synonyms.joined(separator: ","), info: info, isNative: true)
 	}
 }
