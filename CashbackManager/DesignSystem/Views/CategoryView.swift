@@ -18,11 +18,10 @@ struct CategoryView: View {
 			Text(category.name)
 			Spacer()
 			if category.info != nil {
-				Button("", systemImage: "info.circle") {
-					isDescriptionAlertShown = true
-				}
-				.buttonStyle(.plain)
-				.contentShape(.rect)
+				Image(systemName: "info.circle")
+					.onTapGesture {
+						isDescriptionAlertShown = true
+					}
 			}
 		}
 		.contentShape(Rectangle())

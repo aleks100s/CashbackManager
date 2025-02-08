@@ -27,11 +27,10 @@ struct CashbackView: View {
 			Spacer()
 			
 			if cashback.category.info != nil {
-				Button("", systemImage: "info.circle") {
-					isDescriptionAlertShown = true
-				}
-				.buttonStyle(.plain)
-				.contentShape(.rect)
+				Image(systemName: "info.circle")
+					.onTapGesture {
+						isDescriptionAlertShown = true
+					}
 			}
 		}
 		.alert(cashback.category.info ?? "", isPresented: $isDescriptionAlertShown) {

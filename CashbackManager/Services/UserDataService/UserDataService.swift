@@ -27,7 +27,9 @@ final class UserDataService {
 				emoji: entity.emoji,
 				synonyms: entity.synonyms,
 				priority: entity.priority,
-				isArchived: entity.isArchived
+				isArchived: entity.isArchived,
+				info: entity.info,
+				isNative: entity.isNative
 			)
 		}
 		let places: [Place] = try fetchAll(from: context)
