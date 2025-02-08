@@ -27,8 +27,8 @@ struct CategoryService {
 	}
 	
 	@discardableResult
-	func createCategory(name: String, emoji: String? = nil) -> Category {
-		let category = Category(name: name, emoji: emoji ??  String(name.first ?? "?"))
+	func createCategory(name: String, emoji: String? = nil, info: String? = nil) -> Category {
+		let category = Category(name: name, emoji: emoji ??  String(name.first ?? "?"), info: info)
 		context.insert(category)
 		try? context.save()
 		return category

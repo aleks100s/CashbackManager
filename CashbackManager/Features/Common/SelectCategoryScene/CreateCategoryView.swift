@@ -13,7 +13,7 @@ struct CreateCategoryView: View {
 	
 	@State var text = ""
 	
-	let onSaveButtonTapped: (String, String) -> Void
+	let onSaveButtonTapped: (String, String?, String?) -> Void
 
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
@@ -22,6 +22,7 @@ struct CreateCategoryView: View {
 	@Environment(\.dismiss) private var dismiss
 	
 	@State private var emoji = ""
+	@State private var info = ""
 
 	var body: some View {
 		NavigationView {
@@ -39,11 +40,19 @@ struct CreateCategoryView: View {
 						.focused($isFocused)
 				}
 				
-				Section("Необязательно") {
+				Section {
 					TextField("Символ категории", text: $emoji)
 						.onChange(of: emoji) { emoji in
 							self.emoji = String(emoji.prefix(1))
 						}
+				} footer: {
+					Text("Необязательно")
+				}
+				
+				Section {
+					TextField("Описание", text: $info)
+				} footer: {
+					Text("Необязательно")
 				}
 			}
 			.onTapGesture {
@@ -55,7 +64,7 @@ struct CreateCategoryView: View {
 			}
 			.safeAreaInset(edge: .bottom) {
 				Button("Сохранить") {
-					onSaveButtonTapped(text, emoji)
+					onSaveButtonTapped(text, emoji.isEmpty ?  nil : emoji, info.isEmpty ? nil : info)
 				}
 				.disabled(text.isEmpty)
 				.padding()

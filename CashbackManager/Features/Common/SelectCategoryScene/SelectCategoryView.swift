@@ -104,8 +104,8 @@ struct SelectCategoryView: View {
 	}
 	
 	private var addCategorySheet: some View {
-		CreateCategoryView(addCategoryIntent: addCategoryIntent, text: searchText) { categoryName, emoji in
-			categoryService?.createCategory(name: categoryName, emoji: emoji)
+		CreateCategoryView(addCategoryIntent: addCategoryIntent, text: searchText) { categoryName, emoji, info in
+			categoryService?.createCategory(name: categoryName, emoji: emoji, info: info)
 			isAddCategorySheetPresented = false
 		}
 		.presentationBackground(Color.cmScreenBackground)
