@@ -16,13 +16,23 @@ final class Category: @unchecked Sendable {
 	var synonyms: String?
 	var priority: Int
 	var isArchived: Bool = false
+	var info: String?
 	
-	init(id: UUID = UUID(), name: String, emoji: String, synonyms: String? = nil, priority: Int = 0, isArchived: Bool = false) {
+	init(
+		id: UUID = UUID(),
+		name: String,
+		emoji: String,
+		synonyms: String? = nil,
+		priority: Int = 0,
+		isArchived: Bool = false,
+		info: String? = nil
+	) {
 		self.id = id
 		self.name = name
 		self.emoji = emoji
 		self.synonyms = synonyms
 		self.priority = priority
 		self.isArchived = isArchived
+		self.info = info
 	}
 }

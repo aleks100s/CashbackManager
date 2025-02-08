@@ -195,7 +195,7 @@ struct CardDetailView: View {
 							
 							TipView(HowToDeleteCashbackTip())
 						} header: {
-							Text("Кэшбэки")
+							Text("Кэшбэки на карте")
 						} footer: {
 							Text("Форма выплаты кэшбэка: \(card.currency)")
 						}

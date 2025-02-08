@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct CashbackView: View {
-	private let cashback: Cashback
+	let cashback: Cashback
 	
-	init(cashback: Cashback) {
-		self.cashback = cashback
-	}
+	@State private var isDescriptionAlertShown = false
 	
 	var body: some View {
 		HStack(alignment: .center, spacing: .zero) {
@@ -27,6 +25,19 @@ struct CashbackView: View {
 			}
 			
 			Spacer()
+			
+			if cashback.category.info != nil {
+				Button("", systemImage: "info.circle") {
+					isDescriptionAlertShown = true
+				}
+				.buttonStyle(.plain)
+				.contentShape(.rect)
+			}
+		}
+		.alert(cashback.category.info ?? "", isPresented: $isDescriptionAlertShown) {
+			Button("Ок") {
+				isDescriptionAlertShown = false
+			}
 		}
 	}
 }

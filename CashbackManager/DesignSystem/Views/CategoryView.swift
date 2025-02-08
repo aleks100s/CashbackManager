@@ -8,18 +8,28 @@
 import SwiftUI
 
 struct CategoryView: View {
-	private let category: Category
+	let category: Category
 	
-	init(category: Category) {
-		self.category = category
-	}
+	@State private var isDescriptionAlertShown = false
 	
 	var body: some View {
 		HStack(alignment: .center) {
 			CategoryMarkerView(category: category)
 			Text(category.name)
 			Spacer()
+			if category.info != nil {
+				Button("", systemImage: "info.circle") {
+					isDescriptionAlertShown = true
+				}
+				.buttonStyle(.plain)
+				.contentShape(.rect)
+			}
 		}
 		.contentShape(Rectangle())
+		.alert(category.info ?? "", isPresented: $isDescriptionAlertShown) {
+			Button("Ок") {
+				isDescriptionAlertShown = false
+			}
+		}
 	}
 }	

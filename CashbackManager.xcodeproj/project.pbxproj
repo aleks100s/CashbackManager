@@ -166,6 +166,7 @@
 		27A466D32D47EE36000B6B35 /* ColoredCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466862D47EA96000B6B35 /* ColoredCircle.swift */; };
 		27A466D62D47EEEC000B6B35 /* AdBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466D52D47EEEC000B6B35 /* AdBannerViewController.swift */; };
 		27A466DA2D47EF00000B6B35 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466D82D47EF00000B6B35 /* AdBannerView.swift */; };
+		27A466FC2D5725D9000B6B35 /* PredefinedCategory+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466FB2D5725D9000B6B35 /* PredefinedCategory+Info.swift */; };
 		27A5D7EC2C394EC500B93512 /* CashbackManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7EB2C394EC500B93512 /* CashbackManagerUITests.swift */; };
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
@@ -344,6 +345,7 @@
 		27A466AC2D47EAA9000B6B35 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		27A466D52D47EEEC000B6B35 /* AdBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerViewController.swift; sourceTree = "<group>"; };
 		27A466D82D47EF00000B6B35 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
+		27A466FB2D5725D9000B6B35 /* PredefinedCategory+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PredefinedCategory+Info.swift"; sourceTree = "<group>"; };
 		27A5D7CD2C394EC400B93512 /* CashbackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashbackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7DD2C394EC500B93512 /* CashbackManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A5D7E72C394EC500B93512 /* CashbackManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashbackManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -846,6 +848,7 @@
 				27A466542D47EA7A000B6B35 /* PredefinedCategory+Emoji.swift */,
 				27A466552D47EA7A000B6B35 /* PredefinedCategory+Localization.swift */,
 				27A466562D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift */,
+				27A466FB2D5725D9000B6B35 /* PredefinedCategory+Info.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1283,6 +1286,7 @@
 				27AB37252C73B3CE00A00939 /* CreatePlaceIntent.swift in Sources */,
 				27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */,
 				27A465D52D47E606000B6B35 /* IncomeView.swift in Sources */,
+				27A466FC2D5725D9000B6B35 /* PredefinedCategory+Info.swift in Sources */,
 				27A465D62D47E606000B6B35 /* PaymentsView.swift in Sources */,
 				27A465D72D47E606000B6B35 /* IncomeFeatureAssembly.swift in Sources */,
 				27A465D82D47E606000B6B35 /* AddIncomeView.swift in Sources */,

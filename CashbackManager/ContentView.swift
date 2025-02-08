@@ -161,6 +161,7 @@ struct ContentView: View {
 		for predefined in predefinedCategories {
 			if let category = categories.first(where: { $0.name == predefined.name }) {
 				category.synonyms = predefined.synonyms
+				category.info = predefined.info
 			} else {
 				container.mainContext.insert(predefined)
 			}
