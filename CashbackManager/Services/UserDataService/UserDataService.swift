@@ -119,10 +119,12 @@ final class UserDataService {
 				Card(
 					id: card.id,
 					name: card.name,
-					cashback: card.cashback.map { cashback in
-						Cashback(
+					cashback: card.cashback.compactMap { cashback in
+						guard let category = categories.first(where: { $0.id == cashback.category.id }) else { return nil }
+						
+						return Cashback(
 							id: cashback.id,
-							category: categories.first(where: { $0.id == cashback.category.id })!,
+							category: category,
 							percent: cashback.percent
 						)
 					},
@@ -142,7 +144,7 @@ final class UserDataService {
 					id: payment.id,
 					amount: payment.amount,
 					date: payment.date,
-					source: cards.first(where: { $0.id == payment.source?.id })!
+					source: cards.first(where: { $0.id == payment.source?.id })
 				)
 			}
 			for income in payments {
