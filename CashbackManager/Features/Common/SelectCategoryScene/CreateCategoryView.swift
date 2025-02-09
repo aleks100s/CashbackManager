@@ -9,9 +9,12 @@ import AppIntents
 import SwiftUI
 
 struct CreateCategoryView: View {
+	var isEdit: Bool = false
 	let addCategoryIntent: any AppIntent
 	
 	@State var text = ""
+	@State var emoji = ""
+	@State var info = ""
 	
 	let onSaveButtonTapped: (String, String?, String?) -> Void
 
@@ -21,13 +24,11 @@ struct CreateCategoryView: View {
 	@FocusState private var isFocused
 	@Environment(\.dismiss) private var dismiss
 	
-	@State private var emoji = ""
-	@State private var info = ""
 
 	var body: some View {
 		NavigationView {
 			List {
-				if areSiriTipsVisible {
+				if areSiriTipsVisible, !isEdit {
 					IntentTipView(
 						intent: addCategoryIntent,
 						text:  "Чтобы быстро добавить категорию"
@@ -76,7 +77,7 @@ struct CreateCategoryView: View {
 					}
 				}
 			}
-			.navigationTitle("Добавить категорию")
+			.navigationTitle(isEdit ? "Редактировать категорию" : "Добавить категорию")
 			.navigationBarTitleDisplayMode(.inline)
 		}
 	}

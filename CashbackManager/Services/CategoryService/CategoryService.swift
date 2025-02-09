@@ -28,10 +28,16 @@ struct CategoryService {
 	
 	@discardableResult
 	func createCategory(name: String, emoji: String? = nil, info: String? = nil) -> Category {
-		let category = Category(name: name, emoji: emoji ??  String(name.first ?? "?"), info: info, isNative: false)
+		let category = Category(name: name, emoji: emoji ?? String(name.first ?? "?"), info: info, isNative: false)
 		context.insert(category)
 		try? context.save()
 		return category
+	}
+	
+	func update(category: Category, name: String, emoji: String? = nil, info: String? = nil) {
+		category.name = name
+		category.emoji = emoji ?? String(name.first ?? "?")
+		category.info = info
 	}
 	
 	func archive(category: Category) {

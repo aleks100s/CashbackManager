@@ -16,6 +16,7 @@ struct SelectCategoryView: View {
 	
 	@State private var searchText = ""
 	@State private var isAddCategorySheetPresented = false
+	@State private var categoryToEdit: Category?
 	@Query(
 		filter: #Predicate<Category> { !$0.isArchived },
 		sort: [SortDescriptor<Category>(\.priority, order: .reverse),
@@ -73,6 +74,9 @@ struct SelectCategoryView: View {
 			.sheet(isPresented: $isAddCategorySheetPresented) {
 				addCategorySheet
 			}
+			.sheet(item: $categoryToEdit) {
+				editCategorySheet(category: $0)
+			}
 	}
 	
 	private var contentView: some View {
@@ -87,10 +91,26 @@ struct SelectCategoryView: View {
 			} else {
 				List {
 					ForEach(filteredCategories) { category in
-						if isSelectionMode {
-							categoryButtonView(category)
-						} else {
-							CategoryView(category: category)
+						Group {
+							if isSelectionMode {
+								categoryButtonView(category)
+							} else {
+								CategoryView(category: category)
+							}
+						}
+						.contextMenu {
+							if !category.isNative {
+								editCategoryButton(category: category)
+							}
+							
+							Button("Удалить категорию", role: .destructive) {
+								delete(category: category)
+							}
+						}
+						.swipeActions(edge: .leading, allowsFullSwipe: true) {
+							if !category.isNative {
+								editCategoryButton(category: category)
+							}
 						}
 					}
 					.onDelete { indexSet in
@@ -104,7 +124,10 @@ struct SelectCategoryView: View {
 	}
 	
 	private var addCategorySheet: some View {
-		CreateCategoryView(addCategoryIntent: addCategoryIntent, text: searchText) { categoryName, emoji, info in
+		CreateCategoryView(
+			addCategoryIntent: addCategoryIntent,
+			text: searchText
+		) { categoryName, emoji, info in
 			categoryService?.createCategory(name: categoryName, emoji: emoji, info: info)
 			isAddCategorySheetPresented = false
 		}
@@ -112,9 +135,29 @@ struct SelectCategoryView: View {
 	}
 	
 	private var addCategoryButton: some View {
-		Button("Добавить свою категорию") {
+		Button("Добавить категорию") {
 			isAddCategorySheetPresented = true
 		}
+	}
+	
+	private func editCategoryButton(category: Category) -> some View {
+		Button("Редактировать категорию") {
+			categoryToEdit = category
+		}
+	}
+	
+	private func editCategorySheet(category: Category) -> some View {
+		CreateCategoryView(
+			isEdit: true,
+			addCategoryIntent: addCategoryIntent,
+			text: category.name,
+			emoji: category.emoji,
+			info: category.info ?? ""
+		) { categoryName, emoji, info in
+			categoryService?.update(category: category, name: categoryName, emoji: emoji, info: info)
+			categoryToEdit = nil
+		}
+		.presentationBackground(Color.cmScreenBackground)
 	}
 	
 	private func categoryButtonView(_ category: Category) -> some View {
@@ -129,7 +172,11 @@ struct SelectCategoryView: View {
 		.buttonStyle(PlainButtonStyle())
 	}
 	
-	func deleteCategory(index: Int) {
+	private func deleteCategory(index: Int) {
 		categoryService?.archive(category: categories[index])
+	}
+	
+	private func delete(category: Category) {
+		categoryService?.archive(category: category)
 	}
 }
