@@ -26,6 +26,7 @@ struct SelectCategoryView: View {
 	private var categories: [Category]
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.categoryService) private var categoryService
+	@Environment(\.toastService) private var toastService
 	
 	private var filteredCategories: [Category] {
 		categories.filter { category in
@@ -130,6 +131,7 @@ struct SelectCategoryView: View {
 		) { categoryName, emoji, info in
 			categoryService?.createCategory(name: categoryName, emoji: emoji, info: info)
 			isAddCategorySheetPresented = false
+			toastService?.show(Toast(title: "Категория добавлена"))
 		}
 		.presentationBackground(Color.cmScreenBackground)
 	}
@@ -144,6 +146,7 @@ struct SelectCategoryView: View {
 		Button("Редактировать категорию") {
 			categoryToEdit = category
 		}
+		.tint(.green)
 	}
 	
 	private func editCategorySheet(category: Category) -> some View {
@@ -156,6 +159,7 @@ struct SelectCategoryView: View {
 		) { categoryName, emoji, info in
 			categoryService?.update(category: category, name: categoryName, emoji: emoji, info: info)
 			categoryToEdit = nil
+			toastService?.show(Toast(title: "Категория обновлена"))
 		}
 		.presentationBackground(Color.cmScreenBackground)
 	}

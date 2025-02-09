@@ -11,6 +11,7 @@ import SwiftUI
 
 struct AddCashbackView: View {
 	private let card: Card
+	private let cashback: Cashback?
 	private let addCategoryIntent: any AppIntent
 	private let addCashbackIntent: any AppIntent
 	
@@ -19,7 +20,7 @@ struct AddCashbackView: View {
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 	
-	@State private var percent = 0.05
+	@State private var percent: Double
 	@State private var selectedCategory: Category?
 	@State private var isCategorySelectorPresented = false
 	
@@ -27,16 +28,23 @@ struct AddCashbackView: View {
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.toastService) private var toastService
 	
-	init(card: Card, addCategoryIntent: any AppIntent, addCashbackIntent: any AppIntent) {
+	private var isEditMode: Bool {
+		cashback != nil
+	}
+	
+	init(card: Card, cashback: Cashback?, addCategoryIntent: any AppIntent, addCashbackIntent: any AppIntent) {
 		self.card = card
+		self.cashback = cashback
 		self.addCategoryIntent = addCategoryIntent
 		self.addCashbackIntent = addCashbackIntent
+		_percent = State(initialValue: cashback?.percent ?? 0.05)
+		_selectedCategory = State(initialValue: cashback?.category)
 	}
 	
 	var body: some View {
 		contentView
 			.background(Color.cmScreenBackground)
-			.navigationTitle("Добавить кэшбэк")
+			.navigationTitle(isEditMode ? "Редактировать кэшбэк" : "Добавить кэшбэк")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .topBarTrailing) {
@@ -55,7 +63,7 @@ struct AddCashbackView: View {
 	
 	private var contentView: some View {
 		List {
-			if areSiriTipsVisible {
+			if areSiriTipsVisible, !isEditMode {
 				IntentTipView(intent: addCashbackIntent, text: "Чтобы быстро добавить новый кэшбэк")
 			}
 			
@@ -101,9 +109,13 @@ struct AddCashbackView: View {
 	
 	private var saveButton: some View {
 		Button("Сохранить") {
-			createCashback()
+			if isEditMode {
+				editCashback()
+			} else {
+				createCashback()
+			}
+			toastService?.show(Toast(title: isEditMode ? "Кэшбэк обновлен" : "Кэшбэк добавлен"))
 			dismiss()
-			toastService?.show(Toast(title: "Кэшбэк добавлен"))
 		}
 		.frame(maxWidth: .infinity)
 		.padding()
@@ -122,6 +134,13 @@ struct AddCashbackView: View {
 			let cashback = Cashback(category: selectedCategory, percent: percent)
 			cardsService?.add(cashback: cashback, to: card)
 		}
+	}
+	
+	private func editCashback() {
+		if let selectedCategory {
+			cashback?.category = selectedCategory
+		}
+		cashback?.percent = percent
 	}
 }
 

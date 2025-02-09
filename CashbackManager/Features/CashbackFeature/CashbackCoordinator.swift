@@ -18,6 +18,8 @@ struct CashbackCoordinator: View {
 	
 	@State private var navigationStack: [CashbackNavigation] = []
 	@State private var cardToAddCashback: Card?
+	@State private var cashbackToEdit: Cashback?
+	@State private var cardToEditCashback: Card?
 	
 	@Environment(\.widgetURLParser) private var urlParser
 	
@@ -32,7 +34,13 @@ struct CashbackCoordinator: View {
 		}
 		.sheet(item: $cardToAddCashback) { card in
 			NavigationView {
-				AddCashbackView(card: card, addCategoryIntent: addCategoryIntent, addCashbackIntent: addCashbackIntent)
+				AddCashbackView(card: card, cashback: nil, addCategoryIntent: addCategoryIntent, addCashbackIntent: addCashbackIntent)
+			}
+			.presentationDetents([.medium, .large])
+		}
+		.sheet(item: $cardToEditCashback) { card in
+			NavigationView {
+				AddCashbackView(card: card, cashback: cashbackToEdit, addCategoryIntent: addCategoryIntent, addCashbackIntent: addCashbackIntent)
 			}
 			.presentationDetents([.medium, .large])
 		}
@@ -52,6 +60,9 @@ struct CashbackCoordinator: View {
 		case .cardDetail(let card):
 			CardDetailView(card: card, cardCashbackIntent: cardCashbackIntent) {
 				cardToAddCashback = card
+			} onEditCashbackTap: { cashback in
+				cashbackToEdit = cashback
+				cardToEditCashback = card
 			}
 		}
 	}

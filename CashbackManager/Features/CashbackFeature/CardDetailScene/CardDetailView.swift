@@ -17,6 +17,7 @@ struct CardDetailView: View {
 	private let card: Card
 	private let cardCashbackIntent: any AppIntent
 	private let onAddCashbackTap: () -> Void
+	private let onEditCashbackTap: (Cashback) -> Void
 	private let formatter = {
 		let formatter = DateFormatter()
 		formatter.dateStyle = .short
@@ -51,11 +52,13 @@ struct CardDetailView: View {
 	init(
 		card: Card,
 		cardCashbackIntent: any AppIntent,
-		onAddCashbackTap: @escaping () -> Void
+		onAddCashbackTap: @escaping () -> Void,
+		onEditCashbackTap: @escaping (Cashback) -> Void
 	) {
 		self.card = card
 		self.cardCashbackIntent = cardCashbackIntent
 		self.onAddCashbackTap = onAddCashbackTap
+		self.onEditCashbackTap = onEditCashbackTap
 		cardName = card.name
 		color = Color(hex: card.color ?? "")
 	}
@@ -184,7 +187,11 @@ struct CardDetailView: View {
 							ForEach(card.sortedCashback) { cashback in
 								CashbackView(cashback: cashback)
 									.contextMenu {
+										editCashbackButton(cashback: cashback)
 										deleteCashbackButton(cashback: cashback)
+									}
+									.swipeActions(edge: .leading, allowsFullSwipe: true) {
+										editCashbackButton(cashback: cashback)
 									}
 							}
 							.onDelete { indexSet in
@@ -254,11 +261,18 @@ struct CardDetailView: View {
 		}
 	}
 	
+	private func editCashbackButton(cashback: Cashback) -> some View {
+		Button("Редактировать кэшбэк") {
+			onEditCashbackTap(cashback)
+		}
+		.tint(.green)
+	}
+	
 	private func deleteCashbackButton(cashback: Cashback) -> some View {
 		Button(role: .destructive) {
 			delete(cashback: cashback)
 		} label: {
-			Text("Удалить")
+			Text("Удалить кэшбэк")
 		}
 	}
 	
