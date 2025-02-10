@@ -120,7 +120,7 @@ struct AddCashbackView: View {
 		.frame(maxWidth: .infinity)
 		.padding()
 		.background(.background)
-		.disabled(selectedCategory == nil || percent == 0 || card.has(category: selectedCategory))
+		.disabled(selectedCategory == nil || percent == 0 || (card.has(category: selectedCategory) && cashback?.category != selectedCategory))
 	}
 	
 	private var selectCategoryButton: some View {
