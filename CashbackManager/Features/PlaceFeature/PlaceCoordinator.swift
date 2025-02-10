@@ -19,8 +19,8 @@ struct PlaceCoordinator: View {
 		
 	var body: some View {
 		NavigationStack(path: $path) {
-			PlacesListView(checkPlaceIntent: checkPlaceIntent) { place in
-				path.append(.placeDetail(place))
+			PlacesListView(checkPlaceIntent: checkPlaceIntent) { place, isEditing in
+				path.append(.placeDetail(place, isEditing))
 			} onAddPlaceButtonTapped: {
 				isAddPlaceSheetPresented = true
 			}
@@ -29,7 +29,7 @@ struct PlaceCoordinator: View {
 		.sheet(isPresented: $isAddPlaceSheetPresented) {
 			NavigationView {
 				AddPlaceView(addPlaceIntent: addPlaceIntent, addCategoryIntent: addCategoryIntent) { place in
-					path.append(.placeDetail(place))
+					path.append(.placeDetail(place, false))
 				}
 			}
 			.presentationDetents([.medium, .large])
@@ -39,11 +39,12 @@ struct PlaceCoordinator: View {
 	@ViewBuilder
 	private func navigate(to destination: PlaceNavigation) -> some View {
 		switch destination {
-		case .placeDetail(let place):
+		case let .placeDetail(place, isEditing):
 			PlaceDetailView(
 				place: place,
 				checkPlaceCardIntent: checkPlaceCardIntent,
-				addCategoryIntent: addCategoryIntent
+				addCategoryIntent: addCategoryIntent,
+				isEditing: isEditing
 			)
 		}
 	}

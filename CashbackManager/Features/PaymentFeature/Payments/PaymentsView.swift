@@ -316,15 +316,23 @@ private struct TransactionsPeriodView: View {
 					IncomeView(income: income)
 						.contentShape(.rect)
 						.contextMenu {
-							Button("Изменить") {
+							Button("Редактировать выплату") {
 								edit(income)
 							}
-							Button("Удалить", role: .destructive) {
+							.tint(.green)
+							
+							Button("Удалить выплату", role: .destructive) {
 								delete(income)
 							}
 						}
 						.onTapGesture {
 							edit(income)
+						}
+						.swipeActions(edge: .leading, allowsFullSwipe: true) {
+							Button("Редактировать выплату") {
+								edit(income)
+							}
+							.tint(.green)
 						}
 				}
 				.onDelete { indexSet in

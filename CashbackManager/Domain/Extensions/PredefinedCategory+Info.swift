@@ -17,11 +17,11 @@ extension PredefinedCategory {
 		case .vipZone:
 			nil
 		case .carRent:
-			"Прокат автомобилей, домов на колесах, трейлеров и грузовиков:"
+			"Прокат автомобилей, домов на колесах, трейлеров и грузовиков"
 		case .railRoadTickets:
 			"Билеты на поезда дальнего следования"
 		case .tourAgencies:
-			"Туроператоры, круизы"
+			nil
 		case .cruises:
 			nil
 		case .hotels:
@@ -39,7 +39,7 @@ extension PredefinedCategory {
 		case .pharmacies:
 			nil
 		case .beautyAndSPA:
-			"Парикмахерские и салоны красоты, массаж и магазины косметики, спа"
+			"Парикмахерские и салоны красоты, массаж и магазины косметики, СПА"
 		case .cosmeticsAndParfume:
 			nil
 		case .houseAndRenovation:
@@ -47,7 +47,7 @@ extension PredefinedCategory {
 		case .art:
 			"Антикварные магазины, магазины художественных изделий и мастерства, картинные галереи; магазины марок и монет; религиозные товары"
 		case .books:
-			"Книжные магазины"
+			"Книжные магазины и канцтовары"
 		case .zooGoods:
 			"Зоомагазины и ветеринарные услуги"
 		case .cinema:
@@ -79,15 +79,15 @@ extension PredefinedCategory {
 		case .fastfood:
 			nil
 		case .yandex:
-			"Сервисы Яндекса, кроме Yandex Go"
+			nil
 		case .communicationAndTelecom:
 			"Телефония, денежные переводы, обработка данных, поиск информации, ремонт компьютеров"
 		case .photoAndVideo:
-			"фотостудии и фотолаборатории, копировальные услуги"
+			"Фотостудии и фотолаборатории, копировальные услуги"
 		case .souvenirs:
 			"Магазины подарков, сувениров и открыток"
 		case .flowers:
-			"Магазины цветов, товары для флористики:"
+			"Магазины цветов, товары для флористики"
 		case .sportGoods:
 			"Спортивная одежда, веломагазины и другие спорттовары"
 		case .clothesAndShoes:

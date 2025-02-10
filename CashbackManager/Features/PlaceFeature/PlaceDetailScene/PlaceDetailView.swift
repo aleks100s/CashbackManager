@@ -20,7 +20,7 @@ struct PlaceDetailView: View {
 	@AppStorage(Constants.StorageKey.isAdVisible)
 	private var isAdVisible: Bool = false
 	
-	@State private var isEditing = false
+	@State private var isEditing: Bool
 	@State private var cards: [PlaceCard] = []
 	@State private var placeName: String
 	@State private var selectedCategory: Category
@@ -35,13 +35,15 @@ struct PlaceDetailView: View {
 	init(
 		place: Place,
 		checkPlaceCardIntent: any AppIntent,
-		addCategoryIntent: any AppIntent
+		addCategoryIntent: any AppIntent,
+		isEditing: Bool = false
 	) {
 		self.place = place
 		self.checkPlaceCardIntent = checkPlaceCardIntent
 		self.addCategoryIntent = addCategoryIntent
 		placeName = place.name
 		selectedCategory = place.category
+		_isEditing = State(initialValue: isEditing)
 	}
 	
 	var body: some View {

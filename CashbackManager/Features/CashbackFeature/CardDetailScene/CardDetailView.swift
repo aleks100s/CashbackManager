@@ -186,6 +186,9 @@ struct CardDetailView: View {
 						Section {
 							ForEach(card.sortedCashback) { cashback in
 								CashbackView(cashback: cashback)
+									.onTapGesture {
+										onEditCashbackTap(cashback)
+									}
 									.contextMenu {
 										editCashbackButton(cashback: cashback)
 										deleteCashbackButton(cashback: cashback)

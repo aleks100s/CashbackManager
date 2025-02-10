@@ -7,5 +7,5 @@
 
 
 enum PlaceNavigation: Hashable {
-	case placeDetail(Place)
+	case placeDetail(Place, Bool)
 }

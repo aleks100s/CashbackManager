@@ -11,7 +11,7 @@ import SwiftUI
 
 struct PlacesListView: View {
 	private let checkPlaceIntent: any AppIntent
-	private let onPlaceSelected: (Place) -> Void
+	private let onPlaceSelected: (Place, Bool) -> Void
 	private let onAddPlaceButtonTapped: () -> Void
 	
 	@AppStorage(Constants.StorageKey.siriTips)
@@ -35,7 +35,7 @@ struct PlacesListView: View {
 	
 	init(
 		checkPlaceIntent: any AppIntent,
-		onPlaceSelected: @escaping (Place) -> Void,
+		onPlaceSelected: @escaping (Place, Bool) -> Void,
 		onAddPlaceButtonTapped: @escaping () -> Void
 	) {
 		self.checkPlaceIntent = checkPlaceIntent
@@ -72,15 +72,19 @@ struct PlacesListView: View {
 				
 				ForEach(filteredPlaces) { place in
 					Button {
-						onPlaceSelected(place)
+						onPlaceSelected(place, false)
 					} label: {
 						PlaceView(place: place)
 							.contentShape(.rect)
 							.contextMenu {
+								editPlaceButton(place)
 								deletePlaceButton(place)
 							}
 					}
 					.buttonStyle(.plain)
+					.swipeActions(edge: .leading, allowsFullSwipe: true) {
+						editPlaceButton(place)
+					}
 				}
 				.onDelete { indexSet in
 					for index in indexSet {
@@ -97,6 +101,13 @@ struct PlacesListView: View {
 		Button("Добавить место") {
 			onAddPlaceButtonTapped()
 		}
+	}
+	
+	private func editPlaceButton(_ place: Place) -> some View {
+		Button("Редактировать место") {
+			onPlaceSelected(place, true)
+		}
+		.tint(.green)
 	}
 	
 	private func deletePlaceButton(_ place: Place) -> some View {
