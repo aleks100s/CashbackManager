@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardCashbackListView: View {
+	private let card: Card
 	private let onEditCashbackTap: (Cashback) -> Void
 	private let deleteCashback: (Cashback) -> Void
 
@@ -17,10 +18,12 @@ struct CardCashbackListView: View {
 	private var cardsService
 	
 	init(
+		card: Card,
 		cashback: [Cashback],
 		onEditCashbackTap: @escaping (Cashback) -> Void,
 		deleteCashback: @escaping (Cashback) -> Void
 	) {
+		self.card = card
 		_cashback = State(initialValue: cashback.sorted(by: { $0.order < $1.order }))
 		self.onEditCashbackTap = onEditCashbackTap
 		self.deleteCashback = deleteCashback
@@ -52,6 +55,7 @@ struct CardCashbackListView: View {
 			cashback.indices.forEach { index in
 				cashback[index].order = index
 			}
+			cardsService?.update(card: card)
 		}
 	}
 	

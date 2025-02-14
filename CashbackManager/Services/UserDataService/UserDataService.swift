@@ -43,27 +43,23 @@ final class UserDataService {
 		}
 		let cards: [Card] = try fetchAll(from: context)
 		let cardsDTO: [UserData.Card] = cards.map { card in
-			var orderedCashback = [UserData.Cashback]()
-			card.cashback.indices.forEach { index in
-				let cashback = card.cashback[index]
-				orderedCashback.append(
+			UserData.Card(
+				id: card.id,
+				name: card.name,
+				cashback: card.cashback.map { cashback in
 					UserData.Cashback(
 						id: cashback.id,
 						category: categoriesDTO.first(where: { $0.id == cashback.category.id })!,
 						percent: cashback.percent,
-						order: index
+						order: cashback.order
 					)
-				)
-			}
-			return UserData.Card(
-				id: card.id,
-				name: card.name,
-				cashback: orderedCashback,
+				},
 				color: card.color,
 				isArchived: card.isArchived,
 				isFavorite: card.isFavorite,
 				currency: card.currency,
-				currencySymbol: card.currencySymbol)
+				currencySymbol: card.currencySymbol
+			)
 		}
 		let payments: [Income] = try fetchAll(from: context)
 		let paymentsDTO: [UserData.Income] = payments.map { payment in

@@ -185,6 +185,7 @@ struct CardDetailView: View {
 						
 						Section {
 							CardCashbackListView(
+								card: card,
 								cashback: card.cashback,
 								onEditCashbackTap: onEditCashbackTap
 							) { cashback in
