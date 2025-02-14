@@ -13,6 +13,7 @@ final class Cashback {
 	var id: UUID
 	var category: Category
 	var percent: Double
+	var order: Int = 0
 	
 	var description: String {
 		if (percent * 1000).truncatingRemainder(dividingBy: 10) == 0 {
@@ -22,9 +23,10 @@ final class Cashback {
 		}
 	}
 	
-	init(id: UUID = UUID(), category: Category, percent: Double) {
+	init(id: UUID = UUID(), category: Category, percent: Double, order: Int) {
 		self.id = id
 		self.category = category
 		self.percent = percent
+		self.order = order
 	}
 }

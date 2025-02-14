@@ -184,28 +184,11 @@ struct CardDetailView: View {
 						}
 						
 						Section {
-							ForEach(card.cashback) { cashback in
-								HStack {
-									Image(systemName: "line.3.horizontal") // Иконка перетаскивания
-										.foregroundColor(.gray)
-									
-									CashbackView(cashback: cashback)
-										.contentShape(.rect)
-										.onTapGesture {
-											onEditCashbackTap(cashback)
-										}
-								}
-								.swipeActions(edge: .leading, allowsFullSwipe: true) {
-									editCashbackButton(cashback: cashback)
-								}
-							}
-							.onDelete { indexSet in
-								for index in indexSet {
-									deleteCashback(index: index)
-								}
-							}
-							.onMove { source, destination in
-								card.cashback.move(fromOffsets: source, toOffset: destination)
+							CardCashbackListView(
+								cashback: card.cashback,
+								onEditCashbackTap: onEditCashbackTap
+							) { cashback in
+								delete(cashback: cashback)
 							}
 							
 							TipView(HowToDeleteCashbackTip())
@@ -269,23 +252,12 @@ struct CardDetailView: View {
 		}
 	}
 	
-	private func editCashbackButton(cashback: Cashback) -> some View {
-		Button("Редактировать кэшбэк") {
-			onEditCashbackTap(cashback)
-		}
-		.tint(.green)
-	}
-	
 	private func deleteCashbackButton(cashback: Cashback) -> some View {
 		Button(role: .destructive) {
 			delete(cashback: cashback)
 		} label: {
 			Text("Удалить кэшбэк")
 		}
-	}
-	
-	private func deleteCashback(index: Int) {
-		delete(cashback: card.cashback[index])
 	}
 	
 	private func delete(cashback: Cashback) {
@@ -350,7 +322,7 @@ private extension CardDetailView {
 				continue
 			}
 			
-			let cashback = Cashback(category: category, percent: item.1)
+			let cashback = Cashback(category: category, percent: item.1, order: card.cashback.count)
 			cardsService?.add(cashback: cashback, to: card)
 		}
 		toastService?.show(Toast(title: "Кэшбэки считаны!"))

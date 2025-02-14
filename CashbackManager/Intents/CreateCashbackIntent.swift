@@ -58,7 +58,7 @@ struct CreateCashbackIntent: AppIntent {
 				category = categoryEntity.category
 			}
 			
-			let cashback = Cashback(category: category, percent: percent / 100)
+			let cashback = Cashback(category: category, percent: percent / 100, order: card.cashback.count)
 			guard !card.has(category: category) else {
 				return "Нельзя добавить несколько кэшбеков с одинаковой категорией \"\(category.name)\""
 			}

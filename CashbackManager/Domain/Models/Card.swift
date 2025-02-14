@@ -31,8 +31,12 @@ final class Card: @unchecked Sendable {
 		cashback.isEmpty
 	}
 	
+	private var orderedCashback: [Cashback] {
+		cashback.sorted(by: { $0.order < $1.order })
+	}
+	
 	private var categoriesList: String {
-		cashback.map(\.description).joined(separator: ", ")
+		orderedCashback.map(\.description).joined(separator: ", ")
 	}
 
 	init(id: UUID = UUID(), name: String, cashback: [Cashback] = [], color: String?, isArchived: Bool = false, isFavorite: Bool = false, currency: String = "Рубли", currencySymbol: String = "₽") {
@@ -53,9 +57,9 @@ final class Card: @unchecked Sendable {
 	}
 	
 	func filteredCashback(for query: String) -> [Cashback] {
-		guard !query.isEmpty else { return cashback }
+		guard !query.isEmpty else { return orderedCashback }
 		
-		return cashback.filter { $0.category.name.localizedStandardContains(query) || $0.category.synonyms?.localizedStandardContains(query) ?? false }
+		return orderedCashback.filter { $0.category.name.localizedStandardContains(query) || $0.category.synonyms?.localizedStandardContains(query) ?? false }
 	}
 	
 	func cashbackDescription(for query: String) -> String {

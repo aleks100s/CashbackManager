@@ -69,6 +69,7 @@ extension UserData {
 		var id: UUID
 		var category: Category
 		var percent: Double
+		var order: Int
 	}
 	
 	struct Card: Codable {

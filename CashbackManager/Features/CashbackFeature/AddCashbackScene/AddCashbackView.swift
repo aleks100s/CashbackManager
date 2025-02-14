@@ -132,7 +132,7 @@ struct AddCashbackView: View {
 	
 	private func createCashback() {
 		if let selectedCategory {
-			let cashback = Cashback(category: selectedCategory, percent: percent)
+			let cashback = Cashback(category: selectedCategory, percent: percent, order: card.cashback.count)
 			cardsService?.add(cashback: cashback, to: card)
 		}
 	}

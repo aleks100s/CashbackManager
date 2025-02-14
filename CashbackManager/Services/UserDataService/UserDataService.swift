@@ -43,16 +43,22 @@ final class UserDataService {
 		}
 		let cards: [Card] = try fetchAll(from: context)
 		let cardsDTO: [UserData.Card] = cards.map { card in
-			UserData.Card(
-				id: card.id,
-				name: card.name,
-				cashback: card.cashback.map { cashback in
+			var orderedCashback = [UserData.Cashback]()
+			card.cashback.indices.forEach { index in
+				let cashback = card.cashback[index]
+				orderedCashback.append(
 					UserData.Cashback(
 						id: cashback.id,
 						category: categoriesDTO.first(where: { $0.id == cashback.category.id })!,
-						percent: cashback.percent
+						percent: cashback.percent,
+						order: index
 					)
-				},
+				)
+			}
+			return UserData.Card(
+				id: card.id,
+				name: card.name,
+				cashback: orderedCashback,
 				color: card.color,
 				isArchived: card.isArchived,
 				isFavorite: card.isFavorite,
@@ -127,9 +133,10 @@ final class UserDataService {
 						return Cashback(
 							id: cashback.id,
 							category: category,
-							percent: cashback.percent
+							percent: cashback.percent,
+							order: cashback.order
 						)
-					},
+					}.sorted(by: { $0.order < $1.order }),
 					color: card.color,
 					isArchived: card.isArchived,
 					isFavorite: card.isFavorite,
