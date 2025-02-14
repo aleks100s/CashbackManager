@@ -1,5 +1,5 @@
 //
-//  CommonInputView.swift
+//  AddCardView.swift
 //  
 //
 //  Created by Alexander on 21.07.2024.
@@ -8,17 +8,18 @@
 import AppIntents
 import SwiftUI
 
-struct CommonInputView: View {
+struct AddCardView: View {
 	private let placeholder: LocalizedStringKey
 	private let keyboardType: UIKeyboardType
 	private let intent: (any AppIntent)?
 	private let hint: String?
-	private let onSaveButtonTapped: (String) -> Void
+	private let onSaveButtonTapped: (String, Color) -> Void
 	
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 
 	@State private var text: String = ""
+	@State private var color: Color = .white
 	@FocusState private var isFocused
 	@Environment(\.dismiss) private var dismiss
 	
@@ -28,7 +29,7 @@ struct CommonInputView: View {
 		keyboardType: UIKeyboardType = .default,
 		intent: (any AppIntent)? = nil,
 		hint: String? = nil,
-		onSaveButtonTapped: @escaping (String) -> Void
+		onSaveButtonTapped: @escaping (String, Color) -> Void
 	) {
 		self.text = text
 		self.placeholder = placeholder
@@ -49,6 +50,10 @@ struct CommonInputView: View {
 					.keyboardType(keyboardType)
 					.focused($isFocused)
 			}
+			
+			Section {
+				ColorPicker("Цвет карты", selection: $color)
+			}
 		}
 		.onTapGesture {
 			isFocused = false
@@ -59,7 +64,7 @@ struct CommonInputView: View {
 		}
 		.safeAreaInset(edge: .bottom) {
 			Button("Сохранить") {
-				onSaveButtonTapped(text)
+				onSaveButtonTapped(text, color)
 			}
 			.disabled(text.isEmpty)
 			.padding()

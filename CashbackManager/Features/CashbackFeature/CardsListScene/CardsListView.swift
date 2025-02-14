@@ -104,8 +104,8 @@ struct CardsListView: View {
 	
 	private var addCardSheet: some View {
 		NavigationView {
-			CommonInputView("Название карты", intent: addCardIntent, hint: "В следующий раз, чтобы добавить карту") { cardName in
-				create(cardName: cardName)
+			AddCardView("Название карты", intent: addCardIntent, hint: "В следующий раз, чтобы добавить карту") { cardName, color in
+				create(cardName: cardName, color: color)
 			}
 			.navigationTitle("Добавить новую карту")
 			.navigationBarTitleDisplayMode(.inline)
@@ -138,9 +138,10 @@ struct CardsListView: View {
 		.buttonStyle(.plain)
 	}
 		
-	private func create(cardName: String) {
+	private func create(cardName: String, color: Color) {
 		guard let cardsService else { return }
-		let card = cardsService.createCard(name: cardName)
+		
+		let card = cardsService.createCard(name: cardName, color: color.toHex())
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)

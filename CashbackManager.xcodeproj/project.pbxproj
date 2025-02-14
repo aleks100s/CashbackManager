@@ -74,7 +74,7 @@
 		27A4660B2D47E90E000B6B35 /* CashbackNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465FE2D47E745000B6B35 /* CashbackNavigation.swift */; };
 		27A466122D47E99F000B6B35 /* CreateCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4660F2D47E99F000B6B35 /* CreateCategoryView.swift */; };
 		27A466132D47E99F000B6B35 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466102D47E99F000B6B35 /* SelectCategoryView.swift */; };
-		27A466142D47E99F000B6B35 /* CommonInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4660D2D47E99F000B6B35 /* CommonInputView.swift */; };
+		27A466142D47E99F000B6B35 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4660D2D47E99F000B6B35 /* AddCardView.swift */; };
 		27A4663D2D47EA23000B6B35 /* Environment+IncomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4661F2D47EA23000B6B35 /* Environment+IncomeService.swift */; };
 		27A4663E2D47EA23000B6B35 /* ToastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466352D47EA23000B6B35 /* ToastService.swift */; };
 		27A4663F2D47EA23000B6B35 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4662D2D47EA23000B6B35 /* SearchService.swift */; };
@@ -282,7 +282,7 @@
 		27A465FD2D47E745000B6B35 /* Environment+WidgetURLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+WidgetURLParser.swift"; sourceTree = "<group>"; };
 		27A465FE2D47E745000B6B35 /* CashbackNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackNavigation.swift; sourceTree = "<group>"; };
 		27A465FF2D47E745000B6B35 /* WidgetURLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetURLParser.swift; sourceTree = "<group>"; };
-		27A4660D2D47E99F000B6B35 /* CommonInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonInputView.swift; sourceTree = "<group>"; };
+		27A4660D2D47E99F000B6B35 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		27A4660F2D47E99F000B6B35 /* CreateCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryView.swift; sourceTree = "<group>"; };
 		27A466102D47E99F000B6B35 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		27A466172D47EA23000B6B35 /* Environment+CardsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+CardsService.swift"; sourceTree = "<group>"; };
@@ -608,6 +608,7 @@
 		27A465F92D47E745000B6B35 /* CardsListScene */ = {
 			isa = PBXGroup;
 			children = (
+				27A4660E2D47E99F000B6B35 /* AddCardSheet */,
 				27A465F72D47E745000B6B35 /* CardItemView.swift */,
 				27A465F82D47E745000B6B35 /* CardsListView.swift */,
 			);
@@ -624,18 +625,17 @@
 		27A4660C2D47E999000B6B35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				27A4660E2D47E99F000B6B35 /* CommonInputSheet */,
 				27A466112D47E99F000B6B35 /* SelectCategoryScene */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		27A4660E2D47E99F000B6B35 /* CommonInputSheet */ = {
+		27A4660E2D47E99F000B6B35 /* AddCardSheet */ = {
 			isa = PBXGroup;
 			children = (
-				27A4660D2D47E99F000B6B35 /* CommonInputView.swift */,
+				27A4660D2D47E99F000B6B35 /* AddCardView.swift */,
 			);
-			path = CommonInputSheet;
+			path = AddCardSheet;
 			sourceTree = "<group>";
 		};
 		27A466112D47E99F000B6B35 /* SelectCategoryScene */ = {
@@ -1281,7 +1281,7 @@
 				27A466D62D47EEEC000B6B35 /* AdBannerViewController.swift in Sources */,
 				27A466122D47E99F000B6B35 /* CreateCategoryView.swift in Sources */,
 				27A466132D47E99F000B6B35 /* SelectCategoryView.swift in Sources */,
-				27A466142D47E99F000B6B35 /* CommonInputView.swift in Sources */,
+				27A466142D47E99F000B6B35 /* AddCardView.swift in Sources */,
 				2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */,
 				27AB37252C73B3CE00A00939 /* CreatePlaceIntent.swift in Sources */,
 				27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */,
