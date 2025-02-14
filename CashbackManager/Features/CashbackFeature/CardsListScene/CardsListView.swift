@@ -30,8 +30,8 @@ struct CardsListView: View {
 	
 	private var filteredCards: [Card] {
 		cards.filter {
-			searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText) || $0.cashbackDescription.localizedStandardContains(searchText) ||
-				$0.cashback.compactMap(\.category.synonyms).contains { $0.localizedStandardContains(searchText) }
+			searchText.isEmpty ? true : $0.cashbackDescription.localizedStandardContains(searchText)
+			|| $0.cashback.compactMap(\.category.synonyms).contains { $0.localizedStandardContains(searchText) }
 		}
 	}
 	

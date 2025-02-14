@@ -8,6 +8,7 @@
 import AppIntents
 import SwiftData
 import SwiftUI
+import WidgetKit
 
 struct AddCashbackView: View {
 	private let card: Card
@@ -141,6 +142,8 @@ struct AddCashbackView: View {
 			cashback?.category = selectedCategory
 		}
 		cashback?.percent = percent
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.favouriteCardsWidgetKind)
 	}
 }
 
