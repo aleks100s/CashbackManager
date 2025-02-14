@@ -21,7 +21,7 @@ struct CardItemView: View {
 			} else {
 				VStack(alignment: .leading) {
 					HStack {
-						CategoriesStackView(cashback: card.sortedCashback(for: searchQuery))
+						CategoriesStackView(cashback: card.filteredCashback(for: searchQuery))
 						
 						Spacer()
 						
