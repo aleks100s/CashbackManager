@@ -15,7 +15,7 @@ struct CardWidget: Widget {
 				.containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Мои кэшбэки")
-        .description("Показывает кэшбэк на всех картах.")
+        .description("Показывает кэшбэк на всех картах")
 		.supportedFamilies([.systemMedium])
     }
 }

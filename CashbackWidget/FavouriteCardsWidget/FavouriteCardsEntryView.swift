@@ -29,7 +29,8 @@ struct FavouriteCardsEntryView: View {
 				}
 			}
 			if entry.card1 == nil, entry.card2 == nil, entry.card3 == nil {
-				Text("Выберите карты в настройках виджета")
+				Text("Зажмите виджет, нажмите \"Изменить виджет\" и выберите три любимые карты")
+					.multilineTextAlignment(.center)
 			}
 		}
 		.viewClass(.favouriteWidget)

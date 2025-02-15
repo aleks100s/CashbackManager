@@ -29,7 +29,7 @@ struct FavouriteCardsProvider: AppIntentTimelineProvider {
 		
 		let timeline = Timeline(
 			entries: [entry],
-			policy: .never
+			policy: .after(Date().addingTimeInterval(60 * 60 * 24))
 		)
 		
 		return timeline

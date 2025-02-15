@@ -31,6 +31,8 @@ struct FavouriteCardsConfigurationIntent: WidgetConfigurationIntent {
 
 extension Card: AppEntity {
 	struct CardQuery: EntityQuery {
+		static var counter = 0
+		
 		init() {}
 		
 		func entities(for identifiers: [Card.ID]) async throws -> [Card] {
@@ -49,7 +51,9 @@ extension Card: AppEntity {
 		}
 		
 		func defaultResult() async -> Card? {
-			try? await suggestedEntities().first
+			let card = try? await suggestedEntities().dropFirst(Self.counter % 3).first
+			Self.counter += 1
+			return card
 		}
 	}
 	
