@@ -51,7 +51,8 @@ extension Card: AppEntity {
 		}
 		
 		func defaultResult() async -> Card? {
-			let card = try? await suggestedEntities().dropFirst(Self.counter % 3).first
+			let cards = try? await suggestedEntities()
+			let card = cards?.dropFirst(Self.counter % 3).first ?? cards?.first
 			Self.counter += 1
 			return card
 		}

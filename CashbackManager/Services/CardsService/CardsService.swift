@@ -57,6 +57,8 @@ struct CardsService: @unchecked Sendable {
 		}
 		try? context.save()
 		searchService.deindex(card: card)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.cardWidgetKind)
+		WidgetCenter.shared.reloadTimelines(ofKind: Constants.favouriteCardsWidgetKind)
 	}
 	
 	func unarchive(cards: [Card]) {
