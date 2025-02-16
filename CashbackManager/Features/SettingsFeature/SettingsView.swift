@@ -83,8 +83,14 @@ struct SettingsView: View {
 				Text("Приложение напомнит вам выбрать и сохранить кэшбэк каждый месяц 1 числа.\nПроверьте, что вы разрешили уведомления в настройках системы.")
 			}
 			
-			Button("Показать обучение") {
-				isOnboardingPresented = true
+			Section {
+				Button("Показать обучение") {
+					isOnboardingPresented = true
+				}
+			} header: {
+				Text("Обучение")
+			} footer: {
+				Text("Здесь можно посмотреть информацию об основных функциях приложения")
 			}
 			
 			Section {
