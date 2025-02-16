@@ -31,8 +31,8 @@ final class Card: @unchecked Sendable {
 		cashback.isEmpty
 	}
 	
-	private var orderedCashback: [Cashback] {
-		cashback.sorted(by: { $0.order < $1.order })
+	var orderedCashback: [Cashback] {
+		cashback.filter { $0.modelContext != nil }.sorted(by: { $0.order < $1.order })
 	}
 	
 	private var categoriesList: String {

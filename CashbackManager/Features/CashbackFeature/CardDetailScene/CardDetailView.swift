@@ -184,12 +184,34 @@ struct CardDetailView: View {
 						}
 						
 						Section {
-							CardCashbackListView(
-								card: card,
-								cashback: card.cashback,
-								onEditCashbackTap: onEditCashbackTap
-							) { cashback in
-								delete(cashback: cashback)
+							ForEach(card.orderedCashback) { cashback in
+								HStack {
+									Image(systemName: "line.3.horizontal") // Иконка перетаскивания
+										.foregroundColor(.gray)
+									
+									CashbackView(cashback: cashback)
+										.contentShape(.rect)
+										.onTapGesture {
+											onEditCashbackTap(cashback)
+										}
+								}
+								.swipeActions(edge: .leading, allowsFullSwipe: true) {
+									editCashbackButton(cashback: cashback)
+								}
+							}
+							.onDelete { indexSet in
+								for index in indexSet {
+									delete(cashback: card.orderedCashback[index])
+								}
+							}
+							.onMove { source, destination in
+								var cashback = card.orderedCashback
+								cashback.move(fromOffsets: source, toOffset: destination)
+								cashback.indices.forEach { index in
+									cashback[index].order = index
+								}
+								card.cashback = cashback
+								cardsService?.update(card: card)
 							}
 							
 							TipView(HowToDeleteCashbackTip())
@@ -223,6 +245,13 @@ struct CardDetailView: View {
 				AdBannerView(bannerId: bannerId)
 			}
 		}
+	}
+	
+	private func editCashbackButton(cashback: Cashback) -> some View {
+		Button("Редактировать кэшбэк") {
+			onEditCashbackTap(cashback)
+		}
+		.tint(.green)
 	}
 	
 	private var addCashbackButton: some View {
