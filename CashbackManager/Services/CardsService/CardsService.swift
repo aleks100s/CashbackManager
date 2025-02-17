@@ -81,6 +81,9 @@ struct CardsService: @unchecked Sendable {
 	func delete(cashback: Cashback, from card: Card) {
 		searchService.deindex(cashback: cashback)
 		card.cashback.removeAll { $0.id == cashback.id }
+		card.orderedCashback.indices.forEach { index in
+			card.orderedCashback[index].order = index
+		}
 		context.delete(cashback)
 		try? context.save()
 		searchService.index(card: card)
