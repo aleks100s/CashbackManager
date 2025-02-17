@@ -19,6 +19,7 @@ struct CardsListView: View {
 	
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
+	@State private var selectedCategory: Category?
 	
 	@Query(
 		filter: #Predicate<Card> { !$0.isArchived },
@@ -26,12 +27,33 @@ struct CardsListView: View {
 			SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
 	) private var cards: [Card]
+	
+	@Query(
+		filter: #Predicate<Category> { $0.priority > 0 },
+		sort: [SortDescriptor<Category>(\.priority, order: .reverse)]
+	)
+	private var categories: [Category]
+	
+	private var popularCategories: [Category] {
+		Array(categories.prefix(5))
+	}
+	
 	@Environment(\.cardsService) private var cardsService
 	
 	private var filteredCards: [Card] {
-		cards.filter {
-			searchText.isEmpty ? true : $0.cashbackDescription.localizedStandardContains(searchText)
-			|| $0.cashback.compactMap(\.category.synonyms).contains { $0.localizedStandardContains(searchText) }
+		cards.filter { card in
+			if searchText.isEmpty {
+				if let selectedCategory  {
+					card.cashbackDescription.localizedStandardContains(selectedCategory.name)
+				} else {
+					true
+				}
+			} else {
+				card.cashbackDescription.localizedStandardContains(searchText)
+				|| card.cashback.compactMap(\.category.synonyms).contains {
+						$0.localizedStandardContains(searchText)
+					}
+			}
 		}
 	}
 	
@@ -63,42 +85,76 @@ struct CardsListView: View {
 			.sheet(isPresented: $isAddCardSheetPresented) {
 				addCardSheet
 			}
+			.onChange(of: searchText) {
+				if !searchText.isEmpty {
+					selectedCategory = nil
+				}
+			}
+			.onChange(of: selectedCategory) {
+				if selectedCategory != nil {
+					searchText = ""
+				}
+			}
 	}
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if filteredCards.isEmpty {
-			if searchText.isEmpty {
-				ContentUnavailableView("Нет сохраненных карт", systemImage: "creditcard")
-			} else {
-				ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")
-			}
-		} else {
-			List {
-				if areSiriTipsVisible, !searchText.isEmpty {
-					IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
+		VStack {
+			if !cards.isEmpty {
+				ScrollView(.horizontal) {
+					LazyHStack {
+						ForEach(popularCategories) { category in
+							FilterItemView(
+								category: category,
+								isSelected: selectedCategory == category
+							) {
+								if selectedCategory == category {
+									selectedCategory = nil
+								} else {
+									selectedCategory = category
+								}
+							}
+						}
+					}
+					.padding(.horizontal, 16)
 				}
-				
-				ForEach(filteredCards) { card in
-					Section {
-						cardView(card)
-					} header: {
-						HStack {
-							Image(systemName: Constants.SFSymbols.cashback)
-								.foregroundStyle(Color(hex: card.color ?? ""))
+				.scrollIndicators(.hidden)
+				.fixedSize(horizontal: false, vertical: true)
+			}
+			
+			if filteredCards.isEmpty {
+				if searchText.isEmpty {
+					ContentUnavailableView("Нет сохраненных карт", systemImage: "creditcard")
+				} else {
+					ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")
+				}
+			} else {
+				List {
+					if areSiriTipsVisible, !searchText.isEmpty {
+						IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
+					}
+					
+					ForEach(filteredCards) { card in
+						Section {
+							cardView(card)
+						} header: {
+							HStack {
+								Image(systemName: Constants.SFSymbols.cashback)
+									.foregroundStyle(Color(hex: card.color ?? ""))
 
-							Text(card.name)
-							
-							Spacer()
-							
-							Text(card.currency)
+								Text(card.name)
+								
+								Spacer()
+								
+								Text(card.currency)
+							}
 						}
 					}
 				}
+				.listSectionSpacing(8)
+				.scrollDismissesKeyboard(.interactively)
+				.scrollIndicators(.hidden)
 			}
-			.listSectionSpacing(8)
-			.scrollDismissesKeyboard(.interactively)
-			.scrollIndicators(.hidden)
 		}
 	}
 	
