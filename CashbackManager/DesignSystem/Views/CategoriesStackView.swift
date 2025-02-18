@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesStackView: View {
 	let cashback: [Cashback]
-	var color: Color = .red
+	let color: Color
 	
 	@Environment(\.viewClass)
 	private var viewClass

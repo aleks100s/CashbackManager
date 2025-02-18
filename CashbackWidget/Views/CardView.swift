@@ -55,7 +55,7 @@ struct CardView<AddonView: View>: View {
 			}
 			
 			if !card.cashback.isEmpty {
-				CategoriesStackView(cashback: card.cashback)
+				CategoriesStackView(cashback: card.cashback, color: Color(hex: card.color ?? "#E7E7E7"))
 			}
 			
 			Text(card.cashbackDescription)
