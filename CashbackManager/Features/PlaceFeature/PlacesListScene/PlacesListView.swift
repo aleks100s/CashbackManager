@@ -68,7 +68,7 @@ struct PlacesListView: View {
 			.if(!places.isEmpty) {
 				$0.searchable(
 					text: $searchText,
-					placement: .navigationBarDrawer(displayMode: .automatic),
+					placement: .navigationBarDrawer(displayMode: .always),
 					prompt: "Название заведения"
 				)
 			}

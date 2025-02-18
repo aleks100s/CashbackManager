@@ -48,6 +48,8 @@ struct CardDetailView: View {
 	@Environment(\.textDetectionService) private var textDetectionService
 	@Environment(\.incomeService) private var incomeService
 	@Environment(\.toastService) private var toastService
+	
+	@Namespace private var cardNamespace
 
 	init(
 		card: Card,
@@ -64,6 +66,15 @@ struct CardDetailView: View {
 	}
 	
 	var body: some View {
+		if #available(iOS 18.0, *) {
+			view
+				.navigationTransition(.zoom(sourceID: card.id, in: cardNamespace))
+		} else {
+			view
+		}
+	}
+	
+	private var view: some View {
 		contentView
 			.background(Color.cmScreenBackground)
 			.navigationTitle(cardName)
@@ -240,6 +251,8 @@ struct CardDetailView: View {
 				}
 			}
 			.scrollIndicators(.hidden)
+			.scrollContentBackground(.hidden)
+			.background(Color(hex: card.color ?? "#E7E7E7").opacity(0.2))
 			
 			if isAdVisible {
 				AdBannerView(bannerId: bannerId)

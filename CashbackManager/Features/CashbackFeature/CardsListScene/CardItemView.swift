@@ -15,29 +15,76 @@ struct CardItemView: View {
 	@Environment(\.toastService) private var toastService
 	
 	var body: some View {
-		Group {
-			if card.isEmpty {
-				Text(card.cashbackDescription)
-			} else {
-				VStack(alignment: .leading) {
-					HStack {
+		VStack {
+			HStack {
+				Text(card.name)
+				
+				Spacer()
+				
+				HeartView(isFavorite: card.isFavorite)
+					.onTapGesture {
+						card.isFavorite.toggle()
+						cardsService?.update(card: card)
+						toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
+					}
+			}
+			
+			Group {
+				if card.isEmpty {
+					Text(card.cashbackDescription)
+				} else {
+					VStack(alignment: .leading) {
 						CategoriesStackView(cashback: card.filteredCashback(for: searchQuery))
 						
-						Spacer()
-						
-						HeartView(isFavorite: card.isFavorite)
-							.onTapGesture {
-								card.isFavorite.toggle()
-								cardsService?.update(card: card)
-								toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
-							}
+						Text(card.cashbackDescription(for: searchQuery))
 					}
-					
-					Text(card.cashbackDescription(for: searchQuery))
 				}
 			}
+			.frame(maxWidth: .infinity, alignment: .leading)
+			
+			Text(card.currency)
+				.frame(maxWidth: .infinity, alignment: .trailing)
 		}
-		.frame(maxWidth: .infinity, alignment: .leading)
 		.contentShape(Rectangle())
+		.padding(.horizontal, 16)
+		.padding(.vertical, 12)
+		.background {
+			ZStack {
+				RoundedRectangle(cornerRadius: 20, style: .continuous)
+					.fill(Color(hex: card.color ?? "#E7E7E7").opacity(0.4))
+				
+				RoundedRectangle(cornerRadius: 20, style: .continuous)
+					.fill(.ultraThinMaterial)
+				
+				RoundedRectangle(cornerRadius: 20, style: .continuous)
+					.fill(
+						.linearGradient(
+							colors: [
+								.white.opacity(0.25),
+								.white.opacity(0.05)
+							],
+							startPoint: .topLeading,
+							endPoint: .bottomTrailing
+						)
+					)
+					.blur(radius: 5)
+				
+				RoundedRectangle(cornerRadius: 20, style: .continuous)
+					.stroke(
+						.linearGradient(
+							colors: [
+								.secondary.opacity(0.2),
+								.clear,
+								Color(hex: card.color ?? "#E7E7E7").opacity(0.2),
+								Color(hex: card.color ?? "#E7E7E7").opacity(0.5)
+							],
+							startPoint: .top,
+							endPoint: .bottom
+						),
+						lineWidth: 2
+					)
+			}
+			.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+		}
 	}
 }

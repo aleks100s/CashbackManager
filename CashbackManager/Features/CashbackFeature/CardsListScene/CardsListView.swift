@@ -36,6 +36,8 @@ struct CardsListView: View {
 	
 	@Environment(\.cardsService) private var cardsService
 	
+	@Namespace private var cardNamespace
+	
 	private var filteredCards: [Card] {
 		cards.filter { card in
 			if searchText.isEmpty {
@@ -73,7 +75,7 @@ struct CardsListView: View {
 			.if(!cards.isEmpty) {
 				$0.searchable(
 					text: $searchText,
-					placement: .navigationBarDrawer(displayMode: .automatic),
+					placement: .navigationBarDrawer(displayMode: .always),
 					prompt: "Категория кэшбэка"
 				)
 			}
@@ -111,31 +113,37 @@ struct CardsListView: View {
 					ContentUnavailableView("Такой кэшбэк не найден\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
 				}
 			} else {
-				List {
-					if areSiriTipsVisible, !searchText.isEmpty {
-						IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
-					}
-					
-					ForEach(filteredCards) { card in
-						Section {
-							cardView(card)
-						} header: {
-							HStack {
-								Image(systemName: Constants.SFSymbols.cashback)
-									.foregroundStyle(Color(hex: card.color ?? ""))
-
-								Text(card.name)
-								
-								Spacer()
-								
-								Text(card.currency)
+				ScrollView {
+					LazyVStack {
+						Spacer()
+							.frame(height: 16)
+						
+						if areSiriTipsVisible, !searchText.isEmpty {
+							IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
+						}
+						
+						ForEach(filteredCards) { card in
+							if #available(iOS 18.0, *) {
+								CardItemView(card: card, searchQuery: searchText)
+									.matchedTransitionSource(id: card.id, in: cardNamespace)
+									.onTapGesture {
+										onCardSelected(card)
+									}
+							} else {
+								CardItemView(card: card, searchQuery: searchText)
+									.onTapGesture {
+										onCardSelected(card)
+									}
 							}
 						}
+						
+						Spacer()
+							.frame(height: 16)
 					}
 				}
-				.listSectionSpacing(8)
 				.scrollDismissesKeyboard(.interactively)
 				.scrollIndicators(.hidden)
+				.padding(.horizontal, 16)
 			}
 		}
 	}
@@ -156,24 +164,6 @@ struct CardsListView: View {
 		Button("Добавить карту") {
 			isAddCardSheetPresented = true
 		}
-	}
-	
-	private func cardView(_ card: Card) -> some View {
-		Button {
-			onCardSelected(card)
-		} label: {
-			if card.isEmpty {
-				CardItemView(card: card, searchQuery: searchText)
-			} else {
-				CardItemView(card: card, searchQuery: searchText)
-					.contextMenu {
-						Text(card.name)
-					} preview: {
-						CashbackListView(cashback: card.cashback)
-					}
-			}
-		}
-		.buttonStyle(.plain)
 	}
 		
 	private func create(cardName: String, color: Color) {
