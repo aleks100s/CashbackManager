@@ -34,10 +34,6 @@ struct CardsListView: View {
 	)
 	private var categories: [Category]
 	
-	private var popularCategories: [Category] {
-		Array(categories.prefix(5))
-	}
-	
 	@Environment(\.cardsService) private var cardsService
 	
 	private var filteredCards: [Card] {
@@ -55,6 +51,10 @@ struct CardsListView: View {
 					}
 			}
 		}
+	}
+	
+	private var popularCategories: [Category] {
+		Array(categories.prefix(5))
 	}
 	
 	init(
@@ -106,9 +106,9 @@ struct CardsListView: View {
 			
 			if filteredCards.isEmpty {
 				if searchText.isEmpty && selectedCategory == nil {
-					ContentUnavailableView("Нет сохраненных карт", systemImage: "creditcard")
+					ContentUnavailableView("Нет сохраненных карт", systemImage: Constants.SFSymbols.cashback)
 				} else {
-					ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")
+					ContentUnavailableView("Такой кэшбэк не найден\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
 				}
 			} else {
 				List {

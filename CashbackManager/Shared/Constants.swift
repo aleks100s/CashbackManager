@@ -13,6 +13,7 @@ enum Constants {
 		static let income = "rublesign.circle"
 		static let places = "storefront"
 		static let settings = "gear"
+		static let search = "magnifyingglass"
 	}
 	
 	enum StorageKey {

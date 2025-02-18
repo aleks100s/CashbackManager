@@ -18,19 +18,38 @@ struct PlacesListView: View {
 	private var areSiriTipsVisible = true
 	
 	@State private var searchText = ""
+	@State private var selectedCategory: Category?
 	
 	@Query(sort: [SortDescriptor<Place>(\.isFavorite, order: .reverse),
 		SortDescriptor<Place>(\.name, order: .forward)],
 		   animation: .default)
 	private var places: [Place]
 	
+	@Query(
+		filter: #Predicate<Category> { $0.priority > 0 },
+		sort: [SortDescriptor<Category>(\.priority, order: .reverse)]
+	)
+	private var categories: [Category]
+	
 	@Environment(\.placeService) private var placeService
 	@Environment(\.toastService) private var toastService
 	
 	private var filteredPlaces: [Place] {
-		places.filter {
-			searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText)
+		places.filter { place in
+			if searchText.isEmpty {
+				if let selectedCategory {
+					place.category.name.localizedStandardContains(selectedCategory.name)
+				} else {
+					true
+				}
+			} else {
+				place.name.localizedStandardContains(searchText)
+			}
 		}
+	}
+	
+	private var popularCategories: [Category] {
+		Array(categories.prefix(5))
 	}
 	
 	init(
@@ -62,38 +81,48 @@ struct PlacesListView: View {
 	
 	@ViewBuilder
 	private var contentView: some View {
-		if filteredPlaces.isEmpty {
-			ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
-		} else {
-			List {
-				if areSiriTipsVisible, !searchText.isEmpty {
-					IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
-				}
-				
-				ForEach(filteredPlaces) { place in
-					Button {
-						onPlaceSelected(place, false)
-					} label: {
-						PlaceView(place: place)
-							.contentShape(.rect)
-							.contextMenu {
-								editPlaceButton(place)
-								deletePlaceButton(place)
-							}
-					}
-					.buttonStyle(.plain)
-					.swipeActions(edge: .leading, allowsFullSwipe: true) {
-						editPlaceButton(place)
-					}
-				}
-				.onDelete { indexSet in
-					for index in indexSet {
-						deletePlace(index: index)
-					}
-				}
+		VStack {
+			if !places.isEmpty {
+				FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
 			}
-			.listSectionSpacing(16)
-			.scrollIndicators(.hidden)
+			
+			if filteredPlaces.isEmpty {
+				if searchText.isEmpty && selectedCategory == nil {
+					ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
+				} else {
+					ContentUnavailableView("Такие места не найдены\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
+				}
+			} else {
+				List {
+					if areSiriTipsVisible, !searchText.isEmpty {
+						IntentTipView(intent: checkPlaceIntent, text: "Чтобы быстро узнать категорию заведения")
+					}
+					
+					ForEach(filteredPlaces) { place in
+						Button {
+							onPlaceSelected(place, false)
+						} label: {
+							PlaceView(place: place)
+								.contentShape(.rect)
+								.contextMenu {
+									editPlaceButton(place)
+									deletePlaceButton(place)
+								}
+						}
+						.buttonStyle(.plain)
+						.swipeActions(edge: .leading, allowsFullSwipe: true) {
+							editPlaceButton(place)
+						}
+					}
+					.onDelete { indexSet in
+						for index in indexSet {
+							deletePlace(index: index)
+						}
+					}
+				}
+				.listSectionSpacing(16)
+				.scrollIndicators(.hidden)
+			}
 		}
 	}
 	
