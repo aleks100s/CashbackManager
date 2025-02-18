@@ -24,6 +24,7 @@ struct CardItemView: View {
 				Text(card.name)
 					.foregroundStyle(.secondary)
 					.fontWeight(.semibold)
+					.fontWidth(.expanded)
 				
 				Spacer()
 				
@@ -43,12 +44,17 @@ struct CardItemView: View {
 						CategoriesStackView(cashback: card.filteredCashback(for: searchQuery), color: color)
 						
 						Text(card.cashbackDescription(for: searchQuery))
+
 					}
 				}
 			}
 			.frame(maxWidth: .infinity, alignment: .leading)
+			.foregroundStyle(.primary.opacity(0.8))
+			.fontWeight(.medium)
 			
 			Text(card.currencySymbol)
+				.fontWeight(.semibold)
+				.fontWidth(.expanded)
 				.foregroundStyle(.secondary)
 				.frame(maxWidth: .infinity, alignment: .trailing)
 		}
@@ -88,7 +94,7 @@ struct CardItemView: View {
 							startPoint: .top,
 							endPoint: .bottom
 						),
-						lineWidth: 2
+						lineWidth: 3
 					)
 			}
 			.clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
