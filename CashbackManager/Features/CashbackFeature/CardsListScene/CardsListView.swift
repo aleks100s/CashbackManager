@@ -35,9 +35,7 @@ struct CardsListView: View {
 	private var categories: [Category]
 	
 	@Environment(\.cardsService) private var cardsService
-	
-	@Namespace private var cardNamespace
-	
+		
 	private var filteredCards: [Card] {
 		cards.filter { card in
 			if searchText.isEmpty {
@@ -123,18 +121,10 @@ struct CardsListView: View {
 						}
 						
 						ForEach(filteredCards) { card in
-							if #available(iOS 18.0, *) {
-								CardItemView(card: card, searchQuery: searchText)
-									.matchedTransitionSource(id: card.id, in: cardNamespace)
-									.onTapGesture {
-										onCardSelected(card)
-									}
-							} else {
-								CardItemView(card: card, searchQuery: searchText)
-									.onTapGesture {
-										onCardSelected(card)
-									}
-							}
+							CardItemView(card: card, searchQuery: searchText)
+								.onTapGesture {
+									onCardSelected(card)
+								}
 						}
 						
 						Spacer()

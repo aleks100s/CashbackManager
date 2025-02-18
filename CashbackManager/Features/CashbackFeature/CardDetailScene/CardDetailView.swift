@@ -49,8 +49,6 @@ struct CardDetailView: View {
 	@Environment(\.incomeService) private var incomeService
 	@Environment(\.toastService) private var toastService
 	
-	@Namespace private var cardNamespace
-
 	init(
 		card: Card,
 		cardCashbackIntent: any AppIntent,
@@ -66,15 +64,6 @@ struct CardDetailView: View {
 	}
 	
 	var body: some View {
-		if #available(iOS 18.0, *) {
-			view
-				.navigationTransition(.zoom(sourceID: card.id, in: cardNamespace))
-		} else {
-			view
-		}
-	}
-	
-	private var view: some View {
 		contentView
 			.background(Color.cmScreenBackground)
 			.navigationTitle(cardName)
