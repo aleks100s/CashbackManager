@@ -39,4 +39,5 @@ enum Constants {
 	static let urlSchemeCard = "cashback://cashback/card/"
 	static let urlSchemePlace = "cashback://cashback/place/"
 	static let appStoreLink = URL(string: "https://apps.apple.com/app/id6517354748")
+	static let ruStoreLink = URL(string: "https://www.rustore.ru/catalog/app/com.alextos.cashback")
 }

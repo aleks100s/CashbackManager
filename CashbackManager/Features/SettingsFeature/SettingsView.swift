@@ -127,17 +127,29 @@ struct SettingsView: View {
 					TrashbinView()
 				}
 			}
+			
+			Section {
+				if let appStore = Constants.appStoreLink {
+					ShareLink(item: appStore, subject: Text("Ссылка на App Store")) {
+						Text("Поделиться приложением")
+					}
+				}
+				
+				if let ruStore = Constants.ruStoreLink {
+					ShareLink(item: ruStore, subject: Text("Ссылка в RuStore")) {
+						Text("Версия для Android")
+					}
+				}
+			} header: {
+				Text("Поделиться")
+			} footer: {
+				Text("Если вам понравилось приложение, то вы можете поделиться им с другом")
+			}
 
 			Section("О приложении") {
 				ItemView(title: "Версия приложения", value: appVersion, onTap: copy)
 				
 				ItemView(title: "Версия сборки", value: buildVersion, onTap: copy)
-			}
-			
-			if let url = Constants.appStoreLink {
-				ShareLink(item: url, subject: Text("Ссылка на App Store")) {
-					Text("Поделиться приложением")
-				}
 			}
 		}
 		.scrollIndicators(.hidden)

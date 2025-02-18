@@ -24,7 +24,6 @@ struct CardItemView: View {
 				Text(card.name)
 					.foregroundStyle(.secondary)
 					.fontWeight(.semibold)
-					.fontWidth(.expanded)
 				
 				Spacer()
 				

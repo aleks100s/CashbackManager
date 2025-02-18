@@ -632,12 +632,12 @@
 			path = CashbackFeature;
 			sourceTree = "<group>";
 		};
-		27A4660C2D47E999000B6B35 /* Common */ = {
+		27A4660C2D47E999000B6B35 /* Category */ = {
 			isa = PBXGroup;
 			children = (
 				27A466112D47E99F000B6B35 /* SelectCategoryScene */,
 			);
-			path = Common;
+			path = Category;
 			sourceTree = "<group>";
 		};
 		27A4660E2D47E99F000B6B35 /* AddCardSheet */ = {
@@ -660,7 +660,7 @@
 		27A466152D47E9DB000B6B35 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				27A4660C2D47E999000B6B35 /* Common */,
+				27A4660C2D47E999000B6B35 /* Category */,
 				27A465F12D47E738000B6B35 /* CashbackFeature */,
 				27A465DD2D47E65A000B6B35 /* PlaceFeature */,
 				27A465D42D47E606000B6B35 /* PaymentFeature */,
