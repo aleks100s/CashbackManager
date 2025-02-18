@@ -14,10 +14,16 @@ struct CardItemView: View {
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.toastService) private var toastService
 	
+	private var color: Color {
+		Color(hex: card.color ?? "#E7E7E7")
+	}
+	
 	var body: some View {
 		VStack {
 			HStack {
 				Text(card.name)
+					.foregroundStyle(.secondary)
+					.fontWeight(.semibold)
 				
 				Spacer()
 				
@@ -34,7 +40,7 @@ struct CardItemView: View {
 					Text(card.cashbackDescription)
 				} else {
 					VStack(alignment: .leading) {
-						CategoriesStackView(cashback: card.filteredCashback(for: searchQuery))
+						CategoriesStackView(cashback: card.filteredCashback(for: searchQuery), color: color)
 						
 						Text(card.cashbackDescription(for: searchQuery))
 					}
@@ -42,7 +48,8 @@ struct CardItemView: View {
 			}
 			.frame(maxWidth: .infinity, alignment: .leading)
 			
-			Text(card.currency)
+			Text(card.currencySymbol)
+				.foregroundStyle(.secondary)
 				.frame(maxWidth: .infinity, alignment: .trailing)
 		}
 		.contentShape(Rectangle())
@@ -51,7 +58,7 @@ struct CardItemView: View {
 		.background {
 			ZStack {
 				RoundedRectangle(cornerRadius: 20, style: .continuous)
-					.fill(Color(hex: card.color ?? "#E7E7E7").opacity(0.4))
+					.fill(color.opacity(0.4))
 				
 				RoundedRectangle(cornerRadius: 20, style: .continuous)
 					.fill(.ultraThinMaterial)
@@ -75,8 +82,8 @@ struct CardItemView: View {
 							colors: [
 								.secondary.opacity(0.2),
 								.clear,
-								Color(hex: card.color ?? "#E7E7E7").opacity(0.2),
-								Color(hex: card.color ?? "#E7E7E7").opacity(0.5)
+								color.opacity(0.2),
+								color.opacity(0.5)
 							],
 							startPoint: .top,
 							endPoint: .bottom

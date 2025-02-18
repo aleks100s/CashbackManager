@@ -9,12 +9,13 @@ import SwiftUI
 
 struct CashbackView: View {
 	let cashback: Cashback
+	let color: Color
 	
 	@State private var isDescriptionAlertShown = false
 	
 	var body: some View {
 		HStack(alignment: .center, spacing: .zero) {
-			CategoryMarkerView(category: cashback.category)
+			CategoryMarkerView(category: cashback.category, color: color)
 				.padding(.trailing, 8)
 			
 			HStack(alignment: .center, spacing: .zero) {

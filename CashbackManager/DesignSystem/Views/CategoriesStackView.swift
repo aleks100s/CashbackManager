@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CategoriesStackView: View {
-	private let cashback: [Cashback]
+	let cashback: [Cashback]
+	var color: Color = .red
 	
 	@Environment(\.viewClass)
 	private var viewClass
@@ -21,15 +22,11 @@ struct CategoriesStackView: View {
 			-9
 		}
 	}
-		
-	init(cashback: [Cashback]) {
-		self.cashback = cashback
-	}
 	
 	var body: some View {
 		HStack(alignment: .center, spacing: .zero) {
 			ForEach(cashback, id: \.category.name) { cashback in
-				CategoryMarkerView(category: cashback.category)
+				CategoryMarkerView(category: cashback.category, color: color)
 					.padding(.trailing, trailingPadding)
 			}
 		}

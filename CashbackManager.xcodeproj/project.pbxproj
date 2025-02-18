@@ -113,7 +113,6 @@
 		27A466732D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466562D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift */; };
 		27A466742D47EA7A000B6B35 /* PredefinedCategory+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466532D47EA7A000B6B35 /* PredefinedCategory+Category.swift */; };
 		27A466752D47EA7A000B6B35 /* Cashback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466592D47EA7A000B6B35 /* Cashback.swift */; };
-		27A466932D47EA96000B6B35 /* CashbackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466892D47EA96000B6B35 /* CashbackListView.swift */; };
 		27A466942D47EA96000B6B35 /* IntentTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668F2D47EA96000B6B35 /* IntentTipView.swift */; };
 		27A466962D47EA96000B6B35 /* ColoredCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A466862D47EA96000B6B35 /* ColoredCircle.swift */; };
 		27A466972D47EA96000B6B35 /* CashbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4668A2D47EA96000B6B35 /* CashbackView.swift */; };
@@ -332,7 +331,6 @@
 		27A466832D47EA96000B6B35 /* ViewClassKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassKey.swift; sourceTree = "<group>"; };
 		27A466862D47EA96000B6B35 /* ColoredCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredCircle.swift; sourceTree = "<group>"; };
 		27A466882D47EA96000B6B35 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		27A466892D47EA96000B6B35 /* CashbackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackListView.swift; sourceTree = "<group>"; };
 		27A4668A2D47EA96000B6B35 /* CashbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackView.swift; sourceTree = "<group>"; };
 		27A4668B2D47EA96000B6B35 /* CategoriesStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesStackView.swift; sourceTree = "<group>"; };
 		27A4668C2D47EA96000B6B35 /* CategoryMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMarkerView.swift; sourceTree = "<group>"; };
@@ -957,7 +955,6 @@
 			isa = PBXGroup;
 			children = (
 				27A466872D47EA96000B6B35 /* Internal */,
-				27A466892D47EA96000B6B35 /* CashbackListView.swift */,
 				27A4668A2D47EA96000B6B35 /* CashbackView.swift */,
 				27A4668B2D47EA96000B6B35 /* CategoriesStackView.swift */,
 				27A4668C2D47EA96000B6B35 /* CategoryMarkerView.swift */,
@@ -1365,7 +1362,6 @@
 				27A466062D47E745000B6B35 /* CardsListView.swift in Sources */,
 				27A466072D47E745000B6B35 /* CardChartModel.swift in Sources */,
 				27A466082D47E745000B6B35 /* Environment+WidgetURLParser.swift in Sources */,
-				27A466932D47EA96000B6B35 /* CashbackListView.swift in Sources */,
 				27A466942D47EA96000B6B35 /* IntentTipView.swift in Sources */,
 				27A466962D47EA96000B6B35 /* ColoredCircle.swift in Sources */,
 				27A466972D47EA96000B6B35 /* CashbackView.swift in Sources */,

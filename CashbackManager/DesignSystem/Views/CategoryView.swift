@@ -14,7 +14,7 @@ struct CategoryView: View {
 	
 	var body: some View {
 		HStack(alignment: .center) {
-			CategoryMarkerView(category: category)
+			CategoryMarkerView(category: category, color: .red)
 			Text(category.name)
 			Spacer()
 			if category.info != nil {

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CategoryMarkerView: View {
-	private let category: Category
+	let category: Category
+	let color: Color
 	
 	@Environment(\.viewClass)
 	private var viewClass
@@ -39,15 +40,11 @@ struct CategoryMarkerView: View {
 			.callout
 		}
 	}
-
-	init(category: Category) {
-		self.category = category
-	}
 	
 	var body: some View {
 		ColoredCircle(color: .cmStrokeColor, side: outerCircleSize)
 			.overlay {
-				ColoredCircle(color: .red, side: innerCircleSize)
+				ColoredCircle(color: color, side: innerCircleSize)
 					.overlay {
 						Text(category.emoji)
 							.font(font)

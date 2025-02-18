@@ -200,7 +200,7 @@ struct CardDetailView: View {
 									Image(systemName: "line.3.horizontal") // Иконка перетаскивания
 										.foregroundColor(.gray)
 									
-									CashbackView(cashback: cashback)
+									CashbackView(cashback: cashback, color: Color(hex: card.color ?? "#E7E7E7"))
 										.contentShape(.rect)
 										.onTapGesture {
 											onEditCashbackTap(cashback)
