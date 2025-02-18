@@ -72,6 +72,8 @@ struct AddPlaceView: View {
 			Section {
 				TextField("Название", text: $placeName)
 					.focused($isFocused)
+			} footer: {
+				Text("Название бара, магазина или другого заведения")
 			}
 			
 			Section {

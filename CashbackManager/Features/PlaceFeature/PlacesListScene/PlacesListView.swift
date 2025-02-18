@@ -88,7 +88,7 @@ struct PlacesListView: View {
 			
 			if filteredPlaces.isEmpty {
 				if searchText.isEmpty && selectedCategory == nil {
-					ContentUnavailableView("Нет сохраненных мест", systemImage: Constants.SFSymbols.places)
+					ContentUnavailableView("Добавьте любимые места, чтобы не забыть категорию кэшбэка", systemImage: Constants.SFSymbols.places)
 				} else {
 					ContentUnavailableView("Такие места не найдены\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
 				}

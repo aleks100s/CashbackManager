@@ -176,7 +176,7 @@ struct CardDetailView: View {
 				} else {
 					if card.isEmpty {
 						Section {
-							ContentUnavailableView("Нет сохраненных кэшбэков", systemImage: "rublesign.circle")
+							ContentUnavailableView("Добавьте кэшбэк со скриншота или вручную", systemImage: "rublesign.circle")
 						}
 					} else {
 						if areSiriTipsVisible {

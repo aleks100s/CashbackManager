@@ -49,10 +49,14 @@ struct AddCardView: View {
 				TextField(placeholder, text: $text)
 					.keyboardType(keyboardType)
 					.focused($isFocused)
+			} footer: {
+				Text("Это может быть название банка или что угодно другое")
 			}
 			
 			Section {
 				ColorPicker("Цвет карты", selection: $color)
+			} footer: {
+				Text("Цвет карты позволит проще отличать её")
 			}
 		}
 		.onTapGesture {

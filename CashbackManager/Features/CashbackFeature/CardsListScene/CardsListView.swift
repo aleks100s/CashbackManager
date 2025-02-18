@@ -106,7 +106,7 @@ struct CardsListView: View {
 			
 			if filteredCards.isEmpty {
 				if searchText.isEmpty && selectedCategory == nil {
-					ContentUnavailableView("Нет сохраненных карт", systemImage: Constants.SFSymbols.cashback)
+					ContentUnavailableView("Добавьте первую карту, чтобы начать управлять кэшбэком", systemImage: Constants.SFSymbols.cashback)
 				} else {
 					ContentUnavailableView("Такой кэшбэк не найден\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
 				}
