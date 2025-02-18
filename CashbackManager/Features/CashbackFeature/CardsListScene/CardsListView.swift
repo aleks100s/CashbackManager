@@ -101,29 +101,11 @@ struct CardsListView: View {
 	private var contentView: some View {
 		VStack {
 			if !cards.isEmpty {
-				ScrollView(.horizontal) {
-					LazyHStack {
-						ForEach(popularCategories) { category in
-							FilterItemView(
-								category: category,
-								isSelected: selectedCategory == category
-							) {
-								if selectedCategory == category {
-									selectedCategory = nil
-								} else {
-									selectedCategory = category
-								}
-							}
-						}
-					}
-					.padding(.horizontal, 16)
-				}
-				.scrollIndicators(.hidden)
-				.fixedSize(horizontal: false, vertical: true)
+				FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
 			}
 			
 			if filteredCards.isEmpty {
-				if searchText.isEmpty {
+				if searchText.isEmpty && selectedCategory == nil {
 					ContentUnavailableView("Нет сохраненных карт", systemImage: "creditcard")
 				} else {
 					ContentUnavailableView("Такой кэшбэк не найден", systemImage: "magnifyingglass")

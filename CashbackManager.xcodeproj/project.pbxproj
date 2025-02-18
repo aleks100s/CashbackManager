@@ -38,6 +38,7 @@
 		277130EC2C73C52B00C26CD8 /* CreateCategoryIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */; };
 		277130EE2C73CA1400C26CD8 /* CreateCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */; };
 		277FFD862D639B0000A06BB8 /* FilterItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD852D639B0000A06BB8 /* FilterItemView.swift */; };
+		277FFD882D642BDB00A06BB8 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD872D642BDB00A06BB8 /* FilterView.swift */; };
 		2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1252CD874300081A927 /* PlaceEntity.swift */; };
 		2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1272CD874CC0081A927 /* CategoryEntity.swift */; };
 		2781B12B2CD884F20081A927 /* TrashbinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B12A2CD884F20081A927 /* TrashbinView.swift */; };
@@ -251,6 +252,7 @@
 		277130EB2C73C52B00C26CD8 /* CreateCategoryIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryIntent.swift; sourceTree = "<group>"; };
 		277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCashbackIntent.swift; sourceTree = "<group>"; };
 		277FFD852D639B0000A06BB8 /* FilterItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemView.swift; sourceTree = "<group>"; };
+		277FFD872D642BDB00A06BB8 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		2781B1252CD874300081A927 /* PlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceEntity.swift; sourceTree = "<group>"; };
 		2781B1272CD874CC0081A927 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		2781B12A2CD884F20081A927 /* TrashbinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashbinView.swift; sourceTree = "<group>"; };
@@ -613,7 +615,6 @@
 				27A4660E2D47E99F000B6B35 /* AddCardSheet */,
 				27A465F72D47E745000B6B35 /* CardItemView.swift */,
 				27A465F82D47E745000B6B35 /* CardsListView.swift */,
-				277FFD852D639B0000A06BB8 /* FilterItemView.swift */,
 			);
 			path = CardsListScene;
 			sourceTree = "<group>";
@@ -958,6 +959,8 @@
 				27A4668F2D47EA96000B6B35 /* IntentTipView.swift */,
 				27A466902D47EA96000B6B35 /* PlaceMarkerView.swift */,
 				27A466912D47EA96000B6B35 /* ToastView.swift */,
+				277FFD852D639B0000A06BB8 /* FilterItemView.swift */,
+				277FFD872D642BDB00A06BB8 /* FilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1286,6 +1289,7 @@
 				27A466132D47E99F000B6B35 /* SelectCategoryView.swift in Sources */,
 				27A466142D47E99F000B6B35 /* AddCardView.swift in Sources */,
 				2714FEBA2C58BD4A0014CFE0 /* CheckPlaceCardIntent.swift in Sources */,
+				277FFD882D642BDB00A06BB8 /* FilterView.swift in Sources */,
 				27AB37252C73B3CE00A00939 /* CreatePlaceIntent.swift in Sources */,
 				27A465C62D44B7B7000B6B35 /* AppDelegate.swift in Sources */,
 				27A465D52D47E606000B6B35 /* IncomeView.swift in Sources */,

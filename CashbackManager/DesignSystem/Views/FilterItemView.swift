@@ -17,9 +17,10 @@ struct FilterItemView: View {
 			Text(category.emoji)
 			Text(category.name)
 		}
+		.foregroundStyle(.white)
 		.padding(.horizontal, 8)
 		.padding(.vertical, 4)
-		.background(isSelected ? .blue : .gray)
+		.background(isSelected ? .blue : .gray.opacity(0.5))
 		.clipShape(Capsule())
 		.onTapGesture {
 			onTap()
