@@ -11,45 +11,22 @@ struct CardItemView: View {
 	let card: Card
 	let searchQuery: String
 	
-	@Environment(\.cardsService) private var cardsService
-	@Environment(\.toastService) private var toastService
+	private let color: Color
 	
-	private var color: Color {
-		Color(hex: card.color ?? "#E7E7E7")
+	init(card: Card, searchQuery: String) {
+		self.card = card
+		self.searchQuery = searchQuery
+		color = Color(hex: card.color ?? "#E7E7E7")
 	}
 	
 	var body: some View {
 		VStack {
-			HStack {
-				Text(card.name)
-					.foregroundStyle(.secondary)
-					.fontWeight(.semibold)
-				
-				Spacer()
-				
-				HeartView(isFavorite: card.isFavorite)
-					.onTapGesture {
-						card.isFavorite.toggle()
-						cardsService?.update(card: card)
-						toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
-					}
-			}
+			HeaderView(card: card)
 			
-			Group {
-				if card.isEmpty {
-					Text(card.cashbackDescription)
-				} else {
-					VStack(alignment: .leading) {
-						CategoriesStackView(cashback: card.filteredCashback(for: searchQuery), color: color)
-						
-						Text(card.cashbackDescription(for: searchQuery))
-
-					}
-				}
-			}
-			.frame(maxWidth: .infinity, alignment: .leading)
-			.foregroundStyle(.primary.opacity(0.8))
-			.fontWeight(.medium)
+			CashbackDescriptionView(card: card, color: color, searchQuery: searchQuery)
+				.frame(maxWidth: .infinity, alignment: .leading)
+				.foregroundStyle(.primary.opacity(0.8))
+				.fontWeight(.medium)
 			
 			Text(card.currencySymbol)
 				.fontWeight(.semibold)
@@ -61,14 +38,66 @@ struct CardItemView: View {
 		.padding(.horizontal, 16)
 		.padding(.vertical, 12)
 		.background {
+			BackgroundView(color: color)
+		}
+	}
+}
+
+private extension CardItemView {
+	struct HeaderView: View {
+		let card: Card
+		
+		@Environment(\.cardsService) private var cardsService
+		@Environment(\.toastService) private var toastService
+		
+		var body: some View {
+			HStack {
+				Text(card.name)
+					.foregroundStyle(.secondary)
+					.fontWeight(.semibold)
+				
+				Spacer()
+				
+				HeartView(isFavorite: card.isFavorite)
+					.onTapGesture {
+						onHeartTap()
+					}
+			}
+		}
+		
+		private func onHeartTap() {
+			card.isFavorite.toggle()
+			cardsService?.update(card: card)
+			toastService?.show(Toast(title: card.isFavorite ? "Добавлено в избранное" : "Удалено из избранного", hasFeedback: false))
+		}
+	}
+	
+	struct CashbackDescriptionView: View {
+		let card: Card
+		let color: Color
+		let searchQuery: String
+		
+		var body: some View {
+			if card.isEmpty {
+				Text(card.cashbackDescription)
+			} else {
+				VStack(alignment: .leading) {
+					CategoriesStackView(cashback: card.filteredCashback(for: searchQuery), color: color)
+					
+					Text(card.cashbackDescription(for: searchQuery))
+				}
+			}
+		}
+	}
+	
+	struct BackgroundView: View {
+		let color: Color
+		
+		var body: some View {
 			ZStack {
 				RoundedRectangle(cornerRadius: 20, style: .continuous)
 					.fill(color.opacity(0.4))
-				
-				RoundedRectangle(cornerRadius: 20, style: .continuous)
 					.fill(.ultraThinMaterial)
-				
-				RoundedRectangle(cornerRadius: 20, style: .continuous)
 					.fill(
 						.linearGradient(
 							colors: [

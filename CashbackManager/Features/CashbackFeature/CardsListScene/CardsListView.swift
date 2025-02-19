@@ -14,17 +14,17 @@ struct CardsListView: View {
 	private let checkCategoryCardIntent: any AppIntent
 	private let onCardSelected: (Card) -> Void
 	
-	@AppStorage(Constants.StorageKey.siriTips)
-	private var areSiriTipsVisible = true
-	
 	@State private var searchText = ""
 	@State private var isAddCardSheetPresented = false
 	@State private var selectedCategory: Category?
 	
+	@Environment(\.cardsService) private var cardsService
+
+	
 	@Query(
 		filter: #Predicate<Card> { !$0.isArchived },
 		sort: [SortDescriptor<Card>(\.isFavorite, order: .reverse),
-			SortDescriptor<Card>(\.name, order: .forward)],
+			   SortDescriptor<Card>(\.name, order: .forward)],
 		animation: .default
 	) private var cards: [Card]
 	
@@ -33,8 +33,6 @@ struct CardsListView: View {
 		sort: [SortDescriptor<Category>(\.priority, order: .reverse)]
 	)
 	private var categories: [Category]
-	
-	@Environment(\.cardsService) private var cardsService
 		
 	private var filteredCards: [Card] {
 		cards.filter { card in
@@ -47,8 +45,8 @@ struct CardsListView: View {
 			} else {
 				card.cashbackDescription.localizedStandardContains(searchText)
 				|| card.cashback.compactMap(\.category.synonyms).contains {
-						$0.localizedStandardContains(searchText)
-					}
+					$0.localizedStandardContains(searchText)
+				}
 			}
 		}
 	}
@@ -68,74 +66,50 @@ struct CardsListView: View {
 	}
 	
 	var body: some View {
-		contentView
-			.navigationTitle("Мои карты")
-			.navigationBarTitleDisplayMode(cards.isEmpty ? .large : .inline)
-			.if(!cards.isEmpty) {
-				$0.searchable(
-					text: $searchText,
-					placement: .navigationBarDrawer(displayMode: .automatic),
-					prompt: "Категория кэшбэка"
+		Group {
+			if filteredCards.isEmpty {
+				EmptyView(searchText: searchText, selectedCategory: selectedCategory)
+			} else {
+				ContentView(
+					searchText: searchText,
+					filteredCards: filteredCards,
+					onCardSelected: onCardSelected,
+					checkCategoryCardIntent: checkCategoryCardIntent
 				)
 			}
-			.toolbar {
-				ToolbarItem(placement: .bottomBar) {
-					addCardButton
+		}
+		.navigationTitle("Мои карты")
+		.navigationBarTitleDisplayMode(cards.isEmpty ? .large : .inline)
+		.if(!cards.isEmpty) {
+			$0.searchable(
+				text: $searchText,
+				placement: .navigationBarDrawer(displayMode: .automatic),
+				prompt: "Категория кэшбэка"
+			)
+		}
+		.safeAreaInset(edge: .top) {
+			if !cards.isEmpty {
+				FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
+			}
+		}
+		.toolbar {
+			ToolbarItem(placement: .bottomBar) {
+				Button("Добавить карту") {
+					isAddCardSheetPresented = true
 				}
 			}
-			.sheet(isPresented: $isAddCardSheetPresented) {
-				addCardSheet
+		}
+		.sheet(isPresented: $isAddCardSheetPresented) {
+			addCardSheet
+		}
+		.onChange(of: searchText) {
+			if !searchText.isEmpty {
+				selectedCategory = nil
 			}
-			.onChange(of: searchText) {
-				if !searchText.isEmpty {
-					selectedCategory = nil
-				}
-			}
-			.onChange(of: selectedCategory) {
-				if selectedCategory != nil {
-					searchText = ""
-				}
-			}
-			.safeAreaInset(edge: .top) {
-				if !cards.isEmpty {
-					FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
-				}
-			}
-	}
-	
-	@ViewBuilder
-	private var contentView: some View {
-		VStack {
-			if filteredCards.isEmpty {
-				if searchText.isEmpty && selectedCategory == nil {
-					ContentUnavailableView("Добавьте первую карту, чтобы начать управлять кэшбэком", systemImage: Constants.SFSymbols.cashback)
-				} else {
-					ContentUnavailableView("Такой кэшбэк не найден\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
-				}
-			} else {
-				ScrollView {
-					LazyVStack {
-						Spacer()
-							.frame(height: 16)
-						
-						if areSiriTipsVisible, !searchText.isEmpty {
-							IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
-						}
-						
-						ForEach(filteredCards) { card in
-							CardItemView(card: card, searchQuery: searchText)
-								.onTapGesture {
-									onCardSelected(card)
-								}
-						}
-						
-						Spacer()
-							.frame(height: 16)
-					}
-				}
-				.scrollDismissesKeyboard(.interactively)
-				.scrollIndicators(.hidden)
-				.padding(.horizontal, 16)
+		}
+		.onChange(of: selectedCategory) {
+			if selectedCategory != nil {
+				searchText = ""
 			}
 		}
 	}
@@ -152,12 +126,6 @@ struct CardsListView: View {
 		.presentationBackground(Color.cmScreenBackground)
 	}
 	
-	private var addCardButton: some View {
-		Button("Добавить карту") {
-			isAddCardSheetPresented = true
-		}
-	}
-		
 	private func create(cardName: String, color: Color) {
 		guard let cardsService else { return }
 		
@@ -165,5 +133,56 @@ struct CardsListView: View {
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)
+	}
+}
+
+private extension CardsListView {
+	struct EmptyView: View {
+		let searchText: String
+		let selectedCategory: Category?
+		
+		var body: some View {
+			if searchText.isEmpty && selectedCategory == nil {
+				ContentUnavailableView("Добавьте первую карту, чтобы начать управлять кэшбэком", systemImage: Constants.SFSymbols.cashback)
+			} else {
+				ContentUnavailableView("Такой кэшбэк не найден\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
+			}
+		}
+	}
+	
+	struct ContentView: View {
+		let searchText: String
+		let filteredCards: [Card]
+		let onCardSelected: (Card) -> Void
+		let checkCategoryCardIntent: any AppIntent
+		
+		@AppStorage(Constants.StorageKey.siriTips)
+		private var areSiriTipsVisible = true
+		
+		var body: some View {
+			ScrollView {
+				LazyVStack {
+					Spacer()
+						.frame(height: 16)
+					
+					if areSiriTipsVisible, !searchText.isEmpty {
+						IntentTipView(intent: checkCategoryCardIntent, text: "Чтобы быстро найти карту")
+					}
+					
+					ForEach(filteredCards) { card in
+						CardItemView(card: card, searchQuery: searchText)
+							.onTapGesture {
+								onCardSelected(card)
+							}
+					}
+					
+					Spacer()
+						.frame(height: 16)
+				}
+			}
+			.scrollDismissesKeyboard(.interactively)
+			.scrollIndicators(.hidden)
+			.padding(.horizontal, 16)
+		}
 	}
 }

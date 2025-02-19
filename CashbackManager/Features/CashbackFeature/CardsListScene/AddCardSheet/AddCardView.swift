@@ -20,7 +20,9 @@ struct AddCardView: View {
 
 	@State private var text: String = ""
 	@State private var color: Color = .white
+	
 	@FocusState private var isFocused
+	
 	@Environment(\.dismiss) private var dismiss
 	
 	init(
@@ -59,12 +61,13 @@ struct AddCardView: View {
 				Text("Цвет карты позволит проще отличать её")
 			}
 		}
-		.onTapGesture {
-			isFocused = false
-		}
 		.scrollDismissesKeyboard(.interactively)
-		.onAppear {
-			isFocused = true
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing) {
+				Button("Отмена") {
+					dismiss()
+				}
+			}
 		}
 		.safeAreaInset(edge: .bottom) {
 			Button("Сохранить") {
@@ -73,12 +76,11 @@ struct AddCardView: View {
 			.disabled(text.isEmpty)
 			.padding()
 		}
-		.toolbar {
-			ToolbarItem(placement: .topBarTrailing) {
-				Button("Отмена") {
-					dismiss()
-				}
-			}
+		.onAppear {
+			isFocused = true
+		}
+		.onTapGesture {
+			isFocused = false
 		}
 	}
 }

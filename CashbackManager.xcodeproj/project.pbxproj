@@ -39,6 +39,12 @@
 		277130EE2C73CA1400C26CD8 /* CreateCashbackIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */; };
 		277FFD862D639B0000A06BB8 /* FilterItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD852D639B0000A06BB8 /* FilterItemView.swift */; };
 		277FFD882D642BDB00A06BB8 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD872D642BDB00A06BB8 /* FilterView.swift */; };
+		277FFD8C2D659A6100A06BB8 /* EditModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD8B2D659A6100A06BB8 /* EditModeView.swift */; };
+		277FFD8E2D659AE600A06BB8 /* DetectCashbackSectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD8D2D659AE600A06BB8 /* DetectCashbackSectionButton.swift */; };
+		277FFD902D659B5600A06BB8 /* CashbackContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD8F2D659B5600A06BB8 /* CashbackContentView.swift */; };
+		277FFD922D659DB200A06BB8 /* CardChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD912D659DB200A06BB8 /* CardChartView.swift */; };
+		277FFD942D65A06900A06BB8 /* CardDetailView+ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD932D65A06900A06BB8 /* CardDetailView+ContentView.swift */; };
+		277FFD962D65A09500A06BB8 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD952D65A09500A06BB8 /* EmptyView.swift */; };
 		2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1252CD874300081A927 /* PlaceEntity.swift */; };
 		2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1272CD874CC0081A927 /* CategoryEntity.swift */; };
 		2781B12B2CD884F20081A927 /* TrashbinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B12A2CD884F20081A927 /* TrashbinView.swift */; };
@@ -251,6 +257,12 @@
 		277130ED2C73CA1400C26CD8 /* CreateCashbackIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCashbackIntent.swift; sourceTree = "<group>"; };
 		277FFD852D639B0000A06BB8 /* FilterItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemView.swift; sourceTree = "<group>"; };
 		277FFD872D642BDB00A06BB8 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		277FFD8B2D659A6100A06BB8 /* EditModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModeView.swift; sourceTree = "<group>"; };
+		277FFD8D2D659AE600A06BB8 /* DetectCashbackSectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectCashbackSectionButton.swift; sourceTree = "<group>"; };
+		277FFD8F2D659B5600A06BB8 /* CashbackContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashbackContentView.swift; sourceTree = "<group>"; };
+		277FFD912D659DB200A06BB8 /* CardChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChartView.swift; sourceTree = "<group>"; };
+		277FFD932D65A06900A06BB8 /* CardDetailView+ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardDetailView+ContentView.swift"; sourceTree = "<group>"; };
+		277FFD952D65A09500A06BB8 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		2781B1252CD874300081A927 /* PlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceEntity.swift; sourceTree = "<group>"; };
 		2781B1272CD874CC0081A927 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		2781B12A2CD884F20081A927 /* TrashbinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashbinView.swift; sourceTree = "<group>"; };
@@ -495,6 +507,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		277FFD8A2D659A4C00A06BB8 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				277FFD952D65A09500A06BB8 /* EmptyView.swift */,
+				277FFD932D65A06900A06BB8 /* CardDetailView+ContentView.swift */,
+				277FFD8F2D659B5600A06BB8 /* CashbackContentView.swift */,
+				277FFD8D2D659AE600A06BB8 /* DetectCashbackSectionButton.swift */,
+				277FFD8B2D659A6100A06BB8 /* EditModeView.swift */,
+				277FFD912D659DB200A06BB8 /* CardChartView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		2781B1292CD884E80081A927 /* Trashbin */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,6 +634,7 @@
 		27A465F62D47E745000B6B35 /* CardDetailScene */ = {
 			isa = PBXGroup;
 			children = (
+				277FFD8A2D659A4C00A06BB8 /* Subviews */,
 				27A465F42D47E745000B6B35 /* CardDetailView.swift */,
 				27A465F52D47E745000B6B35 /* CardChartModel.swift */,
 			);
@@ -1300,6 +1326,7 @@
 				27A466FC2D5725D9000B6B35 /* PredefinedCategory+Info.swift in Sources */,
 				27A465D62D47E606000B6B35 /* PaymentsView.swift in Sources */,
 				27A465D72D47E606000B6B35 /* IncomeFeatureAssembly.swift in Sources */,
+				277FFD942D65A06900A06BB8 /* CardDetailView+ContentView.swift in Sources */,
 				27A465D82D47E606000B6B35 /* AddIncomeView.swift in Sources */,
 				27A465EA2D47E665000B6B35 /* PlaceFeatureAssembly.swift in Sources */,
 				27A465EB2D47E665000B6B35 /* PlacesListView.swift in Sources */,
@@ -1346,6 +1373,7 @@
 				27A466672D47EA7A000B6B35 /* HowToSwitchPaymentsPeriodTip.swift in Sources */,
 				27A466682D47EA7A000B6B35 /* HowToEditCardTip.swift in Sources */,
 				27A466692D47EA7A000B6B35 /* HowToDeleteCashbackTip.swift in Sources */,
+				277FFD8C2D659A6100A06BB8 /* EditModeView.swift in Sources */,
 				27A4666A2D47EA7A000B6B35 /* HowToDeletePlaceTip.swift in Sources */,
 				27A4666B2D47EA7A000B6B35 /* Place.swift in Sources */,
 				27A4666C2D47EA7A000B6B35 /* Income.swift in Sources */,
@@ -1355,6 +1383,7 @@
 				27A466702D47EA7A000B6B35 /* Category.swift in Sources */,
 				27A466712D47EA7A000B6B35 /* Currency.swift in Sources */,
 				27A466722D47EA7A000B6B35 /* PredefinedCategory+Localization.swift in Sources */,
+				277FFD962D65A09500A06BB8 /* EmptyView.swift in Sources */,
 				27A466732D47EA7A000B6B35 /* PredefinedCategory+Synonyms.swift in Sources */,
 				27A466742D47EA7A000B6B35 /* PredefinedCategory+Category.swift in Sources */,
 				27A466752D47EA7A000B6B35 /* Cashback.swift in Sources */,
@@ -1362,9 +1391,11 @@
 				27A466062D47E745000B6B35 /* CardsListView.swift in Sources */,
 				27A466072D47E745000B6B35 /* CardChartModel.swift in Sources */,
 				27A466082D47E745000B6B35 /* Environment+WidgetURLParser.swift in Sources */,
+				277FFD8E2D659AE600A06BB8 /* DetectCashbackSectionButton.swift in Sources */,
 				27A466942D47EA96000B6B35 /* IntentTipView.swift in Sources */,
 				27A466962D47EA96000B6B35 /* ColoredCircle.swift in Sources */,
 				27A466972D47EA96000B6B35 /* CashbackView.swift in Sources */,
+				277FFD902D659B5600A06BB8 /* CashbackContentView.swift in Sources */,
 				27A4669A2D47EA96000B6B35 /* View+ViewClass.swift in Sources */,
 				27A4669B2D47EA96000B6B35 /* Colors.swift in Sources */,
 				27A4669C2D47EA96000B6B35 /* PlaceMarkerView.swift in Sources */,
@@ -1387,6 +1418,7 @@
 				27A466092D47E745000B6B35 /* CashbackCoordinator.swift in Sources */,
 				272133592D3264A500A904D8 /* OnboardingView.swift in Sources */,
 				2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */,
+				277FFD922D659DB200A06BB8 /* CardChartView.swift in Sources */,
 				2714FEAD2C58A0F80014CFE0 /* CashbackShortcuts.swift in Sources */,
 				2721335B2D3264C900A904D8 /* OnboardingPage.swift in Sources */,
 			);
