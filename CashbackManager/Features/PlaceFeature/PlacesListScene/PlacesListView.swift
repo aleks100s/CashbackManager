@@ -65,10 +65,11 @@ struct PlacesListView: View {
 	var body: some View {
 		contentView
 			.navigationTitle("Сохраненные места")
+			.navigationBarTitleDisplayMode(places.isEmpty ? .large : .inline)
 			.if(!places.isEmpty) {
 				$0.searchable(
 					text: $searchText,
-					placement: .navigationBarDrawer(displayMode: .always),
+					placement: .navigationBarDrawer(displayMode: .automatic),
 					prompt: "Название заведения"
 				)
 			}
@@ -77,15 +78,16 @@ struct PlacesListView: View {
 					addPlaceButton
 				}
 			}
+			.safeAreaInset(edge: .top) {
+				if !places.isEmpty {
+					FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
+				}
+			}
 	}
 	
 	@ViewBuilder
 	private var contentView: some View {
 		VStack {
-			if !places.isEmpty {
-				FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
-			}
-			
 			if filteredPlaces.isEmpty {
 				if searchText.isEmpty && selectedCategory == nil {
 					ContentUnavailableView("Добавьте любимые места, чтобы не забыть категорию кэшбэка", systemImage: Constants.SFSymbols.places)

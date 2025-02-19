@@ -70,10 +70,11 @@ struct CardsListView: View {
 	var body: some View {
 		contentView
 			.navigationTitle("Мои карты")
+			.navigationBarTitleDisplayMode(cards.isEmpty ? .large : .inline)
 			.if(!cards.isEmpty) {
 				$0.searchable(
 					text: $searchText,
-					placement: .navigationBarDrawer(displayMode: .always),
+					placement: .navigationBarDrawer(displayMode: .automatic),
 					prompt: "Категория кэшбэка"
 				)
 			}
@@ -95,15 +96,16 @@ struct CardsListView: View {
 					searchText = ""
 				}
 			}
+			.safeAreaInset(edge: .top) {
+				if !cards.isEmpty {
+					FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
+				}
+			}
 	}
 	
 	@ViewBuilder
 	private var contentView: some View {
 		VStack {
-			if !cards.isEmpty {
-				FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
-			}
-			
 			if filteredCards.isEmpty {
 				if searchText.isEmpty && selectedCategory == nil {
 					ContentUnavailableView("Добавьте первую карту, чтобы начать управлять кэшбэком", systemImage: Constants.SFSymbols.cashback)
