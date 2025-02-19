@@ -36,6 +36,6 @@ struct FilterView: View {
 		.scrollIndicators(.hidden)
 		.fixedSize(horizontal: false, vertical: true)
 		.padding(.vertical, 4)
-		.background(.ultraThinMaterial)
+		.background(.regularMaterial)
 	}
 }

@@ -73,18 +73,26 @@ private extension CardItemView {
 	}
 	
 	struct CashbackDescriptionView: View {
-		let card: Card
+		let cashback: [Cashback]
 		let color: Color
-		let searchQuery: String
+		let text: String
+		let isEmpty: Bool
+		
+		init(card: Card, color: Color, searchQuery: String) {
+			self.color = color
+			self.cashback = card.filteredCashback(for: searchQuery)
+			text = card.cashbackDescription(for: searchQuery)
+			isEmpty = card.isEmpty
+		}
 		
 		var body: some View {
-			if card.isEmpty {
-				Text(card.cashbackDescription)
+			if isEmpty {
+				Text(text)
 			} else {
 				VStack(alignment: .leading) {
-					CategoriesStackView(cashback: card.filteredCashback(for: searchQuery), color: color)
+					CategoriesStackView(cashback: cashback, color: color)
 					
-					Text(card.cashbackDescription(for: searchQuery))
+					Text(text)
 				}
 			}
 		}
@@ -108,7 +116,6 @@ private extension CardItemView {
 							endPoint: .bottomTrailing
 						)
 					)
-					.blur(radius: 5)
 				
 				RoundedRectangle(cornerRadius: 20, style: .continuous)
 					.stroke(
