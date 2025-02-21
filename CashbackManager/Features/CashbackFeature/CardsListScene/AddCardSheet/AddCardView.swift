@@ -19,7 +19,7 @@ struct AddCardView: View {
 	private var areSiriTipsVisible = true
 
 	@State private var text: String = ""
-	@State private var color: Color = .white
+	@State private var color: Color = .red
 	
 	@FocusState private var isFocused
 	
