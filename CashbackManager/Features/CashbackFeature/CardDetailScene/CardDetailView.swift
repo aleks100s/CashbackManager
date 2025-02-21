@@ -35,6 +35,7 @@ struct CardDetailView: View {
 	
 	@Environment(\.cardsService) private var cardsService
 	@Environment(\.toastService) private var toastService
+	@Environment(\.colorScheme) private var colorScheme
 	
 	init(
 		card: Card,
@@ -66,7 +67,7 @@ struct CardDetailView: View {
 				AdBannerView(bannerId: bannerId)
 			}
 		}
-		.background(color.opacity(0.2))
+		.background(Color(hex: card.color ?? "").opacity(colorScheme == .light ? 0.4 : 0.2))
 		.background(
 			.linearGradient(
 				colors: [
@@ -77,7 +78,7 @@ struct CardDetailView: View {
 				endPoint: .bottomTrailing
 			)
 		)
-		.navigationTitle(cardName)
+		.navigationTitle(card.name)
 		.navigationBarTitleDisplayMode(.inline)
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
