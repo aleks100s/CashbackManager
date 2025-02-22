@@ -35,6 +35,9 @@ struct SettingsView: View {
 	@State private var isImporterPresented = false
 	@State private var isImportWarningPresented = false
 	@State private var isOnboardingPresented = false
+	@State private var counter = 0
+	@State private var isPromoCodeInputShown = false
+	@State private var promoCode = ""
 	
 	@Environment(\.notificationService)
 	private var notificationService
@@ -209,6 +212,23 @@ struct SettingsView: View {
 				isImportWarningPresented = false
 			}
 		}
+		.alert("Введите промокод", isPresented: $isPromoCodeInputShown) {
+			TextField("Промокод", text: $promoCode)
+			
+			Button("Ок") {
+				isPromoCodeInputShown = false
+				if promoCode == Constants.appStoreLink?.absoluteString {
+					toastService?.show(Toast(title: "Реклама отключена"))
+					isAdVisible = false
+				}
+				promoCode = ""
+			}
+			
+			Button("Отмена", role: .cancel) {
+				isPromoCodeInputShown = false
+				promoCode = ""
+			}
+		}
 		.sheet(isPresented: $isOnboardingPresented) {
 			OnboardingView()
 		}
@@ -260,6 +280,11 @@ struct SettingsView: View {
 	private func copy(value: String?) {
 		toastService?.show(Toast(title: "Значение скопировано"))
 		UIPasteboard.general.string = value
+		counter += 1
+		if counter == 10 {
+			counter = .zero
+			isPromoCodeInputShown = true
+		}
 	}
 }
 
