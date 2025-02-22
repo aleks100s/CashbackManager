@@ -13,13 +13,14 @@ struct AddCardView: View {
 	private let keyboardType: UIKeyboardType
 	private let intent: (any AppIntent)?
 	private let hint: String?
-	private let onSaveButtonTapped: (String, Color) -> Void
+	private let onSaveButtonTapped: (String, Color, Currency) -> Void
 	
 	@AppStorage(Constants.StorageKey.siriTips)
 	private var areSiriTipsVisible = true
 
 	@State private var text: String = ""
 	@State private var color: Color = .red
+	@State private var currency: Currency = .rubles
 	
 	@FocusState private var isFocused
 	
@@ -31,7 +32,7 @@ struct AddCardView: View {
 		keyboardType: UIKeyboardType = .default,
 		intent: (any AppIntent)? = nil,
 		hint: String? = nil,
-		onSaveButtonTapped: @escaping (String, Color) -> Void
+		onSaveButtonTapped: @escaping (String, Color, Currency) -> Void
 	) {
 		self.text = text
 		self.placeholder = placeholder
@@ -60,6 +61,21 @@ struct AddCardView: View {
 			} footer: {
 				Text("Цвет карты позволит проще отличать её")
 			}
+			
+			Section {
+				HStack {
+					Text("Форма выплаты кэшбэка")
+					Spacer()
+					Menu(currency.rawValue) {
+						ForEach(Currency.allCases) { currency in
+							Button(currency.rawValue) {
+								self.currency = currency
+								hapticFeedback(.light)
+							}
+						}
+					}
+				}
+			}
 		}
 		.scrollDismissesKeyboard(.interactively)
 		.toolbar {
@@ -71,7 +87,7 @@ struct AddCardView: View {
 		}
 		.safeAreaInset(edge: .bottom) {
 			Button("Сохранить") {
-				onSaveButtonTapped(text, color)
+				onSaveButtonTapped(text, color, currency)
 			}
 			.disabled(text.isEmpty)
 			.padding()

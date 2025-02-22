@@ -33,7 +33,7 @@ extension CardDetailView {
 					.textFieldStyle(.plain)
 				
 				HStack {
-					Text("Выплата кэшбэка")
+					Text("Форма выплаты кэшбэка")
 					Spacer()
 					Menu(card.currency) {
 						ForEach(Currency.allCases) { currency in

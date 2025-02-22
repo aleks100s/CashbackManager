@@ -116,20 +116,20 @@ struct CardsListView: View {
 	
 	private var addCardSheet: some View {
 		NavigationView {
-			AddCardView("Название карты", intent: addCardIntent, hint: "В следующий раз, чтобы добавить карту") { cardName, color in
-				create(cardName: cardName, color: color)
+			AddCardView("Название карты", intent: addCardIntent, hint: "В следующий раз, чтобы добавить карту") { cardName, color, currency in
+				create(cardName: cardName, color: color, currency: currency)
 			}
 			.navigationTitle("Добавить новую карту")
 			.navigationBarTitleDisplayMode(.inline)
 		}
-		.presentationDetents([.medium])
+		.presentationDetents([.large])
 		.presentationBackground(Color.cmScreenBackground)
 	}
 	
-	private func create(cardName: String, color: Color) {
+	private func create(cardName: String, color: Color, currency: Currency) {
 		guard let cardsService else { return }
 		
-		let card = cardsService.createCard(name: cardName, color: color.toHex())
+		let card = cardsService.createCard(name: cardName, color: color.toHex(), currency: currency)
 		isAddCardSheetPresented = false
 		onCardSelected(card)
 		hapticFeedback(.light)

@@ -177,6 +177,7 @@
 		27A5D7EE2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7ED2C394EC500B93512 /* CashbackManagerUITestsLaunchTests.swift */; };
 		27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5D7FA2C394EFE00B93512 /* CashbackApplication.swift */; };
 		27A5D88A2C394EFF00B93512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A5D84A2C394EFF00B93512 /* Assets.xcassets */; };
+		27A6DAFF2D69DF5700E283EF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4665B2D47EA7A000B6B35 /* Currency.swift */; };
 		27AB37252C73B3CE00A00939 /* CreatePlaceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AB37242C73B3CE00A00939 /* CreatePlaceIntent.swift */; };
 		27EE77BB2C5C020900D12827 /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714FEB52C58B44F0014CFE0 /* AppFactory.swift */; };
 /* End PBXBuildFile section */
@@ -1281,6 +1282,7 @@
 				27A466C62D47ECEA000B6B35 /* UserData.swift in Sources */,
 				27A465B32D3D2210000B6B35 /* FavouriteCardsProvider.swift in Sources */,
 				27A466CE2D47EDC3000B6B35 /* CategoriesStackView.swift in Sources */,
+				27A6DAFF2D69DF5700E283EF /* Currency.swift in Sources */,
 				27A466BB2D47EC49000B6B35 /* Income.swift in Sources */,
 				27A466B92D47EC3E000B6B35 /* Category.swift in Sources */,
 				27368BC42C4BB11100FC0475 /* CardWidget.swift in Sources */,
@@ -1483,7 +1485,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager.CashbackWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1514,7 +1516,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager.CashbackWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1669,7 +1671,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1706,7 +1708,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.6.0;
+				MARKETING_VERSION = 2.7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alextos.CashbackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";

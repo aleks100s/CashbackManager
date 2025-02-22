@@ -21,8 +21,8 @@ struct CardsService: @unchecked Sendable {
 	}
 	
 	@discardableResult
-	func createCard(name: String, color: String? = Color.white.toHex()) -> Card {
-		let card = Card(name: name, color: color)
+	func createCard(name: String, color: String? = Color.white.toHex(), currency: Currency = .rubles) -> Card {
+		let card = Card(name: name, color: color, currency: currency.rawValue, currencySymbol: currency.symbol)
 		context.insert(card)
 		try? context.save()
 		searchService.index(card: card)
