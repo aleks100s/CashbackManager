@@ -16,6 +16,7 @@ struct FavouriteCardsWidget: Widget {
 			provider: FavouriteCardsProvider()
 		) { entry in
 			FavouriteCardsEntryView(entry: entry)
+				.containerBackground(.fill.tertiary, for: .widget)
 		}
 		.configurationDisplayName("Три любимые карты")
 		.description("Показывает кэшбэк у трех выбранных карт")
