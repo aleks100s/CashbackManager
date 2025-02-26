@@ -1,5 +1,5 @@
 //
-//  TrashbinView.swift
+//  CardTrashbinView.swift
 //  CashbackManager
 //
 //  Created by Alexander on 04.11.2024.
@@ -8,21 +8,17 @@
 import SwiftData
 import SwiftUI
 
-struct TrashbinView: View {
+struct CardTrashbinView: View {
 	@Query(filter: #Predicate<Card> { $0.isArchived })
 	private var cards: [Card]
-
-	@Query(filter: #Predicate<Category> { $0.isArchived })
-	private var categories: [Category]
 	
 	@Environment(\.cardsService) private var cardsService
-	@Environment(\.categoryService) private var categoryService
 	
 	@State private var toast: Toast?
 
 	var body: some View {
 		List {
-			if cards.isEmpty && categories.isEmpty {
+			if cards.isEmpty {
 				ContentUnavailableView("Корзина пуста", systemImage: "trashbin")
 			} else {
 				Section("Удаленные карты") {
@@ -46,32 +42,9 @@ struct TrashbinView: View {
 						ContentUnavailableView("Нет удаленных карт", systemImage: "creditcard")
 					}
 				}
-				
-				Section("Удаленные категории") {
-					if !categories.isEmpty {
-						
-						ForEach(categories) { category in
-							Text(category.name)
-								.swipeActions(edge: .trailing, allowsFullSwipe: true) {
-									Button("Восстановить", systemImage: "trash.slash") {
-										categoryService?.unarchive(categories: [category])
-										toast = Toast(title: "Категория восстановлена")
-									}
-									.tint(.green)
-								}
-						}
-						
-						Button("Восстановить все", role: .cancel) {
-							categoryService?.unarchive(categories: categories)
-							toast = Toast(title: "Все категории восстановлены")
-						}
-					} else {
-						ContentUnavailableView("Нет удаленных категорий", systemImage: "checklist.unchecked")
-					}
-				}
 			}
 		}
-		.navigationTitle("Корзина")
+		.navigationTitle("Удаленные карты")
 		.toast(item: $toast)
 	}
 }

@@ -51,17 +51,14 @@ struct SettingsView: View {
 	var body: some View {
 		List {
 			Section {
-				Button("Экспортировать данные") {
-					exportUserData()
-				}
-				
-				Button("Восстановить данные") {
-					isImportWarningPresented = true
-				}
+				Toggle("Уведомления", isOn: $isNotificationAllowed)
+					.onChange(of: isNotificationAllowed) { _, newValue in
+						toastService?.show(Toast(title: newValue ? "Уведомления включены" : "Уведомления отключены"))
+					}
 			} header: {
-				Text("Перенос данных на другое устройство")
+				Text("Настройка уведомлений")
 			} footer: {
-				Text("Экспортируйте файл с одного устройства и откройте его в приложении на новом девайсе.\n\(Text("При импорте имеющиеся данные будут перезаписаны!").foregroundStyle(.red))")
+				Text("Приложение напомнит вам выбрать и сохранить кэшбэк каждый месяц 1 числа.\nПроверьте, что вы разрешили уведомления в настройках системы.")
 			}
 
 			Section {
@@ -76,14 +73,17 @@ struct SettingsView: View {
 			}
 			
 			Section {
-				Toggle("Уведомления", isOn: $isNotificationAllowed)
-					.onChange(of: isNotificationAllowed) { _, newValue in
-						toastService?.show(Toast(title: newValue ? "Уведомления включены" : "Уведомления отключены"))
-					}
+				Button("Экспортировать данные") {
+					exportUserData()
+				}
+				
+				Button("Восстановить данные") {
+					isImportWarningPresented = true
+				}
 			} header: {
-				Text("Настройка уведомлений")
+				Text("Перенос данных на другое устройство")
 			} footer: {
-				Text("Приложение напомнит вам выбрать и сохранить кэшбэк каждый месяц 1 числа.\nПроверьте, что вы разрешили уведомления в настройках системы.")
+				Text("Экспортируйте файл с одного устройства и откройте его в приложении на новом девайсе.\n\(Text("При импорте имеющиеся данные будут перезаписаны!").foregroundStyle(.red))")
 			}
 			
 			Section {
@@ -125,10 +125,18 @@ struct SettingsView: View {
 				Text("Здесь можно посмотреть все доступные категории кэшбэка, удалить ненужные или добавить новые.")
 			}
 			
-			Section("Удаленные карты и категории") {
-				NavigationLink("Корзина") {
-					TrashbinView()
+			Section {
+				NavigationLink("Удаленные карты") {
+					CardTrashbinView()
 				}
+
+				NavigationLink("Удаленные категоии") {
+					CategoryTrashbinView()
+				}
+			} header: {
+				Text("Корзина")
+			} footer: {
+				Text("Здесь можно найти удаленные ранее данные и восстановить их")
 			}
 			
 			Section {

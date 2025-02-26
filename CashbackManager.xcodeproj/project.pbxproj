@@ -47,7 +47,8 @@
 		277FFD962D65A09500A06BB8 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277FFD952D65A09500A06BB8 /* EmptyView.swift */; };
 		2781B1262CD874300081A927 /* PlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1252CD874300081A927 /* PlaceEntity.swift */; };
 		2781B1282CD874CC0081A927 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B1272CD874CC0081A927 /* CategoryEntity.swift */; };
-		2781B12B2CD884F20081A927 /* TrashbinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B12A2CD884F20081A927 /* TrashbinView.swift */; };
+		2781B12B2CD884F20081A927 /* CardTrashbinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781B12A2CD884F20081A927 /* CardTrashbinView.swift */; };
+		279C9C6F2D6F0F05000443E2 /* CategoryTrashbinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279C9C6E2D6F0F05000443E2 /* CategoryTrashbinView.swift */; };
 		27A465AD2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465AC2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift */; };
 		27A465B02D3D2193000B6B35 /* FavouriteCardsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465AF2D3D2193000B6B35 /* FavouriteCardsEntry.swift */; };
 		27A465B32D3D2210000B6B35 /* FavouriteCardsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */; };
@@ -266,7 +267,8 @@
 		277FFD952D65A09500A06BB8 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		2781B1252CD874300081A927 /* PlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceEntity.swift; sourceTree = "<group>"; };
 		2781B1272CD874CC0081A927 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
-		2781B12A2CD884F20081A927 /* TrashbinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashbinView.swift; sourceTree = "<group>"; };
+		2781B12A2CD884F20081A927 /* CardTrashbinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTrashbinView.swift; sourceTree = "<group>"; };
+		279C9C6E2D6F0F05000443E2 /* CategoryTrashbinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTrashbinView.swift; sourceTree = "<group>"; };
 		27A465AC2D3D1417000B6B35 /* FavouriteCardsConfigurationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsConfigurationIntent.swift; sourceTree = "<group>"; };
 		27A465AF2D3D2193000B6B35 /* FavouriteCardsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsEntry.swift; sourceTree = "<group>"; };
 		27A465B22D3D2210000B6B35 /* FavouriteCardsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCardsProvider.swift; sourceTree = "<group>"; };
@@ -524,7 +526,8 @@
 		2781B1292CD884E80081A927 /* Trashbin */ = {
 			isa = PBXGroup;
 			children = (
-				2781B12A2CD884F20081A927 /* TrashbinView.swift */,
+				279C9C6E2D6F0F05000443E2 /* CategoryTrashbinView.swift */,
+				2781B12A2CD884F20081A927 /* CardTrashbinView.swift */,
 			);
 			path = Trashbin;
 			sourceTree = "<group>";
@@ -1314,7 +1317,7 @@
 				2755A3162CBA4BB1002F61EC /* CreateIncomeIntent.swift in Sources */,
 				2714FEB32C58B41A0014CFE0 /* CheckCategoryCardsIntent.swift in Sources */,
 				27A5D84D2C394EFF00B93512 /* CashbackApplication.swift in Sources */,
-				2781B12B2CD884F20081A927 /* TrashbinView.swift in Sources */,
+				2781B12B2CD884F20081A927 /* CardTrashbinView.swift in Sources */,
 				2714FEB82C58B9D70014CFE0 /* CheckPlaceCategoryIntent.swift in Sources */,
 				27A466D62D47EEEC000B6B35 /* AdBannerViewController.swift in Sources */,
 				27A466122D47E99F000B6B35 /* CreateCategoryView.swift in Sources */,
@@ -1393,6 +1396,7 @@
 				27A466062D47E745000B6B35 /* CardsListView.swift in Sources */,
 				27A466072D47E745000B6B35 /* CardChartModel.swift in Sources */,
 				27A466082D47E745000B6B35 /* Environment+WidgetURLParser.swift in Sources */,
+				279C9C6F2D6F0F05000443E2 /* CategoryTrashbinView.swift in Sources */,
 				277FFD8E2D659AE600A06BB8 /* DetectCashbackSectionButton.swift in Sources */,
 				27A466942D47EA96000B6B35 /* IntentTipView.swift in Sources */,
 				27A466962D47EA96000B6B35 /* ColoredCircle.swift in Sources */,
