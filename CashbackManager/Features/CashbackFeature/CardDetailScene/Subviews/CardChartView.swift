@@ -31,6 +31,8 @@ extension CardDetailView {
 						.scaledToFit()
 						.padding()
 					}
+				} else {
+					Text("Выплаты недоступны")
 				}
 			}
 			.onAppear {

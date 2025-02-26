@@ -41,7 +41,7 @@ struct CashbackCoordinator: View {
 			NavigationView {
 				AddCashbackView(card: pair.card, cashback: pair.cashback, addCategoryIntent: addCategoryIntent, addCashbackIntent: addCashbackIntent)
 			}
-			.presentationDetents([.medium, .large])
+			.presentationDetents([.large])
 		}
 		.onOpenURL { url in
 			if let path = urlParser?.parse(url: url) {
