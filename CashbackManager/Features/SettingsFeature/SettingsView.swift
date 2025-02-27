@@ -145,12 +145,6 @@ struct SettingsView: View {
 						Text("Поделиться приложением")
 					}
 				}
-				
-				if let ruStore = Constants.ruStoreLink {
-					ShareLink(item: ruStore, subject: Text("Ссылка в RuStore")) {
-						Text("Версия для Android")
-					}
-				}
 			} header: {
 				Text("Поделиться")
 			} footer: {
