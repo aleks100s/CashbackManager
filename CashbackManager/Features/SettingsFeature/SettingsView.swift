@@ -123,16 +123,6 @@ struct SettingsView: View {
 			}
 			
 			Section {
-				NavigationLink("Все категории") {
-					SelectCategoryView(addCategoryIntent: CreateCategoryIntent(), isSelectionMode: false) { _ in }
-				}
-			} header: {
-				Text("Каталог категорий кэшбэка")
-			} footer: {
-				Text("Здесь можно посмотреть все доступные категории кэшбэка, удалить ненужные или добавить новые.")
-			}
-			
-			Section {
 				NavigationLink("Удаленные карты") {
 					CardTrashbinView()
 				}
