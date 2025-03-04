@@ -13,15 +13,12 @@ extension CardDetailView {
 		let card: Card
 
 		@State private var chartData = [CardChartModel]()
-		
-		@AppStorage(Constants.StorageKey.AppFeature.payments)
-		private var isPaymentsFeatureAvailable = true
 
 		@Environment(\.incomeService) private var incomeService
 		
 		var body: some View {
 			Group {
-				if isPaymentsFeatureAvailable, !chartData.isEmpty {
+				if !chartData.isEmpty {
 					Section("Последние 10 выплат") {
 						Chart(chartData) { data in
 							BarMark(x: .value("Дата", data.date), y: .value("Сумма", data.amount))
@@ -32,7 +29,7 @@ extension CardDetailView {
 						.padding()
 					}
 				} else {
-					Text("Выплаты недоступны")
+					Text("Выплаты еще не добавлены")
 				}
 			}
 			.onAppear {
