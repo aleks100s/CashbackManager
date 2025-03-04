@@ -18,7 +18,6 @@ struct PlacesListView: View {
 	private var areSiriTipsVisible = true
 	
 	@State private var searchText = ""
-	@State private var selectedCategory: Category?
 	
 	@Query(sort: [SortDescriptor<Place>(\.isFavorite, order: .reverse),
 		SortDescriptor<Place>(\.name, order: .forward)],
@@ -37,11 +36,7 @@ struct PlacesListView: View {
 	private var filteredPlaces: [Place] {
 		places.filter { place in
 			if searchText.isEmpty {
-				if let selectedCategory {
-					place.category.name.localizedStandardContains(selectedCategory.name)
-				} else {
-					true
-				}
+				true
 			} else {
 				place.name.localizedStandardContains(searchText)
 			}
@@ -78,18 +73,13 @@ struct PlacesListView: View {
 					addPlaceButton
 				}
 			}
-			.safeAreaInset(edge: .top) {
-				if !places.isEmpty {
-					FilterView(popularCategories: popularCategories, selectedCategory: $selectedCategory)
-				}
-			}
 	}
 	
 	@ViewBuilder
 	private var contentView: some View {
 		VStack {
 			if filteredPlaces.isEmpty {
-				if searchText.isEmpty && selectedCategory == nil {
+				if searchText.isEmpty {
 					ContentUnavailableView("Добавьте любимые места, чтобы не забыть категорию кэшбэка", systemImage: Constants.SFSymbols.places)
 				} else {
 					ContentUnavailableView("Такие места не найдены\nПопробуйте изменить запрос", systemImage: Constants.SFSymbols.search)
