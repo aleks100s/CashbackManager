@@ -26,6 +26,9 @@ struct SettingsView: View {
 	@AppStorage(Constants.StorageKey.AppFeature.places)
 	private var isPlacesFeatureAvailable = true
 	
+	@AppStorage(Constants.StorageKey.AppFeature.categories)
+	private var isCategoryFeatureAvailable = false
+	
 	@AppStorage(Constants.StorageKey.isAdVisible)
 	private var isAdVisible: Bool = false
 	
@@ -107,6 +110,10 @@ struct SettingsView: View {
 					}
 				Toggle("Места", isOn: $isPlacesFeatureAvailable)
 					.onChange(of: isPlacesFeatureAvailable) { _, newValue in
+						notifySectionToggled(isActive: newValue)
+					}
+				Toggle("Категории", isOn: $isCategoryFeatureAvailable)
+					.onChange(of: isCategoryFeatureAvailable) { _, newValue in
 						notifySectionToggled(isActive: newValue)
 					}
 			} header: {

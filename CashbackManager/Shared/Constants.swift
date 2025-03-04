@@ -14,6 +14,7 @@ enum Constants {
 		static let places = "storefront"
 		static let settings = "gear"
 		static let search = "magnifyingglass"
+		static let category = "checklist"
 	}
 	
 	enum StorageKey {
@@ -21,6 +22,7 @@ enum Constants {
 			static let cards = "cards"
 			static let payments = "payments"
 			static let places = "places"
+			static let categories = "categories"
 		}
 		
 		static let notifications = "isMonthlyNotificationScheduled"

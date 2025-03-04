@@ -15,6 +15,7 @@ struct ContentView: View {
 		case cashback
 		case income
 		case place
+		case category
 		case settings
 	}
 	
@@ -28,6 +29,9 @@ struct ContentView: View {
 	
 	@AppStorage(Constants.StorageKey.AppFeature.places)
 	private var isPlacesFeatureAvailable = true
+	
+	@AppStorage(Constants.StorageKey.AppFeature.categories)
+	private var isCategoryFeatureAvailable = false
 	
 	@AppStorage(Constants.StorageKey.firstLaunch)
 	private var isFirstLaunch = true
@@ -51,6 +55,8 @@ struct ContentView: View {
 			paymentsTab
 			
 			placesTab
+			
+			categoryTab
 			
 			settingsTab
 		}
@@ -136,6 +142,24 @@ struct ContentView: View {
 				Label("Места", systemImage: Constants.SFSymbols.places)
 			}
 			.tag(Tab.place)
+		}
+	}
+	
+	@ViewBuilder
+	private var categoryTab: some View {
+		if isCategoryFeatureAvailable {
+			NavigationView {
+				SelectCategoryView(
+					addCategoryIntent: CreateCategoryIntent(),
+					isSelectionMode: false,
+					onSelect: { _ in }
+				)
+				.navigationTitle("Каталог категорий")
+			}
+			.tabItem {
+				Label("Категории", systemImage: Constants.SFSymbols.category)
+			}
+			.tag(Tab.category)
 		}
 	}
 	
